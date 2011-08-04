@@ -19,6 +19,8 @@ module CanTango
         protected
 
         def guest_user
+          puts "guest user"
+
           procedure = CanTango::Configuration.guest_user_procedure
 
           raise "You must set the guest_user to a Proc or lambda in CanTango::Configuration" if !procedure

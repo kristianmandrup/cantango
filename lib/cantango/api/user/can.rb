@@ -9,7 +9,6 @@ module CanTango
         # end
         def self.included(base)
          ::CanTango.users.each do |user|
-            # puts "method for user: #{user}"
             base.class_eval %{
               def #{user}_can? *args
                 current_ability(:#{user}).can?(*args)

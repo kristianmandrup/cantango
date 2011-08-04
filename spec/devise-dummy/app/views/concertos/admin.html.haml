@@ -13,8 +13,7 @@
       %td
         = link_to(concerto.title, concerto_path(concerto)) if admin_can?(:read, concerto)
       %td
-        = link_to("Edit", edit_concerto_path(concerto)) if admin_can?(:edit, concerto)
+        = link_to("Edit #{concerto.title}", edit_concerto_path(concerto)) if admin_can?(:edit, concerto)
       %td
-        = link_to("Delete", delete_concerto_path(concerto)) if admin_can?(:delete, concerto)
-
+        = link_to("Delete #{concerto.title}", delete_concerto_path(concerto)) if admin_can?(:delete, concerto)
 
