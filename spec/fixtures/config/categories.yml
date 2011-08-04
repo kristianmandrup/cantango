@@ -1,0 +1,6 @@
+another_articles:
+  [Post, Article]
+articles: 
+  [Article, Post, Comment]
+user_models: 
+  [Admin, Guest, User]

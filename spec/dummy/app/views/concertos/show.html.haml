@@ -1,0 +1,10 @@
+%h1= concerto.title
+.content
+  = concerto.body
+.author
+  = concerto.author
+
+#buttons
+  = link_to("New concerto", new_concerto_path) if user_can?(:create, Concerto)
+  = link_to("Edit concerto", edit_concerto_path(concerto)) if user_can?(:update, concerto)
+

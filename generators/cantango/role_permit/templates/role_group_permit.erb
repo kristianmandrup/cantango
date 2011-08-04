@@ -1,0 +1,14 @@
+class <%= role_group.to_s.camelize %>RoleGroupPermit < CanTango::PermitEngine::RoleGroupPermit
+  def initialize ability
+    super
+  end
+
+  protected
+
+  def permit_rules
+    # insert your can, cannot and any other rule statements here
+    <%= permit_logic.strip %>
+    <%= license_logic %>
+  end
+end
+

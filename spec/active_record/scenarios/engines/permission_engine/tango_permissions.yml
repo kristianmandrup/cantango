@@ -1,0 +1,63 @@
+roles:
+  admin:
+    can:
+      manage:
+      - all
+
+  musician: 
+    can: 
+      read:
+      - Song
+      - Concerto
+      create:
+      - Tune
+      write:
+      - Song
+      manage:
+      - Improvisation
+    cannot: 
+      write: 
+      - Concerto
+
+role_groups:
+  bloggers: 
+    can: 
+      read: 
+      - Article
+      - Comment
+    cannot: 
+      write: 
+      - Article
+      - Post
+  editors: 
+    can: 
+      read: 
+      - Article
+      - Comment
+    cannot: 
+      write: 
+      - Article
+      - Post
+
+licenses:
+  editors:
+    can:
+      manage:
+      - all
+
+users:
+  kris@gmail.com:
+    can:
+      read:
+        - Comment 
+      write:
+        - Comment#author
+        - Article#author
+        - Post#body="Nice!"
+  stan@gmail.com:
+    can:
+      read:
+        - Comment
+      write:
+        - Article
+        - Comment

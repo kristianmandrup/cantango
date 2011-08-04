@@ -1,0 +1,20 @@
+h1. Guest, Admin, User Scenario
+
+Blog model:
+* Article
+* Post
+* Comment
+* User
+
+Guest Permissions:
+* Read all articles, posts and comments
+* No access to User
+
+User Permissions:
+* Read all articles, posts and comments
+* Manage all owned articles, posts and comments
+* Manage own User
+
+Admin Permissions:
+* Manage all
+

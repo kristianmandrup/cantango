@@ -1,0 +1,10 @@
+%h1= article.title
+.content
+  = article.body
+.author
+  = article.author
+
+#buttons
+  = link_to("New article", new_article_path) if user_can?(:create, Article)
+  = link_to("Edit article", edit_article_path(article)) if user_can?(:update, article)
+

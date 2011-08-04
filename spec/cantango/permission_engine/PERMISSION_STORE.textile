@@ -1,0 +1,75 @@
+h2. Permission store
+
+The Permission store is basically a key-value store. Each top level key is a type of permission:
+The types are:
+* roles
+* role_groups
+* licenses
+
+Note that licenses are just named subsets of rules and can thus be reused for oth roles and role_groups.
+
+roles:
+  blogger:
+    can:
+    cannot:
+    author:
+      Comment:
+        can:
+role_groups:
+  admins:
+    can:
+licenses:
+  editors:
+    can:
+
+If using a Yaml store, the default file name is: config/tango_permissions.yml
+
+h2. User Permission store
+
+stan@theman.com:
+  can:
+  cannot:
+  owner:
+    Comment:
+      can:
+
+If using a Yaml store, the default file name is: config/tango_user_permissions.yml
+
+h2. Categories store
+
+The categories store can be used to define categories of classes that can be acted upon in the same way.
+
+articles: [Blog, Post]
+roles: [Role, RoleGroup]
+
+If using a Yaml store, the default file name is: config/tango_categories.yml
+
+All access to a store must go through a CanTango::Permission::Store class.
+
+h2. Caching and loading
+
+When a store is loaded, all permissions are parsed and evaluated as CanCan rules and cached under the specific key.
+
+Cache
+  roles:
+    bloggers: [rules]
+  role_groups:
+    admins: [rules]
+
+CanTango.permission_store.cache(:roles).rules_for(:bloggers)
+
+When a store is saved, the Cache for that store must be invalidated and the rules rebuilt.
+
+CanTango.permission_store.save! permissions
+
+CanTango.permission_store.cache.invalidate!
+
+h2. Permissions
+
+CanTango::Permission uses a Hashie to store the rules
+
+* name
+* rules [Hashie]
+
+@stanislaw: let the name and #rules content will have string keys, not symbols.
+Hashie::Mash uses strings, and for us this convention is good for lib & spec stuff consistency.

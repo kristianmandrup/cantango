@@ -1,0 +1,115 @@
+h1. Refactoring into engines
+
+Thinking about how to build permissions factory & collection & evaluation stack I realized that some mediator level beetween Ability and Permission is needed:
+
+1) Many classes in permissions folder were really not on the same logical level as permission: fx YamlStore, Factory, Evaluator and some others - they shared not the logical level of permission but some level before/above? it and thus I thought to take a risk creating such level. ;)
+
+2) Obviously, it should be a possibility there (already done!) to turn off permits or/and permissions evaluation. This was the second reason - it is about logical levels management again - consider these nice "if permit_engine_on? and if permission_engine_on?" allowing to turn off one or both of the engines. 
+Doing fx CanTango.permit_engine_on = false - you disable the whole engine level, not the level of permission itself! (see lib/tango/ability.rb)
+
+3) Structure of lib/tango folder before switching to refactor_into_engines branch:
+
+<pre>
+  stanislaw stanislaw   80 Jul 16 15:34 ability
+  stanislaw stanislaw 2283 Jul 18 21:47 ability.rb
+  stanislaw stanislaw   80 Jul 18 21:47 configuration
+  stanislaw stanislaw 1503 Jul 18 21:47 configuration.rb
+  stanislaw stanislaw  128 Jul 16 21:19 license
+  stanislaw stanislaw   83 Jul 13 19:21 license.rb
+  stanislaw stanislaw  136 Jul 18 21:47 loader
+  stanislaw stanislaw   93 Jul 18 21:47 loader.rb
+  stanislaw stanislaw  153 Jul 13 19:21 macros.rb
+  stanislaw stanislaw  304 Jul 13 19:22 masquerade.rb
+  stanislaw stanislaw  112 Jul 18 21:47 parser
+  stanislaw stanislaw   85 Jul 13 19:21 parser.rb
+  stanislaw stanislaw  352 Jul 18 21:47 permission
+  stanislaw stanislaw   88 Jul 18 21:47 permission_engine
+  stanislaw stanislaw  918 Jul 18 21:47 permission.rb
+  stanislaw stanislaw  392 Jul 18 21:47 permit
+  stanislaw stanislaw  181 Jul 18 21:47 permit.rb
+  stanislaw stanislaw  112 Jul 18 21:47 role_group_permit
+  stanislaw stanislaw 1014 Jul 18 21:47 role_group_permit.rb
+  stanislaw stanislaw  112 Jul 18 21:47 role_permit
+  stanislaw stanislaw  989 Jul 18 21:47 role_permit.rb
+  stanislaw stanislaw  136 Jul 16 20:49 rspec
+  stanislaw stanislaw   28 Jul 13 19:21 rspec.rb
+  stanislaw stanislaw  179 Jul 18 21:47 rule_class.rb
+  stanislaw stanislaw  128 Jul 18 21:47 rules
+  stanislaw stanislaw  730 Jul 18 21:47 rules.rb
+  stanislaw stanislaw  389 Jul 13 19:22 user_account.rb
+  stanislaw stanislaw  468 Jul 13 19:22 user.rb
+</pre>
+
+
+Consider present structure of lib/tango folder:
+
+<pre>
+  stanislaw stanislaw   80 Jul 16 15:34 ability
+  stanislaw stanislaw 2435 Jul 18 09:07 ability.rb
+  stanislaw stanislaw   80 Jul 18 04:43 configuration
+  stanislaw stanislaw 1509 Jul 18 08:46 configuration.rb
+  stanislaw stanislaw  128 Jul 16 21:19 license
+  stanislaw stanislaw   83 Jul 13 19:21 license.rb
+  stanislaw stanislaw  153 Jul 13 19:21 macros.rb
+  stanislaw stanislaw  304 Jul 13 19:22 masquerade.rb
+  stanislaw stanislaw  112 Jul 18 05:00 parser
+  stanislaw stanislaw   85 Jul 13 19:21 parser.rb
+  stanislaw stanislaw  480 Jul 18 08:34 permission_engine
+  stanislaw stanislaw  193 Jul 17 01:46 permission_engine.rb
+  stanislaw stanislaw  544 Jul 17 08:07 permit_engine
+  stanislaw stanislaw  242 Jul 17 02:36 permit_engine.rb
+  stanislaw stanislaw  136 Jul 16 20:49 rspec
+  stanislaw stanislaw   28 Jul 13 19:21 rspec.rb
+  stanislaw stanislaw  160 Jul 18 07:58 rules
+  stanislaw stanislaw  749 Jul 18 08:23 rules.rb
+  stanislaw stanislaw  389 Jul 13 19:22 user_account.rb
+  stanislaw stanislaw  468 Jul 13 19:22 user.rb
+</pre>
+
+license* here should be deprecated or removed - they are not used anymore!
+parser* should be moved into PermissionEngine too because of it is dealing only with permissions & categories. I hadn't enough time to do that.
+
+The resulting structure will be like that:
+
+<pre>
+  stanislaw stanislaw   80 Jul 16 15:34 ability
+  stanislaw stanislaw 2435 Jul 18 09:07 ability.rb
+  stanislaw stanislaw   80 Jul 18 04:43 configuration
+  stanislaw stanislaw 1509 Jul 18 08:46 configuration.rb
+  stanislaw stanislaw  153 Jul 13 19:21 macros.rb
+  stanislaw stanislaw  304 Jul 13 19:22 masquerade.rb
+  stanislaw stanislaw  480 Jul 18 08:34 permission_engine
+  stanislaw stanislaw  193 Jul 17 01:46 permission_engine.rb
+  stanislaw stanislaw  544 Jul 17 08:07 permit_engine
+  stanislaw stanislaw  242 Jul 17 02:36 permit_engine.rb
+  stanislaw stanislaw  136 Jul 16 20:49 rspec
+  stanislaw stanislaw   28 Jul 13 19:21 rspec.rb
+  stanislaw stanislaw  160 Jul 18 07:58 rules
+  stanislaw stanislaw  749 Jul 18 08:23 rules.rb
+  stanislaw stanislaw  389 Jul 13 19:22 user_account.rb
+  stanislaw stanislaw  468 Jul 13 19:22 user.rb
+</pre>
+
+This way we have very clean main logical level. Then we can move user, user_account, masquerade and may be macros to some level like "Users" :
+
+<pre>
+  stanislaw stanislaw   80 Jul 16 15:34 ability
+  stanislaw stanislaw 2435 Jul 18 09:07 ability.rb
+  stanislaw stanislaw   80 Jul 18 04:43 configuration
+  stanislaw stanislaw 1509 Jul 18 08:46 configuration.rb
+  stanislaw stanislaw  480 Jul 18 08:34 permission_engine
+  stanislaw stanislaw  193 Jul 17 01:46 permission_engine.rb
+  stanislaw stanislaw  544 Jul 17 08:07 permit_engine
+  stanislaw stanislaw  242 Jul 17 02:36 permit_engine.rb
+  stanislaw stanislaw  136 Jul 16 20:49 rspec
+  stanislaw stanislaw   28 Jul 13 19:21 rspec.rb
+  stanislaw stanislaw  160 Jul 18 07:58 rules
+  stanislaw stanislaw  749 Jul 18 08:23 rules.rb
+  stanislaw stanislaw  389 Jul 13 19:22 users
+  stanislaw stanislaw  468 Jul 13 19:22 users.rb
+</pre>
+
+
+The structure will then impress me the way like I had when I first saw precise devise structure.
+I think it is really makes sense!!!
+

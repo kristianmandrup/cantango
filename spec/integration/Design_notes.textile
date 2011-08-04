@@ -1,0 +1,30 @@
+h1. Dummy app test design
+
+The dummy app should reflect many of the same tests as in the AR scenarios.
+
+h2. Setup
+
+The following is a description of essential files for the dummy app the are used to configure the test environment for cantango
+in a Rails 3 app.
+
+config/application.rb         - includes the 'cantango' gem
+config/simple_roles.rb        - Stubs for Role API (in place of troles gem or similar)
+config/tango_permissions.yml  - permission rules
+
+dummy_spec_helper             - sets up enviromennt for running tests on dummy app
+
+
+
+
+Users:
+* Normal
+* Guest
+* Admin
+
+User Accounts:
+* Normal
+* Guest
+* Admin
+
+Role API:
+* Only accounts or users in certain roles or role groups can see a given view block

@@ -1,0 +1,19 @@
+--- 
+bloggers: 
+  can: 
+    read: 
+    - Article
+    - Comment
+  cannot: 
+    write: 
+    - Article
+    - Post
+editors: 
+  can: 
+    read: 
+    - Article
+    - Comment
+  cannot: 
+    write: 
+    - Article
+    - Post

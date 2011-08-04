@@ -1,0 +1,1 @@
+require 'cantango/rspec/config'

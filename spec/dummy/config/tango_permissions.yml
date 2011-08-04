@@ -1,0 +1,50 @@
+roles:
+  admin:
+    can:
+      manage:
+      - all
+
+  user:
+    can:
+      read:
+      - ^simple_music
+      write:
+      - Tune
+    cannot:
+      manage:
+      - ^complex_music 
+
+role_groups:
+  musicians: 
+    can: 
+      read:
+      - Song
+      - Tune
+      - Concerto
+      manage:
+      - Improvisation
+    cannot: 
+      write: 
+      - Concerto
+  composers:
+    can:
+      write:
+        - Tune
+        - Song
+        - Concerto
+      read: 
+        - ^simple_music
+        - Concerto 
+    cannot:
+      manage: 
+        - Improvisation
+
+licenses:
+  editors:
+    can:
+      manage:
+      - all
+users:
+  kris@gmail.com:
+    can:
+    cannot:

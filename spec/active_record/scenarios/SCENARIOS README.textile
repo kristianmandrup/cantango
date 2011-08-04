@@ -1,0 +1,19 @@
+h1. Scenarios
+
+This scenarios folder should contain the specs, shared examples and models for various common User scenarios.
+
+All scenarios should have a User and Guest (user), where the User is persisted and the Guest is not.
+
+Scenarios:
+
+* User and Guest only : 'guest_user'
+* User, Admin and Guest : 'guest_admin_user'
+* User, Guest and Admin with UserAccount, GuestAccount and AdminAccount : 'user_accounts'
+
+Note that the GuestAccount should also not be persisted.
+
+CanTango should be able to handle cases where the ability is either created with a user or a user account. In case there is no user account, the user_account variable should just point to the user.
+
+The User and Account model classes must each be exended to allow can? and cannot? with the CanTango::Ability
+
+

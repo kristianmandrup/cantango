@@ -1,0 +1,44 @@
+h1. Note on licenses.
+
+First, your design "note":https://github.com/kristianmandrup/tango/blob/permission_store/spec/tango/permission/PERMISSION_STORE.textile :
+
+"Note that licenses are just named subsets of rules and can thus be reused for both roles and role_groups."
+
+<pre>
+class AdminPermit
+
+  def set_permission_rules
+    licenses :bloggers, :admins
+    can :manage, User
+  end
+end
+</pre>
+
+
+
+<pre>
+class BloggersLicense
+  def enforce!
+    can :manage, [Article, Post]
+  end
+end
+</pre>
+
+maybe rename method to use the same convention. Maybe the method name _enforce!_ is better? or _enforce_rules!_ perhaps?
+
+User permissions:
+
+<pre>
+users:
+  kmandrup:
+    can:
+      manage: [Article, Pot]
+    cannot
+      read: [Secret]
+  stanislaw
+    can:
+      manage: all
+</pre>
+
+Rules for individual Users. They key needs to be a unique identifier for each user, either email or username.
+

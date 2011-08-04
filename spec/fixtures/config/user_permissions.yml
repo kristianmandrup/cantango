@@ -1,0 +1,8 @@
+stan@theman.com:
+  can:
+    manage:
+      - all
+kris@thewiz.dk:
+  cannot:
+    read:
+      - Book

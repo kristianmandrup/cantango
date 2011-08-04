@@ -1,0 +1,114 @@
+h1. Note on caching.
+
+First of all section of Ryan's wiki on Defining Abilities with Blocks.
+
+h2. Only for Object Attributes
+
+The block is only evaluated when an actual instance object is present. 
+It is not evaluated when checking permissions on the class (such as in the index action). 
+This means any conditions which are not dependent on the object attributes should be moved outside of the block.
+
+<pre>
+<code>
+  #don't do this
+  can :update, Project do |project|
+    user.admin? # this won't always get called
+  end
+    
+  #do this
+  can :update, Project if user.admin?
+</code>
+</pre>
+
+<hr/>
+
+What we have here really are conditions of two types: conditions outside blocks and inside blocks.
+
+I) Conditions outside blocks. They can't allow dynamic.
+
+Remember failing spec about #dynamic_rules do not react on changes of $something_dynamic (bspec spec/cantango/permit_engine/permit/permit_static_and_dynamic_rules_spec.rb)?
+
+Consider _failing_ case I created based on excerpt from Ryan's ability_spec.rb. It behaves the same way as ours failing spec.
+It is ugly but I want to show that there is no possibility to allow dynamic on conditions outside blocks:
+
+<pre>
+<code>
+  before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+  end
+  
+  it "should be able to :read anything" do
+    $something = true
+    @ability.can :read, :all if $something_dynamic
+    @ability.can?(:read, :all).should be_true
+    $something = false
+    @ability.can?(:read, :all).should be_false
+  end
+</code>
+</pre>
+
+It shows us, that "can :update, Project if user.admin?" (see Ryan's code above) - is a fiction - no real dynamic!
+
+II) Conditions inside blocks.
+
+Present Ryan's #can work the following way:
+
+<pre>
+<code>
+  can :read, Article |article|
+    article.attribute ?   # article here is INSTANCE!
+  end
+</code>
+</pre>
+
+If you call @can?(:read, Article.new)@ -- inside conditions are evaluated.
+If you call @can?(:read, Article)@ -- inside conditions are SKIPPED!
+
+Review my pull request again (https://github.com/ryanb/cancan/pull/433) - 
+I did this because of I want to allow dynamic not only on instance attributes but wider - 
+on some global dynamic things like Time.now < ?
+
+
+My resume:
+
+I quickly explored a possibility to collect and call #dynamic_rules from all permits at the moment #can? was summoned and see - that 
+it is not possible with the current design we have. Making wrapping patch will be ugly here.
+
+
+Better I suggest write any dynamic we want INSIDE #can's condition blocks like
+
+<pre>
+<code>
+  can :read, Article do |article|
+    $something_dynamic == true
+  end
+</code>
+</pre>
+
+Because outside conditions don't work as I described above.
+
+If we run into this direction (inside conditions blocks) then we can expect dynamic conditions of two types:
+
+I) Instance conditions - which are based on instance attributes. CanCan's Rule deals with instances (can?(:read, Article.new)) ok now.
+
+II) (rare, but anyway needed) Some global conditions which applied to the class fx Article (not instance Article.new) as a whole. To address this case 
+I suggested my pull request #433, because Ryan's can? expect now that if we want conditions inside blocks being evaluated we should
+call can? on instances. My solution is very simple: extend usage of #can? on classes too. If we call #can? on Class then
+if block condition deals with instance attributes it'll of course raise error which we gracefully rescue and return true - 
+in fact now Rule returns conditions'true without evaluating block AT ALL if #can? is called on Class.
+
+And IF BLOCK CONTAINS some condition related not to instance but to CLASS and has REALLY SOMETHING GLOBAL/DYNAMIC NOT INSTANCE-RELATED
+then we EVALUATE inside conditions ok.
+
+This approach will lead us to completely drop "caching/static&dynamic_rules" piece because placed dynamic inside conditions, 
+WE ALREADY HAVE "CACHED" #rules, which emerge at the moment of CanTango::Ability is initialized and live unchanged 
+throughout entire CanTango::Ability lifecycle.
+
+My request to you is follow carefully all above and consider pull request #433 again.
+
+I think dynamic things I talk here about really MAKE SENSE. As for us as for extending CanCan himself.
+For now CanCan doesn't allow DYNAMIC that is NO INSTANCE-RELATED!
+
+
+UPD: See my comment on pull request #433.
