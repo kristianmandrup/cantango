@@ -17,25 +17,24 @@ module CanTango
     def initialize candidate, options = {}
       raise "Candidate must be something!" if !candidate
       @candidate, @options = candidate, options
-      @session = options[:session] # seperate session cache for each type of user?
+      @session = options[:session] || {} # seperate session cache for each type of user?
 
       @rules_cached = true and return if cached_rules?
 
       # run permission evaluators
-      permissions.each do |permission|
-        permission.evaluate! user
-      end if permission_engine?
-
-      # run permit executors
-      permits.each do |permit|
-        # execute the permit and break only if the execution returns the special :break symbol
-        break if permit.execute == :break
-      end if permit_engine?
+      with(:permissions)  {|permission| permission.evaluate! user }
+      with(:permits)      {|permit| break if permit.execute == :break }
 
       cache_rules!
     end
 
     include CanTango::PermitEngine::Util
+
+    def with engine_type, &block
+      send(engine_type).each do |obj|
+        yield obj
+      end if send(:"#{engine_type.to_s.singularize}_engine?")
+    end
 
     def subject
       return @candidate.active_user if @candidate.respond_to?(:active_user) && @candidate.masquerading?

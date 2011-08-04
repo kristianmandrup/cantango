@@ -22,6 +22,7 @@ module CanTango
         return if !caching_on?
         invalidate_cache!
         rules_cache.save cache_key, rules
+        session_check!
         session[:cache_key] = cache_key
         hit_cache_for cache_key
       end
@@ -57,6 +58,7 @@ module CanTango
       end
 
       def invalidate_cache!
+        session_check!
         rules_cache.invalidate! session[:cache_key]
       end
 
@@ -75,11 +77,16 @@ module CanTango
       end
 
       def cache_key_same?
+        session_check!
         session[:cache_key] && (cache_key == session[:cache_key])
       end
 
       def rules_cache_instance
-        @rules_cache_instance ||= rules_cache_class.new :rules_cache, rules_cache_options.merge(:session => session)
+        @rules_cache_instance ||= begin
+          options = rules_cache_options
+          options.merge!(:session => session) if session?
+          rules_cache_class.new :rules_cache, options
+        end
       end
 
       def rules_cache_options
@@ -88,6 +95,14 @@ module CanTango
 
       def rules_cache_class
         CanTango::Configuration.rules_cache
+      end
+
+      def session?
+        session
+      end
+
+      def session_check!
+        raise "No session available" if !session?
       end
     end
   end

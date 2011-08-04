@@ -51,7 +51,7 @@ module CanTango
 
           def cache
             @cache ||= begin
-              moneta = class_eval(factory_statement)
+              moneta = eval(factory_statement)
               moneta.clear
               moneta
             end
