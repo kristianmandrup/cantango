@@ -8,7 +8,6 @@ module CanTango
         def initialize name, options = {}
           super # will set all instance vars using options hash
           @cache = Cache.instance
-          puts "session cache:" << options.inspect
           @cache.configure_with :type => :memory
           raise "SessionCache must be initialized with a :session option" if !session
           session[:rules_cache] = @cache

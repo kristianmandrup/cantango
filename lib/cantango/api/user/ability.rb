@@ -9,15 +9,20 @@ module CanTango
         def current_ability user_type = :user
           user_meth = :"current_#{user_type}"
           return guest_user if !respond_to?(user_meth)
+
           user = send(user_meth)
           return guest_user if !user
+
           user_ability user
         end
 
         protected
 
         def guest_user
-          CanTango::Configuration.guest_user_procedure.call
+          procedure = CanTango::Configuration.guest_user_procedure
+
+          raise "You must set the guest_user to a Proc or lambda in CanTango::Configuration" if !procedure
+          procedure.call
         end
 
         include CanTango::Api::Options

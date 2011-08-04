@@ -18,6 +18,12 @@ doc
 # jeweler generated
 pkg
 
+# capybara selenium
+*/tmp
+spec/devise-dummy/tmp
+spec/dummy/tmp
+
+
 # Have editor/IDE/OS specific files you need to ignore? Consider using a global gitignore: 
 #
 # * Create a file at ~/.gitignore

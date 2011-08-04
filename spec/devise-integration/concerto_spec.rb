@@ -39,6 +39,13 @@ feature "Concertos", %q{
 
   include DeviseSessionHelpers
 
+  scenario "Show concerto index without login - fallback to Guest user", :js => true do
+    visit '/concertos'
+    # puts page.body
+    page.should have_content('one')
+    page.should have_content('two')
+  end
+
   scenario "Show concerto index to musician", :js => true do
     pending
     login_musician

@@ -1,6 +1,9 @@
-class Guest
+require 'singleton'
 
-  tango_user # see macros  
+class Guest
+  include Singleton
+
+  tango_user # see macros
 
   def role_groups_list
     []

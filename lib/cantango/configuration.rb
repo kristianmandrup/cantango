@@ -20,12 +20,12 @@ module CanTango
       attr_reader :guest_user_procedure, :guest_account_procedure
 
       def guest_user procedure
-        raise ArgumentError, "argument must be a Proc or lambda" if !procedure.respond_to? :call
+        raise ArgumentError, "Argument must be a Proc or lambda" if !procedure.respond_to? :call
         @guest_user_procedure = procedure
       end
 
       def guest_account procedure
-        raise ArgumentError, "argument must be a Proc or lambda" if !procedure.respond_to? :call
+        raise ArgumentError, "Argument must be a Proc or lambda" if !procedure.respond_to? :call
         @guest_account_procedure = procedure
       end
 

@@ -34,7 +34,6 @@ module CanTango
 
           def configure_with options = {}
             @options ||= options
-            puts "options:" << self.options.inspect
             @type ||= options[:type] || CanTango::Configuration.default_cache_type
           end
 
@@ -51,8 +50,6 @@ module CanTango
           end
 
           def cache
-            puts factory_statement
-
             @cache ||= begin
               moneta = class_eval(factory_statement)
               moneta.clear
