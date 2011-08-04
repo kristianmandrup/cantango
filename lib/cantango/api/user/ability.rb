@@ -17,7 +17,7 @@ module CanTango
         protected
 
         def guest_user
-          CanTango::Configuration.guest_procedure.call
+          CanTango::Configuration.guest_user_procedure.call
         end
 
         include CanTango::Api::Options
