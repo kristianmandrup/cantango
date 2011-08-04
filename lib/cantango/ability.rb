@@ -15,6 +15,7 @@ module CanTango
     # Equivalent to a CanCan Ability#initialize call 
     # which executes all the permission logic
     def initialize candidate, options = {}
+      raise "Candidate must be something!" if !candidate
       @candidate, @options = candidate, options
       @session = options[:session] # seperate session cache for each type of user?
 
@@ -64,14 +65,14 @@ module CanTango
     end
     # return list of symbols for roles the user has
     def roles
-      raise "#{subject} should have a #roles_list method" if !subject.respond_to?(:roles_list)
+      raise "#{subject.inspect} should have a #roles_list method" if !subject.respond_to?(:roles_list)
       return [] if subject.roles_list.empty?
       subject.roles_list.flatten
     end
 
     # return list of symbols for role groups the user belongs to
     def role_groups
-      raise "#{subject} should have a #role_groups_list method" if !subject.respond_to?(:role_groups_list)
+      raise "#{subject.inspect} should have a #role_groups_list method" if !subject.respond_to?(:role_groups_list)
       return [] if subject.role_groups_list.empty?
       subject.role_groups_list.flatten
     end

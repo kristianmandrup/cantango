@@ -1,0 +1,20 @@
+%h1 Concertos index
+.buttons
+  = link_to("New concerto", new_concerto_path) if admin_can?(:create, Concerto)
+
+%table
+  %th
+    %td View
+    %td Edit
+    %td Delete
+
+  - concertos.each do |concerto|
+    %tr
+      %td
+        = link_to(concerto.title, concerto_path(concerto)) if admin_can?(:read, concerto)
+      %td
+        = link_to("Edit", edit_concerto_path(concerto)) if admin_can?(:edit, concerto)
+      %td
+        = link_to("Delete", delete_concerto_path(concerto)) if admin_can?(:delete, concerto)
+
+

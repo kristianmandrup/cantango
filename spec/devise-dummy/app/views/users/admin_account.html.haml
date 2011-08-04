@@ -1,0 +1,19 @@
+%h1 Users index
+.buttons
+  = link_to("New user", new_user_path) if admin_account_can?(:create, User)
+
+%table
+  %th
+    %td View
+    %td Edit
+    %td Delete
+
+  - users.each do |user|
+    %tr
+      %td
+        = link_to(user.title, user_path(user)) if admin_account_can?(:read, user)
+      %td
+        = link_to("Edit", edit_user_path(user)) if admin_account_can?(:edit, user)
+      %td
+        = link_to("Delete", delete_user_path(user)) if admin_account_can?(:delete, user)
+

@@ -1,0 +1,20 @@
+%h1 Posts index
+.buttons
+  = link_to("New post", new_post_path) if guest_can?(:create, Post)
+
+%table
+  %th
+    %td View
+    %td Edit
+    %td Delete
+
+  - posts.each do |post|
+    %tr
+      %td
+        = link_to(post.title, post_path(post)) if guest_can?(:read, post)
+      %td
+        = link_to("Edit", edit_post_path(post)) if guest_can?(:edit, post)
+      %td
+        = link_to("Delete", delete_post_path(post)) if guest_can?(:delete, post)
+
+

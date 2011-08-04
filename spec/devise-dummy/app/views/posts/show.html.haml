@@ -1,0 +1,11 @@
+%h1= post.title
+  .content
+    = post.body
+  .author
+    = post.author
+
+#buttons
+  = link_to("New post", new_post_path) if user_can?(:create, Post)
+  = link_to("Edit post", edit_post_path(post)) if user_can?(:update, post)
+
+

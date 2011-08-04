@@ -6,11 +6,19 @@ module CanTango
           @current_ability ||= ::CanTango::Ability.new(user, ability_options.merge(options))
         end
 
-        def current_ability user = :user 
-          user_ability send(:"current_#{user}")
+        def current_ability user_type = :user
+          user_meth = :"current_#{user_type}"
+          return guest_user if !respond_to?(user_meth)
+          user = send(user_meth)
+          return guest_user if !user
+          user_ability user
         end
 
         protected
+
+        def guest_user
+          CanTango::Configuration.guest_procedure.call
+        end
 
         include CanTango::Api::Options
       end

@@ -17,6 +17,18 @@ module CanTango
       attr_accessor :user_key_field
       attr_accessor :user_accounts, :users
 
+      attr_reader :guest_user_procedure, :guest_account_procedure
+
+      def guest_user procedure
+        raise ArgumentError, "argument must be a Proc or lambda" if !procedure.respond_to? :call
+        @guest_user_procedure = procedure
+      end
+
+      def guest_account procedure
+        raise ArgumentError, "argument must be a Proc or lambda" if !procedure.respond_to? :call
+        @guest_account_procedure = procedure
+      end
+
       def config_path
         @config_path ||= File.join(::Rails.root.to_s, 'config') if rails?
         @config_path or raise "Define path to config files dir!\n"

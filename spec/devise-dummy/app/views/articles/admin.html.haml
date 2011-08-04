@@ -1,0 +1,20 @@
+%h1 Articles index
+.buttons
+  = link_to("New article", new_article_path) if admin_can?(:create, Article)
+
+%table
+  %th
+    %td View
+    %td Edit
+    %td Delete
+
+  - articles.each do |article|
+    %tr
+      %td
+        = link_to(article.title, article_path(article)) if admin_can?(:read, article)
+      %td
+        = link_to("Edit", edit_article_path(article)) if admin_can?(:edit, article)
+      %td
+        = link_to("Delete", delete_article_path(article)) if admin_can?(:delete, article)
+
+

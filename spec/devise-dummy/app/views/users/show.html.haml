@@ -1,0 +1,11 @@
+%h1= user.title
+  .content
+    = user.body
+  .author
+    = user.author
+
+#buttons
+  = link_to("New user", new_user_path) if user_can?(:create, User)
+  = link_to("Edit user", edit_user_path(user)) if user_can?(:update, user)
+
+

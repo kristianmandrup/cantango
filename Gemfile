@@ -29,6 +29,7 @@ group :test do
   gem 'capybara'
   gem 'rails-app-spec'
   gem 'mocha'
+  gem "launchy"
 
   # Debug
   gem 'cutter'
@@ -37,6 +38,10 @@ group :test do
   gem 'haml'
   gem 'decent_exposure'
 
+  # integration
+  gem "devise"
+
+  # Generators
   gem 'generator-spec'
 end
 

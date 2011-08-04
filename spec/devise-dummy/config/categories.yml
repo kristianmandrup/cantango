@@ -1,0 +1,10 @@
+another_articles:
+  [Post, Article]
+articles: 
+  [Article, Post, Comment]
+user_models: 
+  [Admin, Guest, User]
+simple_music:
+  [Tune, Song]
+complex_music:
+  [Concerto, Improvisation]

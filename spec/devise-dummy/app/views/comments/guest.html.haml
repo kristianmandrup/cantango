@@ -1,0 +1,20 @@
+%h1 Comments index
+.buttons
+  = link_to("New comment", new_comment_path) if guest_can?(:create, Comment)
+
+%table
+  %th
+    %td View
+    %td Edit
+    %td Delete
+
+  - comments.each do |comment|
+    %tr
+      %td
+        = link_to(comment.title, comment_path(comment)) if guest_can?(:read, comment)
+      %td
+        = link_to("Edit", edit_comment_path(comment)) if guest_can?(:edit, comment)
+      %td
+        = link_to("Delete", delete_comment_path(post)) if guest_can?(:delete, comment)
+
+
