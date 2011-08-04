@@ -18,11 +18,21 @@ module CanTango
 
         protected
 
-        def guest_user_account
-          procedure = CanTango::Configuration.guest_account_procedure
+        def get_ability_user_acount user_type
+          user_account_meth = :"current_#{user_type}_account"
+          return AbilityAccount.guest if !respond_to?(user_account_meth)
 
-          raise "You must set the guest_account to a Proc or lambda in CanTango::Configuration" if !procedure
-          procedure.call
+          user_account = send user_account_meth
+          user_account ? user_account : AbilityAccount.guest
+        end
+
+        module AbilityAccount
+          def self.guest
+            procedure = CanTango::Configuration.guest_account_procedure
+
+            raise "You must set the guest_account to a Proc or lambda in CanTango::Configuration" if !procedure
+            procedure.call
+          end
         end
 
         include CanTango::Api::Options

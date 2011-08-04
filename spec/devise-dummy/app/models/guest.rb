@@ -5,6 +5,10 @@ class Guest
 
   tango_user # see macros
 
+  def email
+    'guest@example.com'
+  end
+
   def role_groups_list
     []
   end
