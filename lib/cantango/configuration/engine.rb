@@ -2,7 +2,7 @@ require 'singleton'
 
 module CanTango
   class Configuration
-    class Engines
+    class Engine
       include Singleton
 
       [:permit, :permission, :cache].each do |engine|

@@ -2,7 +2,7 @@ require 'set'
 
 module CanTango
   class Configuration
-    autoload_modules :Categories, :Engines
+    autoload_modules :Categories, :Engine
 
     module ClassMethods
       attr_writer :role_groups, :roles
@@ -40,7 +40,7 @@ module CanTango
       end
 
       def engines
-        Engines.instance
+        Engine.instance
       end
 
       [:permits, :models].each do |type|
