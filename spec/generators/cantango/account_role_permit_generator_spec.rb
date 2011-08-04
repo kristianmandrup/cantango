@@ -21,15 +21,15 @@ describe CanTango::Generators::RolePermitsGenerator do
 
   describe 'Run Permit generator' do
     before :each do
-      @generator = with_generator do |g|    
+      @generator = with_generator do |g|
         g.run_generator "admin --account admin --reads all --licenses blogging user_admin".args
       end
     end
-    
+
     describe 'result of running Permit generator' do
       it "should create Admin permit" do
         @generator.should generate_permit :admin
-      end        
+      end
     end
   end
 end

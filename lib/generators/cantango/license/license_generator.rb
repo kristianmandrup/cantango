@@ -3,6 +3,9 @@ require 'sugar-high/array'
 require 'active_support/inflector'
 require 'rails_artifactor'
 
+require 'generators/cantango/base'
+
+
 module CanTango
   module Generators
     class LicenseGenerator < CanTango::Generators::Base
@@ -17,6 +20,10 @@ module CanTango
       def main_flow
         return if name.empty?
         create_license
+      end
+
+      def licenses
+        options[:licenses]
       end
 
       def create_license

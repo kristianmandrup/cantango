@@ -3,6 +3,8 @@ require 'sugar-high/array'
 require 'active_support/inflector'
 require 'rails_artifactor'
 # require 'logging_assist'
+#
+require 'generators/cantango/base'
 
 module CanTango
   module Generators

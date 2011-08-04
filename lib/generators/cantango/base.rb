@@ -1,6 +1,11 @@
+require 'rails/generators/base'
+require 'sugar-high/array'
+require 'active_support/inflector'
+require 'rails_artifactor'
+
 module CanTango
   module Generators
-    class Base < Rails::Generators::Base
+    class Base < ::Rails::Generators::Base
       def self.inherited(subclass)
         subclass.extend ClassMethods
       end
@@ -10,6 +15,7 @@ module CanTango
           [:create, :update, :manage, :read, :access]
         end
       end
+      extend ClassMethods
 
       can_actions.each do |action|
         class_eval %{
