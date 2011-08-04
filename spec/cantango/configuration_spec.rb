@@ -10,31 +10,31 @@ describe CanTango::Configuration do
     its(:special_permits)     { should_not be_empty }
 
     it "should turn on/off engines" do
-      CanTango::Configuration.permission_engine?.should be_false
-      CanTango::Configuration.permit_engine?.should be_true
+      CanTango::Configuration.engines.permission?.should be_false
+      CanTango::Configuration.engines.permit?.should be_true
 
-      CanTango::Configuration.permission_engine :off
-      CanTango::Configuration.permission_engine?.should be_false
+      CanTango::Configuration.engines.permission :off
+      CanTango::Configuration.engines.permission?.should be_false
 
-      CanTango::Configuration.permit_engine :off
-      CanTango::Configuration.permit_engine?.should be_false
+      CanTango::Configuration.engines.permit :off
+      CanTango::Configuration.engines.permit?.should be_false
 
-      CanTango::Configuration.permission_engine :on
-      CanTango::Configuration.permission_engine?.should be_true
+      CanTango::Configuration.engines.permission :on
+      CanTango::Configuration.engines.permission?.should be_true
 
-      CanTango::Configuration.permit_engine :on
-      CanTango::Configuration.permit_engine?.should be_true
+      CanTango::Configuration.engines.permit :on
+      CanTango::Configuration.engines.permit?.should be_true
     end
 
   context "CanTango#configure DSL" do
-    before(:all) { 
+    before(:all) {
       CanTango.configure do |config|
-        config.permission_engine :off
-        config.permit_engine :off
+        config.engines.permission :off
+        config.engines.permit :off
       end
     }
 
-    specify { CanTango::Configuration.permit_engine?.should be_false}
-    specify { CanTango::Configuration.permission_engine?.should be_false}
+    specify { CanTango::Configuration.engines.permit?.should be_false}
+    specify { CanTango::Configuration.engines.permission?.should be_false}
   end
 end

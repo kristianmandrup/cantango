@@ -28,7 +28,7 @@ module CanTango
       end
 
       def caching_on?
-        CanTango::Configuration.caching_engine?
+        CanTango::Configuration.engines.cache?
       end
 
       def cache_hit? cache_key
@@ -108,60 +108,4 @@ module CanTango
   end
 end
 
-=begin
-      def cache_key
-        [self].hash.to_s
-      end
 
-      # rules contains the actual rules built by application of the #can and #cannot methods
-      # The rules are stored in the cache using the unique key
-      def cache_rules!
-        key = cache_key
-        rules_cache[key] ||= []
-        rules_cache[key] << cached_rules
-      end
-
-      def cached_permit_rules
-        key = cache_key
-        rules_cache[key]
-      end
-
-      alias_method :cached_permit_rules?, :cached_permit_rules
-     def caching_on?
-        @caching ||= :on
-      end
-
-      def with_caching state, &block
-        old_cache_state = state
-        @caching = state
-        yield
-        @caching = old_cache_state
-      end
-
-      def rules_cache
-        @rules_cache ||= {}
-      end
-
-      # dynamic rules - we don't cache them
-      def permit_rules!
-        with_caching :off do
-          dynamic_rules # supplied by subclass
-        end
-      end
-
-      def cache_permit_rules!
-        with_caching :on do
-          static_rules # supplied by subclass
-        end
-        cache_rules!
-      end
-
-      # retrieving static rules - their cached variant, or if it don't exist:
-      # calling #static_rules and caching its result
-      def get_permit_rules
-        cached_permit_rules? ? cached_permit_rules : cache_permit_rules!
-        permit_rules!
-      end
-
-
-=end

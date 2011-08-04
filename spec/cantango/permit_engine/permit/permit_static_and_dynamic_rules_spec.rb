@@ -41,13 +41,13 @@ describe CanTango::PermitEngine::RolePermit do
   let (:ability) do
     CanTango::Ability.new user_account
   end
-  let (:permit) do    
+  let (:permit) do
     AdminRolePermit.new ability
   end
   before(:each) do
     CanTango.configure do |config|
-      config.permit_engine :on
-      config.permission_engine :off
+      config.engines.permit :on
+      config.engines.permission :off
     end
   end
 
