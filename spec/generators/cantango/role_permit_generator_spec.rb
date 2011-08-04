@@ -16,7 +16,7 @@ describe CanTango::Generators::RolePermitGenerator do
   use_helpers :special, :file
 
   setup_generator :permit do
-    tests CanTango::Generators::PermitGenerator
+    tests CanTango::Generators::RolePermitGenerator
   end
 
   describe 'Run Permit generator' do

@@ -39,7 +39,7 @@ module CanTango
         @config_path = path
       end
 
-      [:permit, :permission].each do |type|
+      [:permit, :permission, :caching].each do |type|
         class_eval %{
           def #{type}_engine state
             raise ArgumentError unless [:on, :off].include? state
@@ -75,6 +75,11 @@ module CanTango
       def permission_engine?
         @permission_engine ||= :on
         @permission_engine == :on
+      end
+
+      def caching_engine?
+        @caching_engine ||= :on
+        @caching_engine == :on
       end
 
       def default_store_type

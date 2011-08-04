@@ -4,7 +4,7 @@ require 'active_support/inflector'
 require 'rails_artifactor'
 
 require 'generators/cantango/base'
-
+require 'generators/cantango/license_base'
 
 module CanTango
   module Generators
@@ -22,19 +22,13 @@ module CanTango
         create_license
       end
 
-      def licenses
-        options[:licenses]
-      end
+      protected
 
       def create_license
         template "license.erb", "app/licenses/#{name}_license.rb"
       end
 
-      def license_logic
-        return '' if licenses.empty?
-        ls = licenses.map{|c| ":#{c}"}.join(", ")
-        "licenses #{ls}"
-      end
-    end
+      include CanTango::Generators::LicenseBase
+   end
   end
 end

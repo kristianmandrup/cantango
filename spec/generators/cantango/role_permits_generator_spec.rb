@@ -15,7 +15,7 @@ end
 describe CanTango::Generators::RolePermitsGenerator do
   use_helpers :controller, :special, :file
     setup_generator :permits do
-    tests CanTango::Generators::RolePermitGenerator
+    tests CanTango::Generators::RolePermitsGenerator
   end
 
   describe 'result of running generator with default profile' do

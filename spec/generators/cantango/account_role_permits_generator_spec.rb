@@ -12,11 +12,11 @@ RSpec::Generator.configure do |config|
 end
 
 
-describe CanTango::Generators::RolePermitGenerator do
+describe CanTango::Generators::RolePermitsGenerator do
   use_helpers :controller, :special, :file
 
   setup_generator :permits do
-    tests CanTango::Generators::PermitsGenerator
+    tests CanTango::Generators::RolePermitsGenerator
   end
 
   describe 'result of running generator with default profile' do

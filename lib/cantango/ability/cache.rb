@@ -19,10 +19,15 @@ module CanTango
       end
 
       def cache_rules!
+        return if !caching_on?
         invalidate_cache!
         rules_cache.save cache_key, rules
         session[:cache_key] = cache_key
         hit_cache_for cache_key
+      end
+
+      def caching_on?
+        CanTango::Configuration.caching_engine?
       end
 
       def cache_hit? cache_key
@@ -30,7 +35,7 @@ module CanTango
       end
 
       def cached_rules?
-        cache_key_same?
+        caching_on? && cache_key_same?
       end
 
       def cached_rules

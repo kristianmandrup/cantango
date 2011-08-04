@@ -1,6 +1,7 @@
 module CanTango
   module Generators
     module PermitGenerator
+
       def template_permit role, account = nil
         template_account_permit role, account if account
         template permit_source, "app/permits/#{permit_target(role)}" unless account
@@ -14,8 +15,6 @@ module CanTango
         template = ERB.new File.open(template_filepath).read
         template.result(binding)
       end
-
-      protected
 
       def template_filepath
         File.join source_path, permit_source
