@@ -2,7 +2,7 @@ require 'set'
 
 module CanTango
   class Configuration
-    autoload_modules :Categories
+    autoload_modules :Categories, :Engines
 
     module ClassMethods
       attr_writer :role_groups, :roles
@@ -39,13 +39,8 @@ module CanTango
         @config_path = path
       end
 
-      [:permit, :permission, :caching].each do |type|
-        class_eval %{
-          def #{type}_engine state
-            raise ArgumentError unless [:on, :off].include? state
-            @#{type}_engine = state
-          end
-        }
+      def engines
+        Engines.instance
       end
 
       [:permits, :models].each do |type|
@@ -65,21 +60,6 @@ module CanTango
       def autoload_permits?
         @autoload_permits ||= :on
         @autoload_permits == :on
-      end
-
-      def permit_engine?
-        @permit_engine ||= :on
-        @permit_engine == :on
-      end
-
-      def permission_engine?
-        @permission_engine ||= :on
-        @permission_engine == :on
-      end
-
-      def caching_engine?
-        @caching_engine ||= :on
-        @caching_engine == :on
       end
 
       def default_store_type

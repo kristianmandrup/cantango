@@ -8,7 +8,7 @@ def config_folder
 end
 
 CanTango::Configuration.config_path = config_folder
-CanTango::Configuration.permission_engine :on
+CanTango::Configuration.engines.permission :on
 
 class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   def initialize ability

@@ -91,11 +91,11 @@ module CanTango
     end
 
     def permit_engine?
-      CanTango::Configuration.permit_engine?
+      CanTango::Configuration.engines.permit?
     end
 
     def permission_engine?
-      CanTango::Configuration.permission_engine?
+      CanTango::Configuration.engines.permission?
     end
   end
 end
