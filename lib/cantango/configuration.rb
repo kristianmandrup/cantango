@@ -17,26 +17,8 @@ module CanTango
       attr_accessor :user_key_field
       attr_accessor :user_accounts, :users
 
-      attr_reader :guest_user_procedure, :guest_account_procedure
-
-      def guest_user procedure
-        raise ArgumentError, "Argument must be a Proc or lambda" if !procedure.respond_to? :call
-        @guest_user_procedure = procedure
-      end
-
-      def guest_account procedure
-        raise ArgumentError, "Argument must be a Proc or lambda" if !procedure.respond_to? :call
-        @guest_account_procedure = procedure
-      end
-
-      def config_path
-        @config_path ||= File.join(::Rails.root.to_s, 'config') if rails?
-        @config_path or raise "Define path to config files dir!\n"
-      end
-
-      def config_path= path
-        raise "Must be a valid path to permission yaml file, was: #{path}" if !dir?(path)
-        @config_path = path
+      def guest
+        Guest.instance
       end
 
       def engines
@@ -47,8 +29,8 @@ module CanTango
         Autoload.instance
       end
 
-      def default_store_type
-        @default_store_type || :redis
+      def user
+        User.instance
       end
 
       def default_cache_type

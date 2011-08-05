@@ -11,6 +11,8 @@ module CanTango
         end
 
         class Store
+          attr_writer :default_type
+
           def default_type
             @default_type || :memory
           end
