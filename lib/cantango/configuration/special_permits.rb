@@ -3,8 +3,10 @@ module CanTango
     class SpecialPermits
       include Singleton
 
+      attr_writer :default
+
       def default
-        [:system, :any]
+        @default ||= [:system, :any]
       end
     end
   end

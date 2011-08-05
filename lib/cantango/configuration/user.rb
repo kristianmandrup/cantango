@@ -3,7 +3,9 @@ module CanTango
     class User
       include Singleton
 
-      attr_reader :unique_key_field
+      def unique_key_field
+        @unique_key_field || :email
+      end
 
       def unique_key_field= key
         raise ArgumentError, "Not a valid key" unless key.kind_of_label?

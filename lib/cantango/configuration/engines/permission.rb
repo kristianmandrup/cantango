@@ -25,11 +25,26 @@ module CanTango
         end
 
         class Store
-          attr_writer :default_type
+          attr_writer :default_type, :default
+
+          def default
+            CanTango::PermissionEngine::YamlStore
+          end
 
           def default_type
             @default_type || :memory
           end
+        end
+
+        private
+
+        def rails?
+          defined?(::Rails) && ::Rails.respond_to?(:root)
+        end
+
+        def dir? dir
+          return false if !dir
+          File.directory?(dir)
         end
       end
     end

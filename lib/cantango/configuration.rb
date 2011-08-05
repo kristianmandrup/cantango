@@ -72,11 +72,11 @@ module CanTango
       end
 
       def role_groups
-        @role_groups ||= default_roles
+        RoleGroups.instance
       end
 
       def roles
-        @roles ||= default_roles
+        Roles.instance
       end
 
       def user_relationships

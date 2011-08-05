@@ -11,7 +11,13 @@ module CanTango
         end
 
         class Store
-          attr_writer :default_type
+          attr_writer :default_type # must be Symbol
+
+          # must be a Class of type Cache (Base?)
+          def default= clazz
+            # raise ...
+            @default = clazz
+          end
 
           def options= options = {}
             raise ArgumentError, "Must be a Hash, was #{options}" if !options.kind_of? Hash
