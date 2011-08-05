@@ -2,6 +2,8 @@ require 'rspec'
 require 'cantango'
 require 'fixtures/models'
 
+require 'cantango/configuration/engine_shared'
+
 describe CanTango::Configuration::Engines do
   describe 'Permission engine' do
     it_should_behave_like 'Engine' do
