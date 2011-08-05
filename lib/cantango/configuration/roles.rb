@@ -3,7 +3,11 @@ module CanTango
     class Roles
       include Singleton
 
-      attr_writer :default
+      attr_writer :default, :roles
+
+      def roles
+        @roles || default
+      end
 
       def default
         @default ||= [:admin, :guest]
