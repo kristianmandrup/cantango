@@ -2,7 +2,7 @@ require 'set'
 
 module CanTango
   class Configuration
-    autoload_modules :Categories, :Engines, :Roles, :RoleGroups
+    autoload_modules :Categories, :Engines, :Roles, :RoleGroups, :Register
 
     module ClassMethods
       
