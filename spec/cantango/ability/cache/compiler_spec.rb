@@ -4,7 +4,7 @@ require 'sourcify'
 
 describe CanTango::Ability::Cache::Kompiler do
 
-module CacheStub
+module Cachestub
   
   class << self
   include CanTango::Ability::Cache::Kompiler
@@ -27,7 +27,7 @@ end
   }
 
   it "should compile! rules" do
-    CacheStub.compile_rules(@rules).first.block.should == "proc { |arg| $b = [1, 2, 3, arg] }"
+    Cachestub.compile_rules(@rules).first.block.should == "proc { |arg| $b = [1, 2, 3, arg] }"
   end
 
   # Direct testing doesn't work here because raw_rules.first.eval.to_source raises exception.
@@ -36,8 +36,8 @@ end
   # I.e. things like eval( (Proc.new{}).to_source ).to_source do not work. 
   # But for our needs basic two operations flow like Proc -> String -> (evaled)Proc is pretty enough
   it "should decompile! rules" do
-    compiled_rules = CacheStub.compile_rules(@rules)
-    raw_rules = CacheStub.decompile_rules compiled_rules
+    compiled_rules = Cachestub.compile_rules(@rules)
+    raw_rules = Cachestub.decompile_rules compiled_rules
     raw_rules.first.block.call(4)
     $b.should == [1,2,3,4]
   end

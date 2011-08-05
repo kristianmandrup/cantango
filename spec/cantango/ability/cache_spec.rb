@@ -50,7 +50,7 @@ describe CanTango::Ability::Cache do
 
   subject { CacheStub.new :kris }
 
-  its(:rules_cache) { should be_empty}
+  #its(:rules_cache) { should be_empty}
   its(:rules) { should_not be_empty }
 
 =begin
