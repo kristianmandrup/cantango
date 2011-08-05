@@ -1,3 +1,4 @@
+require 'singleton'
 module CanTango
   class Configuration
     class Roles

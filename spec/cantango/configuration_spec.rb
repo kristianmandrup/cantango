@@ -4,8 +4,12 @@ require 'fixtures/models'
 
 describe CanTango::Configuration do
   subject { CanTango::Configuration }
+  it "should" do
+    puts CanTango::Configuration.roles
+  end
+    
     its(:roles)               { should_not be_empty }
-    its(:role_groups)         { should_not be_empty }
+    its(:role_groups)         { should == [] }
     its(:user_relationships)  { should_not be_empty }
     its(:special_permits)     { should_not be_empty }
 

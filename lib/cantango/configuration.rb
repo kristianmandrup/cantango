@@ -5,7 +5,7 @@ module CanTango
     autoload_modules :Categories, :Engines, :Roles, :RoleGroups
 
     module ClassMethods
-      attr_writer :role_groups, :roles
+      
       attr_writer :default_roles, :default_role_groups
       attr_writer :special_permits, :user_relationships
       attr_writer :localhost_manager
@@ -72,11 +72,11 @@ module CanTango
       end
 
       def role_groups
-        RoleGroups.instance
+        RoleGroups.instance.role_groups
       end
 
       def roles
-        Roles.instance
+        Roles.instance.roles
       end
 
       def user_relationships
