@@ -43,23 +43,8 @@ module CanTango
         Engines.instance
       end
 
-      [:permits, :models].each do |type|
-        class_eval %{
-          def autoload_#{type} state
-            raise ArgumentError unless [:on, :off].include? state
-            @autoload_#{type} = state
-          end
-        }
-      end
-
-      def autoload_models?
-        @autoload_models ||= :on
-        @autoload_models == :on
-      end
-
-      def autoload_permits?
-        @autoload_permits ||= :on
-        @autoload_permits == :on
+      def autoload
+        Autoload.instance
       end
 
       def default_store_type

@@ -19,10 +19,10 @@ module CanTango
 
       # load all models
       # this is needed in order to register all users and accounts with CanTango using the user/account macros!
-      RailsAutoLoader.load_models! if CanTango::Configuration.autoload_models?
+      RailsAutoLoader.load_models! if CanTango::Configuration.autoload.models?
 
       # load all permits
-      RailsAutoLoader.load_permits! if CanTango::Configuration.autoload_permits?
+      RailsAutoLoader.load_permits! if CanTango::Configuration.autoload.permits?
     end
   end
 
