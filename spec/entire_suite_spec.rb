@@ -5,7 +5,7 @@ dir = File.dirname(__FILE__)
 
 require_all "#{dir}/cantango/permit_engine"
 
-require "#{dir}/cantango/ability_spec"
+require_all "#{dir}/cantango/ability"
 
 require_all "#{dir}/cantango/permission_engine/loader"
 
