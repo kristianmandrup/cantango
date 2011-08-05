@@ -10,7 +10,7 @@ group :default do
   gem "friendly_id"
 
   # adapters
-  # gem 'meta_where'
+  gem 'meta_where'
   # gem 'mongoid'
 end
 

@@ -2,7 +2,7 @@ require 'set'
 
 module CanTango
   class Configuration
-    autoload_modules :Categories, :Engines, :Roles, :RoleGroups, :Register
+    autoload_modules :Autoload, :Categories, :Engines, :Roles, :RoleGroups, :Register
 
     module ClassMethods
       
@@ -16,6 +16,10 @@ module CanTango
 
       attr_accessor :user_key_field
       attr_accessor :user_accounts, :users
+
+      def config_path
+        engines.permission.config_path
+      end
 
       def guest
         Guest.instance

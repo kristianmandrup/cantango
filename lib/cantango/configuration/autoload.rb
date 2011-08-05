@@ -4,7 +4,7 @@ module CanTango
       include Singleton
 
       [:models, :permits].each do |name|
-        attr_accessor engine
+        attr_accessor name 
 
         # def permits?
         #   @permits ||= :on
