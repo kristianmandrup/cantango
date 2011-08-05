@@ -4,9 +4,18 @@ module CanTango
       include Singleton
 
       [:models, :permits].each do |name|
-        attr_accessor name 
-
-        # def permits?
+        # def permission state = nil
+        #   raise ArgumentError unless [:on, :off].include? state
+        #   @permission = state
+        # end
+        class_eval %{
+          def #{name} state = nil
+            return #{name}? if !state
+            raise ArgumentError, "Must be :on or :off" unless [:on, :off].include? state
+            @#{name} = state
+          end
+        }
+         # def permits?
         #   @permits ||= :on
         #   @permits == :on
         # end

@@ -20,27 +20,4 @@ describe CanTango::Configuration::Guest do
   end
 end
 
-class UserAccount
-  def self.guest
-    :guest_account
-  end
-end
-
-class User
-  def self.guest
-    :guest
-  end
-end
-
-
-describe CanTango::Configuration::Guest do
-  describe 'default settings with class methods for #guest defined' do
-    subject { CanTango::Configuration.guest }
-      # TODO
-      its(:account_proc) { should == :guest_account }
-      its(:user_proc)    { should == :guest }
-  end
-end
-
-
 

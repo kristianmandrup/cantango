@@ -33,7 +33,7 @@ module CanTango
         class_eval %{
           def #{engine} state = nil
             return #{engine.to_s.camelize}.instance if !state
-            raise ArgumentError unless [:on, :off].include? state
+            raise ArgumentError, "Must be :on or :off" unless [:on, :off].include? state
             @#{engine} = state
           end
         }

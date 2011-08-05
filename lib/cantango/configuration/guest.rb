@@ -4,11 +4,11 @@ module CanTango
       include Singleton
 
       def user_proc
-        @user ||= User.guest if default_user?
+        @user ||= ::User.guest if default_user?
       end
 
       def account_proc
-        @account ||= UserAccount.guest if default_user_account?
+        @account ||= ::UserAccount.guest if default_user_account?
       end
 
       def user procedure
@@ -21,14 +21,14 @@ module CanTango
         @account = procedure
       end
 
-      protected
+      # protected
 
       def default_user?
-        defined?(User) && User.respond_to?(:guest)
+        defined?(::User) && ::User.respond_to?(:guest)
       end
 
       def default_user_account?
-        defined?(UserAccount) && UserAccount.respond_to?(:guest)
+        defined?(::UserAccount) && ::UserAccount.respond_to?(:guest)
       end
     end
   end

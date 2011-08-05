@@ -17,6 +17,7 @@ describe CanTango::Configuration::Autoload do
       end
 
       its(:permits)     { should be_false }
+      its(:permits?)    { should be_false }
     end
 
     describe 'turn on' do
@@ -25,6 +26,7 @@ describe CanTango::Configuration::Autoload do
       end
 
       its(:permits)     { should be_true }
+      its(:permits?)    { should be_true }
     end
   end
 
@@ -34,7 +36,8 @@ describe CanTango::Configuration::Autoload do
         subject.models :off
       end
 
-      its(:models)     { should be_false }
+      its(:models)      { should be_false }
+      its(:models?)     { should be_false }
     end
 
     describe 'turn on' do
@@ -42,7 +45,8 @@ describe CanTango::Configuration::Autoload do
         subject.models :on
       end
 
-      its(:models)     { should be_true }
+      its(:models)      { should be_true }
+      its(:models?)     { should be_true }
     end
   end
 end
