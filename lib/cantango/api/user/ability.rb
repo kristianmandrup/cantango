@@ -26,7 +26,7 @@ module CanTango
             procedure = CanTango::Configuration.guest_user_procedure
 
             raise "You must set the guest_user to a Proc or lambda in CanTango::Configuration" if !procedure
-            procedure.call
+            procedure.respond_to?(:call) ? procedure.call : procedure
           end
         end
 

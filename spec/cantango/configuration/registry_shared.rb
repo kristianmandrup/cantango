@@ -1,6 +1,6 @@
-shared_example 'Registry' do
+shared_examples_for 'Registry' do
   describe 'default settings' do
-    its(:registered)  { should include(subject.default) }
+    its(:registered)  { should_not be_empty }
 
     it 'should register groups' do
       subject.register(:a, :b)

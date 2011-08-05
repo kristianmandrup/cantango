@@ -1,11 +1,15 @@
 require 'set'
+require 'singleton'
 
 module CanTango
   class Configuration
-    autoload_modules :Categories, :Engines, :Roles, :RoleGroups, :Register
+    autoload_modules :Categories
+    autoload_modules :Engines
+    autoload_modules :User, :Guest, :Account
+    autoload_modules :Roles, :RoleGroups, :Registry
+    autoload_modules :SpecialPermits, :Autoload
 
     module ClassMethods
-      
       attr_writer :default_roles, :default_role_groups
       attr_writer :special_permits, :user_relationships
       attr_writer :localhost_manager
@@ -31,6 +35,18 @@ module CanTango
 
       def user
         User.instance
+      end
+
+      def role_groups
+        RoleGroups.instance
+      end
+
+      def roles
+        Roles.instance
+      end
+
+      def conf
+        CanTango::Configuration
       end
 
       def default_cache_type
@@ -69,14 +85,6 @@ module CanTango
 
       def user_key_field
         @user_key_field || :email
-      end
-
-      def role_groups
-        RoleGroups.instance.role_groups
-      end
-
-      def roles
-        Roles.instance.roles
       end
 
       def user_relationships

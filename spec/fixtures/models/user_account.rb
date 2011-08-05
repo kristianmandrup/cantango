@@ -1,16 +1,16 @@
 class UserAccount
   attr_accessor :user, :roles, :role_groups
-  
+
   def initialize user, options = {}
     @user = user
     @roles = options[:roles]
     @role_groups = options[:role_groups]
-  end    
+  end
 
   def has_role? name
     true
   end
-  
+
   def roles_list
     roles
   end

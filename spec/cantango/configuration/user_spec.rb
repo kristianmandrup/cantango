@@ -11,14 +11,14 @@ describe CanTango::Configuration::User do
       its(:unique_key_field)  { should == :email }
     end
 
-    describe 'relations' do
+    describe 'relations config' do
       before do
-        subject.relations = [:mine]
+        subject.relations = :mine
       end
       its(:relations)         { should include(:mine) }
     end
 
-    describe 'unique_key_field' do
+    describe 'unique_key_field config' do
       before do
         subject.unique_key_field = :username
       end

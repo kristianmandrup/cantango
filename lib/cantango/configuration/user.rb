@@ -9,10 +9,18 @@ module CanTango
 
       def unique_key_field= key
         raise ArgumentError, "Not a valid key" unless key.kind_of_label?
-        @unique_key_field = key
+        @unique_key_field = key.to_sym
+      end
+
+      def relations= *relations
+        @relations = relations.select_labels.flat_uniq
       end
 
       def relations
+        @relations ||= default_relations
+      end
+
+      def default_relations
         [:owner, :author, :writer, :user]
       end
     end

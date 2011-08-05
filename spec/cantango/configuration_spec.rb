@@ -3,7 +3,7 @@ require 'cantango'
 require 'fixtures/models'
 
 describe CanTango::Configuration do
-  descrive "configure DSL" do
+  describe "configure DSL" do
     before(:all) {
       CanTango.configure do |config|
         config.engines.permission :off

@@ -3,21 +3,21 @@ module CanTango
     class Guest
       include Singleton
 
-      def get_user
+      def user_proc
         @user ||= User.guest if default_user?
       end
 
-      def get_account
+      def account_proc
         @account ||= UserAccount.guest if default_user_account?
       end
 
       def user procedure
-        raise ArgumentError, "Argument must be a Proc or lambda" if !procedure.respond_to? :call
+        # raise ArgumentError, "Argument must be a Proc or lambda" if !procedure.respond_to? :call
         @user = procedure
       end
 
       def account procedure
-        raise ArgumentError, "Argument must be a Proc or lambda" if !procedure.respond_to? :call
+        # raise ArgumentError, "Argument must be a Proc or lambda" if !procedure.respond_to? :call
         @account = procedure
       end
 

@@ -1,6 +1,6 @@
 module CanTango
   class Configuration
-    class RoleGroups < Registry
+    class Roles < Registry
     end
   end
 end
