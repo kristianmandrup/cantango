@@ -12,7 +12,7 @@ AutoLoader.root = ''
 AutoLoader.namespaces = {:CanTango => 'cantango'}
 
 module CanTango
-  autoload_modules :Ability, :Api, :Configuration
+  autoload_modules :Ability, :Api, :Configuration, :Cache
   autoload_modules :PermitEngine, :Rails, :Users
   autoload_modules :PermissionEngine, :Rules, :Api
 
