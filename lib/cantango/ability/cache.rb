@@ -1,9 +1,10 @@
 module CanTango
   class Ability
     module Cache
-      autoload_modules :BaseCache, :SessionCache, :MonetaCache, :Compiler
+      autoload_modules :BaseCache, :SessionCache, :MonetaCache, :Kompiler
 
-      include Compiler
+      include CanTango::Ability::Cache::Kompiler
+
       attr_reader :rules_cached
 
       def rules
