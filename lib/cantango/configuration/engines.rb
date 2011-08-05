@@ -2,7 +2,9 @@ require 'singleton'
 
 module CanTango
   class Configuration
-    class Engine
+    class Engines
+      autoload_modules :Permission, :Permit, :Cache
+
       include Singleton
 
       [:permit, :permission, :cache].each do |engine|
@@ -20,7 +22,8 @@ module CanTango
         }
 
         class_eval %{
-          def #{engine} state
+          def #{engine} state = nil
+            return #{engine.to_s.camelize}.instance if !state
             raise ArgumentError unless [:on, :off].include? state
             @#{engine} = state
           end

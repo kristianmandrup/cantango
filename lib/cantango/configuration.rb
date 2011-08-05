@@ -40,7 +40,7 @@ module CanTango
       end
 
       def engines
-        Engine.instance
+        Engines.instance
       end
 
       [:permits, :models].each do |type|

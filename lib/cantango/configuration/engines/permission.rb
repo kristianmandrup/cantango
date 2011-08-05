@@ -2,7 +2,7 @@ require 'singleton'
 
 module CanTango
   class Configuration
-    class Engine
+    class Engines
       class Permission
         include Singleton
 
