@@ -2,7 +2,7 @@ require 'singleton'
 
 module CanTango
   class Configuration
-    class Registry
+    class Register
       attr_writer :default
 
       include Singleton

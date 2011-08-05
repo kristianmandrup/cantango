@@ -1,4 +1,4 @@
-shared_example 'Register' do
+shared_example 'Registry' do
   describe 'default settings' do
     its(:registered)  { should include(subject.default) }
 
