@@ -43,7 +43,7 @@ module CanTango
       end
 
       def config_path
-        CanTango::Configuration.config_path
+        CanTango::Configuration.engines.permission.config_path
       end
     end
 
