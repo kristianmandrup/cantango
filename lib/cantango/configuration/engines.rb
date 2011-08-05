@@ -11,8 +11,8 @@ module CanTango
         attr_accessor engine
 
         # def permission?
-        #   @permission_engine ||= :on
-        #   @permission_engine == :on
+        #   @permission ||= :on
+        #   @permission == :on
         # end
         class_eval %{
           def #{engine}?
@@ -21,6 +21,11 @@ module CanTango
           end
         }
 
+        # def permission state = nil
+        #   return Permission.instance if !state
+        #   raise ArgumentError unless [:on, :off].include? state
+        #   @permission = state
+        # end
         class_eval %{
           def #{engine} state = nil
             return #{engine.to_s.camelize}.instance if !state
