@@ -6,11 +6,12 @@ group :default do
   gem 'sugar-high', '>= 0.5'
   gem 'sqlite3'
   gem 'hashie', '>= 0.4'
+  gem 'sourcify'
   gem 'dkastner-moneta', '>= 1.0'
   gem "friendly_id"
 
   # adapters
-  # gem 'meta_where'
+  gem 'meta_where'
   # gem 'mongoid'
 end
 

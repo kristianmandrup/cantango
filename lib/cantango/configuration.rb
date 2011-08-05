@@ -21,6 +21,10 @@ module CanTango
       attr_accessor :user_key_field
       attr_accessor :user_accounts, :users
 
+      def config_path
+        engines.permission.config_path
+      end
+
       def guest
         Guest.instance
       end

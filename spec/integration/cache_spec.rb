@@ -47,13 +47,13 @@ describe "Caching of the rules" do
       it "should have #cached_rules equal to #rules" do
         get '/login_user/stanislaw'
         get '/articles'
-        puts response.body
+        #puts response.body
         response.body.should match(/Cached the rules!/)
         response.body.should match(/Using cached rules: false/)
         get '/articles'
         response.body.should match(/Cached the rules!/)
         response.body.should match(/Using cached rules: true/)
-        puts response.body
+        #puts response.body
       end
     end
   end

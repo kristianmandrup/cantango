@@ -1,7 +1,9 @@
 module CanTango
   class Ability
     module Cache
-      autoload_modules :BaseCache, :SessionCache, :MonetaCache
+      autoload_modules :BaseCache, :SessionCache, :MonetaCache, :Kompiler
+
+      include CanTango::Ability::Cache::Kompiler
 
       attr_reader :rules_cached
 
@@ -21,18 +23,14 @@ module CanTango
       def cache_rules!
         return if !caching_on?
         invalidate_cache!
-        rules_cache.save cache_key, rules
+        rules_compiled = compile_rules! rules
+        rules_cache.save cache_key, rules_compiled
         session_check!
         session[:cache_key] = cache_key
-        hit_cache_for cache_key
       end
 
       def caching_on?
         CanTango::Configuration.engines.cache?
-      end
-
-      def cache_hit? cache_key
-        hit_cache[cache_key]
       end
 
       def cached_rules?
@@ -40,7 +38,9 @@ module CanTango
       end
 
       def cached_rules
-        @rules ||= rules_cache.load(cache_key)
+        rules_compiled = rules_cache.load(cache_key)
+        rules_raw = decompile_rules! rules_compiled
+        @rules ||= rules_raw      
       end
 
       def cache_key
@@ -68,12 +68,8 @@ module CanTango
 
       protected
 
-      def hit_cache
-        @hit_cache ||= {}
-      end
-
-      def hit_cache_for key
-        hit_cache[key] = Time.now
+      def compiler
+        Compiler.instance
       end
 
       def cache_key_same?
