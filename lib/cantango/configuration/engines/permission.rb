@@ -14,12 +14,8 @@ module CanTango
           [:roles, :role_groups, :licenses, :users]
         end
 
-        def config_path
-          @config_path ||= File.join(::Rails.root.to_s, 'config') if rails?
-          @config_path or raise "Define path to config files dir!\n"
-        end
-
-        def config_path= path
+        def config_path path = nil
+          return current_config_path if !path
           raise "Must be a valid path to permission yaml file, was: #{path}" if !dir?(path)
           @config_path = path
         end
@@ -37,6 +33,11 @@ module CanTango
         end
 
         private
+
+        def current_config_path
+          @config_path ||= File.join(::Rails.root.to_s, 'config') if rails?
+          @config_path or raise "Define path to config files dir!\n"
+        end
 
         def rails?
           defined?(::Rails) && ::Rails.respond_to?(:root)
