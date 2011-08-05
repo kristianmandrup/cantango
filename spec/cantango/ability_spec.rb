@@ -7,8 +7,10 @@ def config_folder
   File.dirname(__FILE__)+ "/../fixtures/config/"
 end
 
-CanTango::Configuration.config_path = config_folder
-CanTango::Configuration.engines.permission :on
+CanTango.configure do |config|
+  config.engines.permission :on
+  config.engines.permission.config_path = config_folder
+end
 
 class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   def initialize ability

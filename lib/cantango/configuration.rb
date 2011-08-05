@@ -2,7 +2,7 @@ require 'set'
 
 module CanTango
   class Configuration
-    autoload_modules :Categories, :Engine
+    autoload_modules :Categories, :Engines, :Roles, :RoleGroups
 
     module ClassMethods
       attr_writer :role_groups, :roles
@@ -72,11 +72,11 @@ module CanTango
       end
 
       def role_groups
-        RoleGroups.instance
+        RoleGroups.instance.default
       end
 
       def roles
-        Roles.instance
+        Roles.instance.default
       end
 
       def user_relationships

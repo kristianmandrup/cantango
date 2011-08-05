@@ -7,6 +7,10 @@ module CanTango
 
       include Singleton
 
+      def permission
+        Permission.instance
+      end
+
       [:permit, :permission, :cache].each do |engine|
         attr_accessor engine
 

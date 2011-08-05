@@ -15,5 +15,7 @@ require 'cutter'
 
 require 'simple_roles'
 
-CanTango::Configuration.config_path = File.dirname(__FILE__) + '/fixtures/config'
+CanTango.configure do |config|
+  config.engines.permission.config_path = File.dirname(__FILE__) + '/fixtures/config'
+end
 #require_all File.dirname(__FILE__) + '/fixtures'
