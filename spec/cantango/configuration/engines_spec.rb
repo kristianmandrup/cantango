@@ -6,11 +6,7 @@ require 'cantango/configuration/engine_shared'
 
 describe CanTango::Configuration::Engines do
   describe 'Permission engine' do
-    it_should_behave_like 'Engine' do
-      let (:state) { :permission }
-      subject { CanTango::Configuration.engines }
-    end
-  end
+ end
 
   describe 'Permit engine' do
     it_should_behave_like 'Engine' do

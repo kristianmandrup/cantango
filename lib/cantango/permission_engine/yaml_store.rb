@@ -30,7 +30,7 @@ module CanTango
         @permissions ||= loader.permissions
       end
 
-      CanTango::Configuration.permission_types.each do |type|
+      CanTango::Configuration.engine(:permission).types.each do |type|
         define_method(:"#{type}_permissions") do
           loader.send(:"#{type}_permissions")
         end
@@ -40,7 +40,7 @@ module CanTango
             result.merge(pv.to_hash)
           end
         end
-      
+
         define_method(:"#{type}_permissions_to_hash") do
           { type.to_s => send(:"#{type}_permissions_rules") }
         end

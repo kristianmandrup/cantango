@@ -7,7 +7,7 @@ module CanTango
         include Singleton
 
         def store &block
-          @store ||= Store.instance
+          @store ||= ns::Store.instance
           @store.default = CanTango::PermissionEngine::YamlStore
           yield @store if block
           @store
@@ -21,23 +21,6 @@ module CanTango
           return current_config_path if !path
           raise "Must be a valid path to permission yaml file, was: #{path}" if !dir?(path)
           @config_path = path
-        end
-
-        class Store
-          attr_writer :default_type
-
-          def default= clazz
-            raise ArgumentError, "Cache must implement the class CanTango::PermissionEngine::Store" if !clazz.kind_of?(Class)
-            @default = clazz
-          end
-
-          def default
-            CanTango::PermissionEngine::YamlStore
-          end
-
-          def default_type
-            @default_type || :memory
-          end
         end
 
         private

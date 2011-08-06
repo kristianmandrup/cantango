@@ -7,12 +7,12 @@ module CanTango
         include Singleton
 
         def store &block
-          @store ||= Store.instance
+          @store ||= ns::Store.instance
           @store.default = CanTango::Ability::SessionCache
           yield @store if block
           @store
         end
-     end
+      end
     end
   end
 end

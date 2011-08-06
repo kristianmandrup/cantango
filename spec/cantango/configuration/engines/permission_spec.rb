@@ -2,19 +2,27 @@ require 'rspec'
 require 'cantango'
 require 'fixtures/models'
 
+require 'cantango/configuration/engines/store_engine_shared'
 require 'path_helper'
 
 describe CanTango::Configuration::Engines::Permission do
+  subject { CanTango::Configuration.engine(:permission) }
+
   describe 'default settings' do
-    subject { CanTango::Configuration.engines.permission }
-      it 'should not have config path' do
-        lambda { subject.config_path }.should raise_error
-      end
+    it 'should not have config path' do
+      lambda { subject.config_path }.should raise_error
+    end
+  end
+
+  it_should_behave_like 'Store Engine' do
+    subject { CanTango::Configuration.engine(:permission) }
+  end
+
+  it_should_behave_like 'Store'
+    subject { CanTango::Configuration.engine(:permission).store }
   end
 
   describe 'config_path' do
-    subject { CanTango::Configuration.engines.permission }
-
     let(:yml_path) { File.join dummy_root_path, 'config' }
 
     before do

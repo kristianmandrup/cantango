@@ -14,6 +14,12 @@ module CanTango
             end
           }
         end
+
+        protected
+
+        def ns
+          CanTango::Configuration::Engines
+        end
       end
     end
   end

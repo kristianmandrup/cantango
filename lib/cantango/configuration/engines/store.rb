@@ -5,7 +5,7 @@ module CanTango
         include Singleton
         include ClassExt
 
-        attr_writer :default
+        attr_reader :default
 
         # must be a Class of type Cache (Base?)
         def default= clazz
