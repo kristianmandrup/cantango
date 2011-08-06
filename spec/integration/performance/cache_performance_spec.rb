@@ -16,7 +16,7 @@ describe "Caching of the rules" do
         end
       end
 
-      it "should have #cached_rules equal to #rules" do
+      it "3 requests" do
         get '/login_user/stanislaw'
         puts "\n\nFirst Request"
         get "/articles"

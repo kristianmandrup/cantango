@@ -7,7 +7,7 @@ describe "CanTango::Ability performance" do
     Article.create!(:title => 'one')
   end
 
-  context "With Caching disabled" do
+  context "With cache disabled" do
 
     describe 'Memory store' do
       before do
@@ -16,7 +16,7 @@ describe "CanTango::Ability performance" do
         end
       end
 
-      it "should have #cached_rules equal to #rules" do
+      it "3 requests" do
         get '/login_user/stanislaw'
         puts "\n\nFirst Request"
         get "/articles"
@@ -28,7 +28,7 @@ describe "CanTango::Ability performance" do
     end
   end
 
-  context "Ability's rules" do
+  context "With cache enabled" do
 
     describe 'Memory store' do
       before do
@@ -38,7 +38,7 @@ describe "CanTango::Ability performance" do
         end
       end
 
-      it "should have #cached_rules equal to #rules" do
+      it "3 requests" do
         get '/login_user/stanislaw'
         puts "\n\nFirst Request"
         get "/articles"

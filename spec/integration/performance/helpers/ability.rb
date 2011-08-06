@@ -6,23 +6,27 @@ module CanTango
       @candidate, @options = candidate, options
       @session = options[:session] || {} # seperate session cache for each type of user?
 
-      begin
+      if cached_rules?
         @rules_cached = true
         puts "Using Cache..."
         return
-      if cached_rules?
+      end
 
       puts "\nAbility#initialize"
-      stamper("No caching, going through engines:") {
-      with(:permissions)  {|permission| permission.evaluate! user }
-      stamp "Permissions finished"
-      with(:permits)      {|permit| break if permit.execute == :break }
-      stamp "Permits finished"
 
-      cache_rules!
-      stamp "Caching finished"
+      stamper("No caching, going through engines:") {
+
+        with(:permissions)  {|permission| permission.evaluate! user }
+
+        stamp "Permissions finished"
+
+        with(:permits)      {|permit| break if permit.execute == :break }
+        stamp "Permits finished"
+
+        cache_rules!
+        stamp "Caching finished"
       }
     end
-  end 
+  end
 end
 
