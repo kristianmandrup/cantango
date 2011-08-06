@@ -1,6 +1,5 @@
 require 'rspec'
 require 'cantango'
-require 'fixtures/models'
 
 require 'cantango/configuration/engines/store_engine_shared'
 

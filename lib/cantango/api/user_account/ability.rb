@@ -28,7 +28,7 @@ module CanTango
 
         module AbilityAccount
           def self.guest
-            procedure = CanTango::Configuration.guest_account_procedure
+            procedure = CanTango::Configuration.guest.account_proc
 
             raise "You must set the guest_account to a Proc or lambda in CanTango::Configuration" if !procedure
             procedure.respond_to?(:call) ? procedure.call : procedure

@@ -3,6 +3,17 @@ module CanTango
     class User
       include Singleton
 
+      include ClassExt
+
+      def base_class
+        @clazz ||= (::User if defined? ::User)
+      end
+
+      def base_class= clazz
+        raise ArgumentError, "Must be a class, was: #{clazz}" unless is_class? clazz
+        @clazz = clazz
+      end
+
       def unique_key_field
         @unique_key_field || :email
       end

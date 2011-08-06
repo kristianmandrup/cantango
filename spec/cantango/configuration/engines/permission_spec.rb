@@ -18,7 +18,7 @@ describe CanTango::Configuration::Engines::Permission do
     subject { CanTango::Configuration.engine(:permission) }
   end
 
-  it_should_behave_like 'Store'
+  it_should_behave_like 'Store' do
     subject { CanTango::Configuration.engine(:permission).store }
   end
 
