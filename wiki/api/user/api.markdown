@@ -3,7 +3,6 @@ Cantango comes with a Can API for both users and user accounts.
 The User Account API is very similar to the User API.
 
 * Can API
-* Actie API
 * Scope API
 
 Assume we have the user models User and Admin registered with Cantango.(See [[Registration of User models]])
@@ -38,8 +37,13 @@ the same kind of user.
 
 API methods:
 * scope_user type, options = {}, &block
+* as_real_user type, options = {}, &block
 
-Example use:
+`#scope_user` is used to define an ability scope for a specific user. The
+permission API can then operate on this ability scope directly instead
+of having to create the ability each time.
+
+Example use #scope_user:
 
 ```ruby
 scope_user :admin do |admin|
@@ -52,24 +56,13 @@ scope_user :admin do |admin|
 end
 ```
 
-## User Active API
+`#as_real_user` is used to explicitly negate masquerading within the
+scope. Thus the permissions apply to the real user, not the masqueraded user.
 
-Note: Why not integrate with other apis?
-
-if active_user points to another user, this user should always be the
-one considered for permissions!
-
-The Active API is used when user masquerading must be considered.
-When an Admin user masquerades as a normal user, the admin must have the permissions
-of the normal user. Hence the normal user is the active user for the admin.
-
-API methods:
-* active_user type, options = {}, &block
-
-Example use:
+Example use #as_real_user:
 
 ```ruby
-active_user :admin do |admin|
+as_real_user :admin do |admin|
   if admin.can?(:edit, Article) || admin.can?(:read, Post)
     # do stuff
   end
@@ -78,5 +71,7 @@ active_user :admin do |admin|
   end
 end
 ```
+
+
 
 
