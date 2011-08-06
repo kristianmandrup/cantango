@@ -5,17 +5,17 @@ describe 'Cantango config: tango_permissions.yml' do
   
   before(:each) {
     CanTango.configure do |config|
-      config.permit_engine :off
-      config.config_path = File.dirname(__FILE__)
-      config.permission_engine :on
+      config.permits.set :off
+      config.permissions.config_path = File.dirname(__FILE__)
+      config.permissions.set :on
     end
     @user ||= User.create!(:email => "kris@gmail.com", :role => 'musician')
   }
 
   after(:each) { 
     CanTango.configure do |config|
-      config.permit_engine :on
-      config.permission_engine :off
+      config.permits.set :on
+      config.permissions.set :off
     end
   }
 
@@ -60,5 +60,5 @@ describe 'Cantango config: tango_permissions.yml' do
 
 end
 
-CanTango::Configuration.permission_engine :off
-CanTango::Configuration.permit_engine :on
+CanTango::Configuration.permissions.set :off
+CanTango::Configuration.permits.set :on
