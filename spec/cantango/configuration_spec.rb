@@ -6,12 +6,15 @@ describe CanTango::Configuration do
   describe "configure DSL" do
     before(:all) {
       CanTango.configure do |config|
-        config.engines.permission :off
-        config.engines.permit :off
-      end
+        CanTango::Configuration::Engines.available.each do |name|
+          config.engine(name).set :off
+        end
+     end
     }
 
-    specify { CanTango::Configuration.engines.permit?.should be_false}
-    specify { CanTango::Configuration.engines.permission?.should be_false}
+    CanTango::Configuration::Engines.available.each do |name|
+      specify { CanTango::Configuration.engine(name).on?.should be_false}
+      specify { CanTango::Configuration.engine(name).off?.should be_true}
+    end
   end
 end

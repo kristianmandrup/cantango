@@ -3,7 +3,7 @@ require 'singleton'
 module CanTango
   class Configuration
     class Engines
-      class Permit
+      class Permit < Engine
         include Singleton
 
         def types

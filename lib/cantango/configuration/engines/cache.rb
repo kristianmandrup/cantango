@@ -3,7 +3,7 @@ require 'singleton'
 module CanTango
   class Configuration
     class Engines
-      class Cache
+      class Cache < Engine
         include Singleton
 
         def store &block

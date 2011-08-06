@@ -2,7 +2,7 @@ module CanTango
   module Rules
     module Dsl
       def self.included(base)
-        ::CanTango::Configuration.user_relationships.each do |relationship|
+        ::CanTango::Configuration.user.relations.each do |relationship|
           base.class_eval %{
             def #{relationship}_of *models, &block
               options = models.extract_options!
