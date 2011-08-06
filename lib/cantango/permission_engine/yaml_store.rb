@@ -72,7 +72,7 @@ module CanTango
       protected
 
       def permission_types
-        CanTango::Configuration.permission_types
+        CanTango::Configuration.engine(:permission).types
       end
       
       def to_yaml

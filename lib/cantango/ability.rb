@@ -32,7 +32,7 @@ module CanTango
     def with engine_type, &block
       send(engine_type).each do |obj|
         yield obj
-      end if send(:"#{engine_type}").on?
+      end if send(:"#{engine_type.to_s.singularize}_engine?")
     end
 
     def subject
