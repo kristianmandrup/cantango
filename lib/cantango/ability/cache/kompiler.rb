@@ -7,7 +7,6 @@ module CanTango
         def compile_rules! rules_raw
           rules_compiled = rules_raw.map do |rule|
             rule.block = rule.block.to_source if rule.block.class == Proc
-            puts rule.block
             rule
           end
         end
