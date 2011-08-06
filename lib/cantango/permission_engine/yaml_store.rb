@@ -30,7 +30,7 @@ module CanTango
         @permissions ||= loader.permissions
       end
 
-      CanTango::Configuration.engine(:permission).types.each do |type|
+      CanTango::Configuration.permissions.types.each do |type|
         define_method(:"#{type}_permissions") do
           loader.send(:"#{type}_permissions")
         end

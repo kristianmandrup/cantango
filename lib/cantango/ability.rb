@@ -11,8 +11,7 @@ module CanTango
 
     attr_reader :options, :subject, :session
 
-    # put ability logic here! 
-    # Equivalent to a CanCan Ability#initialize call 
+    # Equivalent to a CanCan Ability#initialize call
     # which executes all the permission logic
     def initialize candidate, options = {}
       raise "Candidate must be something!" if !candidate
@@ -33,7 +32,7 @@ module CanTango
     def with engine_type, &block
       send(engine_type).each do |obj|
         yield obj
-      end if send(:"#{engine_type.to_s.singularize}_engine?")
+      end if send(:"#{engine_type}").on?
     end
 
     def subject
@@ -91,11 +90,11 @@ module CanTango
     end
 
     def permit_engine?
-      CanTango::Configuration.engine(:permit).on?
+      CanTango::Configuration.permits.on?
     end
 
     def permission_engine?
-      CanTango::Configuration.engine(:permission).on?
+      CanTango::Configuration.permissions.on?
     end
   end
 end

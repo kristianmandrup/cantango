@@ -43,6 +43,18 @@ module CanTango
         conf::Roles.instance
       end
 
+      def cache
+        engine(:cache)
+      end
+
+      def permissions
+        engine(:permissions)
+      end
+
+      def permits
+        engine(:permits)
+      end
+
       def engines
         conf::Engines.instance
       end
@@ -51,6 +63,7 @@ module CanTango
 
       def find_engine name
         raise ArgumentError, "Must be label for an engine" if !name.kind_of_label?
+        name = name.to_s.singularize
         engines.send(name) if engines.available? name
       end
 

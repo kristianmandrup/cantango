@@ -11,7 +11,7 @@ describe "Caching of the rules" do
     describe 'Memory store' do
       before do
         CanTango.configure do |config|
-          config.default_cache_type = :memory
+          config.cache.store.default_type = :memory
         end
       end
 
@@ -27,7 +27,7 @@ describe "Caching of the rules" do
 
     before do
       CanTango.configure do |config|
-        config.default_rules_cache = CanTango::Ability::Cache::SessionCache
+        config.cache.store.default = CanTango::Ability::Cache::SessionCache
       end
     end
 

@@ -31,21 +31,30 @@ module CanTango
       end
 
       def store
-        store_class.new :tango_permissions, :path => config_path
+        store_class.new :tango_permissions, store_options
       end
 
       def store_class
-        CanTango::Configuration.store
+        permissions_engine.store.default
+      end
+
+      def store_options
+        permissions_engine.store.options.merge(:path => config_path)
       end
 
       def permission_types
-        CanTango::Configuration.permission_types
+        permissions_engine.types
       end
 
       def config_path
-        CanTango::Configuration.engines.permission.config_path
+        permissions_engine.config_path
+      end
+
+      private
+
+      def permissions_engine
+        CanTango::Configuration.permissions
       end
     end
-
   end
 end

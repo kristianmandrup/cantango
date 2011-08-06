@@ -30,7 +30,7 @@ module CanTango
       end
 
       def caching_on?
-        CanTango::Configuration.engine(:cache).on?
+        CanTango::Configuration.cache.on?
       end
 
       def cached_rules?
