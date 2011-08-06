@@ -10,7 +10,7 @@ module CanTango
         @rules_cached = true 
         puts "Using Cache..."
         return 
-      if cached_rules?
+      end if cached_rules?
      
       puts "\nAbility#initialize" 
       stamper("No caching, going through engines:") {
