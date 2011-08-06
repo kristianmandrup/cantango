@@ -1,8 +1,7 @@
 require 'dummy_spec_helper'
 
-require 'integration/performance/helpers/ability'
-require 'integration/performance/helpers/cache'
-require 'integration/performance/helpers/rules'
+require 'integration/performance/helpers/ability_api'
+
 describe "CanTango::Ability performance" do
 
   before(:each) do
