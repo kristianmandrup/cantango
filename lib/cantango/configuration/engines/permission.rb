@@ -6,8 +6,11 @@ module CanTango
       class Permission
         include Singleton
 
-        def store
-          @store = Store.instance
+        def store &block
+          @store ||= Store.instance
+          @store.default = CanTango::PermissionEngine::YamlStore
+          yield @store if block
+          @store
         end
 
         def types

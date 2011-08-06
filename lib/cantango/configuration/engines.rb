@@ -3,7 +3,7 @@ require 'singleton'
 module CanTango
   class Configuration
     class Engines
-      autoload_modules :Permission, :Permit, :Cache
+      autoload_modules :Permission, :Permit, :Cache, :Store
 
       include Singleton
 
