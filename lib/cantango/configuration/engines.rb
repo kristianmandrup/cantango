@@ -7,7 +7,15 @@ module CanTango
 
       include Singleton
 
-      [:permit, :permission, :cache].each do |engine|
+      def self.available
+        [:permit, :permission, :cache]
+      end
+
+      def available? name
+        self.class.available.include? name.to_sym
+      end
+
+      available.each do |engine|
         # def permission?
         #   @permission ||= :on
         #   @permission == :on
