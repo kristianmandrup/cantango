@@ -8,16 +8,20 @@ a guest user according to configuration and conventions.
 If Cantango has not been configured with specific Guest user configuration, it will see if the User model
 is available. If so, it will call `#guest` on it (if method available).
 
-
 ## Configuration
 
 Cantango should be configured with how to retrieve (or create) such a guest user via:
 
-`CanTango::Configuration.guest.guest_proc`
+`CanTango::Configuration.guest.user obj`
+
+The `obj` argument can be either:
+
+* User instance
+* A procedure in the form of a lambda or Proc
+* A block
 
 The Guest user should normally have restricted permission rules, mostly only :read access.
-We recommend setting the Guest permission rules to: `can :read, :all`
-and go from there...
+We recommend setting the Guest permission rules to: `can :read, :all` and refine from there.
 
 ## Guest user account
 
@@ -33,9 +37,11 @@ Cantango should be configured with how to retrieve (or create) such a guest user
 
 `CanTango::Configuration.guest.account obj`
 
-The argument can be either:
+The `obj` argument can be either:
+
 * UserAccount instance
-* A procedure in the form of a lambda or Proc (or even a block)
+* A procedure in the form of a lambda or Proc
+* A block
 
 The Guest user account should usually be setup to have a guest user only.
 

@@ -1,16 +1,16 @@
-Cantango comes with a Can API for both users and user accounts.
-
-The User Account API is very similar to the User API.
+Cantango comes with a Can API and a Scope API for users
 
 * Can API
 * Scope API
 
-Assume we have the user models User and Admin registered with Cantango.(See [[Registration of User models]])
+The following examples assume we have the user models User and Admin registered as Cantango users.
+See [[Registration of User models]].
 
 ## User Can API
 
-The Can API is very similar to the CanCan API but instead initialized a CanTango::Ability with a specific kind of current user.
-The devise methods `#current_xxxx` such as current_user, current_admin etc. are all integrated this way.
+The Can API is very similar to the CanCan API but instead uses a CanTango::Ability for a specific kind of current user.
+The devise methods `#current_xxxx` such as current_user, current_admin etc. are wll integrated in the Can API.
+For the user models User and Admin, Cantango will provide the following API:
 
 API methods:
 * user_can? actions, targets
@@ -32,8 +32,7 @@ end
 
 ## User Scope API
 
-The scope API is useful when you want to do several ability tests with
-the same kind of user.
+The Scope API is useful when you want to do several ability tests for the same kind of user.
 
 API methods:
 * scope_user type, options = {}, &block
@@ -56,8 +55,16 @@ scope_user :admin do |admin|
 end
 ```
 
-`#as_real_user` is used to explicitly negate masquerading within the
-scope. Thus the permissions apply to the real user, not the masqueraded user.
+`#as_real_user` is used to explicitly negate masquerading within the scope.
+Thus the permissions apply to the real user, not the masqueraded user.
+
+Assume we have an app divided into a public app and an admin app.
+
+For an Admin user it could make sense to masquerade as a Public user in
+the public part of the application, but remain as an Admin user in the
+admin app while remaining in the same session.
+
+This can be achieve using `#as_real_user` in the admin app.
 
 Example use #as_real_user:
 
@@ -71,7 +78,4 @@ as_real_user :admin do |admin|
   end
 end
 ```
-
-
-
 
