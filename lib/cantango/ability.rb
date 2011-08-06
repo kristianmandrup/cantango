@@ -36,9 +36,17 @@ module CanTango
     end
 
     def subject
-      return @candidate.active_user if @candidate.respond_to?(:active_user) && @candidate.masquerading?
-      return @candidate.active_account if @candidate.respond_to?(:active_account)
+      return @candidate.active_user if masquerade_user?
+      return @candidate.active_account if masquerade_account?
       @candidate
+    end
+
+    def masquerade_user?
+      @candidate.respond_to?(:active_user) && @candidate.masquerading? && !options[:masquerade] == false
+    end
+
+    def masquerade_account?
+      @candidate.respond_to?(:active_account)
     end
 
     def user
