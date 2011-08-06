@@ -86,7 +86,7 @@ module CanTango
       end
 
       def rules_cache_options
-        CanTango::Configuration.rules_cache_options || {}
+        CanTango::Configuration.cache.rules_cache_options || {}
       end
 
       def rules_cache_class
