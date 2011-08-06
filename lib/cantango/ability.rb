@@ -42,11 +42,17 @@ module CanTango
     end
 
     def masquerade_user?
-      @candidate.respond_to?(:active_user) && @candidate.masquerading? && !options[:masquerade] == false
+      return false if masquerading_off?
+      @candidate.respond_to?(:active_user) && @candidate.masquerading?
     end
 
     def masquerade_account?
+      return false if masquerading_off?
       @candidate.respond_to?(:active_account)
+    end
+
+    def masquerading_off?
+      options[:masquerade] == false
     end
 
     def user

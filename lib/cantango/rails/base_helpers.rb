@@ -16,7 +16,7 @@ module CanTango
         end
 
         def apis
-          [:Can, :Active, :Scope]
+          [:Can, :Scope]
         end
       end
       extend ClassMethods
