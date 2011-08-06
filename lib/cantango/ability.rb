@@ -51,7 +51,7 @@ module CanTango
       subject
     end
 
-    # by default, only execute permits for which the user 
+    # by default, only execute permits for which the user
     # has a role or a role group
     # also execute any permit marked as special
     def permits
@@ -61,17 +61,17 @@ module CanTango
     def permissions
       permission_factory.build!
     end
-    # return list of symbols for roles the user has
+    # return list roles the user has
     def roles
       raise "#{subject.inspect} should have a #roles_list method" if !subject.respond_to?(:roles_list)
-      return [] if subject.roles_list.empty?
+      return [] if subject.roles_list.blank?
       subject.roles_list.flatten
     end
 
     # return list of symbols for role groups the user belongs to
     def role_groups
       raise "#{subject.inspect} should have a #role_groups_list method" if !subject.respond_to?(:role_groups_list)
-      return [] if subject.role_groups_list.empty?
+      return [] if subject.role_groups_list.blank?
       subject.role_groups_list.flatten
     end
 

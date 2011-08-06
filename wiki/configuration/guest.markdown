@@ -31,7 +31,11 @@ is available. If so, it will call `#guest` on it (if method available).
 
 Cantango should be configured with how to retrieve (or create) such a guest user via:
 
-`CanTango::Configuration.guest.guest_proc`
+`CanTango::Configuration.guest.account obj`
+
+The argument can be either:
+* UserAccount instance
+* A procedure in the form of a lambda or Proc (or even a block)
 
 The Guest user account should usually be setup to have a guest user only.
 

@@ -1,6 +1,7 @@
 require 'rspec'
 require 'cantango'
 require 'fixtures/models'
+require 'cantango/rspec/matchers'
 
 class SystemRolePermit < CanTango::RolePermit
   def initialize ability
@@ -39,12 +40,16 @@ describe CanTango::PermitEngine::Executor::System do
   end
 
   describe '#execute!' do
+    before:each do
+      CanTango::Configuration.permits.set :on
+    end
+
     it 'should execute permit' do
       ability.should be_allowed_to(:read, Article)
       ability.should be_allowed_to(:write, Post)
       ability.should be_allowed_to(:create, Comment)
-   
-      lambda{executor.execute!}.should_not raise_error
+
+      lambda{ executor.execute! }.should_not raise_error
     end
   end
 end
