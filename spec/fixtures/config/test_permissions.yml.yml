@@ -1,41 +1,42 @@
----
-roles:
-  admin:
-    can:
-      manage:
+--- 
+roles: 
+  admin: 
+    can: 
+      manage: 
       - all
-  user:
-    can:
-      read:
+  user: 
+    can: 
+      read: 
       - ^articles
       - Post
-      write:
+      write: 
       - Comment
-    cannot:
-      write:
+    cannot: 
+      write: 
       - Article
-role_groups:
-  bloggers:
-    can:
-      read:
+role_groups: 
+  bloggers: 
+    can: 
+      read: 
       - Article
       - Comment
-    cannot:
-      write:
+    cannot: 
+      write: 
       - Article
       - Post
-  editors:
-    can:
-      read:
+  editors: 
+    can: 
+      read: 
       - Article
       - Comment
-    cannot:
-      write:
+    cannot: 
+      write: 
       - Article
       - Post
-licenses:
-  editors:
-    can:
-      manage:
+licenses: 
+  editors: 
+    can: 
+      manage: 
       - all
 users: {}
+
