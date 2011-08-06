@@ -1,3 +1,3 @@
 CanTango.configure do |config|
-  # config.
+  config.cache.set :on
 end
