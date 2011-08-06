@@ -77,8 +77,8 @@ module CanTango
     end
 
     def user_key_field
-      key_field = CanTango::Configuration.user_key_field
-      raise "\nModel <#{user.class}> has no key #{key_field} defined in CanTango::Configuration!\n" if !user.respond_to?(key_field)
+      key_field = CanTango::Configuration.user.unique_key_field
+      raise "\nModel <#{user.class}> has no ##{key_field} as defined in CanTango::Configuration.user.unique_key_field!\n" if !user.respond_to?(key_field)
       key_field
     end
 
@@ -91,11 +91,11 @@ module CanTango
     end
 
     def permit_engine?
-      CanTango::Configuration.engines.permit?
+      CanTango::Configuration.engine(:permit).on?
     end
 
     def permission_engine?
-      CanTango::Configuration.engines.permission?
+      CanTango::Configuration.engine(:permission).on?
     end
   end
 end
