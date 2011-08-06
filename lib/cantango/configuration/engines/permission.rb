@@ -17,12 +17,16 @@ module CanTango
           [:roles, :role_groups, :licenses, :users]
         end
 
+        attr_reader :config_path
+
         def config_path path = nil
           return current_config_path if !path
           raise "Must be a valid path to permission yaml file, was: #{path}" if !dir?(path)
           @config_path = path
         end
-
+        
+        alias_method :config_path=, :config_path
+        
         private
 
         def current_config_path

@@ -46,8 +46,8 @@ describe CanTango::PermitEngine::RolePermit do
   end
   before(:each) do
     CanTango.configure do |config|
-      config.engines.permit :on
-      config.engines.permission :off
+      config.permits.set :on
+      config.permissions.set :off
     end
   end
 
