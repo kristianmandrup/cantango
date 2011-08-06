@@ -1,10 +1,7 @@
-module CanTangoTest
+class CanTangoTest < CanTango::Ability
   def initialize candidate, options = {}
     raise "!!!!"
     super
   end
 end
 
-CanTango::Ability.class_eval %{
-  include CanTangoTest
-}
