@@ -1,5 +1,6 @@
 require 'rspec'
 require 'cantango'
+require 'cantango/rspec/matchers'
 require 'fixtures/models'
 
 class SystemRolePermit < CanTango::RolePermit
@@ -36,6 +37,10 @@ describe CanTango::PermitEngine::Executor::System do
 
   let (:executor) do
     CanTango::PermitEngine::Executor::System.new permit
+  end
+
+  before(:each) do
+    CanTango::Configuration.permits.set :on
   end
 
   describe '#execute!' do
