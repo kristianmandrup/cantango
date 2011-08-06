@@ -86,11 +86,11 @@ module CanTango
       end
 
       def rules_cache_options
-        CanTango::Configuration.cache.rules_cache_options || {}
+       CanTango::Configuration.cache.store.options || {}
       end
 
       def rules_cache_class
-        CanTango::Configuration.rules_cache
+        CanTango::Configuration.cache.store.default
       end
 
       def session?
