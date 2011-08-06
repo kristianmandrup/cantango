@@ -13,7 +13,7 @@ module CanTango
       end
 
       def relations= *relations
-        @relations = relations.select_labels.flat_uniq
+        @relations = relations.select_labels
       end
 
       def relations

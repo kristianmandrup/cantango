@@ -8,7 +8,7 @@ module CanTango
       include Singleton
 
       def register *list
-        @registered = list.select_labels.flat_uniq
+        @registered = list.select_labels
       end
 
       def registered

@@ -21,7 +21,12 @@ module CanTango
         end
 
         class Store
-          attr_writer :default_type, :default
+          attr_writer :default_type
+
+          def default= clazz
+            raise ArgumentError, "Cache must implement the class CanTango::PermissionEngine::Store" if !clazz.kind_of?(Class)
+            @default = clazz
+          end
 
           def default
             CanTango::PermissionEngine::YamlStore

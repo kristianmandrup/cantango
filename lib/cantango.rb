@@ -8,7 +8,6 @@ require 'hashie'
 require 'cutter'
 require 'moneta'
 
-
 AutoLoader.root = ''
 AutoLoader.namespaces = {:CanTango => 'cantango'}
 
