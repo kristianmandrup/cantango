@@ -32,7 +32,8 @@ group :test do
   gem "launchy"
 
   # Debug
-  gem 'cutter'
+  gem 'cutter', '>= 0.5', :git => "git://github.com/kristianmandrup/cutter.git"
+  gem 'colorize'
 
   # Rails
   gem 'haml'
