@@ -16,3 +16,16 @@ Cantango.configure do |config|
 end
 ```
 
+Alternatively you can define your own factory:
+
+```ruby
+Cantango.configure do |config|
+  config.cache.store do |store|
+    store.factory { MyFantasticCache.new :mine, :awesome_power => true }
+  end
+end
+```
+
+
+
+

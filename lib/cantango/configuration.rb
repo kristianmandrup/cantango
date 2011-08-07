@@ -59,6 +59,23 @@ module CanTango
         conf::Engines.instance
       end
 
+      def users= *users
+        @users = users.select_labels.flat_uniq
+      end
+
+      def user_accounts= *user_accounts
+        @user_accounts = user_accounts.select_labels.flat_uniq
+      end
+
+      def users
+        @users ||= []
+      end
+
+      def user_accounts
+        @user_accounts ||= []
+      end
+
+
       protected
 
       def find_engine name

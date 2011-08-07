@@ -16,7 +16,7 @@ module CanTango
       end
 
       def self.included(base)
-        CanTango.user_accounts << base.name.underscore.gsub(/_account$/, '')
+        CanTango.config.user_accounts << base.name.underscore.gsub(/_account$/, '')
       end
     end
   end

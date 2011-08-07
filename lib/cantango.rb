@@ -19,15 +19,18 @@ module CanTango
 
   class << self
     def configure &block
-      yield CanTango::Configuration
+      yield CanTango::Configuration if block
+      CanTango::Configuration
     end
 
+    alias_method :config, :configure
+
     def users
-      @users ||= []
+      config.users
     end
 
     def user_accounts
-      @user_accounts ||= []
+      config.user_accounts
     end
   end
 
