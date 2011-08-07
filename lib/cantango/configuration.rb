@@ -63,22 +63,13 @@ module CanTango
         conf::Engines.instance
       end
 
-      def users= *users
-        @users = users.select_labels.flat_uniq
-      end
-
-      def user_accounts= *user_accounts
-        @user_accounts = user_accounts.select_labels.flat_uniq
-      end
-
       def users
-        @users ||= []
+        conf::Users.instance
       end
 
-      def user_accounts
-        @user_accounts ||= []
+      def accounts
+        conf::Accounts.instance
       end
-
 
       protected
 
