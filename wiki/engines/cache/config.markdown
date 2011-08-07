@@ -1,18 +1,18 @@
-The Cantango Cache engine is used to cache rules between requests. The
-[[Cantango Ability]] receives a candidate and an options hash.
+The Cantango Cache engine is used to cache rules between requests. It will be referenced here as the 'rules cache'. 
 
-## Cache key
+The rules cache needs a store to store the rules. Cantango is setup to
+use a Session store by default. The session store is internally setup to
+wrap a Moneta memory store.
 
-A cache key is generated for the candidate in order to ensure that the
-rules are cached for that exact candidate and not reused for another
-candidate.
-
-To configure autoloading:
+To configure the cache store for the rules cache:
 
 ```ruby
-Cantango.configure.autoload do |load|
-  load.models :off
-  load.permits :on
+Cantango.configure do |config|
+  config.cache.store do |store|
+    store.default Cantango::Cache::MonetaCache
+    store.default_type :redis
+    store.options = {:port => 5032}
+  end
 end
 ```
 

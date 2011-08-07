@@ -1,6 +1,6 @@
 class CanTangoTest < CanTango::Ability
   def initialize candidate, options = {}
-    stamper { 
+    stamper("raw CanTango::Ability#initialize performance") { 
       super 
     }
   end
