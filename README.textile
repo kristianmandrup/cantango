@@ -150,6 +150,21 @@ If you encounter bugs, raise an issue or:
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
+h2. Contributors
+
+* Kristian Mandrup 
+  * Main architect 
+  * Designer of structure
+  * Feature ideas
+  * Initiator of project
+  * Devise app integration specs
+
+* Stanislaw Pankevich 
+  * Tireless worker ;)
+  * Main contributor of permissions engine
+  * Caching of procs
+  * Bug fixes and many specs
+
 h2. Copyright
 
 Copyright (c) 2010 Kristian Mandrup. See LICENSE for details.
