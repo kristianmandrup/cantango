@@ -10,7 +10,7 @@ module CanTango
           ab_scope
         end
 
-        def as_real_user scope, options = {}, &block
+        def real_user scope, options = {}, &block
           scope_user scope, options.merge(:masquerade => false), &block
         end
 

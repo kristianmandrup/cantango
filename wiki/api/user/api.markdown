@@ -36,13 +36,13 @@ The Scope API is useful when you want to do several ability tests for the same k
 
 API methods:
 * scope_user type, options = {}, &block
-* as_real_user type, options = {}, &block
+* real_user type, options = {}, &block
 
 `#scope_user` is used to define an ability scope for a specific user. The
 permission API can then operate on this ability scope directly instead
 of having to create the ability each time.
 
-Example use #scope_user:
+Example use `#scope_user`:
 
 ```ruby
 scope_user :admin do |admin|
@@ -55,7 +55,7 @@ scope_user :admin do |admin|
 end
 ```
 
-`#as_real_user` is used to explicitly negate masquerading within the scope.
+The method `#real_user` is used to explicitly negate masquerading within the scope.
 Thus the permissions apply to the real user, not the masqueraded user.
 
 Assume we have an app divided into a public app and an admin app.
@@ -64,9 +64,9 @@ For an Admin user it could make sense to masquerade as a Public user in
 the public part of the application, but remain as an Admin user in the
 admin app while remaining in the same session.
 
-This can be achieve using `#as_real_user` in the admin app.
+This can be achieve using `#real_user` in the admin app.
 
-Example use #as_real_user:
+Example use `#real_user`:
 
 ```ruby
 as_real_user :admin do |admin|
