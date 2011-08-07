@@ -2,14 +2,18 @@ module CanTango
   class Configuration
     module Factory
       def factory factory = nil, &block
-        return (@factory || default_factory) if !factory && !block
+        return get_factory if !factory && !block
         @factory = factory || yield
       end
 
       alias_method :factory=, :factory
 
-      def default_factory name
-        default.new name, options
+      def factory_build obj = nil, opts = {}
+        @factory || default_factory(obj, opts = {})
+      end
+
+      def default_factory obj = nil, opts = {}
+        default.new obj, options.merge (opts)
       end
 
       attr_reader :default

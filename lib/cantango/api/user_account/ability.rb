@@ -3,7 +3,7 @@ module CanTango
     module UserAccount
       module Ability
         def user_account_ability user_account, options = {}
-          @current_ability ||= ::CanTango::Ability.new(user_account, ability_options.merge(options))
+          @current_ability ||= create_ability(user_account, ability_options.merge(options))
         end
 
         def current_account_ability user_type = :user
@@ -17,6 +17,8 @@ module CanTango
         end
 
         protected
+
+        include CanTango::Ability::Common
 
         def get_ability_user_acount user_type
           user_account_meth = :"current_#{user_type}_account"

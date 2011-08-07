@@ -3,15 +3,16 @@ module CanTango
     module User
       module Ability
         def user_ability user, options = {}
-          @current_ability ||= ::CanTango::Ability.new(user, ability_options.merge(options))
+          @current_ability ||= create_ability(user_account, ability_options.merge(options))
         end
 
         def current_ability user_type = :user
           user_ability get_ability_user(user_type)
-
         end
 
         protected
+
+        include CanTango::Ability::Common
 
         def get_ability_user user_type
           user_meth = :"current_#{user_type}"
