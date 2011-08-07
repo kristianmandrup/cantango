@@ -6,7 +6,7 @@ Stamper.scope :ability => "Ability#initialize" do |stan|
 end
 
 module CanTango
-  class Ability
+  class PerformanceTestAbility < CanTango::Ability
     def initialize candidate, options = {}
 
       raise "Candidate must be something!" if !candidate
@@ -56,4 +56,7 @@ module CanTango
     end
   end
 end
+
+CanTango.config.ability.default = module CanTango::PerformanceTestAbility
+ 
 

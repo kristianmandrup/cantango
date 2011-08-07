@@ -2,7 +2,7 @@ module CanTango
   class Configuration
     module Factory
       def factory factory = nil, &block
-        return get_factory if !factory && !block
+        return factory_build if !factory && !block
         @factory = factory || yield
       end
 
@@ -13,15 +13,16 @@ module CanTango
       end
 
       def default_factory obj = nil, opts = {}
-        default.new obj, options.merge (opts)
+        raise "Default factory must be defined" if !default
+        default_class.new obj, options.merge(opts)
       end
 
-      attr_reader :default
+      attr_reader :default_class
 
       # must be a Class of type Cache (Base?)
-      def default= clazz
+      def default_class= clazz
         raise ArgumentError, "default Cache must a Class" if !is_class? clazz
-        @default = clazz
+        @default_class = clazz
       end
 
       def options= options = {}
@@ -30,7 +31,7 @@ module CanTango
       end
 
       def options
-        @options ? type_options : type_options.merge options
+        @options ? type_options : type_options.merge(@options || {})
       end
 
       def type_options

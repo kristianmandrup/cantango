@@ -8,7 +8,7 @@ module CanTango
 
         def store &block
           @store ||= ns::Store.instance
-          @store.default = CanTango::Ability::MonetaCache
+          @store.default_class = CanTango::Ability::MonetaCache
           yield @store if block
           @store
         end
