@@ -2,7 +2,23 @@ require 'rspec'
 require 'cantango'
 require 'fixtures/models'
 
+class CanTango::CustomAbility < CanTango::Ability
+  def initialize candidate, options = {}
+    'custom'
+  end
+end
+
 describe CanTango::Configuration do
+  describe 'ability factory' do
+    CanTango::Configuration.ability.factory do
+      CanTango::CustomAbility.new
+    end
+
+    it 'should be substituted' do
+      # magic!
+    end
+  end
+
   describe "configure DSL" do
     before(:all) {
       CanTango.configure do |config|
