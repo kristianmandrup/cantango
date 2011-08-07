@@ -28,6 +28,10 @@ Cantango currently comes with the following features:
   * [[Autoloading]]
   * [[Engines config]]
 
+[[Integrations]]
+  * [[CanCan integration]]
+  * [[Devise integration]]
+  * [[Rails 3 integration]]
 
 The following features are planned for the future:
 * ...

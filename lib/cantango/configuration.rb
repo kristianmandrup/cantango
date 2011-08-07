@@ -4,9 +4,9 @@ require 'singleton'
 module CanTango
   class Configuration
     autoload_modules :Categories
-    autoload_modules :Engines
+    autoload_modules :Engines, :Ability
     autoload_modules :User, :Guest, :Account
-    autoload_modules :Roles, :RoleGroups, :Registry
+    autoload_modules :Roles, :RoleGroups, :Registry, :Factory
     autoload_modules :SpecialPermits, :Autoload
 
     module ClassMethods
@@ -17,6 +17,10 @@ module CanTango
         engine = find_engine(name)
         yield engine if block
         engine
+      end
+
+      def ability
+        conf::Ability.instance
       end
 
       def guest
