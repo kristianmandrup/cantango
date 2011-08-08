@@ -1,4 +1,5 @@
-Stamper.scope :ability => "Ability#initialize" do |stan|
+require 'cutter'
+Cutter::Stamper.scope :ability => "Ability#initialize" do |stan|
   stan.msg :no_cache          => 'No caching, going through engines'
   stan.msg :permissions_done  => "Permissions finished"
   stan.msg :permits_done      => "Permits finished"
@@ -19,38 +20,23 @@ module CanTango
         return
       end
 
-      puts "\nAbility#initialize"
-
       stamper(:ability) {
         raise "Candidate must be something!" if !candidate
         @candidate, @options = candidate, options
         @session = options[:session] || {} # seperate session cache for each type of user?
       }
 
-      begin
-        @rules_cached = true
-        puts "using cache..."
-        return
-      end if cached_rules?
-
-      stamper(:ability)  {
-        stamp(:no_cache)
+      stamper(:ability) do |st| 
+        st.stamp(:no_cache)
         with(:permissions)  {|permission| permission.evaluate! user }
-        stamp :permissions_done
+        st.stamp :permissions_done
 
         with(:permits)      {|permit| break if permit.execute == :break }
-        stamp :permits_done
-
-        with(:permissions)  {|permission| permission.evaluate! user }
-
-        stamp :permissions_done
-
-        with(:permits)      {|permit| break if permit.execute == :break }
-        stamp :permits_done
+        st.stamp :permits_done
 
         cache_rules!
-        stamp :caching_done
-      }
+        st.stamp :caching_done
+      end
     end
   end
 end

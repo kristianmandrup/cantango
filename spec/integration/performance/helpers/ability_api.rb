@@ -1,9 +1,13 @@
+Cutter::Stamper.scope :call_on_ability => "Call on Ability" do |stan|
+  stan.msg :caching_done      => "Caching finished"
+end
+
 module CanTango
   module Api
     module User
       module Ability
         def user_ability user, options = {}
-          stamper("call on CanTango::Ability") { 
+          stamper(:call_on_ability) { 
             @current_ability ||= ::CanTango::Ability.new(user, ability_options.merge(options)) 
           }
           @current_ability

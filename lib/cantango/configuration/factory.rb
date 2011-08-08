@@ -9,7 +9,7 @@ module CanTango
       alias_method :factory=, :factory
 
       def factory_build obj = nil, opts = {}
-        @factory || default_factory(obj, opts = {})
+        @factory || default_factory(obj, opts)
       end
 
       def default_factory obj = nil, opts = {}
@@ -21,7 +21,7 @@ module CanTango
 
       # must be a Class of type Cache (Base?)
       def default_class= clazz
-        raise ArgumentError, "default Cache must a Class" if !is_class? clazz
+        raise ArgumentError, "default must be a Class" if !is_class? clazz
         @default_class = clazz
       end
 

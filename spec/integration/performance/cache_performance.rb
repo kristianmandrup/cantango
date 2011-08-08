@@ -1,15 +1,13 @@
 require 'dummy_spec_helper'
+require 'integration/performance/helpers/cache'
 
-require 'integration/performance/helpers/ability_api'
+describe "Caching of the rules" do
+  context "Ability's rules" do
 
-describe "CanTango::Ability performance" do
-
-  before(:each) do
-    @user = User.create! :name => 'stanislaw', :role => 'user', :email => 'stanislaw@mail.ru'
-    Article.create!(:title => 'one')
-  end
-
-  context "With cache enabled" do
+    before(:each) do
+      @user = User.create! :name => 'stanislaw', :role => 'user', :email => 'stanislaw@mail.ru'
+      Article.create!(:title => 'one')
+    end
 
     describe 'Memory store' do
       before do
@@ -30,6 +28,4 @@ describe "CanTango::Ability performance" do
       end
     end
   end
-
-
 end
