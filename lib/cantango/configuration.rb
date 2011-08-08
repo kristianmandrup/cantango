@@ -5,10 +5,10 @@ module CanTango
   class Configuration
     autoload_modules :Categories
     autoload_modules :Engines, :Ability
-    autoload_modules :User, :Guest, :Account
+    autoload_modules :User, :Guest, :UserAccount
     autoload_modules :Roles, :RoleGroups, :Registry, :Factory
     autoload_modules :SpecialPermits, :Autoload
-    autoload_modules :Users, :Accounts
+    autoload_modules :Users, :UserAccounts
 
     module ClassMethods
       # allow either block or direct access
@@ -70,8 +70,8 @@ module CanTango
         conf::Users.instance
       end
 
-      def accounts
-        conf::Accounts.instance
+      def user_accounts
+        conf::UserAccounts.instance
       end
 
       protected

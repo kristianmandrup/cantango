@@ -1,6 +1,6 @@
 module CanTango
   class Configuration
-    class Accounts < Registry
+    class UserAccounts < Registry
     end
   end
 end

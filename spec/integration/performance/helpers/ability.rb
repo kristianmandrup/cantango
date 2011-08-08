@@ -21,8 +21,6 @@ module CanTango
 
       puts "\nAbility#initialize"
 
-      stamper( {
-
       stamper(:ability) {
         raise "Candidate must be something!" if !candidate
         @candidate, @options = candidate, options
@@ -57,6 +55,6 @@ module CanTango
   end
 end
 
-CanTango.config.ability.default = module CanTango::PerformanceTestAbility
+CanTango.config.ability.default_class = CanTango::PerformanceTestAbility
  
 

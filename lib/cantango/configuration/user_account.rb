@@ -1,6 +1,6 @@
 module CanTango
   class Configuration
-    class Account
+    class UserAccount
       include Singleton
       include ClassExt
 

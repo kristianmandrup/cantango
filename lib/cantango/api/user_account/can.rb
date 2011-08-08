@@ -8,7 +8,7 @@ module CanTango
         #   current_account_ability(:admin).can?(*args)
         # end
         def self.included(base)
-          ::CanTango.accounts.registered.each do |account|
+          ::CanTango.config.user_accounts.registered.each do |account|
             base.class_eval %{
               def #{account}_account_can? *args
                 current_account_ability(:#{account}).can?(*args)
