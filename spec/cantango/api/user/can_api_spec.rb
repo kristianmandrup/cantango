@@ -26,7 +26,6 @@ class UserRolePermit < CanTango::RolePermit
   end
 
   def permit_rules
-    puts "permit roles for :user role"
     can :edit, Article
     cannot :edit, User
   end
@@ -38,7 +37,6 @@ class AdminRolePermit < CanTango::RolePermit
   end
 
   def permit_rules
-    puts "permit roles for :admin role"
     can :edit, Article
     cannot :edit, User
   end
