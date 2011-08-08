@@ -38,7 +38,7 @@ describe CanTango::Api::User::Scope do
     specify do
       subject.scope_user(:admin) do |user|
         user.should be_a CanTango::Ability::Scope
-        user.ability.user.name.should == 'stan'
+        user.ability.user.name.should == 'admin'
       end
     end
 
