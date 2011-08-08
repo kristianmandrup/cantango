@@ -4,7 +4,7 @@ require 'fixtures/models'
 
 require 'cantango/configuration/engines/store_engine_shared'
 
-CanTango.users.register :user, :admin
+CanTango.config.users.register :user, :admin
 
 class User
   include CanTango::Users::Masquerade

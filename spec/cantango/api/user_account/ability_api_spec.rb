@@ -9,11 +9,11 @@ CanTango.config.accounts.register :user, :admin
 
 module CurrentUserAccounts
   def current_user
-    @cu ||= ::UserAccount.new 'stan', 'stan@mail.ru'
+    @cu ||= ::UserAccount.new('stan', 'stan@mail.ru')
   end
 
   def current_admin
-    @ca ||= ::UserAccount.new 'admin', 'admin@mail.ru'
+    @ca ||= ::UserAccount.new('admin', 'admin@mail.ru')
   end
 end
 

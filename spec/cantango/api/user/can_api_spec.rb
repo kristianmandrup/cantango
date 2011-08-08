@@ -1,5 +1,6 @@
 require 'rspec'
 require 'cantango'
+require 'simple_roles'
 require 'fixtures/models'
 
 # require 'cantango/configuration/engines/store_engine_shared'
@@ -12,7 +13,11 @@ class User
   include_and_extend SimpleRoles
 end
 
-CanTango.config.users.register :user, :admin
+CanTango.configure do |config|
+  config.users.register :user, :admin
+  config.cache.set :off
+  config.permits.set :on
+end
 
 
 class UserRolePermit < CanTango::RolePermit
@@ -61,8 +66,8 @@ describe CanTango::Api::User::Can do
   subject { Context.new }
 
   describe 'user_ability' do
-    specify { subject.user_ability(:user).should be_a CanTango::Ability }
-    specify { subject.user_ability(:admin).should be_a CanTango::Ability }
+    specify { subject.user_ability(subject.current_user).should be_a CanTango::Ability }
+    specify { subject.user_ability(subject.current_admin).should be_a CanTango::Ability }
   end
 
   describe 'current_ability :user' do
@@ -96,9 +101,9 @@ describe CanTango::Api::User::Can do
     specify { subject.current_admin.role.should == 'admin' }
 
     specify { subject.admin_can?(:edit, Article).should be_true }
-    specify { subject.admin_can?(:edit, User).should be_true }
+    specify { subject.admin_can?(:edit, User).should be_false }
 
-    specify { subject.admin_cannot?(:edit, User).should be_false }
+    specify { subject.admin_cannot?(:edit, User).should be_true }
     specify { subject.admin_cannot?(:edit, Article).should be_false }
   end
 
