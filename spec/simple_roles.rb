@@ -17,6 +17,7 @@ module SimpleRoles
 
   module InstanceMethods
 
+    attr_accessor :role
     attr_accessor :role_groups_list
 
     def has_role? rolle

@@ -3,9 +3,10 @@ require 'spec_helper'
 
 dir = File.dirname(__FILE__) 
 
-require_all "#{dir}/cantango/permit_engine"
-
 require_all "#{dir}/cantango/ability"
+
+#require_all "#{dir}/cantango/api" # works if isolated!
+require_all "#{dir}/cantango/permit_engine"
 
 require "#{dir}/cantango/configuration_spec"
 #require_all "#{dir}/cantango/configuration"

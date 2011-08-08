@@ -1,15 +1,11 @@
 require 'rspec'
 require 'cantango'
 require 'fixtures/models'
-
+require 'cantango/api/current_user_accounts'
 # require 'cantango/configuration/engines/store_engine_shared'
 
 class User
-
-  attr_accessor :role
-
   include_and_extend SimpleRoles
-
 end
 CanTango.configure do |config|
   config.users.register     :user, :admin
@@ -32,39 +28,14 @@ class AdminRolePermit < CanTango::RolePermit
   end
 end
 
-
 class User
   include CanTango::Users::Masquerade
-end
-
-
-module CurrentUsers
-  def current_user
-    ::User.new 'stan', 'stan@mail.ru'
-  end
-
-  def current_admin
-    ::User.new 'admin', 'admin@mail.ru'
-  end
-end
-
-module CurrentUserAccounts
-  def current_user_account
-    ::UserAccount.new current_user, :roles => ['user']
-  end
-
-  def current_admin_account
-    ::UserAccount.new current_admin, :roles => ['admin']
-  end
 end
 
 class Context
   include CanTango::Api::UserAccount::Can
 
-  include ::CurrentUsers
   include ::CurrentUserAccounts
-
-  extend ::CurrentUsers
   extend ::CurrentUserAccounts
 end
 

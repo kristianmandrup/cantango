@@ -2,13 +2,11 @@ require 'rspec'
 require 'cantango'
 require 'simple_roles'
 require 'fixtures/models'
-
+require 'cantango/api/current_users'
 # require 'cantango/configuration/engines/store_engine_shared'
 
 class User
   include CanTango::Users::Masquerade
-
-  attr_accessor :role
 
   include_and_extend SimpleRoles
 end
@@ -39,17 +37,6 @@ class AdminRolePermit < CanTango::RolePermit
   def permit_rules
     can :edit, Article
     cannot :edit, User
-  end
-end
-
-
-module CurrentUsers
-  def current_user
-    @current_user ||= ::User.new 'stan', 'stan@mail.ru', :role => 'user'
-  end
-
-  def current_admin
-    @current_admin ||= ::User.new 'admin', 'admin@mail.ru', :role => 'admin'
   end
 end
 

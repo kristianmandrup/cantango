@@ -1,6 +1,7 @@
 require 'rspec'
 require 'cantango'
 require 'fixtures/models'
+require 'cantango/api/current_users'
 
 require 'cantango/configuration/engines/store_engine_shared'
 
@@ -8,16 +9,6 @@ CanTango.config.users.register :user, :admin
 
 class User
   include CanTango::Users::Masquerade
-end
-
-module CurrentUsers
-  def current_user
-    ::User.new 'stan', 'stan@mail.ru'
-  end
-
-  def current_admin
-    ::User.new 'admin', 'admin@mail.ru'
-  end
 end
 
 class Context
