@@ -2,27 +2,7 @@ require 'active_record/scenarios/shared/dancing/base'
 
 module Dancing
   module User
-
     include Dancing::Base
-
-    module Active
-      # the active user is used in case of masquerading to distinquish 
-      # between which user is actually performing the action
-      def active scope, &block
-        user = active_scope_user(scope)
-        ab_scope = AbilityScope.new user_ability(user)
-        yield ab_scope if block
-        ab_scope
-      end
-
-      private
-
-      def active_scope_user scope
-        scope_user(scope).active_user
-      end
-    end
-
-    include Active
 
     # Example: generated from types of accounts! (see below)
     # def admin_can?(*args)

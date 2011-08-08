@@ -5,25 +5,12 @@ module Dancing
 
     include Dancing::Base
 
-    # the active user is used in case of masquerading to distinquish 
-    # between which user is actually performing the action
-    def active scope, &block
-      user = active_scope_user(scope)
-      ab_scope = AbilityScope.new user_ability(user)
-      yield ab_scope if block
-      ab_scope
-    end
-
     def scope_user scope
       send(:"current_#{scope}")
     end
 
     def scope_user_account scope
       send(:"current_#{scope}_account")
-    end
-
-    def active_scope_user scope
-      scope_user(scope).active_user
     end
 
     def user_account_scope scope, &block

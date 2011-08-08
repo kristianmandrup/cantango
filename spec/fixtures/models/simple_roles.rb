@@ -18,8 +18,8 @@ module SimpleRoles
 
     attr_accessor :role_groups_list
 
-    def has_role? rolle
-      roles_list.include? rolle
+    def has_role? role
+      roles_list.include? role
     end
 
     def has_any_role? roles
@@ -40,3 +40,4 @@ module SimpleRoles
     end
   end
 end
+

@@ -4,19 +4,48 @@ require 'fixtures/models'
 
 # require 'cantango/configuration/engines/store_engine_shared'
 
-CanTango.users.register :user, :admin
-
 class User
   include CanTango::Users::Masquerade
+
+  attr_accessor :role
+
+  include_and_extend SimpleRoles
+  
 end
+
+CanTango.config.users.register :user, :admin
+
+
+class UserRolePermit < CanTango::RolePermit
+  def initialize ability
+    super
+  end
+
+  def permit_rules
+    can :edit, Article
+    cannot :edit, Admin
+  end
+end
+
+class AdminRolePermit < CanTango::RolePermit
+  def initialize ability
+    super
+  end
+
+  def permit_rules
+    can :edit, Article
+    cannot :edit, Admin
+  end
+end
+
 
 module CurrentUsers
   def current_user
-    ::User.new 'stan', 'stan@mail.ru'
+    ::User.new 'stan', 'stan@mail.ru', :role => 'user'
   end
 
   def current_admin
-    ::User.new 'admin', 'admin@mail.ru'
+    ::User.new 'admin', 'admin@mail.ru', :role => 'admin'
   end
 end
 
