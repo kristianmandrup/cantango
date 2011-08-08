@@ -4,7 +4,7 @@ require 'fixtures/models'
 
 require 'cantango/configuration/engines/store_engine_shared'
 
-CanTango.users.register :user, :admin
+CanTango.config.users.register :user, :admin
 
 module CurrentUserAccounts
   def current_user
@@ -12,7 +12,7 @@ module CurrentUserAccounts
   end
 
   def current_admin
-    ::UserAccount..new 'admin', 'admin@mail.ru'
+    ::UserAccount.new 'admin', 'admin@mail.ru'
   end
 end
 
@@ -23,20 +23,17 @@ class Context
   extend CurrentUserAccounts
 end
 
-describe CanTango::Api::User::Ability do
+describe CanTango::Api::UserAccount::Ability do
   subject { Context.new }
 
   describe 'user_ability' do
-    specify { subject.user_ability(:user).should be_a CanTango::Ability }
+    specify { subject.user_account_ability(:user).should be_a CanTango::Ability }
 
-    specify { subject.user_ability(:admin).should be_a CanTango::Ability }
+    specify { subject.user_account_ability(:admin).should be_a CanTango::Ability }
   end
 
   describe 'current_ability' do
-    specify { subject.current_ability(:user).should be_a CanTango::Ability }
-    specify { subject.current_ability(:admin).should be_a CanTango::Ability }
+    specify { subject.current_account_ability(:user).should be_a CanTango::Ability }
+    specify { subject.current_account_ability(:admin).should be_a CanTango::Ability }
   end  
 end
-
-
-
