@@ -42,13 +42,6 @@ module CanTango
         with(:permits)      {|permit| break if permit.execute == :break }
         st.stamp :permits_done
 
-        with(:permissions)  {|permission| permission.evaluate! user }
-
-        st.stamp :permissions_done
-
-        with(:permits)      {|permit| break if permit.execute == :break }
-        st.stamp :permits_done
-
         cache_rules!
         st.stamp :caching_done
       end

@@ -25,12 +25,13 @@ describe "Caching of the rules" do
   end
 
   describe 'Session store' do
-    pending 'todo'
 
     before do
       CanTango.configure do |config|
-        config.cache.store.default_class = CanTango::Ability::Cache::SessionCache
+        #config.cache.store.default_class = CanTango::Ability::Cache::MonetaCache
       end
+      pending 'todo'
+
     end
 
     it "should just response" do

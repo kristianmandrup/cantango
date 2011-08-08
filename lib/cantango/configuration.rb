@@ -38,8 +38,8 @@ module CanTango
         conf::User.instance
       end
 
-      def account
-        conf::Account.instance
+      def user_account
+        conf::UserAccount.instance
       end
 
       def role_groups

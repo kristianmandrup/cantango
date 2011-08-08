@@ -7,8 +7,8 @@ class BaseAccount
 end
 
 
-describe CanTango::Configuration::Account do
-  subject { CanTango::Configuration.account }
+describe CanTango::Configuration::UserAccount do
+  subject { CanTango::Configuration.user_account }
 
   describe 'default settings' do
     its(:base_class)        { should be_nil }

@@ -1,8 +1,13 @@
+require 'cutter'
+Stamper.scope :cache_rules => "#cache_rules" do |stan|
+  stan.msg :no_cache          => 'No caching, going through engines'
+end
+
 module CanTango
   class Ability
     module Cache
       def cache_rules!
-        stamper("#cache_rules") {
+        stamper(:cache_rules) {
         return if !caching_on?
         invalidate_cache!
         rules_compiled = compile_rules! rules
