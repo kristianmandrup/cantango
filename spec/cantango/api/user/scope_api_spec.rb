@@ -1,20 +1,30 @@
 require 'rspec'
 require 'cantango'
+require 'fixtures/models'
 
 require 'cantango/configuration/engines/store_engine_shared'
 
 CanTango.users.register :user, :admin
 
-class Context
-  include CanTango::Api::User::Scope
+class User
+  include CanTango::Users::Masquerade
+end
 
+module CurrentUsers
   def current_user
-    @current_user ||= User.new 'stan', 'stan@mail.ru'
+    ::User.new 'stan', 'stan@mail.ru'
   end
 
   def current_admin
-    @current_admin ||= User.new 'admin', 'admin@mail.ru'
+    ::User.new 'admin', 'admin@mail.ru'
   end
+end
+
+class Context
+  include CanTango::Api::User::Scope
+
+  include ::CurrentUsers
+  extend ::CurrentUsers
 end
 
 describe CanTango::Api::User::Scope do

@@ -18,7 +18,7 @@ module CanTango
 
         protected
 
-        include CanTango::Ability::Common
+        include CanTango::Api::Common
 
         def get_ability_user_acount user_type
           user_account_meth = :"current_#{user_type}_account"

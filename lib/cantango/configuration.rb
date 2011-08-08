@@ -8,6 +8,7 @@ module CanTango
     autoload_modules :User, :Guest, :Account
     autoload_modules :Roles, :RoleGroups, :Registry, :Factory
     autoload_modules :SpecialPermits, :Autoload
+    autoload_modules :Users, :Accounts
 
     module ClassMethods
       # allow either block or direct access
@@ -20,7 +21,9 @@ module CanTango
       end
 
       def ability
-        conf::Ability.instance
+        @ability ||= conf::Ability.instance
+        @ability.default_class ||= CanTango::Ability
+        @ability
       end
 
       def guest

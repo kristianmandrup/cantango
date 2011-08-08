@@ -13,7 +13,7 @@ module CanTango
       end
 
       def default_factory obj = nil, opts = {}
-        raise "Default factory must be defined" if !default
+        raise "Default factory must be defined" if !default_class
         default_class.new obj, options.merge(opts)
       end
 

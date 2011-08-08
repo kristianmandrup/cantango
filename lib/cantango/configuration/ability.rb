@@ -1,7 +1,9 @@
 module CanTango
   class Configuration
-    module Ability
+    class Ability
       include Singleton
+      include ClassExt
+
       include CanTango::Configuration::Factory
     end
   end
