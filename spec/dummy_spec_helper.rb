@@ -18,7 +18,7 @@ require 'capybara/rspec'
 #require 'controller_macros'
 #Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-#ActiveRecord::Base.logger = Logger.new(STDERR)
+ActiveRecord::Base.logger = Logger.new(STDERR)
 DatabaseCleaner.strategy = :truncation
 def migration_folder(name)
   migrations_path = File.dirname(__FILE__)
@@ -33,9 +33,8 @@ end
 RSpec.configure do |config|
   config.mock_with :rspec
   config.before(:suite) do
-    DatabaseCleaner.drop_tables
+    DatabaseCleaner.strategy = :drop, {:include => ['migrations']}
+    DatabaseCleaner.clean
     migrate("/dummy/db/migrate")
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
   end
 end

@@ -1,5 +1,5 @@
 require 'cutter'
-Stamper.scope :ability => "Ability#initialize" do |stan|
+Cutter::Stamper.scope :ability => "Ability#initialize" do |stan|
   stan.msg :no_cache          => 'No caching, going through engines'
   stan.msg :permissions_done  => "Permissions finished"
   stan.msg :permits_done      => "Permits finished"

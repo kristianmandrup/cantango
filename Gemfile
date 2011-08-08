@@ -19,7 +19,7 @@ group :test do
   gem 'require_all', '~> 1.2.0'
 
   # Data
-  gem 'database_cleaner', :git => "git://github.com/stanislaw/database_cleaner.git"
+  gem 'database_cleaner', :git => "git://github.com/kristianmandrup/database_cleaner.git"
 
   gem 'factory_girl'
 
@@ -33,7 +33,6 @@ group :test do
 
   # Debug
   gem 'cutter'
-  gem 'colorize'
 
   # Rails
   gem 'haml'

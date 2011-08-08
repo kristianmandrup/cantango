@@ -1,4 +1,4 @@
-Stamper.scope :call_on_ability => "Call on Ability" do |stan|
+Cutter::Stamper.scope :call_on_ability => "Call on Ability" do |stan|
   stan.msg :caching_done      => "Caching finished"
 end
 
