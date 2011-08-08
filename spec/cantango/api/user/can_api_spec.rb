@@ -10,7 +10,6 @@ class User
   attr_accessor :role
 
   include_and_extend SimpleRoles
-  
 end
 
 CanTango.config.users.register :user, :admin
@@ -22,8 +21,9 @@ class UserRolePermit < CanTango::RolePermit
   end
 
   def permit_rules
+    puts "permit roles for :user role"
     can :edit, Article
-    cannot :edit, Admin
+    cannot :edit, User
   end
 end
 
@@ -33,19 +33,20 @@ class AdminRolePermit < CanTango::RolePermit
   end
 
   def permit_rules
+    puts "permit roles for :admin role"
     can :edit, Article
-    cannot :edit, Admin
+    cannot :edit, User
   end
 end
 
 
 module CurrentUsers
   def current_user
-    ::User.new 'stan', 'stan@mail.ru', :role => 'user'
+    @current_user ||= ::User.new 'stan', 'stan@mail.ru', :role => 'user'
   end
 
   def current_admin
-    ::User.new 'admin', 'admin@mail.ru', :role => 'admin'
+    @current_admin ||= ::User.new 'admin', 'admin@mail.ru', :role => 'admin'
   end
 end
 
@@ -59,25 +60,46 @@ end
 describe CanTango::Api::User::Can do
   subject { Context.new }
 
-  describe 'user' do
-    # user can edit Article, not Admin
-    specify do
-      subject.user_can?(:edit, Article).should be_true
-      subject.user_can?(:edit, Admin).should be_false
+  describe 'user_ability' do
+    specify { subject.user_ability(:user).should be_a CanTango::Ability }
+    specify { subject.user_ability(:admin).should be_a CanTango::Ability }
+  end
 
-      subject.user_cannot?(:edit, Admin).should be_true
-      subject.user_cannot?(:edit, Article).should be_false
+  describe 'current_ability :user' do
+    specify { subject.current_ability(:user).should be_a CanTango::Ability }
+
+    it 'should set the :user user correctly on ability' do
+      subject.current_ability(:user).user.should == subject.current_user
     end
   end
 
-  describe 'admin_user' do
-    specify do
-      subject.admin_can?(:edit, Article).should be_true
-      subject.admin_can?(:edit, Admin).should be_true
+  describe 'current_ability :admin' do
+    specify { subject.current_ability(:admin).should be_a CanTango::Ability }
 
-      subject.admin_cannot?(:edit, Admin).should be_false
-      subject.admin_cannot?(:edit, Article).should be_false
+    it 'should set the :admin user correctly on ability' do
+      subject.current_ability(:admin).user.should == subject.current_admin
     end
+  end
+
+  describe 'user' do
+    specify { subject.current_user.role.should == 'user' }
+
+    # user can edit Article, not Admin
+    specify { subject.user_can?(:edit, Article).should be_true }
+    specify { subject.user_can?(:edit, User).should be_false }
+
+    specify { subject.user_cannot?(:edit, User).should be_true }
+    specify { subject.user_cannot?(:edit, Article).should be_false }
+  end
+
+  describe 'admin' do
+    specify { subject.current_admin.role.should == 'admin' }
+
+    specify { subject.admin_can?(:edit, Article).should be_true }
+    specify { subject.admin_can?(:edit, User).should be_true }
+
+    specify { subject.admin_cannot?(:edit, User).should be_false }
+    specify { subject.admin_cannot?(:edit, Article).should be_false }
   end
 
   describe 'admin masquerades as user' do
@@ -86,13 +108,12 @@ describe CanTango::Api::User::Can do
     end
 
     # admin masquerading as user can do same as user
-    specify do
-      subject.admin_can?(:edit, Article).should be_true
-      subject.admin_can?(:edit, Admin).should be_false
+    specify { subject.admin_can?(:edit, Article).should be_true }
 
-      subject.admin_cannot?(:edit, Admin).should be_true
-      subject.admin_cannot?(:edit, Article).should be_false
-    end
+    specify { subject.admin_can?(:edit, User).should be_false }
+
+    specify { subject.admin_cannot?(:edit, User).should be_true }
+    specify { subject.admin_cannot?(:edit, Article).should be_false }
   end
 end
 

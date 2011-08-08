@@ -13,7 +13,11 @@ module CanTango
               def #{account}_account_can? *args
                 current_account_ability(:#{account}).can?(*args)
               end
-            }
+
+              def #{account}_account_cannot? *args
+                current_account_ability(:#{account}).cannot?(*args)
+              end
+             }
           end
         end
       end
