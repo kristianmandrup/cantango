@@ -4,21 +4,31 @@ require 'fixtures/models'
 
 # require 'cantango/configuration/engines/store_engine_shared'
 
-CanTango.config.users.register     :user, :admin
-CanTango.config.accounts.register  :user, :admin
+class User
 
+  attr_accessor :role
+
+  include_and_extend SimpleRoles
+
+end
+CanTango.configure do |config|
+  config.users.register     :user, :admin
+  config.user_accounts.register  :user, :admin
+  config.cache.set :off
+  config.permits.set :on
+end
 
 class UserRolePermit < CanTango::RolePermit
   def permit_rules
     can :edit, Article
-    cannot :edit, Admin
+    cannot :edit, User
   end
 end
 
 class AdminRolePermit < CanTango::RolePermit
   def permit_rules
     can :edit, Article
-    cannot :edit, Admin
+    cannot :edit, User 
   end
 end
 
@@ -61,24 +71,24 @@ end
 describe CanTango::Api::UserAccount::Can do
   subject { Context.new }
 
-  describe 'user' do
+  describe 'user_account' do
     # user can edit Article, not Admin
     specify do
-      subject.user_can?(:edit, Article).should be_true
-      subject.user_can?(:edit, Admin).should be_false
+      subject.user_account_can?(:edit, Article).should be_true
+      subject.user_account_can?(:edit, User).should be_false
 
-      subject.user_cannot?(:edit, Admin).should be_true
-      subject.user_cannot?(:edit, Article).should be_false
+      subject.user_account_cannot?(:edit, User).should be_true
+      subject.user_account_cannot?(:edit, Article).should be_false
     end
   end
 
-  describe 'admin_user' do
+  describe 'admin_account' do
     specify do
-      subject.admin_can?(:edit, Article).should be_true
-      subject.admin_can?(:edit, Admin).should be_true
+      subject.admin_account_can?(:edit, Article).should be_true
+      subject.admin_account_can?(:edit, User).should be_false
 
-      subject.admin_cannot?(:edit, Admin).should be_false
-      subject.admin_cannot?(:edit, Article).should be_false
+      subject.admin_account_cannot?(:edit, User).should be_true
+      subject.admin_account_cannot?(:edit, Article).should be_false
     end
   end
 
@@ -89,11 +99,11 @@ describe CanTango::Api::UserAccount::Can do
 
     # admin masquerading as user can do same as user
     specify do
-      subject.admin_can?(:edit, Article).should be_true
-      subject.admin_can?(:edit, Admin).should be_false
+      subject.admin_account_can?(:edit, Article).should be_true
+      subject.admin_account_can?(:edit, User).should be_false
 
-      subject.admin_cannot?(:edit, Admin).should be_true
-      subject.admin_cannot?(:edit, Article).should be_false
+      subject.admin_account_cannot?(:edit, User).should be_true
+      subject.admin_account_cannot?(:edit, Article).should be_false
     end
   end
 end
