@@ -20,19 +20,11 @@ module CanTango
         return
       end
 
-      puts "\nAbility#initialize"
-
       stamper(:ability) {
         raise "Candidate must be something!" if !candidate
         @candidate, @options = candidate, options
         @session = options[:session] || {} # seperate session cache for each type of user?
       }
-
-      begin
-        @rules_cached = true
-        puts "using cache..."
-        return
-      end if cached_rules?
 
       stamper(:ability) do |st| 
         st.stamp(:no_cache)

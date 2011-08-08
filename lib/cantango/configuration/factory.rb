@@ -9,7 +9,7 @@ module CanTango
       alias_method :factory=, :factory
 
       def factory_build obj = nil, opts = {}
-        @factory || default_factory(obj, opts = {})
+        @factory || default_factory(obj, opts)
       end
 
       def default_factory obj = nil, opts = {}

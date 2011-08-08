@@ -3,35 +3,17 @@ require 'dummy_spec_helper'
 Stamper.turn :off
 
 describe "Caching of the rules" do
-  context "Ability's rules" do
-
-    before(:each) do
-      @user = User.create! :name => 'stanislaw', :role => 'user', :email => 'stanislaw@mail.ru'
-      Article.create!(:title => 'one')
-    end
-
-    describe 'Memory store' do
-      before do
-        CanTango.configure do |config|
-          config.cache.store.default_type = :memory
-        end
-      end
-
-      it "should populate session with rules" do
-        get '/login_user/stanislaw'
-        get '/articles'
-      end
-    end
+  
+  before(:all) do
+    @user = User.create! :name => 'stanislaw', :role => 'user', :email => 'stanislaw@mail.ru'
+    Article.create!(:title => 'one')
   end
 
-  describe 'Session store' do
-
+  context 'Moneta store' do
     before do
       CanTango.configure do |config|
-        #config.cache.store.default_class = CanTango::Ability::Cache::MonetaCache
+        config.cache.store.default_class = CanTango::Ability::Cache::MonetaCache
       end
-      pending 'todo'
-
     end
 
     it "should just response" do

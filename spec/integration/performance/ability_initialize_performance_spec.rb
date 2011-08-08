@@ -18,9 +18,9 @@ describe "CanTango::Ability performance" do
 
       it "3 requests" do
         get '/login_user/stanislaw'
-        puts "\n\nFirst Request"
+        puts "\n\nFirst Request with Rails autoloading of all CanTango(if running isolated)"
         get "/articles"
-        puts "\n\nSecond Request"
+        puts "\n\nSecond Request (basic #initialize)"
         get "/articles"
         puts "\n\nThird Request"
         get "/articles"
@@ -49,6 +49,6 @@ describe "CanTango::Ability performance" do
       end
     end
   end
-
-
 end
+
+
