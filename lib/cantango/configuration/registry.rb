@@ -9,8 +9,7 @@ module CanTango
       include Singleton
 
       def register *list
-        puts "#{registered} --- #{list.select_labels}"
-        @registered |= list.select_labels
+        self.registered |= list.select_labels
       end
 
       def registered

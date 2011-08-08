@@ -30,6 +30,4 @@ describe "CanTango::Ability performance" do
       end
     end
   end
-
-
 end

@@ -1,3 +1,4 @@
+require 'cutter'
 Stamper.scope :ability => "Ability#initialize" do |stan|
   stan.msg :no_cache          => 'No caching, going through engines'
   stan.msg :permissions_done  => "Permissions finished"
@@ -33,24 +34,24 @@ module CanTango
         return
       end if cached_rules?
 
-      stamper(:ability)  {
-        stamp(:no_cache)
+      stamper(:ability) do |st| 
+        st.stamp(:no_cache)
         with(:permissions)  {|permission| permission.evaluate! user }
-        stamp :permissions_done
+        st.stamp :permissions_done
 
         with(:permits)      {|permit| break if permit.execute == :break }
-        stamp :permits_done
+        st.stamp :permits_done
 
         with(:permissions)  {|permission| permission.evaluate! user }
 
-        stamp :permissions_done
+        st.stamp :permissions_done
 
         with(:permits)      {|permit| break if permit.execute == :break }
-        stamp :permits_done
+        st.stamp :permits_done
 
         cache_rules!
-        stamp :caching_done
-      }
+        st.stamp :caching_done
+      end
     end
   end
 end
