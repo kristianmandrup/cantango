@@ -21,7 +21,7 @@ module CanTango
 
       # must be a Class of type Cache (Base?)
       def default_class= clazz
-        raise ArgumentError, "default Cache must a Class" if !is_class? clazz
+        raise ArgumentError, "default must be a Class" if !is_class? clazz
         @default_class = clazz
       end
 

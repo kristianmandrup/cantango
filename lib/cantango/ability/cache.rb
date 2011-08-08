@@ -90,7 +90,7 @@ module CanTango
       end
 
       def rules_cache_class
-        CanTango::Configuration.cache.store.default
+        CanTango::Configuration.cache.store.default_class
       end
 
       def session?

@@ -1,5 +1,7 @@
 require 'dummy_spec_helper'
 
+Stamper.turn :off
+
 describe "Caching of the rules" do
   context "Ability's rules" do
 
@@ -27,7 +29,7 @@ describe "Caching of the rules" do
 
     before do
       CanTango.configure do |config|
-        config.cache.store.default = CanTango::Ability::Cache::SessionCache
+        config.cache.store.default_class = CanTango::Ability::Cache::SessionCache
       end
     end
 

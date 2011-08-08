@@ -35,7 +35,7 @@ module CanTango
       end
 
       def store_class
-        permissions_engine.store.default
+        permissions_engine.store.default_class
       end
 
       def store_options
