@@ -27,12 +27,12 @@ module Dancing
     end
 
     def user_account_scope scope, &block
-      su = scope_user_account(scope) 
+      su = scope_user_account(scope)
       yield su if block
       su
     end
 
-    def user_account_can?(user, *args)   
+    def user_account_can?(user, *args)
       user_account_ability(user).can?(*args)
     end
 
@@ -44,24 +44,22 @@ module Dancing
       @current_ability ||= ::CanTango::Ability.new(user_account)
     end
 
-    def current_account_ability name = :user 
+    def current_account_ability name = :user
       user_account_ability send(:"current_#{name}_account")
-    end    
+    end
 
     # Example: generated from types of accounts! (see below)
     # def admin_account_can?(*args)
     #   current_account_ability(:admin).can?(*args)
-    # end    
+    # end
 
-    ::CanTango.user_accounts.each do |account|
-      # puts "method for account: #{name}"
-
+    ::CanTango.config.user_accounts.registered.each do |account|
       class_eval %{
-      def #{account}_account_can? *args
-       current_account_ability(:#{account}).can?(*args)
-      end
+        def #{account}_account_can? *args
+        current_account_ability(:#{account}).can?(*args)
+        end
       }
-    end  
+    end
   end
 end
 

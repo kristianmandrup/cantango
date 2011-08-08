@@ -1,13 +1,17 @@
-RSpec.configure do |config| 
+RSpec.configure do |config|
   config.mock_with :mocha
-    
+
   config.before(:suite) do
-    DatabaseCleaner.drop_tables ...     
-    # DatabaseCleaner::ActiveRecord.config_file_location = 'db/database.yml'    
+
+    puts "Drop all tables"
+    DatabaseCleaner.drop_tables
+    DatabaseCleaner::ActiveRecord.config_file_location = 'db/database.yml'
+
     migrate("/../migrations")
+
     DatabaseCleaner.strategy = :transaction
     # DatabaseCleaner.clean_with(:truncation)
-    # DatabaseCleaner.clean 
+    # DatabaseCleaner.clean
   end
 
   config.before(:each) do
@@ -15,6 +19,5 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-  
-  end  
+  end
 end

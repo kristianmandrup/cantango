@@ -24,14 +24,6 @@ module CanTango
     end
 
     alias_method :config, :configure
-
-    def users
-      config.users
-    end
-
-    def user_accounts
-      config.user_accounts
-    end
   end
 
 end

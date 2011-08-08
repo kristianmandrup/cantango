@@ -31,9 +31,8 @@ group :test do
   gem 'mocha'
   gem "launchy"
 
-  # Debug
-  gem 'cutter', '>= 0.6', :git => "git://github.com/stanislaw/cutter.git"
-  gem 'colorize'
+  gem 'cutter'
+  # gem 'colorize'
 
   # Rails
   gem 'haml'

@@ -2,6 +2,8 @@ require 'rspec'
 require 'cantango'
 require 'fixtures/models'
 
+@user = User.new('kris', 'kris@gmail.com')
+
 class CanTango::CustomAbility < CanTango::Ability
   def initialize candidate, options = {}
     'custom'
@@ -11,7 +13,7 @@ end
 describe CanTango::Configuration do
   describe 'ability factory' do
     CanTango::Configuration.ability.factory do
-      CanTango::CustomAbility.new
+      CanTango::CustomAbility.new(@user)
     end
 
     it 'should be substituted' do
