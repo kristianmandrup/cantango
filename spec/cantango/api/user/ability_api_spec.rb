@@ -26,12 +26,12 @@ end
 describe CanTango::Api::User::Ability do
   subject { Context.new }
 
-  describe 'user_ability :user' do
-    specify { subject.user_ability(:user).should be_a CanTango::Ability }
+  describe 'user_ability user' do
+    specify { subject.user_ability(subject.current_user).should be_a CanTango::Ability }
   end
 
-  describe 'user_ability :admin' do
-    specify { subject.user_ability(:admin).should be_a CanTango::Ability }
+  describe 'user_ability admin' do
+    specify { subject.user_ability(subject.current_admin).should be_a CanTango::Ability }
   end
 
   describe 'current_ability :user' do

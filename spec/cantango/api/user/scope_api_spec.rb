@@ -21,6 +21,7 @@ module CurrentUsers
 end
 
 class Context
+  include CanTango::Api::User::Ability
   include CanTango::Api::User::Scope
 
   include ::CurrentUsers
