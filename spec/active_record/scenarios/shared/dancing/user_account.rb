@@ -53,7 +53,7 @@ module Dancing
     #   current_account_ability(:admin).can?(*args)
     # end    
 
-    ::CanTango.user_accounts.each do |account|
+    ::CanTango.config.user_accounts.registered.each do |account|
       # puts "method for account: #{name}"
 
       class_eval %{

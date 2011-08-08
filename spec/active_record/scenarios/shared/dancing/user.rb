@@ -30,7 +30,7 @@ module Dancing
     # end    
    
     def self.included(base)
-    ::CanTango.users.each do |user|
+    ::CanTango.config.users.registered.each do |user|
       # puts "method for user: #{user}"
       class_eval %{
       def #{user}_can? *args
