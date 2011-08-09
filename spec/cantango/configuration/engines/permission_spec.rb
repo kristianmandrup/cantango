@@ -8,12 +8,6 @@ require 'path_helper'
 describe CanTango::Configuration::Engines::Permission do
   subject { CanTango.config.permissions }
 
-  describe 'default settings' do
-    it 'should not have config path' do
-      lambda { subject.config_path }.should raise_error
-    end
-  end
-
   it_should_behave_like 'Store Engine' do
     subject { CanTango.config.permissions }
   end
