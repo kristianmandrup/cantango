@@ -12,14 +12,6 @@ module CanTango
         super
       end
 
-      def rules_cached?
-        @rules_cached || false
-      end
-
-      def using_cached?
-        @using_cached
-      end
-
       def cache_rules!
         return if !caching_on?
         invalidate_cache!
@@ -67,10 +59,6 @@ module CanTango
       end
 
       protected
-
-      def compiler
-        Compiler.instance
-      end
 
       def cache_key_same?
         session_check!
