@@ -18,7 +18,7 @@ module CanTango
       @ability
     end
 
-    [:guest, :autoload, :user, :user_account, :roles, :role_groups, :engines, :user, :user_accounts].each do |conf_module|
+    [:guest, :autoload, :user, :user_account, :roles, :role_groups, :engines, :users, :user_accounts].each do |conf_module|
       class_eval %{
         def #{conf_module}
           conf::#{conf_module.to_s.camelize}.instance
@@ -31,6 +31,8 @@ module CanTango
         def #{engine}
           engine(:#{engine})
         end
+
+        alias_method :#{engine.to_s.pluralize}, :#{engine}
       }
     end
 

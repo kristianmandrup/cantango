@@ -1,5 +1,5 @@
 CanTango.configure do |config|
-  config.guest_user Proc.new { Guest.instance }
+  config.guest.user Proc.new { Guest.instance }
 end
 
 # puts "guest_user_procedure:"

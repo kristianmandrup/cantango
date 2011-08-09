@@ -2,7 +2,7 @@ require 'active_record/spec_helper'
 require_all File.dirname(__FILE__) + "/../../shared/" 
 
 describe 'Cantango config: tango_permissions.yml' do
-  
+
   before(:each) {
     CanTango.configure do |config|
       config.permits.set :off
@@ -60,5 +60,5 @@ describe 'Cantango config: tango_permissions.yml' do
 
 end
 
-CanTango::Configuration.permissions.set :off
-CanTango::Configuration.permits.set :on
+CanTango.config.permissions.set :off
+CanTango.config.permits.set :on

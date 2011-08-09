@@ -30,7 +30,7 @@ module CanTango
         @permissions ||= loader.permissions
       end
 
-      CanTango::Configuration.permissions.types.each do |type|
+      CanTango.config.permissions.types.each do |type|
         define_method(:"#{type}_permissions") do
           loader.send(:"#{type}_permissions")
         end
@@ -50,7 +50,7 @@ module CanTango
         end
 
         # @stanislaw: this needs revision!
-        
+
         define_method(:"#{type}_rules") do
           #cache(":#{type}") || 
           send(:"#{type}_compiled_permissions")
@@ -59,7 +59,7 @@ module CanTango
 
       def save! perms = nil
         save_permissions(perms) if perms
-       
+
         File.open(file_path+".yml", 'w') do |f|
           f.write to_yaml
         end
@@ -72,9 +72,9 @@ module CanTango
       protected
 
       def permission_types
-        CanTango::Configuration.engine(:permission).types
+        CanTango.config.engine(:permission).types
       end
-      
+
       def to_yaml
         permission_types.inject({}) do |collection, type|
           collection.merge(send(:"#{type}_permissions_to_hash"))

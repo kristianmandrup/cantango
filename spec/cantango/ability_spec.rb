@@ -8,8 +8,8 @@ def config_folder
 end
 
 CanTango.configure do |config|
-  config.engines.permission :on
-  config.engines.permission.config_path = config_folder
+  config.permissions.set :on
+  config.permissions.config_path = config_folder
 end
 
 class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
