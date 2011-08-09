@@ -13,7 +13,7 @@ Currently doesn't support:
 
 h2. Should I use CanTango for my permission requirements?
 
-* "When and Why?":https://github.com/kristianmandrup/cantango/wiki/When-and-why-to-use-cantango
+* "CanCan vs CanTango":https://github.com/kristianmandrup/cantango/wiki/CanCan-vs-CanTango
 * "CanTango overview":https://github.com/kristianmandrup/cantango/wiki
 
 h2. Install

@@ -33,5 +33,7 @@ Cantango currently comes with the following features:
   * [[Devise integration]]
   * [[Rails 3 integration]]
 
-The following features are planned for the future:
-* ...
+The following features are currently planned for the future:
+* Role Filters
+* Domain differentiation on rules
+* Customize Ability#initialize process flow via registration of :before and :after hooks

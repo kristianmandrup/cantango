@@ -1,21 +1,23 @@
-The CanTango::Ability is initialized with a candidate and an options
+The **CanTango::Ability** is initialized with a candidate and an options
 hash.
 
 ## Candidate
 
-The candidate... subject, user, active user - masquerading, ...
+The candidate is any object that can have roles and/or role groups
+behavior attached. A candidate is usually either user and in some cases
+might be a user account.
 
 ## Options hash
 
 When used from a web framework such as Rails, the options hash
-should be populated with essential objects such as:
+is populated with essential objects such as:
 
 * Request
 * Session
 * Params
 
-This will make these objects available to the permission rules for evaluation.
-Some rules might be dependent on whether the user is accessing the site
+These objects are then made available to the permission rules for evaluation.
+Some rules might dependen on whether the user is accessing the site
 from localhost or if the user has a given session state.
 
 ## The Flow
