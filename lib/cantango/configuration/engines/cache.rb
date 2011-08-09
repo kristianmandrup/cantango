@@ -7,8 +7,8 @@ module CanTango
         include Singleton
 
         def store &block
-          @store ||= ns::Store.instance
-          @store.default_class = CanTango::Ability::Cache::MonetaCache
+          @store ||= ns::Store.new
+          @store.default_class ||= CanTango::Ability::Cache::MonetaCache
           yield @store if block
           @store
         end

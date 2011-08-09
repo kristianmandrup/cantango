@@ -2,7 +2,6 @@ module CanTango
   class Configuration
     class Engines
       class Store
-        include Singleton
         include ClassExt
 
         include CanTango::Configuration::Factory

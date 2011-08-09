@@ -7,7 +7,7 @@ module CanTango
         include Singleton
 
         def store &block
-          @store ||= ns::Store.instance
+          @store ||= ns::Store.new
           @store.default_class = CanTango::PermissionEngine::YamlStore
           yield @store if block
           @store
