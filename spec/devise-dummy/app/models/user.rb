@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   # OTHER
-  attr_accessible :name, :role, :role_group
+  attr_accessible :name, :role, :role_groups
 
   attr_accessor :encrypted_password
 

@@ -34,7 +34,7 @@ end
 RSpec.configure do |config|
   config.mock_with :rspec
   config.before(:suite) do
-    DatabaseCleaner.strategy = :drop, {:include => ['migrations']}
+    DatabaseCleaner.strategy = :drop , {:include => ['migrations']}
     DatabaseCleaner.clean
     migrate("/dummy/db/migrate")
   end

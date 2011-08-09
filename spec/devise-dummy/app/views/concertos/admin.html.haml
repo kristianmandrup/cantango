@@ -1,6 +1,10 @@
 %h1 Concertos index
 .buttons
   = link_to("New concerto", new_concerto_path) if admin_can?(:create, Concerto)
+===========================
+= current_user.inspect 
+= current_admin.inspect
+===========================
 
 %table
   %th

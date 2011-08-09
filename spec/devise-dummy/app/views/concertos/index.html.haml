@@ -11,7 +11,7 @@
   - concertos.each do |concerto|
     %tr
       %td
-        = link_to(concerto.title, concerto_path(concerto)) # if user_can?(:read, concerto)
+        = link_to(concerto.title, concerto_path(concerto)) #if user_can?(:read, concerto)
       %td
         = link_to("Edit #{concerto.title}", edit_concerto_path(concerto)) if user_can?(:edit, concerto)
       %td
