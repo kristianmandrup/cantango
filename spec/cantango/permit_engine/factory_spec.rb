@@ -14,6 +14,11 @@ class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
 end
 
 describe CanTango::PermitEngine::Factory do
+  
+  before do
+    CanTango.config.cache.set :off
+  end
+
   let (:user) do
     User.new 'kris'
   end

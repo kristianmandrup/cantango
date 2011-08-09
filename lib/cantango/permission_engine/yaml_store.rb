@@ -60,7 +60,7 @@ module CanTango
       def save! perms = nil
         save_permissions(perms) if perms
 
-        File.open(file_path+".yml", 'w') do |f|
+        File.open(file_path, 'w') do |f|
           f.write to_yaml
         end
       end
