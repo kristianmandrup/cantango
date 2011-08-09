@@ -1,5 +1,6 @@
 require 'rspec'
 require 'cantango'
+require 'fixtures/models/items'
 
 describe CanTango::PermissionEngine::Permission do
   before(:all) do
