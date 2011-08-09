@@ -15,6 +15,7 @@ class SystemRolePermit < CanTango::RolePermit
     can :read, Article
     can :write, Post
     can :create, Comment
+    :break
   end
 end
 
@@ -49,12 +50,12 @@ describe CanTango::PermitEngine::Executor::System do
       CanTango.config.permits.set :on
     end
 
-    it 'should execute permit' do
-      ability.should be_allowed_to(:read, Article)
-      ability.should be_allowed_to(:write, Post)
-      ability.should be_allowed_to(:create, Comment)
+    describe 'should execute permit' do
+      # specify { ability.should be_allowed_to(:read, Article) }
+      # specify { ability.should be_allowed_to(:write, Post) }
+      # specify { ability.should be_allowed_to(:create, Comment) }
 
-      lambda{ executor.execute! }.should_not raise_error
+      specify { lambda{ executor.execute! }.should_not raise_error }
     end
   end
 end
