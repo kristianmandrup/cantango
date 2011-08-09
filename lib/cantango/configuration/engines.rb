@@ -12,6 +12,10 @@ module CanTango
         [:permit, :permission, :cache]
       end
 
+      def available
+        self.class.available
+      end
+
       def available? name
         self.class.available.include? name.to_sym
       end

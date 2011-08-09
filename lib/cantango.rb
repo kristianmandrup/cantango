@@ -19,13 +19,13 @@ module CanTango
 
   class << self
     def configure &block
-      yield CanTango::Configuration if block
-      CanTango::Configuration
+      conf = CanTango::Configuration.instance
+      yield conf if block
+      conf
     end
 
     alias_method :config, :configure
   end
-
 end
 
 require 'cantango/api/aliases'
