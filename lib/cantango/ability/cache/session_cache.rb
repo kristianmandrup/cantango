@@ -25,6 +25,10 @@ module CanTango
           store.save! key, rules
         end
 
+        def invalidate! key
+          store.delete key
+        end
+
         def cache
           CanTango::Cache::MonetaCache.instance
         end

@@ -32,9 +32,9 @@ module CanTango
 
       def factory_statement
         %{
-              ::Moneta::Builder.build do
-          #{run_adapter}
-              end
+          ::Moneta::Builder.build do
+            #{run_adapter}
+          end
         }
       end
 
