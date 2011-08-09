@@ -25,4 +25,40 @@ in the future.
 
 ## When to use CanTango
 
+If you find that your requirements go beyond what CanCan can satisfy out
+of the box without too much tweaking on your own part, CanTango just
+might be the solution you are looking for.
 
+Complexity and fine control
+* Access rule requirements are somewhat complex
+* Access must be controlled on a more fine grained level
+
+Users
+* You have multiple types of users, fx User, Guest and Admin
+* There are more than a few roles (and/or role groups)
+
+Performance
+* Access control should be fast, you need caching of permits for each user
+* Users not logged in should be granted a Guest user instance
+
+User accounts:
+* Your app has multiple User accounts, one for each sub-app
+* Access control logic can differ for each account
+* A user can be logged into one or more accounts simultaneously
+* Some users are allowed to masquerade as other users
+* Some users are allowed to masquerade as if logged into a
+  different account
+
+Administration
+* Access control (permisssions) should be maintained in logical
+  containers, on a per-role or role group basis
+* Access control should be maintained and administrated in a permission
+  store, fx a Yaml file
+
+If more than a few items on this list reflect your requirements, give
+CanTango a chance!
+
+If your requirements go beyond this, create your own extension or even
+better help enhance CanTango directly!
+
+Have FUN! Let's Tango!
