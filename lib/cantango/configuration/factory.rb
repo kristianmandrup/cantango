@@ -1,9 +1,9 @@
 module CanTango
   class Configuration
     module Factory
-      def factory factory = nil, &block
-        return factory_build if !factory && !block
-        @factory = factory || yield
+      def factory factory = nil
+        raise "Factory must be a callable, either a lambda or Proc" if !callable? factory
+        @factory = factory
       end
 
       alias_method :factory=, :factory
@@ -42,10 +42,14 @@ module CanTango
       def type_options
         {}
       end
+
+      protected
+
+      def callable? obj
+        obj && obj.respond_to?(:call)
+      end
     end
   end
 end
-
-
 
 
