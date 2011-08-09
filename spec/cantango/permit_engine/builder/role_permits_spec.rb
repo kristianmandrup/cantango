@@ -2,6 +2,7 @@ require 'rspec'
 require 'cantango'
 require 'fixtures/models'
 
+CanTango.config.cache.set :off
 class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   def initialize ability
     super
