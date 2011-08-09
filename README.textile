@@ -11,6 +11,15 @@ Tested to work with:
 Currently doesn't support:
 * Ruby 1.8.7
 
+h2. August 9, Announcement!
+
+The first **Release Candidate** of CanTango is expected tomorrow, the 10th of August. 
+The specs should almost all pass now (+95%) and we have two working
+dummy apps included (see spec folder) that demonstrate how to use CanTango in a Rails 3
+app, with and without Devise :)
+
+Enjoy!
+
 h2. Should I use CanTango for my permission requirements?
 
 * "CanCan vs CanTango":https://github.com/kristianmandrup/cantango/wiki/CanCan-vs-CanTango
