@@ -22,7 +22,7 @@ describe CanTango::Configuration::Guest do
       its(:user)     { should == :guest }
 
       its(:default_account?) { should be_true }
-      its(:account) { should == :guest_account }
+      its(:account) { should == :guest }
   end
 end
 
