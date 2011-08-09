@@ -3,7 +3,7 @@ require 'cantango'
 require 'fixtures/models'
 
 describe CanTango::Configuration::Autoload do
-  subject { CanTango::Configuration.autoload }
+  subject { CanTango.config.autoload }
 
   describe 'default settings' do
       its(:permits)     { should be_true }

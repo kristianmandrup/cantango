@@ -6,7 +6,7 @@ require 'cantango/configuration/engines/store_engine_shared'
 require 'path_helper'
 
 describe CanTango::Configuration::Engines::Permission do
-  subject { CanTango.config.engine(:permission) }
+  subject { CanTango.config.permissions }
 
   describe 'default settings' do
     it 'should not have config path' do
@@ -15,11 +15,11 @@ describe CanTango::Configuration::Engines::Permission do
   end
 
   it_should_behave_like 'Store Engine' do
-    subject { CanTango.config.engine(:permission) }
+    subject { CanTango.config.permissions }
   end
 
   it_should_behave_like 'Store' do
-    subject { CanTango.config.engine(:permission).store }
+    subject { CanTango.config.permissions.store }
   end
 
   describe 'config_path' do

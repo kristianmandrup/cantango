@@ -3,7 +3,7 @@ require 'cantango'
 require 'fixtures/models'
 
 describe CanTango::Configuration::Engines::Permit do
-    subject { CanTango.config.engines.permit }
+    subject { CanTango.config.permits }
 
     describe 'SpecialPermits' do
       describe 'default settings' do
