@@ -8,7 +8,7 @@ class BaseUser
 end
 
 describe CanTango::Configuration::User do
-  subject { CanTango::Configuration.user }
+  subject { CanTango.config.user }
 
   describe 'default settings' do
     its(:relations)         { should_not be_empty }

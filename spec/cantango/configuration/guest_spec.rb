@@ -3,7 +3,7 @@ require 'cantango'
 require 'fixtures/models'
 
 describe CanTango::Configuration::Guest do
-  subject { CanTango::Configuration.guest }
+  subject { CanTango.config.guest }
 
   describe 'default settings' do
     it 'should not have defined UserAccount.guest' do

@@ -18,7 +18,7 @@ require 'capybara/rspec'
 #require 'controller_macros'
 #Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-ActiveRecord::Base.logger = Logger.new(STDERR)
+#ActiveRecord::Base.logger = Logger.new(STDERR)
 DatabaseCleaner.strategy = :truncation
 def migration_folder(name)
   migrations_path = File.dirname(__FILE__)

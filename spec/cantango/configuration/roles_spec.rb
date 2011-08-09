@@ -6,7 +6,7 @@ require 'cantango/configuration/registry_shared'
 
 describe CanTango::Configuration::Roles do
   it_should_behave_like "Registry" do
-    subject { CanTango::Configuration.roles }
+    subject { CanTango.config.roles }
   end
 end
 
