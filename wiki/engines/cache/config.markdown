@@ -16,12 +16,12 @@ Cantango.configure do |config|
 end
 ```
 
-Alternatively you can define your own factory:
+Alternatively you can define your own Cache store factory:
 
 ```ruby
 Cantango.configure do |config|
   config.cache.store do |store|
-    store.factory { MyFantasticCache.new :mine, :awesome_power => true }
+    store.factory Proc.new {|name, options| MyFantasticCache.new name, {:awesome_power => true}.merge(options) }
   end
 end
 ```

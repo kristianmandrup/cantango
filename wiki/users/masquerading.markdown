@@ -6,7 +6,7 @@ In order to masquerade, you simply do:
 
 ```ruby
 user.masquerade_as other_user
-``
+```
 
 If you are using the 'friendly_id' gem, you can even do:
 

@@ -1,5 +1,4 @@
-The User Account API is very similar to the User API and is divided into
-a Can API and a Scope API.
+The User Account APIs are very similar to the [[User APIs]]
 
 * Can API
 * Scope API
@@ -14,13 +13,16 @@ In our scenario, `#current_user_account` and `#current_admin_account` should be 
 Cantango will provide the following API:
 
 API methods:
+
 * user_can? actions, targets
+* user_cannot? actions, targets
 * admin_can? actions, targets
+* admin_cannot? actions, targets
 
 Example use:
 
 ```ruby
-if user_account_can? :edit, Article
+if user_account_cannot? :edit, Article
   # do sth
 end
 ```
@@ -56,7 +58,9 @@ scope_account :admin do |account|
 end
 ```
 
-`#as_real_acount` is used to explicitly negate masquerading within the scope.
+### Real account
+
+`#real_account` is used to explicitly negate masquerading within the scope.
 Thus the permissions apply to the real account, not the masqueraded account.
 
 Assume we have an app divided into a public app and an admin app.
@@ -66,12 +70,12 @@ in to the Public account in the public part of the application.
 The admin should remain as an Admin user on the Admin account when
 accessing the admin app, while remaining in the same session.
 
-This can be achieve using `#as_real_account` in the admin app.
+This can be achieve using `#real_account` in the admin app.
 
-Example use #as_real_account:
+Example use #real_account:
 
 ```ruby
-as_real_account :admin do |account|
+real_account :admin do |account|
   if account.can?(:edit, Article) || account.can?(:read, Post)
     # do stuff
   end
@@ -80,4 +84,5 @@ as_real_account :admin do |account|
   end
 end
 ```
+
 

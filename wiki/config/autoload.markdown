@@ -1,4 +1,4 @@
-Cantango is by default setup to autoload:
+Cantango is by default setup to autoload the following:
 
 * Models (app/models)
 * Permits (app/permits)
