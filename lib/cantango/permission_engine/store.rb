@@ -28,42 +28,6 @@ module CanTango
         end
       end
 
-=begin
-      module ClassMethods
-        attr_writer :stores
-
-        def << store
-          @stores << store
-        end
-
-        def - store
-          @stores - store
-        end
-
-        def stores
-          @stores ||= Set.new default_stores.map{|name| build_store name }
-        end
-
-        def load_all!
-          stores.each{|store| store.load!}
-        end
-
-        # load all permissions?
-        def load *store_names
-          stores.select {|store| store_names.include? store.name }.each{|store| store.load!}
-        end
-
-        def default_stores
-          [:role_permits, :role_group_permits, :licenses]
-        end
-
-        def build_store name, options = {}
-          CanTango::Configuration.default_store.create name, options
-        end
-      end
-
-      extend ClassMethods
-=end
     end
   end
 end

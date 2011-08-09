@@ -49,11 +49,11 @@ module CanTango
         end
 
         def available_role_groups
-          CanTango::Configuration.role_groups
+          CanTango.config.role_groups
         end
 
         def available_roles
-          CanTango::Configuration.roles
+          CanTango.config.roles
         end
       end
     end

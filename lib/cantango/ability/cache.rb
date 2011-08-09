@@ -45,8 +45,8 @@ module CanTango
 
       def cache_key
         @cache_key ||= begin
-          user_key_field = CanTango::Configuration.user.unique_key_field || :email
-          raise "#{user.class} must have a method ##{user_key_field}. You can configure this with CanTango::Configuration#user.unique_key_field" if !user.respond_to?(user_key_field)
+          user_key_field = CanTango.config.user.unique_key_field || :email
+          raise "#{user.class} must have a method ##{user_key_field}. You can configure this with CanTango.config#user.unique_key_field" if !user.respond_to?(user_key_field)
 
           user_key = user.send(user_key_field)
           [user_key, subject_roles_hash].hash
@@ -86,11 +86,11 @@ module CanTango
       end
 
       def rules_cache_options
-       CanTango::Configuration.cache.store.options || {}
+       CanTango.config.cache.store.options || {}
       end
 
       def rules_cache_class
-        CanTango::Configuration.cache.store.default_class
+        CanTango.config.cache.store.default_class
       end
 
       def session?

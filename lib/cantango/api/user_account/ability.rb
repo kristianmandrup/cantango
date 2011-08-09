@@ -30,9 +30,9 @@ module CanTango
 
         module AbilityAccount
           def self.guest
-            account = CanTango::Configuration.guest.account
+            account = CanTango.config.guest.account
 
-            raise "You must set the guest_account to a Proc or lambda in CanTango::Configuration" if !account
+            raise "You must set the guest_account to a Proc or lambda in CanTango.config" if !account
             account.respond_to?(:call) ? account.call : account
           end
         end

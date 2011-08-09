@@ -8,7 +8,7 @@ module CanTango
         @permit = permit
       end
 
-      ::CanTango::Configuration.user_relationships.each do |relationship|
+      ::CanTango.config.user.relations.each do |relationship|
         base.class_eval %{
           def #{relationship}_of *models, &block
             options = models.extract_options!

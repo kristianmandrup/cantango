@@ -46,7 +46,7 @@ module CanTango
           @parser ||= CanTango::PermissionEngine::Parser::Permissions.new
         end
 
-        CanTango::Configuration.permissions.types.each do |type|
+        CanTango.config.permissions.types.each do |type|
           define_method(:"#{type}_permissions") {
             permissions.send(:"#{type}")
           }

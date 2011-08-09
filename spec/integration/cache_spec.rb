@@ -1,7 +1,7 @@
 require 'dummy_spec_helper'
 
 # Cutter::
-Stamper.turn :off
+Cutter::Stamper.turn :off
 
 describe "Caching of the rules" do
   

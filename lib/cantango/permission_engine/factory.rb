@@ -53,7 +53,7 @@ module CanTango
       private
 
       def permissions_engine
-        CanTango::Configuration.permissions
+        CanTango.config.permissions
       end
     end
   end

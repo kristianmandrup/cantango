@@ -7,7 +7,7 @@ module CanTango
 
       def configure_with options = {}
         @options ||= options
-        @type ||= options[:type] || CanTango::Configuration.cache.store.default_type
+        @type ||= options[:type] || CanTango.config.cache.store.default_type
       end
 
       def load! key

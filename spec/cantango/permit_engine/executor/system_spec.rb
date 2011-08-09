@@ -41,12 +41,12 @@ describe CanTango::PermitEngine::Executor::System do
   end
 
   before(:each) do
-    CanTango::Configuration.permits.set :on
+    CanTango.config.permits.set :on
   end
 
   describe '#execute!' do
     before:each do
-      CanTango::Configuration.permits.set :on
+      CanTango.config.permits.set :on
     end
 
     it 'should execute permit' do

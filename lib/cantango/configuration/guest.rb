@@ -40,11 +40,11 @@ module CanTango
       end
 
       def base_user_class
-        CanTango::Configuration.user.base_class
+        CanTango.config.user.base_class
       end
 
       def base_account_class
-        CanTango::Configuration.user.base_class
+        CanTango.config.user.base_class
       end
     end
   end
