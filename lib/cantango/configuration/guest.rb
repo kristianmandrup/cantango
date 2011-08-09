@@ -44,7 +44,7 @@ module CanTango
       end
 
       def base_account_class
-        CanTango.config.user.base_class
+        CanTango.config.user_account.base_class
       end
     end
   end
