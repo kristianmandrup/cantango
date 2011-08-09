@@ -41,7 +41,6 @@ feature "Concertos", %q{
 
   scenario "Show concerto index without login - fallback to Guest user", :js => true do
     visit '/concertos'
-    # puts page.body
     page.should have_content('one')
     page.should have_content('two')
   end
@@ -52,7 +51,6 @@ feature "Concertos", %q{
     # save_and_open_page
 
     visit '/concertos'
-    # puts page.body
     page.should have_content('one')
     page.should have_content('two')
   end
@@ -70,12 +68,10 @@ feature "Concertos", %q{
 
   scenario "Show concerto admin index to composer", :js => true do
     login_composer
-    # save_and_open_page
 
     visit '/concertos/admin'
-    save_and_open_page
+    # save_and_open_page
 
-    puts page.body
     page.should have_content('one')
     page.should have_content('two')
   end

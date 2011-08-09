@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   # OTHER
   attr_accessible :name, :role, :role_group
 
+  attr_accessor :encrypted_password
+
   include_and_extend SimpleRoles
 
   tango_user # see macros
