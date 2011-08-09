@@ -31,7 +31,7 @@ feature "Concertos", %q{
     Admin.delete_all
     User.delete_all
 
-    @composer = Admin.create! :name => 'composer', :role_groups => 'composers', :email => 'stanislaw@mail.ru', :password => 'admin123'
+    @composer = Admin.create! :name => 'composer', :role_groups => 'composers', :email => 'stanislaw@mail.ru', :password => 'admin123', :confirmation_password => 'admin123'
     @musician = User.create! :name => 'musician', :role_groups => 'musicians', :email => 'musician@mail.ru', :password => 'secret123', :confirmation_password => 'secret123'
 
     Capybara.reset_sessions!
