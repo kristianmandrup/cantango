@@ -7,7 +7,7 @@ module CanTangoFixtures
        }},
       "user"=>{
        "can"=>{
-        "read"=>["@articles", "Post"],
+        "read"=>["^articles", "Post"],
         "write"=>["Comment"]
        },
        "cannot"=>{
