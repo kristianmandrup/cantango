@@ -27,8 +27,8 @@ describe CanTango::PermissionEngine::Permission do
     subject { @permission.compiled_rules} 
     it { should include('can')}
     it { should include('cannot')}
-    its(:can) { should == %|can(:read, ["Article", "Comment"])|}
-    its(:cannot) { should == %|cannot(:write, ["Article", "Post"])|}
+    its(:can) { should == %|can(:read, Article)\ncan(:read, Comment)|}
+    its(:cannot) { should == %|cannot(:write, Article)\ncannot(:write, Post)|}
   end
 
 end
