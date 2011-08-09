@@ -3,6 +3,11 @@ require 'cantango'
 require 'fixtures/models'
 
 describe CanTango::Configuration::Guest do
+  before do
+    CanTango.config.user.base_class = User
+    CanTango.config.user_account.base_class = UserAccount
+  end
+
   subject { CanTango.config.guest }
 
   describe 'default settings' do
@@ -52,5 +57,6 @@ describe CanTango::Configuration::Guest do
     its(:account) { should == '2' }
   end
 end
+
 
 

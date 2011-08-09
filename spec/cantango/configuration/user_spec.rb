@@ -8,6 +8,11 @@ class BaseUser
 end
 
 describe CanTango::Configuration::User do
+  before do
+    CanTango.config.user.base_class = User
+    CanTango.config.user_account.base_class = UserAccount
+  end
+
   subject { CanTango.config.user }
 
   describe 'default settings' do

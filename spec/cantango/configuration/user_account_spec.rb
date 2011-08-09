@@ -8,11 +8,11 @@ end
 
 
 describe CanTango::Configuration::UserAccount do
-  subject { CanTango.config.user_account }
-
-  describe 'default settings' do
-    its(:base_class)        { should be_nil }
+  before do
+    CanTango.config.user.base_class = User
   end
+
+  subject { CanTango.config.user_account }
 
   describe 'set base class' do
     before do
