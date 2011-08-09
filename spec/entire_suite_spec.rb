@@ -9,6 +9,7 @@ require_all "#{dir}/cantango/api"
 require_all "#{dir}/cantango/permit_engine"
 
 require "#{dir}/cantango/configuration_spec"
+require "#{dir}/cantango/rules_spec"
 require_all "#{dir}/cantango/configuration"
 
 require_all "#{dir}/cantango/permission_engine"

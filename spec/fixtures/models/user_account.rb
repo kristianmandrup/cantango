@@ -2,7 +2,6 @@ class UserAccount
   attr_accessor :user, :roles, :role_groups
 
   def initialize user, options = {}
-    inspect!{}
     @user = user
     @roles = options[:roles]
     @role_groups = options[:role_groups]
