@@ -33,12 +33,9 @@ end
 
 RSpec.configure do |config|
   config.mock_with :rspec
-
   config.before(:suite) do
-    DatabaseCleaner.drop_tables
-    migrate("/devise-dummy/db/migrate")
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :drop, {:include => ['migrations']}
+    DatabaseCleaner.clean
+    migrate("/dummy/db/migrate")
   end
 end
-
