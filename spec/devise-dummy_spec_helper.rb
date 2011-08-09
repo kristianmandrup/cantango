@@ -36,6 +36,6 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :drop , {:include => ['migrations']}
     DatabaseCleaner.clean
-    migrate("/dummy/db/migrate")
+    migrate("/devise-dummy/db/migrate")
   end
 end

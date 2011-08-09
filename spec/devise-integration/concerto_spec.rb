@@ -31,14 +31,14 @@ feature "Concertos", %q{
     Admin.delete_all
     User.delete_all
 
-    @composer = Admin.create! :name => 'composer', :role_groups => 'composers', :email => 'stanislaw@mail.ru', :password => 'admin123', :confirmation_password => 'admin123'
-    @musician = User.create! :name => 'musician', :role_groups => 'musicians', :email => 'musician@mail.ru', :password => 'secret123', :confirmation_password => 'secret123'
+    @composer = Admin.create :name => 'composer', :role_groups => 'composers', :email => 'stanislaw@mail.ru', :password => 'admin123', :confirmation_password => 'admin123'
+    @musician = User.create :name => 'musician', :role_groups => 'musicians', :email => 'musician@mail.ru', :password => 'secret123', :confirmation_password => 'secret123'
 
     Capybara.reset_sessions!
   end
 
   include DeviseSessionHelpers
-=begin
+  
   scenario "Show concerto index without login - fallback to Guest user", :js => true do
     visit '/concertos'
     page.should have_content('one')
@@ -65,7 +65,7 @@ feature "Concertos", %q{
     visit '/concertos/two'
     page.should have_content('two')
   end
-=end
+  
   scenario "Show concerto admin index to composer", :js => true do
     login_composer
 

@@ -1,9 +1,4 @@
 class Admin < User 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-
-  # INHERITED, specialize for admin if necessary
-
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   # INHERITED, specialize for admin if necessary

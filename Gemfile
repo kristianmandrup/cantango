@@ -45,6 +45,7 @@ group :test do
 end
 
 group :development do
+  gem 'devise'
   gem "rspec",    ">= 2.5.0"
   gem "jeweler",  ">= 1.6.4"
   gem "bundler",  "~> 1.0.10"
