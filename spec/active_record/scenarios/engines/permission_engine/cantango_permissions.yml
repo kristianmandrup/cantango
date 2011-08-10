@@ -27,8 +27,7 @@ role_groups:
       - Comment
     cannot: 
       write: 
-      - Article
-      - Post
+      - ^another_articles
   editors: 
     can: 
       read: 
@@ -54,6 +53,7 @@ users:
         - Comment#author
         - Article#author
         - Post#body="Nice!"
+        - Todo#authors
   stan@gmail.com:
     can:
       read:

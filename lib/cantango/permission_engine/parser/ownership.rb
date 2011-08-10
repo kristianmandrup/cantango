@@ -8,11 +8,11 @@ module CanTango
           owner = match[$2]
           model_class = try_class
           raise "#{model_class} has no ##{owner}!" if !model_class.new.respond_to?(owner.to_sym)
-          conditions = ":#{owner} => user"
-
-          [target, conditions].compact.join(', ')
+          result = [ "#{owner.singularize}_of(#{target}) do |#{owner}|",
+                     "  #{owner}.#{method} :#{action}",
+                     "end" ]
+          result.join("\n")
         end
-
       end
     end
   end
