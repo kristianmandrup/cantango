@@ -2,16 +2,29 @@ module CanTango
   module PermissionEngine
     module Parser
       class Ownership < Rule
+        attr_reader :model_class, :owner
+
         def parse
           match = target[/(\w+)#(\w+)/]
+
           @target = match[$1]
-          owner = match[$2]
-          model_class = try_class
+          @owner = match[$2]
+          @model_class = try_class
+          build_ownership_dsl
+        end
+
+        protected
+
+        def build_ownership_dsl
           raise "#{model_class} has no ##{owner}!" if !model_class.new.respond_to?(owner.to_sym)
-          result = [ "#{owner.singularize}_of(#{target}) do |#{owner}|",
-                     "  #{owner}.#{method} :#{action}",
-                     "end" ]
-          result.join("\n")
+          ownership_dsl_lines.join("\n")
+        end
+
+        def ownership_dsl_lines
+          [ "#{owner.singularize}_of(#{target}) do |#{owner}|",
+            "  #{owner}.#{method} :#{action}",
+            "end"
+          ]
         end
       end
     end
