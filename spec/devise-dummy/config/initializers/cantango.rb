@@ -5,7 +5,4 @@ CanTango.configure do |config|
   config.permits.set :on
   config.permissions.set :on
 end
-# puts "guest_user_procedure:"
-# puts CanTango::Configuration.methods.sort
-# puts CanTango::Configuration.guest_user_procedure.inspect
 
