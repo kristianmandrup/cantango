@@ -10,10 +10,10 @@ describe "Caching of the rules" do
     Article.create!(:title => 'one')
   end
 
-  context 'Moneta store' do
+  context 'CanTango::Ability::Cache::MonetaCache' do
     before do
       CanTango.configure do |config|
-        config.cache.store.default_class = CanTango::Ability::Cache::SessionCache
+        config.cache.store.default_class = CanTango::Ability::Cache::MonetaCache
       end
     end
 

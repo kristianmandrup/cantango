@@ -42,5 +42,3 @@ module CanTango
 end
 
 CanTango.config.ability.default_class = CanTango::PerformanceTestAbility
- 
-

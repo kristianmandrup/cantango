@@ -72,7 +72,7 @@ feature "Concertos", %q{
     visit '/concertos/admin'
     # save_and_open_page
 
-    puts page.body.inspect
+    #puts page.body.inspect
     page.should have_content('one')
     page.should have_content('two')
   end

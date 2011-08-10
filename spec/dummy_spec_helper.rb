@@ -10,7 +10,6 @@ require 'database_cleaner'
 require 'cutter'
 require 'capybara/rails'
 require 'capybara/rspec'
-
 #require 'cantango/rspec'
 #require 'factory_girl'
 #require 'mocha'
@@ -38,3 +37,7 @@ RSpec.configure do |config|
     migrate("/dummy/db/migrate")
   end
 end
+
+# Overriden variant of Ability exposes some extra methods 
+# to test caching:
+require 'helpers/dummy_app_ability'
