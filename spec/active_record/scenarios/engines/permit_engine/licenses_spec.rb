@@ -8,21 +8,12 @@ def preconfigure
   end
 end
 
-def reset_back
-  CanTango.configure do |config|
-    config.permits.set :off
-    config.permissions.set :on
-  end
-end
-
 describe 'Licenses usage' do
   context 'Musicianslicense applied to UserRolePermit' do
     before(:each) {
       preconfigure
       @user = User.create!(:email => "kris@gmail.com", :role => 'user')
     }
-
-    after(:all) { reset_back }
 
     let(:current_user) { @user }
     let(:ability) { current_ability(:user) }

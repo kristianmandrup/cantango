@@ -13,3 +13,7 @@ require 'active_record/helper/permits_config'
 require 'active_record/helper/rails_config'
 
 Cutter::Inspection.loud!
+
+CanTango.configure do |config|
+  config.permits.set :on
+end

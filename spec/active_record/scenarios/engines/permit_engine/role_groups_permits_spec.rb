@@ -8,20 +8,11 @@ def preconfigure
   end
 end
 
-def reset_back
-  CanTango.configure do |config|
-    config.permits.set :off
-    config.permissions.set :on
-  end
-end
-
 describe 'RoleGroupPermit usage' do
   before(:each) {
     preconfigure
     @user = User.create!(:email => "kris@gmail.com", :role_groups_list => [:musicians])
   }
-
-  after(:each) { reset_back }
 
   let(:current_user) { @user }
   let(:ability) { current_ability(:user) }
