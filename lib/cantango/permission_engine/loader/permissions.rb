@@ -61,7 +61,6 @@ module CanTango
         end
 
         include ClassMethods
-      
       end
     end
   end

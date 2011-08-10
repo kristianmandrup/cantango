@@ -5,7 +5,7 @@ require 'shared'
 
 describe 'Load Permissions file' do
   let (:file) do
-    File.join(config_folder, 'tango_permissions.yml')
+    File.join(config_folder, 'cantango_permissions.yml')
   end
 
   let (:loader) { CanTango::PermissionEngine::Loader::Permissions.new file }

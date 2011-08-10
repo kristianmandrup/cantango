@@ -16,35 +16,36 @@ describe CanTango::PermissionEngine::YamlStore do
   
   context 'Loading permissions' do
     let (:store) do
-      @store ||= CanTango::PermissionEngine::YamlStore.new :tango_permissions, :path => config_folder 
+      @store ||= CanTango::PermissionEngine::YamlStore.new 'cantango_permissions', :path => config_folder 
     end
     
     before(:each) do
       store.load!
     end
-    
+
     it_should_behave_like "Having permissions"
   end
-  
+
   context 'Caching permissions by types' do
     let (:store) do
-      @store ||= CanTango::PermissionEngine::YamlStore.new :tango_permissions, :path => config_folder 
+      # filename: 'cantango_permissions.yml',
+      @store ||= CanTango::PermissionEngine::YamlStore.new 'cantango_permissions', :path => config_folder 
     end
-    
+
     before(:each) do
       store.load!
     end
-    
+
     context "roles" do
       subject{ @store.roles_rules }
       it { should == @store.roles_compiled_permissions }
     end
-    
+
     context "role groups" do
       subject{ @store.role_groups_rules }
       it { should == @store.role_groups_compiled_permissions }
     end
-    
+
     context "licenses" do
       subject{ @store.licenses_rules }
       it { should == @store.licenses_compiled_permissions }
@@ -52,31 +53,31 @@ describe CanTango::PermissionEngine::YamlStore do
 
     it_should_behave_like "Having compiled permissions"
   end
-  
+
   context 'Saving permissions' do
     let (:store) do
       @store ||= CanTango::PermissionEngine::YamlStore.new :test_permissions, :path => config_folder 
     end
-   
+
     before(:each) do
       store.save! permissions
       store.load!
-    end 
-    
+    end
+
     it_should_behave_like "Having permissions" 
   end
-  
+
   context 'Loading permissions and saving them again' do
     let (:store) do
       @store ||= CanTango::PermissionEngine::YamlStore.new :test_permissions, :path => config_folder 
     end
-   
+
     before(:each) do
       store.load!
       store.save!
       store.load!
-    end 
-    
+    end
+
     it_should_behave_like "Having permissions"
   end
 end
