@@ -14,7 +14,7 @@ module CanTango
         end
 
         def permit_for_user_role?
-          subject.has_role?(role) || role == :any
+          subject_in_role? || role == :any
         end
 
         def role_group_execution
@@ -23,12 +23,27 @@ module CanTango
         end
 
         def permit_for_user_group?
-          subject.is_in_group?(role) if subject.respond_to? :is_in_group?
-          subject.in_role_group?(role) if subject.respond_to? :in_role_group?
-          false
+          subject_in_role_group? || false
         end
 
         protected
+
+        def subject_in_role?
+          subject.send(has_role_meth, role) if subject.respond_to? has_role_meth
+        end
+
+        def subject_in_role_group?
+          subject.send(has_role_group_meth, role) if subject.respond_to? has_role_group_meth
+        end
+
+
+        def has_role_meth
+          CanTango.config.roles.has_method
+        end
+
+        def has_role_group_meth
+          CanTango.config.role_groups.has_method
+        end
 
         def role
           permit.role

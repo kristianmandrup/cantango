@@ -25,14 +25,6 @@ module CanTango
       def roles_list_meth
         CanTango.config.roles.list_method
       end
-
-      def has_role_meth
-        CanTango.config.roles.list_method
-      end
-
-      def has_role_group_meth
-        CanTango.config.role_groups.has_method
-      end
     end
   end
 end
