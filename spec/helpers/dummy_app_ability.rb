@@ -4,7 +4,7 @@ require 'cantango/permit_engine/util'
 module CanTango
   class Ability
     def initialize candidate, options = {}
-      puts "\n\n !Using test variant of CanTango::Ability from spec/helpers !\n\n"
+      puts "\n\n! Using test variant of CanTango::Ability from spec/helpers !\n\n"
       raise "Candidate must be something!" if !candidate
       @candidate, @options = candidate, options
       @session = options[:session] || {} # seperate session cache for each type of user?
