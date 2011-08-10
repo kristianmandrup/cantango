@@ -12,7 +12,8 @@ module CanTango
           raise "#{model_class} has no ##{lstat}!" if !model_class.new.respond_to?(lstat.to_sym)
           conditions = ":#{lstat} => #{rstat}"
 
-          [ target, conditions ].compact.join(', ')
+          target_and_conditions = [ target, conditions ].compact.join(', ')
+          "#{method}(:#{action}, #{target_and_conditions})"
         end
       end
     end

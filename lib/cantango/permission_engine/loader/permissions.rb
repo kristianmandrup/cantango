@@ -11,7 +11,6 @@ module CanTango
 
         def load_from_hash hash
           hash.each do |type, groups|
-          #puts "load_from_hash --- #{type}"
             groups.each do |group, rules|
               permissions[type] ||= {}
               parser.parse(group, rules) do |permission|

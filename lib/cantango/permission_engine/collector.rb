@@ -11,13 +11,11 @@ module CanTango
 
       def build
         relevant_rules.inject([]){|evaluators, (name, rules)| 
-          # puts "injecting evaluator of #{name} rules"
           evaluators << CanTango::PermissionEngine::Evaluator.new(ability, rules) 
         }
       end
 
       def relevant_rules
-        # puts "relevant_rules for #{type}"
         selector.select permissions
       end
 

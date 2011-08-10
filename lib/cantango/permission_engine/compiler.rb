@@ -36,10 +36,6 @@ module CanTango
         statements(method)
       end
 
-      def parser
-        @parser ||= CanTango::PermissionEngine::RulesParser.new categories
-      end
-
       def statements method
         valid_actions.map do |action|
           statements_string(method, :action => action)

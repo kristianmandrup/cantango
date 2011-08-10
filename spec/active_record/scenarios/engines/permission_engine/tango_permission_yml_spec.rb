@@ -10,6 +10,10 @@ describe 'Cantango config: tango_permissions.yml' do
       config.permissions.set :on
     end
     @user ||= User.create!(:email => "kris@gmail.com", :role => 'musician')
+    @own_todo = Todo.create!
+    @own_todo.authors << @user
+    @own_todo.save!
+
   }
 
   after(:each) { 
@@ -57,6 +61,15 @@ describe 'Cantango config: tango_permissions.yml' do
       ability.should_not be_allowed_to(:write, Concerto)
     end
   end
+
+    it "should allow :write of own Todos" do
+      @user.should be_allowed_to(:write, @own_todo)
+    end
+
+    it "should not allow :write of not-own Todos" do
+      @user.should_not be_allowed_to(:write, Todo.new)
+    end
+
 
 end
 

@@ -4,11 +4,11 @@ module CanTango
       autoload_modules :Categories, :Permissions
       autoload_modules :Category, :Default, :Ownership, :Relationship, :Rule
 
-      def self.create_for target
+      def self.create_for method, action, target
         type = parser_type target
         parser_name = "CanTango::PermissionEngine::Parser::#{type.to_s.camelize}"
         parser_class = parser_name.constantize
-        parser_class.new target #, categories
+        parser_class.new method, action, target
       end
 
       protected

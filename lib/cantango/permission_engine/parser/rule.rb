@@ -3,10 +3,12 @@ module CanTango
     module Parser
       class Rule
 
-        attr_reader :model, :target
+        attr_reader :method, :action, :model, :target
 
-        def initialize target
+        def initialize method, action, target
           @target = target
+          @method = method
+          @action = action
         end
 
         def parse
