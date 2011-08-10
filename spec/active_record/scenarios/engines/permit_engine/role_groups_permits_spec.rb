@@ -1,5 +1,5 @@
 require 'active_record/spec_helper'
-require_all File.dirname(__FILE__) + "/../../shared/" 
+require_all File.dirname(__FILE__) + "/../../shared/"
 
 def preconfigure
   CanTango.configure do |config|
@@ -10,8 +10,8 @@ end
 
 def reset_back
   CanTango.configure do |config|
-    config.permits.set :on
-    config.permissions.set :off
+    config.permits.set :off
+    config.permissions.set :on
   end
 end
 
