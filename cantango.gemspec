@@ -27,6 +27,7 @@ Store permissions in yaml file or key-value store}
     "README.textile",
     "Rakefile",
     "VERSION",
+    "cantango.gemspec",
     "ideas/feature_list.markdown",
     "lib/cantango.rb",
     "lib/cantango/ability.rb",
