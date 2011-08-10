@@ -14,7 +14,7 @@ module CanTango
         @permit_factory ||= CanTango::PermitEngine::Factory.new self
       end
 
-      def permit_engine?
+      def permits?
         CanTango.config.permits.on?
       end
     end
