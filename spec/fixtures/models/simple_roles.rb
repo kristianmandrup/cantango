@@ -33,6 +33,7 @@ module SimpleRoles
     def is_in_group? group
       role_groups_list.include? group
     end
+    alias_method :in_role_group?, :is_in_group?
 
     def role_groups_list
       return role_groups.scan(/\w+/).map(&:to_sym) if respond_to?(:role_groups) && !role_groups.nil?
