@@ -11,12 +11,12 @@ Tested to work with:
 Currently doesn't support:
 * Ruby 1.8.7
 
-h2. August 9, Announcement!
+h2. August 10, RC released!
 
-The first **Release Candidate** of CanTango is expected tomorrow, the 10th of August. 
-The specs should almost all pass now (+95%) and we have two working
-dummy apps included (see spec folder) that demonstrate how to use CanTango in a Rails 3
-app, with and without Devise :)
+The first **Release Candidate** of CanTango has now been released, version 0.8.0.rc1
+The specs should almost all pass. We also include two working dummy apps (see spec folder) 
+The "dummy" app demonstrates how to use CanTango in a Rails 3 app without Devise.
+The "devise-dummy" demonstrates integration _with_ Devise :)
 
 Enjoy!
 
