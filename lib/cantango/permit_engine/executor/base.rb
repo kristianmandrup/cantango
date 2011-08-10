@@ -13,7 +13,7 @@ module CanTango
           permit? if permit_for_user_role? || permit_for_user_group?
         end
 
-        def permit_for_user_role? 
+        def permit_for_user_role?
           subject.has_role?(role) || role == :any
         end
 
@@ -21,13 +21,15 @@ module CanTango
           # could also use #user.is_member_of?
           permit? if permit_for_user_group?
         end
-      
-        def permit_for_user_group? 
-          subject.is_in_group?(role)
-        end    
-      
+
+        def permit_for_user_group?
+          subject.is_in_group?(role) if subject.respond_to? :is_in_group?
+          subject.in_role_group?(role) if subject.respond_to? :in_role_group?
+          false
+        end
+
         protected
-      
+
         def role
           permit.role
         end

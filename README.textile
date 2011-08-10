@@ -117,7 +117,7 @@ See "Account permits":https://github.com/kristianmandrup/cantango/wiki/Account-p
 
 h3. Permit for Role group
 
-See "Role group permits":https://github.com/kristianmandrup/cantango/wiki/Role-Group-permits
+See "RoleGroup permits":https://github.com/kristianmandrup/cantango/wiki/Role-Group-permits
 
 h3. Special permits
 
@@ -161,8 +161,8 @@ If you encounter bugs, raise an issue or:
 
 h2. Contributors
 
-* Kristian Mandrup 
-  * Main architect 
+* Kristian Mandrup
+  * Main architect
   * Designer of structure
   * Feature ideas
   * Initiator of project
