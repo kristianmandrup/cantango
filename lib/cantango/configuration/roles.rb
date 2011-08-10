@@ -1,6 +1,13 @@
 module CanTango
   class Configuration
-    class Roles < Registry
+    class Roles < RoleRegistry
+      def default_has_method
+        :has_role?
+      end
+
+      def default_list_method
+        :roles_list
+      end
     end
   end
 end

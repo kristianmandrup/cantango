@@ -1,7 +1,7 @@
 require 'rspec'
 require 'cantango'
 
-require 'cantango/configuration/factory_shared'
+require 'cantango/configuration/shared/factory_ex'
 
 describe CanTango::Configuration::Ability do
 

@@ -1,12 +1,14 @@
 require 'rspec'
 require 'cantango'
-require 'fixtures/models'
 
-require 'cantango/configuration/registry_shared'
+require 'cantango/configuration/shared/role_registry_ex'
 
 describe CanTango::Configuration::RoleGroups do
-  it_should_behave_like "Registry" do
-    subject { CanTango.config.role_groups }
+  subject { CanTango.config.role_groups }
+
+  it_should_behave_like "Role Registry" do
+    let (:has) { :in_role_group? }
+    let (:list) { :role_groups_list }
   end
 end
 
