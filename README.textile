@@ -11,12 +11,13 @@ Tested to work with:
 Currently doesn't support:
 * Ruby 1.8.7
 
-h2. August 10, RC released!
+h2. August 11, RC2 released!
 
-The first **Release Candidate** of CanTango has now been released, version 0.8.0.rc1
-The specs should almost all pass. We also include two working dummy apps (see spec folder) 
-The "dummy" app demonstrates how to use CanTango in a Rails 3 app without Devise.
-The "devise-dummy" demonstrates integration _with_ Devise :)
+The second **Release Candidate** of CanTango has now been released, version 0.8.0.rc2
+We have included two working dummy apps (see spec folder).
+
+* "dummy" - how to use CanTango in a Rails 3 app without Devise.
+* "devise-dummy" - integration _with_ Devise :)
 
 Enjoy!
 
@@ -39,6 +40,21 @@ Run bundler to bundle gems in the app
 
 @$ bundle@
 
+h2. Running the dumy app integration tests
+
+<pre>
+$ bundle
+
+# run dummy app integration specs
+$ bundle exec rspec spec/integration
+
+# dun devise dummy integration specs
+$ bundle exec rspec spec/devise-integration
+</pre>
+
+We suggest you look at the wiki scenarios and check out the dummy apps to 
+get a feel for how to integrate CanTango in your app.
+
 h2. Design overview
 
 The CanTango pattern is simple:
@@ -49,9 +65,9 @@ The CanTango pattern is simple:
 _CanTango::Ability#initialize_
 
 1. Use cached rules and return if user has cached rules
-2. Generate rules for Permits if 'Permits engine' is turned on
-3. Generate rules for Permissions if 'Permissions engine' is turned on
-4. Cache generated rules with unique key for current user
+2. Generate rules for Permits (if 'Permits engine' is turned on)
+3. Generate rules for Permissions (if 'Permissions engine' is turned on)
+4. Cache generated rules with unique key for current user (ability candidate)
 
 See "CanTango Ability":https://github.com/kristianmandrup/cantango/wiki/Cantango-ability
 
