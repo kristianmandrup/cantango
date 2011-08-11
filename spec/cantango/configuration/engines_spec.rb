@@ -22,6 +22,20 @@ describe CanTango::Configuration::Engines do
       subject { CanTango.config.engine(:cache) }
     end
   end
+
+  describe 'all on' do
+    subject { CanTango.config.engines }
+
+    before do
+      subject.all :on
+    end
+
+    specify do
+      [:permits, :permissions, :cache].each do |engine|
+        CanTango.config.send(engine).on?.should be_true
+      end
+    end
+  end
 end
 
 

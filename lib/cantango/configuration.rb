@@ -20,8 +20,10 @@ module CanTango
 
     [:guest, :autoload, :user, :user_account, :roles, :role_groups, :engines, :users, :user_accounts].each do |conf_module|
       class_eval %{
-        def #{conf_module}
-          conf::#{conf_module.to_s.camelize}.instance
+        def #{conf_module} &block
+          conf = conf::#{conf_module.to_s.camelize}.instance
+          yield conf if block
+          conf
         end
       }
     end

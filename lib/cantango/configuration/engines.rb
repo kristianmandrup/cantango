@@ -20,6 +20,10 @@ module CanTango
         self.class.available.include? name.to_sym
       end
 
+      def all state
+        available.each {|engine| send(engine).set state }
+      end
+
       available.each do |engine|
         # def permission
         #   return Permission.instance
