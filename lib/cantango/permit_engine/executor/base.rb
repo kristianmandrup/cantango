@@ -29,27 +29,23 @@ module CanTango
         protected
 
         def subject_in_role?
-          subject.send(has_role_meth, role) if subject.respond_to? has_role_meth
+          return subject.send(has_role_meth, role) if subject.respond_to? has_role_meth
+          return subject.send(list_role_meth, role).include? role if subject.respond_to? has_role_meth
+          false
         end
 
         def subject_in_role_group?
-          subject.send(has_role_group_meth, role) if subject.respond_to? has_role_group_meth
+          return subject.send(has_role_group_meth, role) if subject.respond_to? has_role_group_meth
+          return subject.send(list_role_group_meth).include? role if subject.respond_to? list_role_group_meth
+          false
         end
 
-
-        def has_role_meth
-          CanTango.config.roles.has_method
-        end
-
-        def has_role_group_meth
-          CanTango.config.role_groups.has_method
-        end
+        include CanTango::Helpers::RoleMethods
 
         def role
           permit.role
         end
       end
     end
-
   end
 end

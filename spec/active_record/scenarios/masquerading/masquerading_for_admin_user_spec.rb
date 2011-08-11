@@ -4,13 +4,13 @@ require_all File.dirname(__FILE__) + "/../shared/"
 
 describe 'Scenario: masquerading for admin user' do
 
-  context "Masquerading as user" do 
+  context "Masquerading as user" do
     before(:each) do
       @user = User.create!(:role => "user")
       @admin = Admin.create!(:name => "kris")
       @admin.masquerade_as @user
     end
-    
+
     it_should_behave_like "User role" do
       let(:current_user) { @admin }
       let(:user) { current_ability(:user) }
@@ -26,7 +26,7 @@ describe 'Scenario: masquerading for admin user' do
       @admin = Admin.create!(:name => "kris")
       @admin.masquerade_as @user
     end
-    
+
     it_should_behave_like "Editor role" do
       let(:current_user) { @admin }
       let(:user) { current_ability(:user) }

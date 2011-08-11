@@ -12,17 +12,20 @@ module CanTango
         end
 
         def parse
-          category = target.gsub(/^\^/, '').to_sym 
-          targets = categories.category_of_subject(category).map{|model| parse_class(model)}
+          cat_name = target.gsub(/^\^/, '').to_sym
+          targets = category_models_for(cat_name).map{|model| parse_class(model)}
           targets.inject([]) do |statements, target|
             statements << "#{method}(:#{action}, #{target})"
           end
         end
 
-        def load_categories
-          @categories = CanTango::PermissionEngine::Loader::Categories.new
+        def category_models_for name
+          categories.registered[name.to_s]
         end
 
+        def load_categories
+          @categories = CanTango::PermissionEngine::Loader::Categories.new.categories
+        end
       end
     end
   end

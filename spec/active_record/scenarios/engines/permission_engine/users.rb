@@ -1,5 +1,3 @@
-include Dancing::User
-
 shared_examples_for "Guest role" do
   
   it 'should allow :read of all Articles' do

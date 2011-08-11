@@ -43,6 +43,10 @@ module CanTango
       @candidate
     end
 
+    def config
+      CanTango.config
+    end
+
     include MasqueradeHelpers
     include PermissionHelpers
     include PermitHelpers

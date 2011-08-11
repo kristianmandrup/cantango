@@ -20,8 +20,33 @@ module CanTango
         executor.execute!
       end
 
+      def category label
+        config.categories.category(label.to_s)
+      end
+
+      def any reg_exp
+        raise "Must be a Regular Expression like: /xyz/ was #{reg_exp.inspect}" if !reg_exp.kind_of? Regexp
+        config.all_models.grep regexp
+      end
+
       def options
         ability.options
+      end
+
+      [:session, :controller, :request, :params].each do |obj|
+        class_eval %{
+          def #{obj}
+            options[:#{obj}]
+          end
+        }
+      end
+
+      def localhost?
+        config.localhost_list.include? request.host
+      end
+
+      def publichost?
+        !localhost?
       end
 
       def subject
@@ -61,12 +86,11 @@ module CanTango
         dynamic_rules
       end
 
-      # where and how is this used???
       def licenses *names
         names.to_strings.each do |name|
           try_license name
         end
-     end
+      end
 
       include CanTango::Rules
 

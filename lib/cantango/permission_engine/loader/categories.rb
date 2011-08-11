@@ -8,9 +8,7 @@ module CanTango
           begin
             @file_name = file || categories_config_file
             yml_content.each do |key, value|
-              parser.parse(categories_config, key, value) do |cat_config|
-                category_config = cat_config
-              end
+              parser.parse(categories, key, value)
             end
 
           rescue RuntimeError => e
@@ -18,20 +16,16 @@ module CanTango
           end
         end
 
-        def category_of_subject(category)
-          categories_config.category_of_subject(category)
+        def category name
+          categories.category(name).subjects
         end
 
-        def categories_config
-          @categories_config ||= CanTango::Configuration::Categories.new
+        def categories
+          @categories ||= CanTango.config.categories
         end
 
         def parser
           @parser ||= CanTango::PermissionEngine::Parser::Categories.new
-        end
-
-        def category_config
-          @category_config ||= {}
         end
 
         def load_categories name = nil
