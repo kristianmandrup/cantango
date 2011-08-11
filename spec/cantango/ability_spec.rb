@@ -10,6 +10,7 @@ end
 CanTango.configure do |config|
   config.permissions.set :on
   config.permissions.config_path = config_folder
+  config.categories.register :blog_items => [Article, Post]
 end
 
 class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
@@ -20,8 +21,9 @@ class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   protected
 
   def static_rules
-    can(:read, Comment)
-    can(:write, Article)
+    can :read, Comment
+    can :write, Article
+    can :write, category(:blog_items)
   end
 end
 

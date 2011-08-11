@@ -37,6 +37,10 @@ module CanTango
       end if send(:"#{engine_type}?")
     end
 
+    def category
+
+    end
+
     def subject
       return @candidate.active_user if masquerade_user?
       return @candidate.active_account if masquerade_account?

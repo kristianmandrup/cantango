@@ -6,7 +6,7 @@ module CanTango
     autoload_modules :Categories
     autoload_modules :Engines, :Ability
     autoload_modules :User, :Guest, :UserAccount
-    autoload_modules :Roles, :RoleGroups, :Registry, :RoleRegistry, :Factory
+    autoload_modules :Roles, :RoleGroups, :Registry, :RoleRegistry, :HashRegistry, :Factory
     autoload_modules :SpecialPermits, :Autoload
     autoload_modules :Users, :UserAccounts
 
@@ -18,7 +18,7 @@ module CanTango
       @ability
     end
 
-    [:guest, :autoload, :user, :user_account, :roles, :role_groups, :engines, :users, :user_accounts].each do |conf_module|
+    [:guest, :autoload, :user, :user_account, :roles, :role_groups, :engines, :users, :user_accounts, :categories].each do |conf_module|
       class_eval %{
         def #{conf_module}
           conf::#{conf_module.to_s.camelize}.instance
