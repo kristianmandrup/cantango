@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.8.0.rc1"
+  s.version = "0.8.0.rc2"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
-  s.date = %q{2011-08-10}
+  s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
+  s.date = %q{2011-08-11}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -37,7 +37,12 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/ability/cache/moneta_cache.rb",
     "lib/cantango/ability/cache/session_cache.rb",
     "lib/cantango/ability/class_methods.rb",
+    "lib/cantango/ability/masquerade_helpers.rb",
+    "lib/cantango/ability/permission_helpers.rb",
+    "lib/cantango/ability/permit_helpers.rb",
+    "lib/cantango/ability/role_helpers.rb",
     "lib/cantango/ability/scope.rb",
+    "lib/cantango/ability/user_helpers.rb",
     "lib/cantango/api.rb",
     "lib/cantango/api/aliases.rb",
     "lib/cantango/api/aliases/license.rb",
@@ -68,13 +73,17 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/configuration/engines/store.rb",
     "lib/cantango/configuration/factory.rb",
     "lib/cantango/configuration/guest.rb",
+    "lib/cantango/configuration/hash_registry.rb",
     "lib/cantango/configuration/registry.rb",
     "lib/cantango/configuration/role_groups.rb",
+    "lib/cantango/configuration/role_registry.rb",
     "lib/cantango/configuration/roles.rb",
     "lib/cantango/configuration/user.rb",
     "lib/cantango/configuration/user_account.rb",
     "lib/cantango/configuration/user_accounts.rb",
     "lib/cantango/configuration/users.rb",
+    "lib/cantango/helpers.rb",
+    "lib/cantango/helpers/role_methods.rb",
     "lib/cantango/permission_engine.rb",
     "lib/cantango/permission_engine/builder.rb",
     "lib/cantango/permission_engine/collector.rb",
@@ -95,7 +104,6 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/permission_engine/parser/relationship.rb",
     "lib/cantango/permission_engine/parser/rule.rb",
     "lib/cantango/permission_engine/permission.rb",
-    "lib/cantango/permission_engine/rules_parser.rb",
     "lib/cantango/permission_engine/selector.rb",
     "lib/cantango/permission_engine/selector/base.rb",
     "lib/cantango/permission_engine/selector/licenses.rb",
@@ -186,9 +194,9 @@ Store permissions in yaml file or key-value store}
     "spec/active_record/migrations/006_create_todo.rb",
     "spec/active_record/migrations/007_create_user_todos.rb",
     "spec/active_record/scenarios/SCENARIOS README.textile",
+    "spec/active_record/scenarios/engines/permission_engine/cantango_permissions.yml",
     "spec/active_record/scenarios/engines/permission_engine/categories.yml",
     "spec/active_record/scenarios/engines/permission_engine/tango_permission_yml_spec.rb",
-    "spec/active_record/scenarios/engines/permission_engine/tango_permissions.yml",
     "spec/active_record/scenarios/engines/permission_engine/users.rb",
     "spec/active_record/scenarios/engines/permit_engine/licenses_spec.rb",
     "spec/active_record/scenarios/engines/permit_engine/role_groups_permits_spec.rb",
@@ -200,11 +208,8 @@ Store permissions in yaml file or key-value store}
     "spec/active_record/scenarios/guest_user_admin/user_spec.rb",
     "spec/active_record/scenarios/masquerading/masquerading_for_admin_account_spec.rb",
     "spec/active_record/scenarios/masquerading/masquerading_for_admin_user_spec.rb",
+    "spec/active_record/scenarios/shared/api.rb",
     "spec/active_record/scenarios/shared/can_tango.rb",
-    "spec/active_record/scenarios/shared/dancing/base.rb",
-    "spec/active_record/scenarios/shared/dancing/user.rb",
-    "spec/active_record/scenarios/shared/dancing/user_account.rb",
-    "spec/active_record/scenarios/shared/examples/dancing_api.rb",
     "spec/active_record/scenarios/shared/examples/user_accounts.rb",
     "spec/active_record/scenarios/shared/examples/users.rb",
     "spec/active_record/scenarios/shared/licenses/musicians_license.rb",
@@ -263,13 +268,17 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/configuration/engines/store_engine_shared.rb",
     "spec/cantango/configuration/engines/store_shared.rb",
     "spec/cantango/configuration/engines_spec.rb",
-    "spec/cantango/configuration/factory_shared.rb",
     "spec/cantango/configuration/factory_spec.rb",
     "spec/cantango/configuration/guest/find_guest_default_way_spec.rb",
     "spec/cantango/configuration/guest_spec.rb",
-    "spec/cantango/configuration/registry_shared.rb",
+    "spec/cantango/configuration/hash_registry_spec.rb",
+    "spec/cantango/configuration/registry_spec.rb",
     "spec/cantango/configuration/role_groups_spec.rb",
     "spec/cantango/configuration/roles_spec.rb",
+    "spec/cantango/configuration/shared/factory_ex.rb",
+    "spec/cantango/configuration/shared/hash_registry_ex.rb",
+    "spec/cantango/configuration/shared/registry_ex.rb",
+    "spec/cantango/configuration/shared/role_registry_ex.rb",
     "spec/cantango/configuration/user_account_spec.rb",
     "spec/cantango/configuration/user_spec.rb",
     "spec/cantango/configuration_spec.rb",
@@ -511,7 +520,6 @@ Store permissions in yaml file or key-value store}
     "spec/fixtures/config/permissions.yml",
     "spec/fixtures/config/role_group.yml",
     "spec/fixtures/config/roles.yml",
-    "spec/fixtures/config/test_permissions.yml",
     "spec/fixtures/config/user_permissions.yml",
     "spec/fixtures/models.rb",
     "spec/fixtures/models/items.rb",
@@ -577,9 +585,9 @@ Store permissions in yaml file or key-value store}
     "wiki/why_to_use.markdown"
   ]
   s.homepage = %q{http://github.com/kristianmandrup/cantango}
-  s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.licenses = [%q{MIT}]
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.7}
   s.summary = %q{CanCan extension with role oriented permission management and more}
 
   if s.respond_to? :specification_version then
