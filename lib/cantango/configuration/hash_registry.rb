@@ -31,6 +31,11 @@ module CanTango
         registered[label]
       end
 
+      def []= label, value
+        raise "Must be a label" if !label.kind_of_label?
+        registered[label] = value
+      end
+
       def register hash
         raise "Must be a hash" if !hash.is_a? Hash
         @registered = hash

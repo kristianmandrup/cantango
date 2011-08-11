@@ -41,5 +41,13 @@ shared_examples_for 'Hash Registry' do
     end
     specify { subject[:c].should == 3 }
   end
+
+  describe 'set index []=' do
+    before do
+      subject.register hash1
+      subject[:d] = 5
+    end
+    specify { subject[:d].should == 5 }
+  end
 end
 

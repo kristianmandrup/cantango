@@ -8,12 +8,12 @@ describe 'Scenario: Guest account' do
 
   let(:user_profile) { create_user }
   let(:user_account) { create_user_account user_profile, :guest }
-  
-  before(:each) do 
+
+  before(:each) do
     user_account = create_user_account user_profile, :guest
     @user_profile = create_user
-  end 
-  
+  end
+
   describe 'User profile' do
     it_should_behave_like "Guest role" do
       let(:user) { @user_profile }
@@ -21,11 +21,6 @@ describe 'Scenario: Guest account' do
       let(:own_post)    { Post.create(:user_id => @user_profile.id) }
       let(:own_comment) { Comment.create(:user_id => @user_profile.id) }
     end
-
-    it_should_behave_like "Dancing API: user account" do
-      let(:current_user_account) { user_account }
-      let(:current_guest_account) { user_account }
-    end    
   end
 
   context 'GuestAccount himself' do

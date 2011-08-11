@@ -1,5 +1,3 @@
-include Dancing::UserAccount
-
 shared_examples_for "Guest account" do
   it 'should allow :read of all Articles' do
     user_account.should be_allowed_to(:read, article)
