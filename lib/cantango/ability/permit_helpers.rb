@@ -15,7 +15,7 @@ module CanTango
       end
 
       def permits?
-        CanTango.config.permits.on?
+        config.permits.on?
       end
     end
   end
