@@ -14,14 +14,9 @@ module CanTango
         found
       end
 
-      # find the siblings of a subject if such a category exists
-      def siblings_of_subject subject, &block
-        categories_of_subject(subject).values.first
-      end
-
       # find the category of a subject if such a category exists
-      def category_name_of_subject subject, &block
-        categories_of_subject(subject).keys.first
+      def category_names_of_subject subject, &block
+        categories_of_subject(subject).keys
       end
 
       # find the category of a subject if such a category exists

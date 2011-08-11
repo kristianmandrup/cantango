@@ -18,7 +18,7 @@ describe CanTango::Configuration::Categories do
 
   describe 'API' do
     before do
-      categories = {'a' => ['B', 'C'], 'x' => ['Y', 'Z']}
+      categories = {'a' => ['B', 'C'], 'x' => ['Y', 'Z'], 'v' => ['B', 'Z']}
       subject.register categories
    end
 
@@ -30,21 +30,15 @@ describe CanTango::Configuration::Categories do
       specify { subject.has_any?('Y').should be_true }
     end
 
-    describe 'siblings_of_subject' do
-      specify { subject.siblings_of_subject('B').should == ['B', 'C'] }
+    describe 'category_names_of_subject' do
+      specify { subject.category_names_of_subject('B').last.should == 'v' }
 
-      specify { subject.siblings_of_subject('blip').should == nil }
-    end
-
-    describe 'category_of_subject' do
-      specify { subject.category_name_of_subject('B').should == 'a' }
-
-      specify { subject.category_name_of_subject('c').should == nil }
+      specify { subject.category_names_of_subject('c').first.should == nil }
     end
 
     describe 'categories_of_subject' do
       specify do
-        subject.categories_of_subject('B').should == {'a' => ['B', 'C']}
+        subject.categories_of_subject('B').should == {'a' => ['B', 'C'], 'v' => ['B', 'Z'],}
       end
 
       specify do
