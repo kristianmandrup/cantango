@@ -21,7 +21,7 @@ module CanTango
       end
 
       def category label
-        config.categories.category(label.to_s)
+       config.categories.registered[label.to_s] || []
       end
 
       def any reg_exp

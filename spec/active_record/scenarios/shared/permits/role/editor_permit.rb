@@ -1,3 +1,11 @@
+CanTango.config.categories.register 'articles' => [Post, Article]
+
+puts "=================="
+puts "!!! CATEGORIES:"
+puts CanTango.config.categories.registered
+puts "=================="
+
+
 class EditorRolePermit < CanTango::RolePermit
   def initialize ability
     super
@@ -10,8 +18,7 @@ class EditorRolePermit < CanTango::RolePermit
     #owns(user, Comment)
 
     can :read, Comment
-    can :read, Post
-    can :read, Article
+    can :read, category(:articles)
     #author_of(Article, :scope => :account) do |author|
     #  author.can :manage
     #end

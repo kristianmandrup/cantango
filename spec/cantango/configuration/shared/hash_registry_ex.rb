@@ -28,6 +28,7 @@ shared_examples_for 'Hash Registry' do
 
   describe 'append <<' do
     before do
+      subject << hash2
       subject.register hash1
       subject << hash2
     end

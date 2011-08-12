@@ -14,7 +14,7 @@ module CanTango
       end
 
       def clean!
-        registered = {}
+        registered = Hashie::Mash.new
       end
 
       def default!
@@ -23,7 +23,7 @@ module CanTango
 
       def << hash
         raise "Must be a hash" if !hash.is_a? Hash
-        @registered.merge! hash
+        registered.merge! hash
       end
 
       def [] label
@@ -33,7 +33,7 @@ module CanTango
 
       def []= label, value
         raise "Must be a label" if !label.kind_of_label?
-        registered[label] = value
+        registered[label.to_s] = value
       end
 
       def register hash
@@ -46,7 +46,7 @@ module CanTango
       end
 
       def default
-        @default ||= {}
+        @default ||= Hashie::Mash.new
       end
     end
   end
