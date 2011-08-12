@@ -1,3 +1,4 @@
+require 'active_record/spec_helper'
 CanTango.config.categories.register 'articles' => [Post, Article]
 
 puts "=================="

@@ -19,11 +19,16 @@ describe CanTango::Configuration::Categories do
   describe 'API' do
     before do
       categories = {:a => ['B', 'C'], 'x' => ['Y', 'Z'], 'v' => ['B', 'Z']}
+      
+      subject.clean!
+      
       subject.register categories
-   end
+    end
 
     describe 'category_has_subject?' do
-      specify { subject.category('a').has_any?('B').should be_true }
+      specify {
+        subject.category('a').has_any?('B').should be_true 
+      }
     end
 
     describe 'has_subject?' do
@@ -38,7 +43,7 @@ describe CanTango::Configuration::Categories do
 
     describe 'categories_of_subject' do
       specify do
-        subject.categories_of_subject('B').should == {:a => ['B', 'C'], 'v' => ['B', 'Z'],}
+        subject.categories_of_subject('B').should == {'a' => ['B', 'C'], 'v' => ['B', 'Z'],}
       end
 
       specify do

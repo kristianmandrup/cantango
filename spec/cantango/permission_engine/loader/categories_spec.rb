@@ -12,7 +12,8 @@ describe 'Load Categories rules' do
 
   it "should load a categories file" do
     loader = CanTango::PermissionEngine::Loader::Categories.new file
-    loader.categories_config.categories.should_not be_empty
-    loader.categories_config.categories['articles'].should include('Article')
+   
+    loader.categories['user_models'].should include('Admin')
+    loader.categories['articles'].should include('Article')
   end 
 end
