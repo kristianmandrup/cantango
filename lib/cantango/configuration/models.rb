@@ -12,7 +12,7 @@ module CanTango
         end
       end
 
-      def by_category label 
+      def by_category label
         categories[label].map do |model|
           model.class == String ? try_model(model) : model
         end

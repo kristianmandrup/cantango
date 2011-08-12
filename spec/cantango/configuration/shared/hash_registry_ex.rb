@@ -22,8 +22,10 @@ shared_examples_for 'Hash Registry' do
   describe 'register' do
     before do
       subject.register hash1
+      subject.register hash2
     end
     its(:registered) { should include(hash1) }
+    its(:registered) { should include(hash2) }
   end
 
   describe 'append <<' do
@@ -40,15 +42,24 @@ shared_examples_for 'Hash Registry' do
       subject.register hash1
       subject << hash2
     end
-    specify { subject[:c].should == 3 }
+    
+    it 'should respond to :symbol keys' do
+      subject[:c].should == 3
+    end
+
+    it "should respond to 'string' keys" do
+      subject['c'].should == 3
+    end
   end
 
   describe 'set index []=' do
     before do
+      subject.clean!
       subject.register hash1
       subject[:d] = 5
     end
     specify { subject[:d].should == 5 }
+
   end
 end
 

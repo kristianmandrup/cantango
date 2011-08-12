@@ -14,15 +14,19 @@ end
 describe CanTango::Configuration::Categories do
   subject { CanTango.config.categories }
 
-  it_should_behave_like "Hash Registry"
-
   describe 'API' do
-    before do
+    before(:each) do
       categories = {:a => ['B', 'C'], 'x' => ['Y', 'Z'], 'v' => ['B', 'Z']}
       
       subject.clean!
-      
       subject.register categories
+    end
+
+    describe 'get index []' do
+      specify {
+        subject.register(:w => 'something non-array!')
+        lambda { subject.category('w') }.should raise_error
+      }
     end
 
     describe 'category_has_subject?' do

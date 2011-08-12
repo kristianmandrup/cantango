@@ -4,7 +4,7 @@ module CanTango
       
       def [] label
         models = super
-        raise "Category #{label} either not exists or invalid!" if !models.kind_of?(Array)
+        raise "Category '#{label}' either not exists or invalid!" if !models.kind_of?(Array)
         models
       end
       
