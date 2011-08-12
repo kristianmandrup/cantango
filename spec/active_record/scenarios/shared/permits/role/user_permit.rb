@@ -6,15 +6,19 @@ class UserRolePermit < CanTango::RolePermit
   protected
 
   def static_rules
+    
     cannot :manage, User
 
     can :read, Comment
-    can :read, Post
+    can :read, any(/Post/)
     can :read, Article do |article|
-      asdfasdfe
     end
 
-    can :write, Article
+    can :write, any(/Article/)
+
+    # Following will just return empty array of targets:
+    # can :write, []
+    can :write, any(/Unable to constantize/)
 
     # Todo.new.author - is attribute
     author_of(Article, Post, Comment) do |author|
@@ -25,10 +29,7 @@ class UserRolePermit < CanTango::RolePermit
     author_of(Todo) do |author|
       author.can :write
     end
-    # Related to "should allow management of the account User"
-    # see user_accounts/scenario_spec
-    # ???????????
- 
+
     # # can :manage, :all    
     # scope :account do |account|
     #   account.author_of(Article) do |author|

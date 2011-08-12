@@ -4,7 +4,7 @@ require 'singleton'
 module CanTango
   class Configuration
     autoload_modules :Categories
-    autoload_modules :Engines, :Ability
+    autoload_modules :Models, :Engines, :Ability
     autoload_modules :User, :Guest, :UserAccount
     autoload_modules :Roles, :RoleGroups, :Registry, :RoleRegistry, :HashRegistry, :Factory
     autoload_modules :SpecialPermits, :Autoload
@@ -20,7 +20,7 @@ module CanTango
 
     def self.components
       [
-        :guest, :autoload, :user, :user_account, :roles, :role_groups,
+        :guest, :autoload, :user, :user_account, :models, :roles, :role_groups,
         :engines, :users, :user_accounts, :categories
       ]
     end
@@ -52,10 +52,6 @@ module CanTango
       engine = find_engine(name)
       yield engine if block
       engine
-    end
-
-    def all_models
-      ActiveRecord::Base.connection.tables.map {|t| t.to_s.camelize }
     end
 
     attr_writer :localhost_list

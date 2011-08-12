@@ -11,10 +11,10 @@ module UserAccountPermits
       cannot :manage, User
 
       can :read, Comment
-      can :read, Post
+      can :read, any(/Post/)
       can :read, Article
 
-      can :write, Article
+      can :write, any(/Article/)
 
       author_of(Article) do |author|
         author.can :manage

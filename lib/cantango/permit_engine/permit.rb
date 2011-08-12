@@ -25,8 +25,7 @@ module CanTango
       end
 
       def any reg_exp
-        raise "Must be a Regular Expression like: /xyz/ was #{reg_exp.inspect}" if !reg_exp.kind_of? Regexp
-        config.all_models.grep regexp
+        config.models.by_reg_exp reg_exp
       end
 
       def options
@@ -140,6 +139,10 @@ module CanTango
         else
           CanTango::PermitEngine::Executor::Base.new self
         end
+      end
+
+      def config
+        CanTango.config
       end
     end
   end
