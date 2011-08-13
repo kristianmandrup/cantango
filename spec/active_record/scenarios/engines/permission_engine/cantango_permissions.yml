@@ -8,13 +8,13 @@ roles:
     can: 
       read:
       - Song
-      - Concerto
+      - /Concerto/
       create:
       - Tune
       write:
-      - Song
+      - /Song/
       manage:
-      - Improvisation
+      - /Improvisation/
     cannot: 
       write: 
       - Concerto
@@ -48,7 +48,7 @@ users:
   kris@gmail.com:
     can:
       read:
-        - Comment 
+        - /Comment/ 
       write:
         - Comment#author
         - Article#author

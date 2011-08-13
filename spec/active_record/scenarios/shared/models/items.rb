@@ -12,15 +12,15 @@ end
 
 
 # Models for licenses testing:
-class Song
+class Song < ActiveRecord::Base
 end
 
-class Tune
+class Tune < ActiveRecord::Base
 end
 
-class Concerto
+class Concerto < ActiveRecord::Base
 end
 
-class Improvisation
+class Improvisation < ActiveRecord::Base
 end
 

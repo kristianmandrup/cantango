@@ -26,18 +26,17 @@ module CanTango
         model
       end
 
-      def models_strings
-        tables.map do |table|
-          table.camelize
-        end
-      end
-
       def grep reg_exp
-        models_strings.grep reg_exp
+        available_models.grep reg_exp
+      end
+ 
+      def available_models
+        ar_models.map(&:name)
       end
 
-      def tables
-        ActiveRecord::Base.connection.tables.map {|t| t.to_s }
+      def ar_models
+        # Sugar-high #to_strings didn't work here!
+        ActiveRecord::Base.descendants
       end
 
       def categories

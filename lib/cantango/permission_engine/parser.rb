@@ -2,7 +2,7 @@ module CanTango
   module PermissionEngine
     module Parser
       autoload_modules :Categories, :Permissions
-      autoload_modules :Category, :Default, :Ownership, :Relationship, :Rule
+      autoload_modules :Category, :Default, :Ownership, :Relationship, :Regex, :Rule
 
       def self.create_for method, action, target
         type = parser_type target
@@ -15,6 +15,8 @@ module CanTango
 
       def self.parser_type target
         case target.to_s
+        when /\/(.*)\//
+          :regex
         when /^\^(\w+)/ # a category is prefixed with a '@'
           :category
         when /\w+#\w+=.+/
