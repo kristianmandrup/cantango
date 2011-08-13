@@ -17,7 +17,7 @@ module CanTango
         case target.to_s
         when /\/(.*)\//
           :regex
-        when /^\^(\w+)/ # a category is prefixed with a '@'
+        when /^\^(\w+)/ # a category is prefixed with a '^<D-^>s'
           :category
         when /\w+#\w+=.+/
           :relationship
