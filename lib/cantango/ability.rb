@@ -9,7 +9,7 @@ module CanTango
 
     include CanCan::Ability
     include Cache
-    extend ClassMethods
+    extend  ClassMethods
 
     attr_reader :options, :subject, :session
 

@@ -21,7 +21,7 @@ module CanTango
       end
 
       def category label
-        config.models.by_category label  
+        config.models.by_category label
       end
 
       def any reg_exp

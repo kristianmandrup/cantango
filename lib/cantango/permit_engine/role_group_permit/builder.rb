@@ -7,15 +7,15 @@ module CanTango
 
         # builds a list of Permits for each role group of the current ability user (or account)
         # @return [Array<RoleGroupPermit::Base>] the role group permits built for this ability
-        def build    
+        def build
           # raise NoAvailableRoleGroups, "no available roles groups are defined" if available_role_groups.empty?
           role_groups.inject([]) do |permits, role_group|
             permits << create_permit(role_group)
-          end.compact        
+          end.compact
         end
 
         protected
-            
+
         def finder
           CanTango::PermitEngine::RoleGroupPermit::Finder
         end

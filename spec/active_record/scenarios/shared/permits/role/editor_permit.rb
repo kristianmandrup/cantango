@@ -1,12 +1,6 @@
 require 'active_record/spec_helper'
 CanTango.config.categories.register 'articles' => [Post, Article]
 
-puts "=================="
-puts "!!! CATEGORIES:"
-puts CanTango.config.categories.registered
-puts "=================="
-
-
 class EditorRolePermit < CanTango::RolePermit
   def initialize ability
     super

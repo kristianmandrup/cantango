@@ -3,6 +3,8 @@ module CanTango
     class Finder
       include ClassExt
 
+      # This class is used to find the right permit, possible scoped for a specific user account
+
       attr_reader :user_account, :name
 
       def initialize user_account, name

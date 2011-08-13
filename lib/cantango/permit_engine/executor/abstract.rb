@@ -32,7 +32,7 @@ module CanTango
 
         def user_account
           permit.user_account
-        end      
+        end
       end
     end
   end

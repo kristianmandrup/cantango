@@ -32,7 +32,7 @@ module CanTango
       end
 
       def builders
-        [:role_group, :role, :special]
+        [:role_group, :role, :user, :account, :special]
       end
 
       def options

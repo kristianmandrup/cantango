@@ -15,37 +15,26 @@ module CanTango
 
         # Tries to create a new permit for the given role
         # If no permit Class can be found, it should return nil
-        # @param [Symbol] the role
+        # @param [Symbol] the name
         # @return the permit Class or nil if not found
-        def create_permit role
+        def create_permit name
           begin
-            permit_clazz(role).new ability
+            permit_clazz(name).new ability
           rescue RuntimeError => e
             #raise "Error instantiating Permit instance for role #{role}, cause #{e}"
             nil
           end
         end
 
-        protected
-
-        def options
-          ability.options
-        end
-
         def permit_clazz name
           finder.new(subject, name).get_permit
         end
 
-        def role_groups
-          ability.role_groups
-        end
-
-        def roles
-          ability.roles
-        end
-
-        def subject
-          ability.subject
+        # delegate to ability
+        [:options, :role_groups, :roles, :subject, :user, :user_account].each do |name|
+          define_method name do
+            ability.send(name)
+          end
         end
 
         def available_role_groups
