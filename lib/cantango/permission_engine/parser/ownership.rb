@@ -17,14 +17,11 @@ module CanTango
 
         def build_ownership_dsl
           raise "#{model_class} has no ##{owner}!" if !model_class.new.respond_to?(owner.to_sym)
-          ownership_dsl_lines.join("\n")
+          ownership_dsl_lines
         end
 
         def ownership_dsl_lines
-          [ "#{owner.singularize}_of(#{target}) do |#{owner}|",
-            "  #{owner}.#{method} :#{action}",
-            "end"
-          ]
+          "#{owner.singularize}_of(#{target}).#{method} :#{action}"
         end
       end
     end
