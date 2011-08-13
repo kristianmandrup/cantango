@@ -22,6 +22,7 @@ shared_examples_for 'Registry' do
 
   describe 'append <<' do
     before do
+      subject.clean!
       subject.register :abc, :def
       subject << :xyz
     end
@@ -30,6 +31,7 @@ shared_examples_for 'Registry' do
 
   describe 'get index []' do
     before do
+      subject.clean!
       subject.register :abc, :def
     end
     specify {subject[0].should == :abc }

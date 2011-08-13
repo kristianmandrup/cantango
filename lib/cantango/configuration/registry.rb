@@ -14,7 +14,7 @@ module CanTango
       end
 
       def types
-        @types ||= [Symbol]
+        @types ||= [Symbol, String]
         @types
       end
 
@@ -26,17 +26,15 @@ module CanTango
         @registered = default
       end
 
-      def << *list
-        @registered << list.select_kinds_of(*types)
-        @registered.flat_uniq!
+      def register *list
+        registered << list.select_kinds_of(*types)
+        registered.flat_uniq!
       end
+
+      alias_method :<<, :register
 
       def [] index
         registered[index]
-      end
-
-      def register *list
-        @registered = list.select_kinds_of(*types)
       end
 
       def registered
