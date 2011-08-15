@@ -33,7 +33,7 @@ describe CanTango::Ability do
   end
 
   let (:user_account) do
-    ua = UserAccount.new user, :roles => [:user], :role_groups => [:admins]
+    ua = UserAccount.new user, :roles => [:user, :admin], :role_groups => [:admins]
     user.account = ua
   end
 
@@ -51,4 +51,13 @@ describe CanTango::Ability do
     its(:permits)       { should_not be_empty }
     its(:roles)         { should_not be_empty }
     #its(:role_groups)   { should_not be_empty }
+    #
+
+  describe 'roles filter on' do
+    before do
+      CanTango.roles.exclude :admin
+    end
+
+    its (:roles) { should_not include(:admin) }
+  end
 end

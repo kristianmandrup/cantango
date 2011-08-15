@@ -10,7 +10,11 @@ module CanTango
 
         # TODO: Add roles filter
         def valid? permission
-          role_groups.include? permission.to_sym
+          valid_role_groups.include? permission.to_sym
+        end
+
+        def valid_role_groups
+          role_groups - CanTango.config.role_groups.excluded
         end
       end
     end

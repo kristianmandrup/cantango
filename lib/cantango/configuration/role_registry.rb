@@ -15,6 +15,14 @@ module CanTango
           end
         }
       end
+
+      def excluded
+        @excluded ||= []
+      end
+
+      def exclude *roles
+        @excluded = roles.select_labels
+      end
     end
   end
 end
