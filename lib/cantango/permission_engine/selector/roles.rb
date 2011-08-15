@@ -8,6 +8,7 @@ module CanTango
           @roles = subject.roles_list
         end
 
+        # TODO: Add roles filter
         def valid? permission
           roles.include? permission.to_sym
         end
