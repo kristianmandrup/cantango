@@ -9,8 +9,16 @@ module CanTango
         def build
           # raise NoAvailableRoles, "no available roles are defined" if available_roles.empty?
           roles.inject([]) do |permits, role|
-            permits << create_permit(role)
+            permits << create_permit(role) if valid?(role)
           end.compact
+        end
+
+        def valid? role
+          !excluded_roles.include? role
+        end
+
+        def excluded_roles
+          CanTango.config.roles.excluded
         end
 
         def finder
