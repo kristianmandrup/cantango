@@ -4,6 +4,10 @@ module CanTango
       include Singleton
       include ClassExt
 
+      def clear!
+        @clazz = nil
+      end
+
       def base_class
         @clazz ||= (::UserAccount if defined? ::UserAccount)
       end

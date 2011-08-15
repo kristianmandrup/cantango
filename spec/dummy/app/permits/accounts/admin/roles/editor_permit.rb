@@ -1,5 +1,5 @@
 module AdminAccountPermits
-  class EditorRolePermit < CanTango::PermitEngine::RolePermit
+  class EditorRolePermit < CanTango::RolePermit
     def initialize ability
       super
     end

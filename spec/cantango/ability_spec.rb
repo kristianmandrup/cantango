@@ -8,7 +8,10 @@ def config_folder
 end
 
 CanTango.configure do |config|
-  config.permissions.set :on
+  config.clear!
+  # config.permissions.set :on
+  config.engines.all :on
+
   config.permissions.config_path = config_folder
   config.categories.register :blog_items => [Article, Post]
 end
@@ -21,12 +24,12 @@ class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   protected
 
   def static_rules
-    can :write, Article
     can :write, category(:blog_items)
+    cannot :write, Post
   end
 end
 
-class UserRolePermit < CanTango::RoleGroupPermit
+class UserRolePermit < CanTango::RolePermit
   def initialize ability
     super
   end
@@ -41,7 +44,7 @@ end
 
 describe CanTango::Ability do
   let (:user) do
-    User.new 'kris', 'kris@gmail.com'
+    User.new 'krisy', 'krisy@gmail.com'
   end
 
   let (:user_account) do
@@ -49,13 +52,18 @@ describe CanTango::Ability do
     user.account = ua
   end
 
-  let (:ability) do
-    CanTango::Ability.new user_account
+  before do
+    CanTango.config.clear!
+    @ability = CanTango::Ability.new user_account
   end
 
-  subject { ability }
-    specify { ability.should be_allowed_to(:read, Comment)}
-    specify { ability.should be_allowed_to(:write, Article)}
+  specify { CanTango.config.roles.excluded.should be_empty }
+  specify { CanTango.config.role_groups.excluded.should be_empty }
+
+  subject { @ability }
+    specify { @ability.should be_allowed_to(:read, Comment) }
+    specify { @ability.should be_allowed_to(:write, Article) }
+    specify { @ability.should_not be_allowed_to(:write, Post) }
 
     its(:user_account)  { should be_a(UserAccount) }
     its(:user)          { should be_a(User) }

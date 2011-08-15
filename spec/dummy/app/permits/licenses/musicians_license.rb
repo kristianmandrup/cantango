@@ -1,4 +1,4 @@
-class MusiciansLicense < CanTango::PermitEngine::License
+class MusiciansLicense < CanTango::License
   def initialize name
     super
   end

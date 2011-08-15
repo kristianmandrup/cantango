@@ -6,6 +6,11 @@ module CanTango
       class Permit < Engine
         include Singleton
 
+        def on?
+          @state ||= :on
+          @state == :on
+        end
+
         def types
           [:roles, :role_groups, :licenses, :users]
         end

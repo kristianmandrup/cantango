@@ -17,6 +17,10 @@ module CanTango
         registered = Hashie::Mash.new
       end
 
+      def clear!
+        clean!
+      end
+
       def default!
         @registered = default
       end

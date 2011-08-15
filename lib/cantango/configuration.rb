@@ -35,6 +35,14 @@ module CanTango
       }
     end
 
+    def clear!
+      CanTango::Configuration.components.each do |c| 
+        comp = send(c)
+        comp.send(:clear!) if comp.respond_to? :clear!
+      end
+      engines.clear!
+    end
+
     CanTango::Configuration::Engines.available.each do |engine|
       class_eval %{
         def #{engine}

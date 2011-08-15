@@ -8,9 +8,6 @@ CanTango.configure do |config|
   config.permissions.set :off
 
   config.permits.set :on
-
-  config.roles.exclude :user
-  config.role_groups.exclude :admins
 end
 
 class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
@@ -26,7 +23,7 @@ class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   end
 end
 
-class UserRolePermit < CanTango::RoleGroupPermit
+class UserRolePermit < CanTango::RolePermit
   def initialize ability
     super
   end
@@ -38,7 +35,7 @@ class UserRolePermit < CanTango::RoleGroupPermit
   end
 end
 
-class AdminRolePermit < CanTango::RoleGroupPermit
+class AdminRolePermit < CanTango::RolePermit
   def initialize ability
     super
   end
@@ -61,16 +58,22 @@ describe CanTango::Ability do
       user.account = ua
     end
 
-    let (:ability) do
-      CanTango::Ability.new user_account
+    before do
+      CanTango.config.roles.exclude :user
+      CanTango.config.role_groups.exclude :admins
+      @ability = CanTango::Ability.new user_account
     end
 
-    subject { ability }
+    after do
+      CanTango.config.clear!
+    end
+
+    subject { @ability }
       its(:permit_class_names) { should include "AdminRolePermit" }
 
-      specify { ability.should be_allowed_to(:read, Post)}
+      specify { @ability.should be_allowed_to(:read, Post)}
 
-      specify { ability.should_not be_allowed_to(:read, Comment)}
-      specify { ability.should_not be_allowed_to(:write, Article)}
+      specify { @ability.should_not be_allowed_to(:read, Comment)}
+      specify { @ability.should_not be_allowed_to(:write, Article)}
   end
 end

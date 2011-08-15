@@ -5,6 +5,12 @@ module CanTango
 
       include ClassExt
 
+      def clear!
+        @clazz = nil
+        @unique_key_field = nil
+        @relations = nil
+      end
+
       def base_class
         @clazz ||= (::User if defined? ::User)
       end

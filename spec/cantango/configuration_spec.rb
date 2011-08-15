@@ -11,6 +11,20 @@ class CanTango::CustomAbility < CanTango::Ability
 end
 
 describe CanTango::Configuration do
+  describe 'clear!' do
+    subject { CanTango.config }
+
+    before do
+      subject.roles.exclude :user
+      subject.role_groups.exclude :admins
+
+      subject.clear!
+    end
+
+    specify { subject.roles.excluded.should be_empty }
+    specify { subject.role_groups.excluded.should be_empty }
+  end
+
   describe "configure DSL" do
     before(:all) {
       CanTango.configure do |config|

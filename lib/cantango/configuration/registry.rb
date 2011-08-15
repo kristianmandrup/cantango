@@ -22,6 +22,8 @@ module CanTango
         @registered = []
       end
 
+      alias_method :clear!, :clean!
+
       def default!
         @registered = default
       end

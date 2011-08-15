@@ -1,4 +1,4 @@
-class AdminRolePermit < CanTango::PermitEngine::RolePermit
+class AdminRolePermit < CanTango::RolePermit
   def initialize ability
     super
   end

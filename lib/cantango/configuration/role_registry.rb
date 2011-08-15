@@ -23,6 +23,11 @@ module CanTango
       def exclude *roles
         @excluded = roles.select_labels
       end
+
+      def clear!
+        super
+        @excluded = []
+      end      
     end
   end
 end

@@ -1,4 +1,4 @@
-class UserRolePermit < CanTango::PermitEngine::RolePermit
+class UserRolePermit < CanTango::RolePermit
   def initialize ability
     super
   end
@@ -9,7 +9,7 @@ class UserRolePermit < CanTango::PermitEngine::RolePermit
     author_of Article do |author|
       author.can :write
     end
-    
+
     can :read, Article
     can :edit, Article
     cannot :create, Article

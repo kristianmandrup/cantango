@@ -1,6 +1,10 @@
 module CanTango
   class Configuration
     module Factory
+      def clear!
+        @factory = nil
+      end
+
       def factory factory = nil
         raise "Factory must be a callable, either a lambda or Proc" if !callable? factory
         @factory = factory

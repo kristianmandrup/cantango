@@ -1,4 +1,4 @@
-class EditorRoleGroupPermit < CanTango::PermitEngine::RolePermit
+class EditorRoleGroupPermit < CanTango::RolePermit
   def initialize ability
     super
   end

@@ -3,6 +3,11 @@ module CanTango
     class Autoload
       include Singleton
 
+      def clear!
+        @models = :on
+        @permits = :on
+      end
+
       [:models, :permits].each do |name|
         # def permission state = nil
         #   raise ArgumentError unless [:on, :off].include? state

@@ -1,4 +1,4 @@
-class BloggersLicense < CanTango::PermitEngine::License
+class BloggersLicense < CanTango::License
   def initialize name
     super
   end

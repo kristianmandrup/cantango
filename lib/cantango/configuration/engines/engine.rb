@@ -7,14 +7,18 @@ module CanTango
           @state = state || :on
         end
 
-        [:on, :off].each do |state|
-          class_eval %{
-            def #{state}?
-              @state == :#{state}
-            end
-          }
+        def reset! 
+          @state = nil
         end
 
+        def on?            
+          @state == :on
+        end
+ 
+        def off? 
+          !on?
+        end
+ 
         protected
 
         def ns

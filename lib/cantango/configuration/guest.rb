@@ -3,6 +3,11 @@ module CanTango
     class Guest
       include Singleton
 
+      def clear!
+        @user = nil
+        @account = nil
+      end
+
       def user user = nil, &block
         return (@user || guest_user) if !user && !block
         @user = user || yield
