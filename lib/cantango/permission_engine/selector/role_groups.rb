@@ -8,13 +8,19 @@ module CanTango
           @role_groups = collector.role_groups_list
         end
 
-        # TODO: Add roles filter
-        def valid? permission
-          valid_role_groups.include? permission.to_sym
+        def valid? role_group
+          return true if !role_groups_filter?
+          filter(role_group).valid?
         end
 
-        def valid_role_groups
-          role_groups - CanTango.config.role_groups.excluded
+        def filter role_group
+          CanTango::Filters::RoleGroupFilter.new role_group, role_groups
+        end
+
+        private
+
+        def role_groups_filter?
+          CanTango.config.role_groups.filter?
         end
       end
     end

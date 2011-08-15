@@ -10,7 +10,7 @@ module CanTango
         def build
           # raise NoAvailableRoleGroups, "no available roles groups are defined" if available_role_groups.empty?
           role_groups.inject([]) do |permits, role_group|
-            (permits << create_permit(role_group)) if valid?(role_group.to_sym)
+            (permits << create_permit(role_group)) if valid?(role_group)
             permits
           end.compact
         end
@@ -19,27 +19,19 @@ module CanTango
           CanTango::PermitEngine::RoleGroupPermit::Finder
         end
 
-        protected
-
         def valid? role_group
-          return false if not_only_role_group?(role_group)
-          !excluded? role_group
+          return true if !role_groups_filter?
+          filter(role_group).valid?
         end
 
-        def not_only_role_group? role_group
-          !only_role_groups.empty? && !only_role_groups.include?(role_group)
+        def filter role_group
+          CanTango::Filters::RoleGroupFilter.new role_group
         end
 
-        def excluded? role_group
-          excluded_role_groups.include? role_group
-        end
+        private
 
-        def only_role_groups
-          CanTango.config.role_groups.onlies
-        end
-
-        def excluded_role_groups
-          CanTango.config.role_groups.excluded
+        def role_groups_filter?
+          CanTango.config.role_groups.filter?
         end
       end
     end

@@ -15,7 +15,7 @@ AutoLoader.namespaces = {:CanTango => 'cantango'}
 module CanTango
   autoload_modules :Ability, :Api, :Configuration, :Cache
   autoload_modules :PermitEngine, :Rails, :Users
-  autoload_modules :PermissionEngine, :Rules, :Api, :Helpers
+  autoload_modules :PermissionEngine, :Rules, :Api, :Helpers, :Filters
 
   class << self
     def configure &block

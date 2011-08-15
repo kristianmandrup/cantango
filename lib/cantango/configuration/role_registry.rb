@@ -32,6 +32,10 @@ module CanTango
         @excluded = names.select_labels
       end
 
+      def filter?
+        !(excluded + onlies).empty?
+      end
+
       def clear!
         super
         @excluded = []

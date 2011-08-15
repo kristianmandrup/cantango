@@ -21,24 +21,18 @@ module CanTango
         protected
 
         def valid? role
-          return false if not_only_role?(role)
-          !excluded? role
+          return true if !roles_filter?
+          filter(role).valid?
         end
 
-        def not_only_role? role
-          !only_roles.empty? && !only_roles.include?(role)
+        def filter role
+          CanTango::Filters::RoleFilter.new role
         end
 
-        def excluded? role
-          excluded_roles.include? role
-        end
+        private
 
-        def only_roles
-          CanTango.config.roles.onlies
-        end
-
-        def excluded_roles
-          CanTango.config.roles.excluded
+        def roles_filter?
+          CanTango.config.roles.filter?
         end
       end
     end
