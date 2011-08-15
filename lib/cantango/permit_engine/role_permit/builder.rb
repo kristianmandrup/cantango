@@ -9,12 +9,12 @@ module CanTango
         def build
           # raise NoAvailableRoles, "no available roles are defined" if available_roles.empty?
           roles.inject([]) do |permits, role|
-            permits << create_permit(role) if valid?(role)
+            (permits << create_permit(role)) if valid?(role)
           end.compact
         end
 
         def valid? role
-          !excluded_roles.include? role
+          !excluded_roles.include? role.to_sym
         end
 
         def excluded_roles

@@ -21,11 +21,24 @@ class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   protected
 
   def static_rules
-    can :read, Comment
     can :write, Article
     can :write, category(:blog_items)
   end
 end
+
+class UserRolePermit < CanTango::RoleGroupPermit
+  def initialize ability
+    super
+  end
+
+  protected
+
+  def static_rules
+    can :read, Comment
+  end
+end
+
+
 
 describe CanTango::Ability do
   let (:user) do
@@ -54,10 +67,25 @@ describe CanTango::Ability do
     #
 
   describe 'roles filter on' do
-    before do
-      CanTango.roles.exclude :admin
+    let (:user) do
+      User.new 'stan', 'stan@gmail.com'
     end
 
-    its (:roles) { should_not include(:admin) }
+    let (:user_account) do
+      ua = UserAccount.new user, :roles => [:user, :admin], :role_groups => [:admins]
+      user.account = ua
+    end
+
+    let (:ability) do
+      CanTango.config.roles.exclude :user
+      CanTango.config.role_groups.exclude :admins
+      CanTango::Ability.new user_account
+    end
+
+    subject { ability }
+      specify { ability.permits.map{|p| p.class.to_s}.should == [] }
+
+      specify { ability.should_not be_allowed_to(:read, Comment)}
+      specify { ability.should_not be_allowed_to(:write, Article)}
   end
 end
