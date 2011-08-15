@@ -9,19 +9,25 @@ module CanTango
       include Enumerable
 
       # engine registry is a simple hash
-      def register name, engine
-        raise "Must be a sublclass of CanTango::Engine" if !engine.kind_of? CanTango::Engine
+      def register name, engine_class
+        raise "Class must implement the CanTango Engine API. You can start by sublclassing CanTango::Engine" if !engine? engine_class
         raise "Name of engine must be a String or Symbol" if !name.kind_of_label?
-        registered[name.to_sym] = engine
+        registered[name.to_sym] = engine_class
       end
 
+      # engine factories ?
       def registered
-        @registered ||= {}
+        @registered ||= {:permits => CanTango::PermitEngine, :permissions => CanTango::PermissionEngine }
       end
 
       def unregister name
         @registered = {} if name == :all
-        @registered.delete name
+        @registered.delete(name)
+      end
+
+      # defines the order of execution of engine in ability
+      def execution_order *names
+        @execution_order = names.select {|name| available? name }
       end
 
       def available
@@ -44,7 +50,7 @@ module CanTango
         available.each {|engine| yield send(engine) if respond_to(engine) }
       end
 
-      def active 
+      def active
         available.select {|engine| send(engine).on? if respond_to(engine) }
       end
 
@@ -57,6 +63,13 @@ module CanTango
             #{engine.to_s.camelize}.instance
           end
         }
+      end
+
+      protected
+
+      # does it implement the basic Engine API?
+      def engine? engine_class
+        [:execute!, :ability].all? {|meth| engine_class.instance_methods.include? meth }
       end
     end
   end
