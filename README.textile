@@ -11,10 +11,10 @@ Tested to work with:
 Currently doesn't support:
 * Ruby 1.8.7
 
-h2. August 11, RC2 released!
+h2. August 15, RC4 released!
 
-The second **Release Candidate** of CanTango has now been released, version 0.8.0.rc2
-We have included two working dummy apps (see spec folder).
+Today marks the first CanTango release, version 0.8.0.
+The project includes two working dummy apps (see spec folder).
 
 * "dummy" - how to use CanTango in a Rails 3 app without Devise.
 * "devise-dummy" - integration _with_ Devise :)
