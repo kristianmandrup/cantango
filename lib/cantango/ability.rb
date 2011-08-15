@@ -23,18 +23,15 @@ module CanTango
       return if cached_rules?
 
       # run permission evaluators
-      with(:permissions)  {|permission| permission.evaluate! user }
-      with(:permits)      {|permit| break if permit.execute == :break }
+      active_engines.each {|engine| engine.execute! ability }
 
       cache_rules!
     end
 
     include CanTango::PermitEngine::Util
 
-    def with engine_type, &block
-      send(engine_type).each do |obj|
-        yield obj
-      end if send(:"#{engine_type}?")
+    def active_engines
+      CanTango.config.engines.active
     end
 
     def subject

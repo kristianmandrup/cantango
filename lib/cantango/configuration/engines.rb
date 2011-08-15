@@ -6,18 +6,30 @@ module CanTango
       autoload_modules :Permission, :Permit, :Cache, :Store, :Engine
 
       include Singleton
+      include Enumerable
 
-      # engines available
-      def self.available
-        [:permit, :permission, :cache]
+      # engine registry is a simple hash
+      def register name, engine
+        raise "Must be a sublclass of CanTango::Engine" if !engine.kind_of? CanTango::Engine
+        raise "Name of engine must be a String or Symbol" if !name.kind_of_label?
+        registered[name.to_sym] = engine
+      end
+
+      def registered
+        @registered ||= {}
+      end
+
+      def unregister name
+        @registered = {} if name == :all
+        @registered.delete name
       end
 
       def available
-        self.class.available
+        registered.keys
       end
 
       def available? name
-        self.class.available.include? name.to_sym
+        available.include? name.to_sym
       end
 
       def all state
@@ -28,8 +40,12 @@ module CanTango
         available.each {|engine| send(engine).reset! }
       end
 
-      def each &block
+      def each
         available.each {|engine| yield send(engine) if respond_to(engine) }
+      end
+
+      def active 
+        available.select {|engine| send(engine).on? if respond_to(engine) }
       end
 
       available.each do |engine|
@@ -39,7 +55,7 @@ module CanTango
         class_eval %{
           def #{engine}
             #{engine.to_s.camelize}.instance
-         end
+          end
         }
       end
     end
