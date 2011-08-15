@@ -8,6 +8,10 @@ module CanTango
         permit_factory.build!
       end
 
+      def permit_class_names
+        @permit_class_names ||= permits.map{|p| p.class.to_s}
+      end
+
       protected
 
       def permit_factory

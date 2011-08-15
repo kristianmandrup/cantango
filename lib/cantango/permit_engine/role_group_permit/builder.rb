@@ -11,6 +11,7 @@ module CanTango
           # raise NoAvailableRoleGroups, "no available roles groups are defined" if available_role_groups.empty?
           role_groups.inject([]) do |permits, role_group|
             (permits << create_permit(role_group)) if valid? role_group
+            permits
           end.compact
         end
 

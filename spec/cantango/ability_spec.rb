@@ -39,7 +39,6 @@ class UserRolePermit < CanTango::RoleGroupPermit
 end
 
 
-
 describe CanTango::Ability do
   let (:user) do
     User.new 'kris', 'kris@gmail.com'
@@ -63,29 +62,5 @@ describe CanTango::Ability do
 
     its(:permits)       { should_not be_empty }
     its(:roles)         { should_not be_empty }
-    #its(:role_groups)   { should_not be_empty }
-    #
-
-  describe 'roles filter on' do
-    let (:user) do
-      User.new 'stan', 'stan@gmail.com'
-    end
-
-    let (:user_account) do
-      ua = UserAccount.new user, :roles => [:user, :admin], :role_groups => [:admins]
-      user.account = ua
-    end
-
-    let (:ability) do
-      CanTango.config.roles.exclude :user
-      CanTango.config.role_groups.exclude :admins
-      CanTango::Ability.new user_account
-    end
-
-    subject { ability }
-      specify { ability.permits.map{|p| p.class.to_s}.should == [] }
-
-      specify { ability.should_not be_allowed_to(:read, Comment)}
-      specify { ability.should_not be_allowed_to(:write, Article)}
-  end
+    its(:role_groups)   { should_not be_empty }
 end
