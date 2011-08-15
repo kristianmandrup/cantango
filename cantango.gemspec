@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.8.0.rc3"
+  s.version = "0.8.0"
 
-  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-08-13}
+  s.date = %q{2011-08-15}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -258,6 +258,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/ability/cache/compiler_spec.rb",
     "spec/cantango/ability/cache/session_cache_spec.rb",
     "spec/cantango/ability/cache_spec.rb",
+    "spec/cantango/ability_filters_spec.rb",
     "spec/cantango/ability_spec.rb",
     "spec/cantango/api/current_user_accounts.rb",
     "spec/cantango/api/current_users.rb",
@@ -313,6 +314,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/permission_engine/store_spec.rb",
     "spec/cantango/permission_engine/user_permission_store_spec.rb",
     "spec/cantango/permission_engine/yaml_store_spec.rb",
+    "spec/cantango/permit_engine/account_permit_spec.rb",
     "spec/cantango/permit_engine/builder/role_group_permits_spec.rb",
     "spec/cantango/permit_engine/builder/role_permits_spec.rb",
     "spec/cantango/permit_engine/builder/special_permits_spec.rb",
@@ -322,6 +324,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/permit_engine/permit/permit_static_and_dynamic_rules_spec.rb",
     "spec/cantango/permit_engine/role_group_permit_spec.rb",
     "spec/cantango/permit_engine/role_permit_spec.rb",
+    "spec/cantango/permit_engine/user_permit_spec.rb",
     "spec/cantango/rules_spec.rb",
     "spec/devise-dummy/Rakefile",
     "spec/devise-dummy/app/controllers/accounts_controller.rb",
