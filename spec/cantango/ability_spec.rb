@@ -16,7 +16,7 @@ CanTango.configure do |config|
   config.categories.register :blog_items => [Article, Post]
 end
 
-class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
+class PublishersRoleGroupPermit < CanTango::RoleGroupPermit
   def initialize ability
     super
   end
@@ -29,7 +29,7 @@ class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   end
 end
 
-class UserRolePermit < CanTango::RolePermit
+class EditorRolePermit < CanTango::RolePermit
   def initialize ability
     super
   end
@@ -48,7 +48,7 @@ describe CanTango::Ability do
   end
 
   let (:user_account) do
-    ua = UserAccount.new user, :roles => [:user, :admin], :role_groups => [:admins]
+    ua = UserAccount.new user, :roles => [:editor], :role_groups => [:publishers]
     user.account = ua
   end
 
