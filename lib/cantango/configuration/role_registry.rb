@@ -16,17 +16,26 @@ module CanTango
         }
       end
 
+      def only *names
+        @onlies = names.select_labels
+      end
+
+      def onlies
+        @onlies ||= []
+      end
+
       def excluded
         @excluded ||= []
       end
 
-      def exclude *roles
-        @excluded = roles.select_labels
+      def exclude *names
+        @excluded = names.select_labels
       end
 
       def clear!
         super
         @excluded = []
+        @onlies = []
       end      
     end
   end
