@@ -11,7 +11,7 @@ Tested to work with:
 Currently doesn't support:
 * Ruby 1.8.7
 
-h2. August 15, RC4 released!
+h2. August 15, version 0.8.0 released
 
 Today marks the first CanTango release, version 0.8.0.
 The project includes two working dummy apps (see spec folder).
