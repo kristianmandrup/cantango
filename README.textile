@@ -11,9 +11,12 @@ Tested to work with:
 Currently doesn't support:
 * Ruby 1.8.7
 
-h2. August 15, version 0.8.0 released
+h2. August 16, version 0.8.1 released
 
-Today marks the first CanTango release, version 0.8.0.
+Today marks a new CanTango release, version 0.8.1.
+
+Now with "Pluggable engines":https://github.com/kristianmandrup/cantango/wiki/Pluggable-engines
+
 The project includes two working dummy apps (see spec folder).
 
 * "dummy" - how to use CanTango in a Rails 3 app without Devise.
