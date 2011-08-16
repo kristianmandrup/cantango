@@ -1,8 +1,5 @@
-$:.unshift File.dirname(__FILE__)
-require 'aliases/permit'
-require 'aliases/role_permit'
-require 'aliases/role_group_permit'
-require 'aliases/license'
-require 'aliases/user_permit'
-require 'aliases/account_permit'
+['', :role, :role_group,  :user, :account].each do |type|
+  eval "CanTango::#{type.to_s.camelize}Permit = CanTango::Permits::#{type.to_s.camelize}Permit"
+end
 
+CanTango::License = CanTango::Permits::License

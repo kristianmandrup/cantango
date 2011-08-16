@@ -17,7 +17,7 @@ module CanTango
 
       # engine factories ?
       def registered
-        @registered ||= {:permits => CanTango::PermitEngine, :permissions => CanTango::PermissionEngine }
+        @registered ||= {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine }
       end
 
       def unregister name
@@ -41,7 +41,11 @@ module CanTango
       end
 
       def execution_order
-        @execution_order ||= [:permissions, :permits]
+        @execution_order ||= (self.class.default_available - [:cache])
+      end
+
+      def self.default_available
+        [:cache, :permission , :permit]
       end
 
       def available
@@ -61,20 +65,20 @@ module CanTango
       end
 
       def each
-        available.each {|engine| yield send(engine) if respond_to(engine) }
+        available.each {|engine| yield send(engine) if respond_to?(engine) }
       end
 
       def active
-        available.select {|engine| send(engine).on? if respond_to(engine) }
+        available.select {|engine| send(engine).on? if respond_to?(engine) }
       end
 
-      available.each do |engine|
+      default_available.each do |engine|
         # def permission
         #   return Permission.instance
         # end
         class_eval %{
           def #{engine}
-            #{engine.to_s.camelize}.instance
+            CanTango::Configuration::Engines::#{engine.to_s.camelize}.instance
           end
         }
       end

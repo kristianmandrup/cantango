@@ -7,6 +7,12 @@ require 'cantango/configuration/engines/engine_shared'
 describe CanTango::Configuration::Engines do
   subject { CanTango.config.engines }
 
+  describe 'default settings' do
+    describe 'active' do
+      its(:active) { should == [:permit] }
+    end
+  end
+
   describe 'Permission engine' do
     it_should_behave_like 'Engine' do
       subject { CanTango.config.engine(:permission) }
@@ -40,13 +46,13 @@ describe CanTango::Configuration::Engines do
   end
 
   describe 'active' do
-    its(:active) { should == [:permits] }
+    its(:active) { should include(:permit, :permission) }
   end
 
   describe 'execution' do
     describe 'default settings' do
-      its(:registered) { should include(:permits, :permissions) }
-      its(:execution_order) { should == [:permissions, :permits] }
+      its(:registered) { should include(:permit, :permission) }
+      its(:execution_order) { should == [:permission, :permit] }
     end
   end
 end

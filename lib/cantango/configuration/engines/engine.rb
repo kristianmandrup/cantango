@@ -7,18 +7,18 @@ module CanTango
           @state = state || :on
         end
 
-        def reset! 
+        def reset!
           @state = nil
         end
 
-        def on?            
+        def on?
           @state == :on
         end
- 
-        def off? 
+
+        def off?
           !on?
         end
- 
+
         protected
 
         def ns

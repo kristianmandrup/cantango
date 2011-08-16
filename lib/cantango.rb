@@ -13,7 +13,7 @@ require 'moneta'
 AutoLoader.namespaces = {:CanTango => 'cantango'}
 
 module CanTango
-  autoload_modules :Ability, :Api, :Configuration, :Cache
+  autoload_modules :Ability, :Api, :Configuration, :Cache, :Permits
   autoload_modules :PermitEngine, :Rails, :Users
   autoload_modules :PermissionEngine, :Rules, :Api, :Helpers, :Filters, :Engine
 
