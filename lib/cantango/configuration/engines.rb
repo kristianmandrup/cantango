@@ -74,7 +74,7 @@ module CanTango
       def clear!
         each {|engine| engine.reset! }
         @registered = nil
-        @execution_order = i
+        @execution_order = nil
       end
 
       def each

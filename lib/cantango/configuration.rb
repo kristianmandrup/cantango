@@ -36,7 +36,7 @@ module CanTango
     end
 
     def clear!
-      CanTango::Configuration.components.each do |c| 
+      CanTango::Configuration.components.each do |c|
         comp = send(c)
         comp.send(:clear!) if comp.respond_to? :clear!
       end
