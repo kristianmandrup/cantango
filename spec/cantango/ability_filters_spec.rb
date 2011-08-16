@@ -86,8 +86,6 @@ describe CanTango::Ability do
     end
 
     subject { @ability }
-      its(:permit_class_names) { should include "AdminRolePermit" }
-
       specify { @ability.should be_allowed_to(:read, Post)}
 
       specify { @ability.should_not be_allowed_to(:read, Comment)}
@@ -118,8 +116,6 @@ describe CanTango::Ability do
     end
 
     subject { @ability }
-      its(:permit_class_names) { should include("UserRolePermit", "AdminsRoleGroupPermit") }
-
       specify { @ability.should be_allowed_to(:read, Comment)}
       specify { @ability.should be_allowed_to(:publish, Post)}
 

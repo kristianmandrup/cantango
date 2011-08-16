@@ -10,7 +10,7 @@ module CanTango
       end
 
       def build
-        relevant_rules.inject([]){|evaluators, (name, rules)| 
+        relevant_rules.inject([]){|evaluators, (name, rules)|
           evaluators << CanTango::PermissionEngine::Evaluator.new(ability, rules) 
         }
       end

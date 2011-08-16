@@ -33,38 +33,38 @@ def setup
     ua = UserAccount.new user, :role_groups => [:admins]
     user.account = ua
   end
-end  
+end
 
-describe CanTango::PermitEngine::RolePermit::Finder do
+describe CanTango::Permits::RolePermit::Finder do
   setup
-  
-  let (:finder) do    
-    CanTango::PermitEngine::RolePermit::Finder.new user_account, :admin
+
+  let (:finder) do
+    CanTango::Permits::RolePermit::Finder.new user_account, :admin
   end
 
   describe 'attributes' do
     it "should have an ability" do
       finder.user_account.should be_a(UserAccount)
-    end    
+    end
   end
-  
-  describe '#permit_class' do        
+
+  describe '#permit_class' do
     it 'should return the :admin permit class' do
       finder.permit_class.should == "AdminRolePermit"
     end
-  end  
+  end
 end
 
-describe CanTango::PermitEngine::RoleGroupPermit::Finder do
+describe CanTango::Permits::RoleGroupPermit::Finder do
   setup
-  
-  let (:finder) do    
-    CanTango::PermitEngine::RoleGroupPermit::Finder.new user_account, :admins
+
+  let (:finder) do
+    CanTango::Permits::RoleGroupPermit::Finder.new user_account, :admins
   end
 
-  describe '#permit_class' do        
+  describe '#permit_class' do
     it 'should return the :admins role permit class' do
       finder.permit_class.should == "AdminsRoleGroupPermit"
     end
-  end    
+  end
 end

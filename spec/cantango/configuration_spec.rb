@@ -28,15 +28,15 @@ describe CanTango::Configuration do
   describe "configure DSL" do
     before(:all) {
       CanTango.configure do |config|
-        CanTango.config.engines.available.each do |name|
-          config.engine(name).set :off
+        CanTango.config.engines.each do |engine|
+          engine.set :off
         end
      end
     }
 
-    CanTango.config.engines.available.each do |name|
-      specify { CanTango.config.engine(name).on?.should be_false}
-      specify { CanTango.config.engine(name).off?.should be_true}
+    CanTango.config.engines.each do |engine|
+      specify { engine.on?.should be_false}
+      specify { engine.off?.should be_true}
     end
   end
 end

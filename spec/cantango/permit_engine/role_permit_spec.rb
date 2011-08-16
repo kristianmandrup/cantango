@@ -14,7 +14,7 @@ class AdminRolePermit < CanTango::RolePermit
 end
 
 
-describe CanTango::PermitEngine::RolePermit do
+describe CanTango::Permits::RolePermit do
   let (:user) do
     User.new 'kris'
   end
@@ -27,18 +27,18 @@ describe CanTango::PermitEngine::RolePermit do
   let (:ability) do
     CanTango::Ability.new user_account
   end
-  
-  let (:permit) do    
+
+  let (:permit) do
     AdminRolePermit.new ability
   end
 
   describe 'attributes' do
     it "should be the permit for the :admin role" do
       permit.role.should == :admin
-    end     
+    end
 
     it "should have an ability" do
       permit.ability.should be_a(CanTango::Ability)
-    end     
+    end
   end
 end

@@ -26,7 +26,7 @@ class AdminRolePermit < CanTango::RolePermit
 end
 
 
-describe CanTango::PermitEngine::RolePermit::Builder do
+describe CanTango::Permits::RolePermit::Builder do
   let (:user) do
     User.new 'kris'
   end
@@ -41,7 +41,7 @@ describe CanTango::PermitEngine::RolePermit::Builder do
   end
 
   let (:builder) do
-    CanTango::PermitEngine::RolePermit::Builder.new ability
+    CanTango::Permits::RolePermit::Builder.new ability
   end
 
   describe 'attributes' do
@@ -54,5 +54,5 @@ describe CanTango::PermitEngine::RolePermit::Builder do
     it 'should build a list of permits' do
       builder.build.should_not be_empty
     end
-  end  
+  end
 end

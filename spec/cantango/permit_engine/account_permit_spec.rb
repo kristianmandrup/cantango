@@ -15,7 +15,7 @@ class AdminAccountPermit < CanTango::AccountPermit
 end
 
 
-describe CanTango::PermitEngine::AccountPermit do
+describe CanTango::Permits::AccountPermit do
   let (:user) do
     User.new 'kris'
   end

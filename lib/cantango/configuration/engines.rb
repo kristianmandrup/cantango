@@ -20,12 +20,16 @@ module CanTango
       # engine factories ?
       # :cache => Cantango::Ability::Cache
       def registered
-        @registered ||= {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine }
+        @registered ||= default_register
       end
 
       def unregister name
         @registered = {} if name == :all
         @registered.delete(name)
+      end
+
+      def default_register
+        {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine }
       end
 
       # defines the order of execution of engine in ability
@@ -68,7 +72,9 @@ module CanTango
       end
 
       def clear!
-        available.each {|engine| send(engine).reset! }
+        each {|engine| engine.reset! }
+        @registered = nil
+        @execution_order = nil
       end
 
       def each

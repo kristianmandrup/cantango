@@ -30,7 +30,7 @@ class AdminRolePermit < CanTango::RolePermit
   end
 end
 
-describe CanTango::PermitEngine::RolePermit do
+describe CanTango::Permits::RolePermit do
   let (:user) do
     User.new 'kris'
   end

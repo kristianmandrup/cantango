@@ -26,8 +26,7 @@ class AdminRolePermit < CanTango::RolePermit
 end
 
 
-describe CanTango::PermitEngine::RoleGroupPermit::Builder do
-  
+describe CanTango::Permits::RoleGroupPermit::Builder do
   before do
     CanTango.config.cache.set :off
   end
@@ -46,7 +45,7 @@ describe CanTango::PermitEngine::RoleGroupPermit::Builder do
   end
 
   let (:builder) do
-    CanTango::PermitEngine::RoleGroupPermit::Builder.new ability
+    CanTango::Permits::RoleGroupPermit::Builder.new ability
   end
 
   describe 'attributes' do

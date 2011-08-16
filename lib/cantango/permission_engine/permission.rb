@@ -28,7 +28,7 @@ module CanTango
       end
 
       def compile_rules!
-        compiler.compile! self 
+        compiler.compile! self
         @compiled_rules = compiler.to_hashie
       end
 

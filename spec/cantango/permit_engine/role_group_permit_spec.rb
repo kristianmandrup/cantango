@@ -13,7 +13,7 @@ class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   end
 end
 
-describe CanTango::PermitEngine::RoleGroupPermit do
+describe CanTango::Permits::RoleGroupPermit do
   let (:user) do
     User.new 'kris'
   end

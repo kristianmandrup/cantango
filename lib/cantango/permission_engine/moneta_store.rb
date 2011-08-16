@@ -10,7 +10,7 @@ module CanTango
       # for a YamlStore, the name is the name of the yml file
       def initialize name, options = {}
         super
-        @store = CanTango::Cache::MonetaCache.instance 
+        @store = CanTango::Cache::MonetaCache.instance
         @store.configure_with options
       end
 

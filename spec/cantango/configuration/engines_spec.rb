@@ -10,7 +10,7 @@ end
 class PerformanceTool
   attr_reader :ability
 
-  def execute! ability
+  def execute!
   end
 end
 
@@ -113,6 +113,10 @@ describe CanTango::Configuration::Engines do
       before do
         subject.execute_after :permit, :performance
         subject.execute_after :permission, :last
+      end
+
+      after do
+        CanTango.config.engines.clear!
       end
 
       its(:execution_order) { should == [:non_existing, :permit, :performance, :permission, :last] }
