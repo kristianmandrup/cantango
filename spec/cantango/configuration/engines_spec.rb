@@ -14,8 +14,6 @@ class PerformanceTool
   end
 end
 
-
-
 describe CanTango::Configuration::Engines do
   subject { CanTango.config.engines }
 

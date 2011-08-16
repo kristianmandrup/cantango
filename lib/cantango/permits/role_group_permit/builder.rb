@@ -15,10 +15,6 @@ module CanTango
           end.compact
         end
 
-        def finder
-          CanTango::PermitEngine::RoleGroupPermit::Finder
-        end
-
         def valid? role_group
           return true if !role_groups_filter?
           filter(role_group).valid?

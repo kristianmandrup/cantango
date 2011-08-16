@@ -30,7 +30,11 @@ module CanTango
     include CanTango::PermitEngine::Util
 
     def execute_engines!
-      engines.execution_order.each {|name| engines.registered[name].new(ability).execute!  }
+      each_engine {|engine| engine.new(self).execute!  }
+    end
+
+    def each_engine &block
+      engines.execution_order.each {|name| yield engines.registered[name] }
     end
 
     def engines

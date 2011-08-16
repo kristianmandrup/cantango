@@ -10,10 +10,6 @@ module CanTango
           # raise NoAvailableRoles, "no available roles are defined" if available_roles.empty?
           [] << create_permit(user.class.to_s)
         end
-
-        def finder
-          CanTango::PermitEngine::UserPermit::Finder
-        end
       end
     end
   end

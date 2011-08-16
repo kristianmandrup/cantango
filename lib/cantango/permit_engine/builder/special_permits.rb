@@ -11,7 +11,7 @@ module CanTango
         end
 
         def finder
-          CanTango::PermitEngine::RolePermit::Finder
+          CanTango::Permits::RolePermit::Finder
         end
       end
     end

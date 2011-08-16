@@ -13,6 +13,14 @@ module CanTango
 
         protected
 
+        def finder
+          ns::Finder
+        end
+
+        def ns
+          self.class.to_s.gsub(/::Builder/, '').constantize
+        end
+
         # Tries to create a new permit for the given role
         # If no permit Class can be found, it should return nil
         # @param [Symbol] the name

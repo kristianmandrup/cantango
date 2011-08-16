@@ -28,7 +28,7 @@ module CanTango
 
       def builder_class builder
         return "CanTango::PermitEngine::Builder::SpecialPermits" if builder == :special
-        "CanTango::PermitEngine::#{builder.to_s.camelize}Permit::Builder"
+        "CanTango::Permits::#{builder.to_s.camelize}Permit::Builder"
       end
 
       def builders

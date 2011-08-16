@@ -68,7 +68,6 @@ describe CanTango::Ability do
     its(:user_account)  { should be_a(UserAccount) }
     its(:user)          { should be_a(User) }
 
-    its(:permits)       { should_not be_empty }
     its(:roles)         { should_not be_empty }
     its(:role_groups)   { should_not be_empty }
 end

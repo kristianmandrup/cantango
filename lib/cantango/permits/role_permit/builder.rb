@@ -14,10 +14,6 @@ module CanTango
           end.compact
         end
 
-        def finder
-          CanTango::PermitEngine::RolePermit::Finder
-        end
-
         protected
 
         def valid? role

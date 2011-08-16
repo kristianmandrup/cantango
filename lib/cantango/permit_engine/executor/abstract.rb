@@ -1,5 +1,5 @@
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     module Executor
       class Abstract
         attr_accessor :permit
