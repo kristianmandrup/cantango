@@ -1,20 +1,19 @@
 module CanTango
-  class PermitEngine < Engine
-    class UserPermit < CanTango::PermitEngine::Permit
+  module Permits
+    class RolePermit < CanTango::Permit
       class Finder < CanTango::PermitEngine::Finder
         def initialize account, name
           super
         end
 
         def type
-          :user
+          :role
         end
 
         def permit_class
-          "#{name.to_s.camelize}Permit"
+          "#{name.to_s.camelize}RolePermit"
         end
       end
     end
   end
 end
-

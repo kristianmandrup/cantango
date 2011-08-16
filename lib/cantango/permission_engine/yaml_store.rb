@@ -1,7 +1,7 @@
 require 'yaml'
 
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     class YamlStore < Store
       attr_reader :path
 

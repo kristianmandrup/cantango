@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Parser
       class Category < Rule
        # remove the '@' prefix to get the category name

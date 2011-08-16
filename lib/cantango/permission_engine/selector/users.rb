@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Selector
       class Users < Base
         attr_reader :user, :user_key

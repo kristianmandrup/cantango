@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Parser
       class Regex < Rule
         attr_reader :regex
@@ -21,7 +21,7 @@ module CanTango
             "#{method} :#{action}, #{target.name}"
           end.join("\n")
         end
-      
+
         def config_models
           CanTango.config.models
         end

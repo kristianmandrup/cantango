@@ -1,12 +1,12 @@
 module CanTango
-  class PermitEngine < Engine
-    class UserPermit < CanTango::PermitEngine::Permit
+  module Permits
+    class AccountPermit < CanTango::Permit
 
       autoload_modules :Builder, :Finder
 
-      # fx for User user class, becomes simply UserPermit
-      def user_type
-        self.class.name.demodulize.gsub(/(.*)(Permit)/, '\1').underscore.to_sym
+      # fx for Admin account class, becomes simply AdminAccountPermit
+      def account_type
+        self.class.name.demodulize.gsub(/(.*)(AccountPermit)/, '\1').underscore.to_sym
       end
 
       # creates the permit
@@ -37,4 +37,5 @@ module CanTango
 
   end
 end
+
 

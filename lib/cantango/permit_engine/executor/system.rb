@@ -1,5 +1,5 @@
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     module Executor
       class System < Abstract
         # always execute system permit

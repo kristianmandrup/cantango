@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Loader
       class Permissions < Base
         attr_accessor :permissions

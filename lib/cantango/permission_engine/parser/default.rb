@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Parser
       class Default < Rule
         def parse
@@ -11,7 +11,6 @@ module CanTango
         def default_all
           "#{method}(:#{action}, :all)"
         end
-         
       end
     end
   end

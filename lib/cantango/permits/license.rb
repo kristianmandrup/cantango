@@ -1,5 +1,5 @@
 module CanTango
-  class PermitEngine < Engine
+  module Permits
     class License
       autoload_modules :Loader, :Rules
 

@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Selector
       class Licenses < Base
         attr_reader :roles, :role_groups

@@ -1,20 +1,19 @@
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     module Builder
-      class SpecialPermits < Base      
+      class SpecialPermits < Base
         def build
           special_permits.map{|role| create_permit(role)}.compact
-        end    
+        end
 
         def special_permits
           [:system, :any]
-        end    
-      
+        end
+
         def finder
           CanTango::PermitEngine::RolePermit::Finder
-        end      
+        end
       end
     end
-
   end
 end

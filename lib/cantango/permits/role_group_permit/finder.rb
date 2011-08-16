@@ -1,5 +1,5 @@
 module CanTango
-  class PermitEngine < Engine
+  module Permits
     class RoleGroupPermit < CanTango::Permit
 
       class Finder < CanTango::PermitEngine::Finder

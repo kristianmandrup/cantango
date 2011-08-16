@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     class Evaluator
       attr_reader :ability, :rule
 
@@ -20,7 +20,7 @@ module CanTango
       def rules
         ability.send :rules
       end
-     
+
       def user
         @user
       end

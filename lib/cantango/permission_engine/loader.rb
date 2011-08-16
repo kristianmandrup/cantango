@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Loader
       autoload_modules :Base, :Categories, :Permissions
     end

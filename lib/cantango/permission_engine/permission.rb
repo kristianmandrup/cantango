@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     class Permission
       # rules is a Hashie, a Hash where keys can also be accessed as method calls
       attr_accessor :name, :static_rules, :compiled_rules

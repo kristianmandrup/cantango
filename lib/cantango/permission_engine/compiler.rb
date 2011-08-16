@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     class Compiler
       attr_reader :permission, :categories
 

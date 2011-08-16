@@ -1,5 +1,5 @@
 module CanTango
-  class AccountPermit < CanTango::PermitEngine::AccountPermit
+  class AccountPermit < CanTango::Permits::AccountPermit
     def initialize ability
       super
     end

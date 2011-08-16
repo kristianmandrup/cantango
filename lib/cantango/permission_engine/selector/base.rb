@@ -1,6 +1,6 @@
 module CanTango
-  module PermissionEngine
-    module Selector 
+  class PermissionEngine < Engine
+    module Selector
       class Base
         attr_reader :subject
 

@@ -1,6 +1,6 @@
 module CanTango
-  module PermissionEngine
-    module Selector 
+  class PermissionEngine < Engine
+    module Selector
       autoload_modules :Base, :Licenses, :Roles, :RoleGroups, :Users
 
       def self.create type, collector

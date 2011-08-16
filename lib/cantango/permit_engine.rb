@@ -1,9 +1,7 @@
 module CanTango
   class PermitEngine < Engine
     autoload_modules :Builder, :Compatibility, :Executor
-    autoload_modules :Factory, :Finder, :License, :Loaders, :Permit
-    autoload_modules :RoleGroupPermit, :RolePermit, :UserPermit, :AccountPermit
-    autoload_modules :RoleMatcher, :Util
+    autoload_modules :Factory, :Finder, :Loaders, :Util, :RoleMatcher
 
     def initialize ability
       super

@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Loader 
       class Categories < Base
         attr_reader :file_name, :categories

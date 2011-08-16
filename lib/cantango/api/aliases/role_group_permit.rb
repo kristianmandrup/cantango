@@ -1,5 +1,5 @@
 module CanTango
-  class RoleGroupPermit < CanTango::PermitEngine::RoleGroupPermit
+  class RoleGroupPermit < CanTango::Permits::RoleGroupPermit
     def initialize ability
       super
     end

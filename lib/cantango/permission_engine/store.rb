@@ -1,7 +1,7 @@
 require 'set'
 
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     class Store
       attr_reader :name, :options
 

@@ -1,5 +1,5 @@
 module CanTango
-  module PermissionEngine
+  class PermissionEngine < Engine
     module Parser
       class Ownership < Rule
         attr_reader :model_class, :owner

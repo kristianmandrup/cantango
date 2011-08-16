@@ -1,5 +1,5 @@
 module CanTango
-  class PermitEngine < Engine
+  module Permits
     class RolePermit < CanTango::Permit
       class Builder < CanTango::PermitEngine::Builder::Base
         # class NoAvailableRoles < StandardError; end

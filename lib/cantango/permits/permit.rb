@@ -3,7 +3,7 @@ require 'sugar-high/array'
 # The permit base class for both Role Permits and Role Group Permits
 # Should contain all common logic
 module CanTango
-  class PermitEngine < Engine
+  module Permits
     class Permit
       attr_reader :ability
 
