@@ -30,6 +30,20 @@ module CanTango
         @execution_order = names.select {|name| available? name }
       end
 
+      def execute_before existing, name
+        index = execution_order.index(existing) || 0
+        execution_order.insert(index, name)
+      end
+
+      def execute_after existing, name
+        index = execution_order.index(existing)
+        index ? execution_order.insert(index +1, name) : execution_order << name
+      end
+
+      def execution_order
+        @execution_order ||= [:permissions, :permits]
+      end
+
       def available
         registered.keys
       end
