@@ -115,11 +115,27 @@ describe CanTango::Configuration::Engines do
         subject.execute_after :permission, :last
       end
 
+      its(:execution_order) { should == [:non_existing, :permit, :performance, :permission, :last] }
+    end
+
+    describe 'execute_after' do
+      before do
+        subject.execute_last :very_last
+      end
+
+      its(:execution_order) { should == [:non_existing, :permit, :performance, :permission, :last, :very_last] }
+    end
+
+    describe 'execute_first' do
+      before do
+        subject.execute_first :very_first
+      end
+
       after do
         CanTango.config.engines.clear!
       end
 
-      its(:execution_order) { should == [:non_existing, :permit, :performance, :permission, :last] }
+      its(:execution_order) { should == [:very_first, :non_existing, :permit, :performance, :permission, :last, :very_last] }
     end
   end
 end

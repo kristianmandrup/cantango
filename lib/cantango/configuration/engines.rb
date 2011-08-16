@@ -33,8 +33,16 @@ module CanTango
       end
 
       # defines the order of execution of engine in ability
-      def execution_order= names
-        @execution_order = names.select {|name| available? name }
+      def execution_order= *names
+        @execution_order = names.to_symbols.select {|name| available? name }
+      end
+
+      def execute_first name
+        execution_order.insert(0, name)
+      end
+
+      def execute_last name
+        execution_order.insert(-1, name)
       end
 
       def execute_before existing, name
@@ -44,7 +52,7 @@ module CanTango
 
       def execute_after existing, name
         index = execution_order.index(existing)
-        index ? execution_order.insert(index +1, name) : execution_order << name
+        index ? execution_order.insert(index +1, name) : execute_last(name)
       end
 
       def execution_order
