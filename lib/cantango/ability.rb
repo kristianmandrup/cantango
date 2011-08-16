@@ -22,16 +22,19 @@ module CanTango
 
       return if cached_rules?
 
-      # run permission evaluators
-      active_engines.each {|engine| engine.execute! ability }
+      execute_engines!
 
       cache_rules!
     end
 
     include CanTango::PermitEngine::Util
 
-    def active_engines
-      CanTango.config.engines.active
+    def execute_engines!
+      engines.execution_order.each {|name| engines.registered[name].new(ability).execute!  }
+    end
+
+    def engines
+      CanTango.config.engines
     end
 
     def subject
