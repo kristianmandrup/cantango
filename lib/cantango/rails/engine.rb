@@ -13,7 +13,7 @@ module CanTango
     end
   end
 
-  class Engine < ::Rails::Engine
+  class RailsEngine < ::Rails::Engine
     initializer "cantango.helpers" do
       CanTango.include_helpers(CanTango)
 

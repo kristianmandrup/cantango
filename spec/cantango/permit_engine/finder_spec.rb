@@ -1,5 +1,4 @@
-require 'rspec'
-require 'cantango'
+require 'spec_helper'
 require 'fixtures/models'
 
 class AdminsRoleGroupPermit < CanTango::RoleGroupPermit

@@ -1,6 +1,4 @@
-
-require 'rspec'
-require 'cantango'
+require 'spec_helper'
 require 'fixtures/models'
 require 'cantango/rspec'
 

@@ -15,7 +15,7 @@
       %td
         = link_to("Edit", edit_article_path(article)) if user_can?(:edit, article)
       %td
-        = link_to("Delete", delete_article_path(article)) if user_can?(:delete, article)
+        = link_to("Delete", article_path(article), :method => 'delete') if user_can?(:delete, article)
 
 <!-- some dirty tricks to test caching -->
 <%= "Cached the rules!" if current_ability.cached_rules === current_ability.rules %>

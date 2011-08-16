@@ -1,7 +1,11 @@
+require 'fixtures/models/simple_roles'
+
 class User
   attr_accessor :name, :account, :email
 
   # tango_user # see macros
+
+  include ::SimpleRoles
 
   def initialize name, email = nil, options = {}
     @name = name

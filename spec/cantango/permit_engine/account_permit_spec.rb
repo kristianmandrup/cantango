@@ -1,5 +1,4 @@
-require 'rspec'
-require 'cantango'
+require 'spec_helper'
 require 'fixtures/models'
 
 class AdminAccountPermit < CanTango::AccountPermit
@@ -13,7 +12,6 @@ class AdminAccountPermit < CanTango::AccountPermit
     can :read, Article
   end
 end
-
 
 describe CanTango::Permits::AccountPermit do
   let (:user) do

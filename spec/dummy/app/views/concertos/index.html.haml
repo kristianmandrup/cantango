@@ -15,5 +15,5 @@
       %td
         = link_to("Edit", edit_concerto_path(concerto)) if user_can?(:edit, concerto)
       %td
-        = link_to("Delete", delete_concerto_path(concerto)) if user_can?(:delete, concerto)
+        = link_to("Delete", concerto_path(concerto), :method => 'delete') if user_can?(:delete, concerto)
 

@@ -15,6 +15,6 @@
       %td
         = link_to("Edit", edit_comment_path(comment)) if guest_can?(:edit, comment)
       %td
-        = link_to("Delete", delete_comment_path(post)) if guest_can?(:delete, comment)
+        = link_to("Delete", comment_path(post), :method => 'delete') if guest_can?(:delete, comment)
 
 

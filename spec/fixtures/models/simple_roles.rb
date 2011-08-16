@@ -1,4 +1,9 @@
 module SimpleRoles
+  def self.included(base)
+    base.send :include, InstanceMethods
+    base.extend ClassMethods
+  end
+
   module ClassMethods
     def is_role_in_group?(role, group)
       raise "No group #{group} defined in User model" if !role_groups.has_key?(group)

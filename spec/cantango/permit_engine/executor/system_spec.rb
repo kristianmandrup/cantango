@@ -1,5 +1,5 @@
-require 'rspec'
-require 'cantango'
+require 'spec_helper'
+
 require 'cantango/rspec/matchers'
 require 'fixtures/models'
 require 'cantango/rspec/matchers'

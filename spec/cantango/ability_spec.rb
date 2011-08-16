@@ -3,7 +3,7 @@ require 'cantango'
 require 'fixtures/models'
 require 'cantango/rspec'
 
-def config_folder 
+def config_folder
   File.dirname(__FILE__)+ "/../fixtures/config/"
 end
 

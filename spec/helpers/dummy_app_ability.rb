@@ -11,16 +11,13 @@ module CanTango
 
       @rules_cached = true and return if cached_rules?
 
-      # run permission evaluators
-      with(:permissions)  {|permission| permission.evaluate! user }
-      with(:permits)      {|permit| break if permit.execute == :break }
+      execute_engines!
 
       cache_rules!
     end
-  
+
     def rules_cached?
       @rules_cached || false
     end
   end
-  
 end
