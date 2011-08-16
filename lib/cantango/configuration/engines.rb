@@ -9,10 +9,12 @@ module CanTango
       include Enumerable
 
       # engine registry is a simple hash
-      def register name, engine_class
-        raise "Class must implement the CanTango Engine API. You can start by sublclassing CanTango::Engine" if !engine? engine_class
-        raise "Name of engine must be a String or Symbol" if !name.kind_of_label?
-        registered[name.to_sym] = engine_class
+      def register hash
+        hash.each_pair do |name, engine_class|
+          raise "Class must implement the CanTango Engine API. You can start by sublclassing CanTango::Engine" if !engine? engine_class
+          raise "Name of engine must be a String or Symbol" if !name.kind_of_label?
+          registered[name.to_sym] = engine_class
+        end
       end
 
       # engine factories ?
@@ -27,7 +29,7 @@ module CanTango
       end
 
       # defines the order of execution of engine in ability
-      def execution_order *names
+      def execution_order= names
         @execution_order = names.select {|name| available? name }
       end
 
