@@ -15,5 +15,5 @@
       %td
         = link_to("Edit", edit_user_path(user)) if user_can?(:edit, user)
       %td
-        = link_to("Delete", delete_user_path(user)) if user_can?(:delete, user)
+        = link_to("Delete", user_path(user), :method => 'delete') if user_can?(:delete, user)
 
