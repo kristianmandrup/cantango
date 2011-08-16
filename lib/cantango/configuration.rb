@@ -43,7 +43,7 @@ module CanTango
       engines.clear!
     end
 
-    CanTango.config.engines.available.each do |engine|
+    CanTango.config.engines.default_available.each do |engine|
       class_eval %{
         def #{engine}
           engine(:#{engine})

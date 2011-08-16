@@ -8,6 +8,13 @@ describe CanTango::Configuration::Engines do
   subject { CanTango.config.engines }
 
   describe 'default settings' do
+    describe 'available' do
+      %w(permit permission).each do |engine|
+        specify { subject.available?(engine).should be_true }
+        specify { subject.available?(engine.to_sym).should be_true }
+      end
+    end
+
     describe 'active' do
       its(:active) { should == [:permit] }
     end

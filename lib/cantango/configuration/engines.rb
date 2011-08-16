@@ -16,6 +16,7 @@ module CanTango
       end
 
       # engine factories ?
+      # :cache => Cantango::Ability::Cache
       def registered
         @registered ||= {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine }
       end
@@ -48,8 +49,12 @@ module CanTango
         [:cache, :permission , :permit]
       end
 
+      def default_available
+        self.class.default_available
+      end
+
       def available
-        registered.keys
+        (registered.keys + default_available).uniq
       end
 
       def available? name
