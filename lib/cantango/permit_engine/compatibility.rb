@@ -1,6 +1,6 @@
 # ensures compatibility with CanCan 1.5+ and 1.4-
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     module Compatibility
       def rules
         return rules_1_5 if rules_1_5

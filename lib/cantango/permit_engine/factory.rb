@@ -1,7 +1,7 @@
 require 'sugar-high/class_ext'
 
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     class Factory
       include ClassExt
 
@@ -39,7 +39,6 @@ module CanTango
         ability.options
       end
     end
-
   end
 end
 

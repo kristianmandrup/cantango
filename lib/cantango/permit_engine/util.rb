@@ -1,7 +1,7 @@
 require 'active_support/inflector'
 
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     module Util
       def permit_name clazz
         @name ||= clazz.to_s.demodulize.gsub(/Role/,'').gsub(/Permit$/, '').gsub(/Group/,'').underscore.to_sym

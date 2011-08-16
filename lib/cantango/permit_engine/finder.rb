@@ -1,5 +1,5 @@
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     class Finder
       include ClassExt
 

@@ -1,5 +1,5 @@
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     module Executor
       autoload_modules :Abstract, :Base, :System
     end

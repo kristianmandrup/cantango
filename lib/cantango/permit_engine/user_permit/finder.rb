@@ -1,5 +1,5 @@
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     class UserPermit < CanTango::PermitEngine::Permit
       class Finder < CanTango::PermitEngine::Finder
         def initialize account, name

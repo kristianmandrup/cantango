@@ -1,6 +1,6 @@
 module CanTango
-  module PermitEngine
-    class RoleGroupPermit < CanTango::PermitEngine::Permit
+  class PermitEngine < Engine
+    class RoleGroupPermit < CanTango::Permit
 
       class Builder < CanTango::PermitEngine::Builder::Base
         #class NoAvailableRoleGroups < StandardError; end

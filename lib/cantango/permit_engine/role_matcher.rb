@@ -1,5 +1,5 @@
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     module RoleMatcher
       def role_match? user_account
         user_account.has_role? permit_name(self.class)

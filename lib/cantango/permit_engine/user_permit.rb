@@ -1,5 +1,5 @@
 module CanTango
-  module PermitEngine
+  class PermitEngine < Engine
     class UserPermit < CanTango::PermitEngine::Permit
 
       autoload_modules :Builder, :Finder

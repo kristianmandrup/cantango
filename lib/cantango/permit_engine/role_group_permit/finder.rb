@@ -1,6 +1,6 @@
 module CanTango
-  module PermitEngine
-    class RoleGroupPermit < CanTango::PermitEngine::Permit
+  class PermitEngine < Engine
+    class RoleGroupPermit < CanTango::Permit
 
       class Finder < CanTango::PermitEngine::Finder
         def initialize account, name
