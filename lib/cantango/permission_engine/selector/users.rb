@@ -9,7 +9,7 @@ module CanTango
           @user_key = user.send(subject.user_key_field)
         end
 
-        def valid? permission
+        def relevant? permission
           permission == user_key
         end
       end

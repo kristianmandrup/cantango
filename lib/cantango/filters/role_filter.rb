@@ -12,7 +12,7 @@ module CanTango
       end
 
       def excluded?
-        excluded_roles.include? role
+        !excluded_roles.empty? && excluded_roles.include?(role)
       end
 
       def only_roles

@@ -10,8 +10,7 @@ module CanTango
 
         protected
 
-        def valid? role
-          #return true if !roles_filter?
+        def relevant? role
           filter(role).valid?
         end
 
@@ -21,9 +20,6 @@ module CanTango
 
         private
 
-        def roles_filter?
-          CanTango.config.roles.filter?
-        end
       end
     end
   end

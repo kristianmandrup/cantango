@@ -17,7 +17,6 @@ module CanTango
         protected
 
         def valid? role
-          return true if !roles_filter?
           filter(role).valid?
         end
 
@@ -25,11 +24,6 @@ module CanTango
           CanTango::Filters::RoleFilter.new role
         end
 
-        private
-
-        def roles_filter?
-          CanTango.config.roles.filter?
-        end
       end
     end
   end

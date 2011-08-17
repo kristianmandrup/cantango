@@ -9,7 +9,7 @@ module CanTango
           @role_groups = subject.role_groups_list
         end
 
-        def valid? permission
+        def relevant? permission
           (roles | role_groups).include? permission.to_sym
         end
       end

@@ -8,8 +8,7 @@ module CanTango
           @role_groups = collector.role_groups_list
         end
 
-        def valid? role_group
-          return true if !role_groups_filter?
+        def relevant? role_group
           filter(role_group).valid?
         end
 
@@ -18,10 +17,6 @@ module CanTango
         end
 
         private
-
-        def role_groups_filter?
-          CanTango.config.role_groups.filter?
-        end
       end
     end
   end
