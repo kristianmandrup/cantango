@@ -1,9 +1,9 @@
 h1. CanTango
 
-CanTango:
-* extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented permissions design. 
-* is designed to integrate well with any Role and Authentication systems in a non-intrusive manner.
-* supports multiple user accounts and thus works well when you have multiple "Devise":https://github.com/plataformatec/devise users
+* extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented permissions design.
+* integrates with any Role and Authentication systems in a non-intrusive manner.
+* supports multiple user accounts, fx for scenarios with sub applications
+* works with multiple "Devise":https://github.com/plataformatec/devise users
 
 h2. Supported ruby versions
 
