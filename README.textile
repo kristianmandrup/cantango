@@ -1,7 +1,9 @@
 h1. CanTango
 
-CanTango extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented
-permissions design. CanTango also integrates well with "Devise":https://github.com/plataformatec/devise and scenarios with multiple user accounts.
+CanTango:
+* extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented permissions design. 
+* is designed to integrate well with any Role and Authentication systems in a non-intrusive manner.
+* supports multiple user accounts and thus works well when you have multiple "Devise":https://github.com/plataformatec/devise users
 
 h2. Supported ruby versions
 
@@ -11,9 +13,11 @@ Tested to work with:
 Currently doesn't support:
 * Ruby 1.8.7
 
-h2. August 16, version 0.8.1 released
+If you require ruby 1.8.7 support, please patch it and make a pull request ;)
 
-Today marks a new CanTango release, version 0.8.1.
+h2. August 17, version 0.8.1 released
+
+Today marks a new CanTango release, version 0.8.2.
 
 Now with "Pluggable engines":https://github.com/kristianmandrup/cantango/wiki/Pluggable-engines
 
@@ -22,9 +26,7 @@ The project includes two working dummy apps (see spec folder).
 * "dummy" - how to use CanTango in a Rails 3 app without Devise.
 * "devise-dummy" - integration _with_ Devise :)
 
-Enjoy!
-
-h2. Should I use CanTango for my permission requirements?
+h2. Will CanTango meet my Access Control (permission) requirements?
 
 * "CanCan vs CanTango":https://github.com/kristianmandrup/cantango/wiki/CanCan-vs-CanTango
 * "CanTango overview":https://github.com/kristianmandrup/cantango/wiki
