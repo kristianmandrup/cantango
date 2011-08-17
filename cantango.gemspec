@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-08-16}
+  s.date = %q{2011-08-17}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -602,7 +602,7 @@ Store permissions in yaml file or key-value store}
   s.homepage = %q{http://github.com/kristianmandrup/cantango}
   s.licenses = [%q{MIT}]
   s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.7}
+  s.rubygems_version = %q{1.8.8}
   s.summary = %q{CanCan extension with role oriented permission management and more}
 
   if s.respond_to? :specification_version then
