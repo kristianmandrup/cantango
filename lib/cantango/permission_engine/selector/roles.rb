@@ -11,7 +11,7 @@ module CanTango
         protected
 
         def valid? role
-          return true if !roles_filter?
+          #return true if !roles_filter?
           filter(role).valid?
         end
 

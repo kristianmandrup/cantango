@@ -4,7 +4,7 @@ module CanTango
       attr_reader :item, :include_list
 
       def initialize item, list = nil
-        @item         = item
+        @item         = item.to_sym
         @include_list = list || []
       end
 
