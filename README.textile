@@ -15,7 +15,7 @@ Currently doesn't support:
 
 If you require ruby 1.8.7 support, please patch it and make a pull request ;)
 
-h2. August 17, version 0.8.1 released
+h2. August 17, version 0.8.2 released
 
 Today marks a new CanTango release, version 0.8.2.
 
