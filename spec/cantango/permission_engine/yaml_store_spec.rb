@@ -13,12 +13,12 @@ end
 describe CanTango::PermissionEngine::YamlStore do
   include CanTangoFixtures
   let (:permissions) { tango_permissions }
-  
+
   context 'Loading permissions' do
     let (:store) do
-      @store ||= CanTango::PermissionEngine::YamlStore.new 'cantango_permissions', :path => config_folder 
+      @store ||= CanTango::PermissionEngine::YamlStore.new 'permissions', :path => config_folder 
     end
-    
+
     before(:each) do
       store.load!
     end
@@ -29,7 +29,7 @@ describe CanTango::PermissionEngine::YamlStore do
   context 'Caching permissions by types' do
     let (:store) do
       # filename: 'cantango_permissions.yml',
-      @store ||= CanTango::PermissionEngine::YamlStore.new 'cantango_permissions', :path => config_folder 
+      @store ||= CanTango::PermissionEngine::YamlStore.new 'permissions', :path => config_folder 
     end
 
     before(:each) do

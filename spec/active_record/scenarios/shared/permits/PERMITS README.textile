@@ -1,3 +1,0 @@
-h1. Permits for scenarios
-
-Should be grouped into RolePermits and RoleGroupPermits. Some of each should be put in a UserAccount namespace, but only for specific scenario, not in shared!

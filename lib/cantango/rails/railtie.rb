@@ -1,7 +1,7 @@
 module CanTango
   class Railtie < Rails::Railtie
     initializer "cantango" do |app|
-      puts "initializing CanTango..."
+      # puts "initializing CanTango..."
     end
   end
 end

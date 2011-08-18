@@ -1,7 +1,7 @@
 require 'active_record/spec_helper'
 require_all File.dirname(__FILE__) + "/../../shared/" 
 
-describe 'Cantango config: tango_permissions.yml' do
+describe 'Cantango config: permissions.yml' do
 
   before(:each) {
     CanTango.configure do |config|

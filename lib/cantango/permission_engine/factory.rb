@@ -31,7 +31,7 @@ module CanTango
       end
 
       def store
-        store_class.new :cantango_permissions, store_options
+        store_class.new :permissions, store_options
       end
 
       def store_class
