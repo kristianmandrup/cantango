@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.8.2"
+  s.version = "0.8.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-08-17}
+  s.date = %q{2011-08-18}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -617,11 +617,10 @@ Store permissions in yaml file or key-value store}
       s.add_runtime_dependency(%q<sourcify>, [">= 0"])
       s.add_runtime_dependency(%q<dkastner-moneta>, [">= 1.0"])
       s.add_runtime_dependency(%q<friendly_id>, [">= 0"])
-      s.add_runtime_dependency(%q<meta_where>, [">= 0"])
       s.add_development_dependency(%q<devise>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 2.5.0"])
       s.add_development_dependency(%q<jeweler>, [">= 1.6.4"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.10"])
+      s.add_development_dependency(%q<bundler>, [">= 1.0.10"])
       s.add_development_dependency(%q<rdoc>, [">= 0"])
     else
       s.add_dependency(%q<rails>, [">= 3.0.1"])
@@ -632,11 +631,10 @@ Store permissions in yaml file or key-value store}
       s.add_dependency(%q<sourcify>, [">= 0"])
       s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
       s.add_dependency(%q<friendly_id>, [">= 0"])
-      s.add_dependency(%q<meta_where>, [">= 0"])
       s.add_dependency(%q<devise>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 2.5.0"])
       s.add_dependency(%q<jeweler>, [">= 1.6.4"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.10"])
+      s.add_dependency(%q<bundler>, [">= 1.0.10"])
       s.add_dependency(%q<rdoc>, [">= 0"])
     end
   else
@@ -648,11 +646,10 @@ Store permissions in yaml file or key-value store}
     s.add_dependency(%q<sourcify>, [">= 0"])
     s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
     s.add_dependency(%q<friendly_id>, [">= 0"])
-    s.add_dependency(%q<meta_where>, [">= 0"])
     s.add_dependency(%q<devise>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 2.5.0"])
     s.add_dependency(%q<jeweler>, [">= 1.6.4"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.10"])
+    s.add_dependency(%q<bundler>, [">= 1.0.10"])
     s.add_dependency(%q<rdoc>, [">= 0"])
   end
 end
