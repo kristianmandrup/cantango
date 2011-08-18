@@ -8,7 +8,6 @@ require 'sugar-high/blank'
 require 'hashie'
 require 'moneta'
 
-# AutoLoader.root = ''
 AutoLoader.namespaces = {:CanTango => 'cantango'}
 
 module CanTango

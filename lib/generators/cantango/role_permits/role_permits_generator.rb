@@ -4,7 +4,7 @@ require 'active_support/inflector'
 require 'rails_artifactor'
 # require 'logging_assist'
 
-module CanTango
+module Cantango
   module Generators
     class PermitsGenerator < Rails::Generators::Base
       desc "Creates a Permit for each role in 'app/permits' and ensures that the permit folder is added to Rails load path."

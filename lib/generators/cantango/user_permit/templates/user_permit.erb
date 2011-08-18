@@ -1,4 +1,4 @@
-class <%= role.to_s.camelize %>RolePermit < CanTango::RolePermit
+class <%= user.to_s.camelize %>Permit < CanTango::UserPermit
   def initialize ability
     super
   end
@@ -11,3 +11,4 @@ class <%= role.to_s.camelize %>RolePermit < CanTango::RolePermit
     <%= license_logic %>
   end
 end
+

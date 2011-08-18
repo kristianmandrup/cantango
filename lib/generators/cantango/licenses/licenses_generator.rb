@@ -3,7 +3,7 @@ require 'sugar-high/array'
 require 'active_support/inflector'
 require 'rails_artifactor'
 
-module CanTango
+module Cantango
   module Generators
     class LicensesGenerator < Rails::Generators::Base
       desc "Creates Licenses for use with CanCan Permits"

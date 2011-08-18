@@ -6,9 +6,9 @@ require 'rails_artifactor'
 require 'generators/cantango/base'
 require 'generators/cantango/license_base'
 
-module CanTango
+module Cantango
   module Generators
-    class LicenseGenerator < CanTango::Generators::Base
+    class LicenseGenerator < Cantango::Generators::Base
       desc "Creates a License for a Permit in 'app/licenses' with reusable permissions"
 
       argument     :name,         :type => :string,    :default => '',  :desc => "Name of license"
@@ -29,6 +29,6 @@ module CanTango
       end
 
       include CanTango::Generators::LicenseBase
-   end
+    end
   end
 end

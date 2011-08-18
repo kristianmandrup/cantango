@@ -3,7 +3,7 @@ require 'sugar-high/array'
 require 'active_support/inflector'
 require 'rails_artifactor'
 
-module CanTango
+module Cantango
   module Generators
     class Base < ::Rails::Generators::Base
       def self.inherited(subclass)
@@ -24,6 +24,12 @@ module CanTango
       end
 
       protected
+
+      [:user, :account, :group].each do |name|
+        define_method :"#{name}?"
+          false
+        end
+      end
 
       can_actions.each do |action|
         class_eval %{

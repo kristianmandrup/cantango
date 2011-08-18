@@ -1,14 +1,14 @@
-module CanTango
+module Cantango
   module Generators
     module PermitGenerator
 
-      def template_permit role, account = nil
-        template_account_permit role, account if account
-        template permit_source, "app/permits/#{permit_target(role)}" unless account
+      def template_permit name, account = nil
+        template_account_permit name, account if account
+        template permit_source, "app/permits/#{permit_target(name)}" unless account
       end
 
-      def template_account_permit role, account
-        template "account_permit.erb" , "app/permits/#{account}_permits/#{permit_target(role)}"
+      def template_account_permit name, account
+        template "account_permit.erb" , "app/permits/#{account}_permits/#{permit_target(name)}"
       end
 
       def load_permit_template name
@@ -25,11 +25,17 @@ module CanTango
       end
 
       def permit_source
+        return "user_permit.erb" if user?
+        return "account_permit.erb" if account?
+
         group? ? "role_group_permit.erb" : "role_permit.erb"
       end
 
-      def permit_target role
-        group? ? "#{role}_group_permit.rb" : "#{role}_permit.rb"
+      def permit_target name
+        return "#{name}_permit.erb" if user?
+        return "#{name}_account_permit.erb" if account?
+
+        group? ? "#{name}_group_permit.rb" : "#{nema}_permit.rb"
       end
     end
   end

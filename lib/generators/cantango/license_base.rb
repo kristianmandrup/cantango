@@ -1,4 +1,4 @@
-module CanTango
+module Cantango
   module Generators
     module LicenseBase
       def licenses

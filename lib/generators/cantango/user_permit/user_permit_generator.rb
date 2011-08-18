@@ -10,10 +10,10 @@ require 'generators/cantango/permit_generator'
 
 module Cantango
   module Generators
-    class RolePermitGenerator < Cantango::Generators::Base
-      desc "Creates a Permit for a role in 'app/permits' with specific permissions and/or licenses"
+    class UserPermitGenerator < Cantango::Generators::Base
+      desc "Creates a Permit for a user in 'app/permits' with specific permissions and/or licenses"
 
-      argument     :role,       :type => :string,   :default => '',     :desc => "Role to create permit for"
+      argument     :user,       :type => :string,   :default => '',     :desc => "User class to create permit for"
 
       class_option :licenses,   :type => :array,    :default => [],     :desc => "Licenses to use in Permit"
 
@@ -25,18 +25,19 @@ module Cantango
       source_root File.dirname(__FILE__) + '/templates'
 
       def main_flow
-        return if role.empty?
-        template_permit role
+        return if user.empty?
+        template_permit user
       end
 
       protected
 
+      def user?
+        true
+      end
+
       include CanTango::Generators::Base
       include CanTango::Generators::LicenceBase
-
-      def group?
-        options[:group]
-      end
     end
   end
 end
+
