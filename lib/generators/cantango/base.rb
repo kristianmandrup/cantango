@@ -1,8 +1,3 @@
-require 'rails/generators/base'
-require 'sugar-high/array'
-require 'active_support/inflector'
-require 'rails_artifactor'
-
 module Cantango
   module Generators
     class Base < ::Rails::Generators::Base
@@ -26,7 +21,7 @@ module Cantango
       protected
 
       [:user, :account, :group].each do |name|
-        define_method :"#{name}?"
+        define_method :"#{name}?" do
           false
         end
       end

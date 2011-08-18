@@ -1,14 +1,9 @@
-require 'rails/generators/base'
-require 'sugar-high/array'
-require 'active_support/inflector'
-require 'rails_artifactor'
-
 module Cantango
   module Generators
     class LicensesGenerator < Rails::Generators::Base
       desc "Creates Licenses for use with CanCan Permits"
 
-      argument     :licenses,           :type => :array,      :default => [],     :desc => "Licenses"
+      argument     :licenses,           :type => :array,      :desc => "Licenses"
 
       source_root File.dirname(__FILE__) + '/../license/templates'
 

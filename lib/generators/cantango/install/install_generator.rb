@@ -19,7 +19,7 @@ module Cantango
 
       def copy_permissions
         return unless permissions?
-        template "cantango_permissions.yml", "config/cantango_permissions.yml"
+        template "permissions.yml", "config/permissions.yml"
       end
 
       protected

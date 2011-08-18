@@ -1,8 +1,3 @@
-require 'rails/generators/base'
-require 'sugar-high/array'
-require 'active_support/inflector'
-require 'rails_artifactor'
-
 require 'generators/cantango/base'
 require 'generators/cantango/license_base'
 
@@ -11,7 +6,7 @@ module Cantango
     class LicenseGenerator < Cantango::Generators::Base
       desc "Creates a License for a Permit in 'app/licenses' with reusable permissions"
 
-      argument     :name,         :type => :string,    :default => '',  :desc => "Name of license"
+      argument     :name,         :type => :string,    :desc => "Name of license"
 
       class_option :licenses,     :type => :array,     :default => [],  :desc => "Sub licenses"
 
@@ -28,7 +23,7 @@ module Cantango
         template "license.erb", "app/licenses/#{name}_license.rb"
       end
 
-      include CanTango::Generators::LicenseBase
+      include Cantango::Generators::LicenseBase
     end
   end
 end
