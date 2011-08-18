@@ -10,6 +10,8 @@ module CanTango
       # strategy is used to control the owns strategy (see rules.rb)
       attr_reader :strategy
 
+      include CanTango::Api::Attributes
+
       # creates the permit
       def initialize ability
         @ability  = ability

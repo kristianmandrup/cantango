@@ -6,7 +6,6 @@ require 'sugar-high/class_ext'
 require 'sugar-high/array'
 require 'sugar-high/blank'
 require 'hashie'
-require 'cutter'
 require 'moneta'
 
 # AutoLoader.root = ''

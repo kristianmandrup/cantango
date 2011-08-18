@@ -4,12 +4,16 @@ module CanTango
 
       def ability_options
         opts = {}
-        opts.merge!(:session => session) if respond_to? :session
-        opts.merge!(:request => request) if respond_to? :request
-        opts.merge!(:params => params) if respond_to? :params
-        opts.merge!(:controller => controller) if respond_to? :controller
-        # puts "CanTango::Ability options:" << opts.keys.inspect
+        options_list.each do |option|
+          opts.merge!(option => send(option)) if respond_to? option
+        end
         opts
+      end
+
+      private
+
+      def options_list
+        [:session, :request, :params, :controller, :domain]
       end
     end
   end
