@@ -19,7 +19,7 @@ module Cantango
       source_root File.dirname(__FILE__) + '/templates'
 
       def main_flow
-        template_permit user
+        template_permit user, account
       end
 
       protected

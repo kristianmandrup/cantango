@@ -1,4 +1,4 @@
-module <%= account%>Permits
-  <%= load_permit_template :role_permit %>
+module <%= account.to_s.camelize%>AccountPermits
+<%= load_permit_template :role_permit %>
 end
 

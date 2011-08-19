@@ -10,16 +10,19 @@ module Cantango
       def template_permit name, account = nil
         @permit_name = name
         set_logic name
-        template_account_permit name, account if account
-        template permit_source, "app/permits/#{permit_target(name)}" unless account
+        account.present? ? template_account_permit(name, account) : template_simple_permit(name)
+      end
+
+      def template_simple_permit name
+        template permit_source, "app/permits/#{permit_target(name)}"
       end
 
       def template_account_permit name, account
-        template "account_permit.erb" , "app/permits/#{account}_permits/#{permit_target(name)}"
+        template "account_permit.erb" , "app/permits/#{account}/#{permit_target(name)}"
       end
 
       def load_permit_template name
-        template = ERB.new File.open(template_filepath).read
+        template = ERB.new File.open(template_filepath).read.gsub(/\n/, "\n\s\s")
         template.result(binding)
       end
 
