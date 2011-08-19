@@ -2,7 +2,7 @@ module CanTango
   module Users
     module User
 
-      include Masquerade
+      # include Masquerade
 
       attr_accessor :active_account
 

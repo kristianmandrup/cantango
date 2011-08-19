@@ -6,7 +6,7 @@ module Cantango
       end
 
       def license_logic
-        return '' if licenses.empty?
+        return ' # use any licenses here' if licenses.empty?
         ls = licenses.map{|c| ":#{c}"}.join(", ")
         "licenses #{ls}"
       end

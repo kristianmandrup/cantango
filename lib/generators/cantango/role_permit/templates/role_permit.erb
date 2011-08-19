@@ -7,7 +7,7 @@ class <%= role.to_s.camelize %>RolePermit < CanTango::RolePermit
 
   def permit_rules
     # insert your can, cannot and any other rule statements here
-    <%= permit_logic.strip %>
+    <%= rules_logic.strip %>
     <%= license_logic %>
   end
 end

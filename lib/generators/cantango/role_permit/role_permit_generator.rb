@@ -30,7 +30,7 @@ module Cantango
       include Cantango::Generators::LicenseBase
       include Cantango::Generators::PermitGenerator
 
-      def group?
+      def is_group?
         options[:group]
       end
     end

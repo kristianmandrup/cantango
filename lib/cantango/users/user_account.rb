@@ -1,7 +1,7 @@
 module CanTango
   module Users
     module UserAccount
-      include CanTango::Users::Masquerade
+      # include CanTango::Users::Masquerade
 
       def active_user
         @active_user || user

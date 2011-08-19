@@ -3,7 +3,7 @@ require 'generators/cantango/license_base'
 
 module Cantango
   module Generators
-    class LicenseGenerator < Cantango::Generators::Base
+    class LicenseGenerator < Cantango::Generators::Base 
       desc "Creates a License for a Permit in 'app/licenses' with reusable permissions"
 
       argument     :name,         :type => :string,    :desc => "Name of license"
@@ -20,7 +20,7 @@ module Cantango
       protected
 
       def create_license
-        template "license.erb", "app/licenses/#{name}_license.rb"
+        template "license.erb", "app/permits/licenses/#{name}_license.rb"
       end
 
       include Cantango::Generators::LicenseBase
