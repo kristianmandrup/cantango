@@ -1,184 +1,86 @@
 h1. CanTango
 
-* extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented permissions design.
-* integrates with any Role and Authentication systems in a non-intrusive manner.
-* supports multiple user accounts, fx for scenarios with sub applications
-* works with multiple "Devise":https://github.com/plataformatec/devise users
+CanTango is an advanced Access Control (permissions) system for Rails 3.
+
+Cantango:
+
+* extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented permissions design
+* integrates with _role_ and _authentication_ systems in a non-intrusive manner
+* can _cache_ rules between requests for increased performance
+* works well with multiple user accounts, sub applications 
+* supports having multiple "Devise":https://github.com/plataformatec/devise users
 
 h2. Supported ruby versions
 
-Tested to work with:
-* Ruby 1.9+
-
-Currently doesn't support:
-* Ruby 1.8.7
-
-If you require ruby 1.8.7 support, please patch it and make a pull request ;)
-
-h2. August 17, version 0.8.2 released
-
-Today marks a new CanTango release, version 0.8.2.
-
-Now with "Pluggable engines":https://github.com/kristianmandrup/cantango/wiki/Pluggable-engines
-
-The project includes two working dummy apps (see spec folder).
-
-* "dummy" - how to use CanTango in a Rails 3 app without Devise.
-* "devise-dummy" - integration _with_ Devise :)
+CanTango has been tested to work with _Ruby 1.9+_ and currently doesn't support _Ruby 1.8.7_
+If you require ruby 1.8.7 support, please help patch it and make a pull request ;)
 
 h2. Will CanTango meet my Access Control (permission) requirements?
 
 * "CanCan vs CanTango":https://github.com/kristianmandrup/cantango/wiki/CanCan-vs-CanTango
 * "CanTango overview":https://github.com/kristianmandrup/cantango/wiki
 
-h2. Install
+h2. Install in current environment (or gemset)
 
 @gem install cantango@
 
-h2. Usage in a Rails 3 app
+h2. Install in application
 
 Insert into Gemfile
 
 @gem 'cantango'@
 
-Run bundler to bundle gems in the app
+Run bundler in a terminal/console from the folder of your Gemfile (root folder of app)
 
 @$ bundle@
 
-h2. Running the dumy app integration tests
-
-<pre>
-$ bundle
-
-# run dummy app integration specs
-$ bundle exec rspec spec/integration
-
-# dun devise dummy integration specs
-$ bundle exec rspec spec/devise-integration
-</pre>
-
-We suggest you look at the wiki scenarios and check out the dummy apps to 
-get a feel for how to integrate CanTango in your app.
-
-h2. Design overview
-
-The CanTango pattern is simple:
-1. Return cached rules (if available)
-2. Generate rules
-3. Cache rules
-
-_CanTango::Ability#initialize_
-
-1. Use cached rules and return if user has cached rules
-2. Generate rules for Permits (if 'Permits engine' is turned on)
-3. Generate rules for Permissions (if 'Permissions engine' is turned on)
-4. Cache generated rules with unique key for current user (ability candidate)
-
-See "CanTango Ability":https://github.com/kristianmandrup/cantango/wiki/Cantango-ability
-
-h2. Rails 3 configuration
-
-See "Configuration":https://github.com/kristianmandrup/cantango/wiki/Configuration
-
-h3. Minimal role system requirements
-
-_CanTango_ requires that you have some kind of 'role system' in place (see "Role system requirement":https://github.com/kristianmandrup/cantango/wiki/Role-system-requirements)
-
-h3. Supported role systems
-
-Currently the role system "Troles":https://github.com/kristianmandrup/troles is targeted, but any role system will do with a few minor patches on top
-
-h2. Permission configuration
-
-Permission rules can be defined in:
-* Permission store
-* Permit classes
-
-h3. Permits
-
-See "Permits":https://github.com/kristianmandrup/cantango/wiki/Permits
-
-h3. Permissions store
-
-Permission rules can be stored and maintained in a "Permissions store":https://github.com/kristianmandrup/cantango/wiki/Permissions-store
-A Permissions store can be either a simple YAML file or a key-value store supported by "Moneta":https://github.com/dkastner/moneta
-
-
-h2. Application configuration for CanTango
-
-* Define roles that Users can have
-* Define which roles are available
-* Define a Permit for each role.
-* For each Permit, define what Users with a role matching the permit can do
-
-h2. Extensions
-
-CanTango will be integrated with "CanCan REST links":https://github.com/kristianmandrup/cancan-rest-links, letting you easily control which users have access to which models in your app.
-
-The coming Rails 3 engine
-"Dancing":https://github.com/kristianmandrup/dancing will likely include a generator that you can use to 
-configure your Rails app for Devise, CanCan, CanTango and Troles.
-
 h2. Quickstart
 
-See "Quickstart guide":https://github.com/kristianmandrup/cantango/wiki/Quickstart in the wiki.
+See the "Quickstart guide":https://github.com/kristianmandrup/cantango/wiki/Quickstart in the wiki.
 
-We also have a complete setup guide for a simple and a complex permissions scenario.
+The follwoing scenarios demonstrate some of the problems CanTango can help solve in an elegant way
 
 * "Simple scenario":https://github.com/kristianmandrup/cantango/wiki/Simple-scenario
 * "Complex scenario":https://github.com/kristianmandrup/cantango/wiki/Complex-scenario
 
-h2. Define Permits
+h2. Rails 3 configuration
 
-Permits can be defined for any of the following:
+The CanTango "Configuration":https://github.com/kristianmandrup/cantango/wiki/Configuration consists of a nice DSL that let's you configure most of the things we imagine you would want to customize. Feel free to suggest more configuration options!
 
+h2. Access Control rules
+
+Rules can be defined in both:
+
+* "Permission store":https://github.com/kristianmandrup/cantango/wiki/Permits (fx a yaml file)
+* "Permits":https://github.com/kristianmandrup/cantango/wiki/Permits (special classes)
+
+Rules can be defined for the following conceptual entities:
+
+* User models
+* User Account models
 * Roles
 * Role groups
-* User types (not yet implemented)
+* Users
 
-In addition you can also define _licenses_, that are sets of permit rules that can be reused in various role and role group permits.
+h2. Design overview
 
-You can use Generators to generate your permits. All Permit classes should be placed in the app/permits folder of a Rails app.
+The CanTango pattern is simple:
 
-See "Role permits":https://github.com/kristianmandrup/cantango/wiki/Role-Permits in the wiki.
+1. Return cached rules if available
+2. Generate rules
+3. Cache rules
 
-h3. Account permits
+Caching can be enabled or disabled. To generate the rules, CanTango comes with a "Permit engine"::https://github.com/kristianmandrup/cantango/wiki/Permit-engine and a "Permission engine":https://github.com/kristianmandrup/cantango/wiki/Permission-engine
 
-You can limist a Permit to only take effect for a certain account
-
-See "Account permits":https://github.com/kristianmandrup/cantango/wiki/Account-permits on the wiki
-
-h3. Role group permits
-
-See "RoleGroup permits":https://github.com/kristianmandrup/cantango/wiki/Role-Group-permits
-
-h3. Advanced permission control
-
-The Permits system uses some special permits _System_ and _Any_, that can be configured for
-advanced permission scenarios as described in the wiki. You also have
-other special options available for advanced permission scenarios.
-
-See "Advanced Permits":https://github.com/kristianmandrup/cantango/wiki/Advanced-permits
-
-h2. Licenses
-
-Licenses are named permission sets that can be reused across various permits (like mixins).
-
-See "Licenses":https://github.com/kristianmandrup/cantango/wiki/Licenses in the wiki.
+You can however freely plugin or unplug engines as you wish as described in "Pluggable engines":https://github.com/kristianmandrup/cantango/wiki/Pluggable-engines
 
 h2. Generators
 
-The gem comes with the following generators
+We now also provide "Generators":https://github.com/kristianmandrup/cantango/wiki/Generators to quickly get you dancing...
 
-* can_tango:install - generate initial configuration files to "install" CanTango in your app
-* can_tango:role_permits - generate multiple permits
-* can_tango:role_permit - generate a single permit
-* can_tango:licenses - generate multiple licenses
-* can_tango:license - generate a single license
+* cantango:install
 
-See "Generators":https://github.com/kristianmandrup/cantango/wiki/Generators
-
-Note: Some work is still needed on the generators... please help out!
+To generate basic initializer and configuration files in order to "install" CanTango in your app. The Permit generators are documented on the Generators wiki page ;)
 
 h2. You need help?
 
