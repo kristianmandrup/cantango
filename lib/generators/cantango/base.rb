@@ -1,6 +1,10 @@
+require 'generators/cantango/basic'
+
 module Cantango
   module Generators
     class Base < ::Rails::Generators::Base
+
+      include Cantango::Generators::Basic
 
       CAN_ACTIONS = [:create, :update, :manage, :read, :access]
 
@@ -12,7 +16,7 @@ module Cantango
 
       protected
 
-      [:user, :account, :group].each do |name|
+      [:user, :account].each do |name|
         define_method :"#{name}?" do
           false
         end

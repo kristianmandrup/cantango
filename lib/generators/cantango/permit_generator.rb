@@ -1,8 +1,15 @@
+require 'generators/cantango/basic'
+
 module Cantango
   module Generators
     module PermitGenerator
+      attr_accessor :permit_name, :permit_logic
+
+      include Cantango::Generators::Basic
 
       def template_permit name, account = nil
+        @permit_name = name
+        set_logic name
         template_account_permit name, account if account
         template permit_source, "app/permits/#{permit_target(name)}" unless account
       end
@@ -36,6 +43,11 @@ module Cantango
         return "#{name}_account_permit.erb" if account?
 
         is_group? ? "#{name}_role_group_permit.rb" : "#{name}_role_permit.rb"
+      end
+
+      def set_logic name
+        meth = "#{name}_logic"
+        @permit_logic = respond_to?(meth) ? send(meth) : base_logic
       end
     end
   end
