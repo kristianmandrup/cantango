@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.8.3"
+  s.version = "0.8.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
@@ -177,7 +177,9 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/users/user.rb",
     "lib/cantango/users/user_account.rb",
     "lib/generators/cantango/account_permit/account_permit_generator.rb",
+    "lib/generators/cantango/account_permit/templates/account_permit.erb",
     "lib/generators/cantango/base.rb",
+    "lib/generators/cantango/basic.rb",
     "lib/generators/cantango/install/install_generator.rb",
     "lib/generators/cantango/install/templates/cantango.rb",
     "lib/generators/cantango/install/templates/categories.yml",
