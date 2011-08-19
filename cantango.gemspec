@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.8.2.1"
+  s.version = "0.8.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-08-18}
+  s.date = %q{2011-08-19}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -45,6 +45,7 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/ability/user_helpers.rb",
     "lib/cantango/api.rb",
     "lib/cantango/api/aliases.rb",
+    "lib/cantango/api/attributes.rb",
     "lib/cantango/api/common.rb",
     "lib/cantango/api/options.rb",
     "lib/cantango/api/user.rb",
@@ -175,7 +176,12 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/users/masquerade/session_active_user.rb",
     "lib/cantango/users/user.rb",
     "lib/cantango/users/user_account.rb",
+    "lib/generators/cantango/account_permit/account_permit_generator.rb",
     "lib/generators/cantango/base.rb",
+    "lib/generators/cantango/install/install_generator.rb",
+    "lib/generators/cantango/install/templates/cantango.rb",
+    "lib/generators/cantango/install/templates/categories.yml",
+    "lib/generators/cantango/install/templates/permissions.yml",
     "lib/generators/cantango/license/license_generator.rb",
     "lib/generators/cantango/license/templates/license.erb",
     "lib/generators/cantango/license_base.rb",
@@ -186,6 +192,9 @@ Store permissions in yaml file or key-value store}
     "lib/generators/cantango/role_permit/templates/role_group_permit.erb",
     "lib/generators/cantango/role_permit/templates/role_permit.erb",
     "lib/generators/cantango/role_permits/role_permits_generator.rb",
+    "lib/generators/cantango/user_permit/templates/account_permit.erb",
+    "lib/generators/cantango/user_permit/templates/user_permit.erb",
+    "lib/generators/cantango/user_permit/user_permit_generator.rb",
     "spec/Note_on_licenses.textile",
     "spec/Refactor_into_engines.textile",
     "spec/TODO",
@@ -204,8 +213,8 @@ Store permissions in yaml file or key-value store}
     "spec/active_record/migrations/006_create_todo.rb",
     "spec/active_record/migrations/007_create_user_todos.rb",
     "spec/active_record/scenarios/SCENARIOS README.textile",
-    "spec/active_record/scenarios/engines/permission_engine/cantango_permissions.yml",
     "spec/active_record/scenarios/engines/permission_engine/categories.yml",
+    "spec/active_record/scenarios/engines/permission_engine/permissions.yml",
     "spec/active_record/scenarios/engines/permission_engine/tango_permission_yml_spec.rb",
     "spec/active_record/scenarios/engines/permission_engine/users.rb",
     "spec/active_record/scenarios/engines/permit_engine/licenses_spec.rb",
@@ -227,7 +236,6 @@ Store permissions in yaml file or key-value store}
     "spec/active_record/scenarios/shared/models/todo.rb",
     "spec/active_record/scenarios/shared/models/user_todo.rb",
     "spec/active_record/scenarios/shared/models/users.rb",
-    "spec/active_record/scenarios/shared/permits/PERMITS README.textile",
     "spec/active_record/scenarios/shared/permits/account_permits/admin_account_permit.rb",
     "spec/active_record/scenarios/shared/permits/account_permits/guest_account_permit.rb",
     "spec/active_record/scenarios/shared/permits/account_permits/user_account_permit.rb",
@@ -241,9 +249,6 @@ Store permissions in yaml file or key-value store}
     "spec/active_record/scenarios/shared/permits/special/any_role_permit.rb",
     "spec/active_record/scenarios/shared/permits/special/system_role_permit.rb",
     "spec/active_record/scenarios/user_accounts/admin_account_spec.rb",
-    "spec/active_record/scenarios/user_accounts/config/account_permits.yml",
-    "spec/active_record/scenarios/user_accounts/docs/USER_ACCOUNTS_SCENARIO.textile",
-    "spec/active_record/scenarios/user_accounts/docs/basic_rules_spec_possible_samples.txt",
     "spec/active_record/scenarios/user_accounts/guest_account_spec.rb",
     "spec/active_record/scenarios/user_accounts/helpers.rb",
     "spec/active_record/scenarios/user_accounts/helpers/account_setup.rb",
@@ -259,6 +264,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/ability/cache_spec.rb",
     "spec/cantango/ability_filters_spec.rb",
     "spec/cantango/ability_spec.rb",
+    "spec/cantango/api/attributes_spec.rb",
     "spec/cantango/api/current_user_accounts.rb",
     "spec/cantango/api/current_users.rb",
     "spec/cantango/api/user/ability_api_spec.rb",
@@ -393,7 +399,6 @@ Store permissions in yaml file or key-value store}
     "spec/devise-dummy/config.ru",
     "spec/devise-dummy/config/application.rb",
     "spec/devise-dummy/config/boot.rb",
-    "spec/devise-dummy/config/cantango_permissions.yml",
     "spec/devise-dummy/config/categories.yml",
     "spec/devise-dummy/config/database.yml",
     "spec/devise-dummy/config/environment.rb",
@@ -410,6 +415,7 @@ Store permissions in yaml file or key-value store}
     "spec/devise-dummy/config/initializers/simple_roles.rb",
     "spec/devise-dummy/config/locales/devise.en.yml",
     "spec/devise-dummy/config/locales/en.yml",
+    "spec/devise-dummy/config/permissions.yml",
     "spec/devise-dummy/config/routes.rb",
     "spec/devise-dummy/db/migrate/002_create_comment.rb",
     "spec/devise-dummy/db/migrate/003_create_post.rb",
@@ -490,7 +496,6 @@ Store permissions in yaml file or key-value store}
     "spec/dummy/config.ru",
     "spec/dummy/config/application.rb",
     "spec/dummy/config/boot.rb",
-    "spec/dummy/config/cantango_permissions.yml",
     "spec/dummy/config/categories.yml",
     "spec/dummy/config/database.yml",
     "spec/dummy/config/environment.rb",
@@ -505,6 +510,7 @@ Store permissions in yaml file or key-value store}
     "spec/dummy/config/initializers/session_store.rb",
     "spec/dummy/config/initializers/simple_roles.rb",
     "spec/dummy/config/locales/en.yml",
+    "spec/dummy/config/permissions.yml",
     "spec/dummy/config/routes.rb",
     "spec/dummy/db/migrate/001_create_user.rb",
     "spec/dummy/db/migrate/002_create_comment.rb",
@@ -528,7 +534,6 @@ Store permissions in yaml file or key-value store}
     "spec/dummy_spec_helper.rb",
     "spec/entire_suite_spec.rb",
     "spec/factories.rb",
-    "spec/fixtures/config/cantango_permissions.yml",
     "spec/fixtures/config/categories.yml",
     "spec/fixtures/config/evaluator_fixtures.yml",
     "spec/fixtures/config/licenses.yml",
@@ -616,11 +621,9 @@ Store permissions in yaml file or key-value store}
       s.add_runtime_dependency(%q<hashie>, [">= 0.4"])
       s.add_runtime_dependency(%q<sourcify>, [">= 0"])
       s.add_runtime_dependency(%q<dkastner-moneta>, [">= 1.0"])
-      s.add_runtime_dependency(%q<friendly_id>, [">= 0"])
-      s.add_development_dependency(%q<devise>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, [">= 2.5.0"])
+      s.add_development_dependency(%q<rspec>, [">= 2.4.0"])
       s.add_development_dependency(%q<jeweler>, [">= 1.6.4"])
-      s.add_development_dependency(%q<bundler>, [">= 1.0.10"])
+      s.add_development_dependency(%q<bundler>, [">= 1.0.1"])
       s.add_development_dependency(%q<rdoc>, [">= 0"])
     else
       s.add_dependency(%q<rails>, [">= 3.0.1"])
@@ -630,11 +633,9 @@ Store permissions in yaml file or key-value store}
       s.add_dependency(%q<hashie>, [">= 0.4"])
       s.add_dependency(%q<sourcify>, [">= 0"])
       s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
-      s.add_dependency(%q<friendly_id>, [">= 0"])
-      s.add_dependency(%q<devise>, [">= 0"])
-      s.add_dependency(%q<rspec>, [">= 2.5.0"])
+      s.add_dependency(%q<rspec>, [">= 2.4.0"])
       s.add_dependency(%q<jeweler>, [">= 1.6.4"])
-      s.add_dependency(%q<bundler>, [">= 1.0.10"])
+      s.add_dependency(%q<bundler>, [">= 1.0.1"])
       s.add_dependency(%q<rdoc>, [">= 0"])
     end
   else
@@ -645,11 +646,9 @@ Store permissions in yaml file or key-value store}
     s.add_dependency(%q<hashie>, [">= 0.4"])
     s.add_dependency(%q<sourcify>, [">= 0"])
     s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
-    s.add_dependency(%q<friendly_id>, [">= 0"])
-    s.add_dependency(%q<devise>, [">= 0"])
-    s.add_dependency(%q<rspec>, [">= 2.5.0"])
+    s.add_dependency(%q<rspec>, [">= 2.4.0"])
     s.add_dependency(%q<jeweler>, [">= 1.6.4"])
-    s.add_dependency(%q<bundler>, [">= 1.0.10"])
+    s.add_dependency(%q<bundler>, [">= 1.0.1"])
     s.add_dependency(%q<rdoc>, [">= 0"])
   end
 end
