@@ -26,7 +26,7 @@ module Cantango
     }
       end
 
-      [:user, :account, :is_group].each do |name|
+      [:is_user, :is_account, :is_group].each do |name|
         define_method :"#{name}?" do
           false
         end

@@ -21,7 +21,6 @@ module Cantango
       source_root File.dirname(__FILE__) + '/templates'
 
       def main_flow
-        return if role.empty?
         template_permit role
       end
 

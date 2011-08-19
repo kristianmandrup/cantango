@@ -1,0 +1,13 @@
+class <%= account.to_s.camelize %>AccountPermit < CanTango::AccountPermit
+  def initialize ability
+    super
+  end
+
+  protected
+
+  def permit_rules
+    # insert your can, cannot and any other rule statements here
+    <%= permit_logic.strip %>
+    <%= license_logic %>
+  end
+end

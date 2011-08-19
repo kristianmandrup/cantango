@@ -32,15 +32,15 @@ module Cantango
       end
 
       def permit_source
-        return "user_permit.erb" if user?
-        return "account_permit.erb" if account?
+        return "user_permit.erb" if is_user?
+        return "account_permit.erb" if is_account?
 
         is_group? ? "role_group_permit.erb" : "role_permit.erb"
       end
 
       def permit_target name
-        return "#{name}_permit.erb" if user?
-        return "#{name}_account_permit.erb" if account?
+        return "#{name}_permit.rb" if is_user?
+        return "#{name}_account_permit.rb" if is_account?
 
         is_group? ? "#{name}_role_group_permit.rb" : "#{name}_role_permit.rb"
       end
