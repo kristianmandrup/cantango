@@ -35,7 +35,7 @@ module Cantango
         return "#{name}_permit.erb" if user?
         return "#{name}_account_permit.erb" if account?
 
-        is_group? ? "#{name}_group_permit.rb" : "#{name}_permit.rb"
+        is_group? ? "#{name}_role_group_permit.rb" : "#{name}_role_permit.rb"
       end
     end
   end

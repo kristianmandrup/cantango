@@ -30,6 +30,8 @@ module Cantango
       include Cantango::Generators::LicenseBase
       include Cantango::Generators::PermitGenerator
 
+      alias_method :role_group, :role
+
       def is_group?
         options[:group]
       end
