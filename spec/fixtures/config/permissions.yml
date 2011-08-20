@@ -1,3 +1,15 @@
+user_types:
+  admin:
+    can:
+      manage:
+        - all
+
+account_types:
+  editor:
+    can:
+      manage:
+        - all
+
 roles:
   admin:
     can:

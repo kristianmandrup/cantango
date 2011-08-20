@@ -36,6 +36,16 @@ describe CanTango::PermissionEngine::YamlStore do
       store.load!
     end
 
+    context "user_types" do
+      subject{ @store.user_types_rules }
+      it { should == @store.user_types_compiled_permissions }
+    end
+
+    context "account_types" do
+      subject{ @store.account_types_rules }
+      it { should == @store.account_types_compiled_permissions }
+    end
+
     context "roles" do
       subject{ @store.roles_rules }
       it { should == @store.roles_compiled_permissions }

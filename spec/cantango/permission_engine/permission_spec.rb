@@ -7,7 +7,7 @@ describe CanTango::PermissionEngine::Permission do
     @permission = CanTango::PermissionEngine::Permission.new :bloggers
   end
 
-  subject do 
+  subject do
     reads = ['Article' , 'Comment']
     writes = ['Article' , 'Post']
     @permission.static_rules.can = {:read => reads}

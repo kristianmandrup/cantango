@@ -10,6 +10,7 @@ module CanTango
         end
 
         def load_from_hash hash
+          return if hash.empty?
           hash.each do |type, groups|
             groups.each do |group, rules|
               permissions[type] ||= {}
@@ -23,6 +24,7 @@ module CanTango
         end
 
         def load!
+          return if yml_content.empty?
           yml_content.each do |type, groups|
             (permissions[type] = {} # This is for having fx empty users: section 
              next) if groups.nil?   #
