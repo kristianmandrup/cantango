@@ -1,8 +1,6 @@
 h1. CanTango
 
-CanTango is an advanced Access Control (permissions) system for Rails 3.
-
-Cantango:
+CanTango is an advanced Access Control (permissions) system for Rails 3. It:
 
 * extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented design
 * integrates with _role_ and _authentication_ systems in a non-intrusive manner
