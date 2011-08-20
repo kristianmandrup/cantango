@@ -14,7 +14,7 @@ module CanTango
         end
 
         def types
-          [:roles, :role_groups, :licenses, :users]
+          [:roles, :role_groups, :licenses, :users, :user_types, :account_types]
         end
 
         attr_reader :config_path
