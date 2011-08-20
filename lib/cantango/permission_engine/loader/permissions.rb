@@ -52,13 +52,14 @@ module CanTango
             permissions.send(:"#{type}")
           }
 
-          define_method(:"#{type}_compiled_permissions") {
+          define_method(:"#{type}_compiled_permissions") do
+            type_permissions = send(:"#{type}_permissions")
+            return Hashie::Mash.new if !type_permissions || type_permissions.empty?
             compiled_sum = send(:"#{type}_permissions").inject({}) do |compiled_sum, (actor, permission)|
               compiled_sum.merge(permission.to_compiled_hash)
             end
             Hashie::Mash.new(compiled_sum)
-          }
-
+          end
         end
 
         include ClassMethods

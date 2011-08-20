@@ -10,7 +10,7 @@ feature "Concertos", %q{
     Concerto.create!(:title => 'one')
     Concerto.create!(:title => 'two')
 
-    @composer = User.create!(:name => 'composer', :role_groups => 'composers', :email => 'stanislaw@mail.ru')
+    @composer = Admin.create!(:name => 'composer', :role_groups => 'composers', :email => 'stanislaw@mail.ru')
     @musician = User.create! :name => 'musician', :role_groups => 'musicians', :email => 'editor@mail.ru'
   end
 

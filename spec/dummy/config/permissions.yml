@@ -1,9 +1,9 @@
-roles:
+user_types:
   admin:
     can:
       manage:
       - all
-
+roles:
   user:
     can:
       read:

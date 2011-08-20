@@ -11,7 +11,7 @@ feature "Articles", %q{
     Article.create!(:title => 'two')
 
     @user = User.create! :name => 'stanislaw', :role => 'user', :email => 'stanislaw@mail.ru'
-    @editor = User.create! :name => 'editor', :role => 'editor', :email => 'editor@mail.ru'
+    @editor = Admin.create! :name => 'editor', :role => 'editor', :email => 'editor@mail.ru'
   end
 
   scenario "Article index" do

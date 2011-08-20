@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
 end
 
 class Admin < User 
-  tango_user # see macros 
+  tango_user # see macros
+  masquerader
 end
 
 # should not inherit from AR, since no need to persist Guest 

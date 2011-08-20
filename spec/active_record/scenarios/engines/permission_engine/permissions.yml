@@ -1,9 +1,10 @@
-roles:
+user_types:
   admin:
     can:
       manage:
       - all
 
+roles:
   musician: 
     can: 
       read:

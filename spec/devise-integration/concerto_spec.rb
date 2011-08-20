@@ -65,7 +65,7 @@ feature "Concertos", %q{
     visit '/concertos/two'
     page.should have_content('two')
   end
-  
+
   scenario "Show concerto admin index to composer", :js => true do
     login_composer
 

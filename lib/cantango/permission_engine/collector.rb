@@ -35,6 +35,11 @@ module CanTango
         ability.user
       end
 
+      def user_account
+        ability.user_account
+      end
+      alias_method :account, :user_account
+
       def user_key_field
         ability.user_key_field
       end

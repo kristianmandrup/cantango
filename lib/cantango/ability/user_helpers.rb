@@ -10,6 +10,7 @@ module CanTango
         return subject.active_account if subject.respond_to? :active_account
         subject
       end
+      alias_method :account, :user_account
 
       def user_key_field
         key_field = config.user.unique_key_field

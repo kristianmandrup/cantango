@@ -11,7 +11,7 @@ module CanTango
     include Cache
     extend  ClassMethods
 
-    attr_reader :options, :subject, :session
+    attr_reader :options, :subject, :session, :candidate
 
     # Equivalent to a CanCan Ability#initialize call
     # which executes all the permission logic
@@ -42,9 +42,9 @@ module CanTango
     end
 
     def subject
-      return @candidate.active_user if masquerade_user?
-      return @candidate.active_account if masquerade_account?
-      @candidate
+      return candidate.active_user if masquerade_user?
+      return candidate.active_account if masquerade_account?
+      candidate
     end
 
     def config

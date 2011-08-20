@@ -3,7 +3,7 @@ module CanTango
     module MasqueradeHelpers
       def masquerade_user?
         return false if masquerading_off?
-        @candidate.respond_to?(:active_user) && @candidate.masquerading?
+        @candidate.respond_to?(:active_user) && @candidate.respond_to?(:masquerading?) && @candidate.masquerading?
       end
 
       def masquerade_account?
