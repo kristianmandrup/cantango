@@ -3,13 +3,12 @@ require 'cantango/permit_engine/util'
 
 module CanTango
   class Ability
-    autoload_modules :ClassMethods, :Scope, :Cache
+    autoload_modules :Scope, :Cache
     autoload_modules :MasqueradeHelpers, :PermitHelpers, :PermissionHelpers
     autoload_modules :UserHelpers, :RoleHelpers
 
     include CanCan::Ability
     include Cache
-    extend  ClassMethods
 
     attr_reader :options, :subject, :session, :candidate
 
