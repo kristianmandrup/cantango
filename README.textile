@@ -11,21 +11,23 @@ Cantango:
 * works well with multiple user accounts and sub applications
 * supports multiple "Devise":https://github.com/plataformatec/devise users
 
-h2. Supported ruby versions
-
-CanTango has been tested to work with _Ruby 1.9+_ and currently doesn't support _Ruby 1.8.7_
-If you require ruby 1.8.7 support, please help patch it and make a pull request ;)
-
-h2. Will CanTango meet my Access Control (permission) requirements?
+h3. Will CanTango meet my Access Control (permission) requirements?
 
 * "CanCan vs CanTango":https://github.com/kristianmandrup/cantango/wiki/CanCan-vs-CanTango
 * "CanTango overview":https://github.com/kristianmandrup/cantango/wiki
 
-h2. Install in current environment (or gemset)
+h2. Installation
+
+h3. Ruby versions
+
+CanTango has been tested to work with _Ruby 1.9+_ and currently doesn't support _Ruby 1.8.7_
+If you require ruby 1.8.7 support, please help patch it and make a pull request ;)
+
+h3. Install in current environment (or gemset)
 
 @gem install cantango@
 
-h2. Install in application
+h3. Install in application
 
 Insert into Gemfile
 
@@ -39,25 +41,34 @@ h2. Quickstart
 
 See the "Quickstart guide":https://github.com/kristianmandrup/cantango/wiki/Quickstart in the wiki.
 
-For a devise integration guide, see "Quickstart with Devise":https://github.com/kristianmandrup/cantango/wiki/Quickstart-cantango-with-devise 
+For devise integration, see "Quickstart with Devise":https://github.com/kristianmandrup/cantango/wiki/Quickstart-cantango-with-devise 
 
 The following scenarios demonstrate some of the problems CanTango can help solve in an elegant way
 
 * "Simple scenario":https://github.com/kristianmandrup/cantango/wiki/Simple-scenario
 * "Complex scenario":https://github.com/kristianmandrup/cantango/wiki/Complex-scenario
 
-h2. Rails 3 configuration
+h3. Generators
+
+Cantango comes with a set of "Generators":https://github.com/kristianmandrup/cantango/wiki/Generators to get your app dancing...
+Simply start with:
+
+* cantango:install
+
+To use the Permit generators please see the Generators wiki page ;)
+
+h3. Rails 3 configuration
 
 The CanTango "Configuration":https://github.com/kristianmandrup/cantango/wiki/Configuration consists of a nice DSL that let's you configure most of the things we imagine you would want to customize. Feel free to suggest more configuration options!
 
-h2. Access Control rules
+h3. Access Control via Permits and Permissions
 
-Rules can be defined in both:
+AC rules can be defined in both:
 
-* "Permission store":https://github.com/kristianmandrup/cantango/wiki/Permits (fx a yaml file)
+* "Permissions":https://github.com/kristianmandrup/cantango/wiki/Permissions (fx a yaml file)
 * "Permits":https://github.com/kristianmandrup/cantango/wiki/Permits (special classes)
 
-Rules can be defined for the following conceptual entities:
+AC rules can be defined for the following conceptual entities:
 
 * User models
 * User Account models
@@ -65,25 +76,24 @@ Rules can be defined for the following conceptual entities:
 * Role groups
 * Users
 
-h2. Design overview
+h3. Design overview
 
-The CanTango pattern is simple:
+The default CanTango ability pattern is simple.
 
-1. Return cached rules if available
-2. Generate rules
-3. Cache rules
+1. Return cached rules for ability candidate if available
+2. Generate rules for candidate
+3. Cache rules for candidate
 
-Caching can be enabled or disabled. To generate the rules, CanTango comes with a "Permit engine"::https://github.com/kristianmandrup/cantango/wiki/Permit-engine and a "Permission engine":https://github.com/kristianmandrup/cantango/wiki/Permission-engine
+An ability candidate is typically either a user or an account instance.
+
+Caching can be enabled or disabled. To generate the rules, one or more engines are executed.
+
+CanTango comes with the following engines:
+
+* "Permit engine"::https://github.com/kristianmandrup/cantango/wiki/Permit-engine
+* "Permission engine":https://github.com/kristianmandrup/cantango/wiki/Permission-engine
 
 You can however freely plugin or unplug engines as you wish as described in "Pluggable engines":https://github.com/kristianmandrup/cantango/wiki/Pluggable-engines
-
-h2. Generators
-
-We now also provide "Generators":https://github.com/kristianmandrup/cantango/wiki/Generators to quickly get you dancing...
-
-* cantango:install
-
-To generate basic initializer and configuration files in order to "install" CanTango in your app. The Permit generators are documented on the Generators wiki page ;)
 
 h2. You need help?
 
@@ -116,6 +126,6 @@ h2. Contributors
 - Lots of bug fixes and specs
 - Tireless "worker" ;)
 
-h2. Copyright
+h3. Copyright
 
 Copyright (c) 2010 Kristian Mandrup. See LICENSE for details.
