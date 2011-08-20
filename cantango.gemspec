@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.8.3.1"
+  s.version = "0.8.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-08-19}
+  s.date = %q{2011-08-20}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -36,7 +36,6 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/ability/cache/kompiler.rb",
     "lib/cantango/ability/cache/moneta_cache.rb",
     "lib/cantango/ability/cache/session_cache.rb",
-    "lib/cantango/ability/class_methods.rb",
     "lib/cantango/ability/masquerade_helpers.rb",
     "lib/cantango/ability/permission_helpers.rb",
     "lib/cantango/ability/permit_helpers.rb",
@@ -109,10 +108,12 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/permission_engine/parser/rule.rb",
     "lib/cantango/permission_engine/permission.rb",
     "lib/cantango/permission_engine/selector.rb",
+    "lib/cantango/permission_engine/selector/account_types.rb",
     "lib/cantango/permission_engine/selector/base.rb",
     "lib/cantango/permission_engine/selector/licenses.rb",
     "lib/cantango/permission_engine/selector/role_groups.rb",
     "lib/cantango/permission_engine/selector/roles.rb",
+    "lib/cantango/permission_engine/selector/user_types.rb",
     "lib/cantango/permission_engine/selector/users.rb",
     "lib/cantango/permission_engine/statement.rb",
     "lib/cantango/permission_engine/statements.rb",
@@ -544,6 +545,7 @@ Store permissions in yaml file or key-value store}
     "spec/fixtures/config/roles.yml",
     "spec/fixtures/config/user_permissions.yml",
     "spec/fixtures/models.rb",
+    "spec/fixtures/models/admin.rb",
     "spec/fixtures/models/items.rb",
     "spec/fixtures/models/simple_roles.rb",
     "spec/fixtures/models/user.rb",
