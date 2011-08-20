@@ -39,7 +39,9 @@ h2. Quickstart
 
 See the "Quickstart guide":https://github.com/kristianmandrup/cantango/wiki/Quickstart in the wiki.
 
-The follwoing scenarios demonstrate some of the problems CanTango can help solve in an elegant way
+For a devise integration guide, see "Quickstart with Devise":https://github.com/kristianmandrup/cantango/wiki/Quickstart-cantango-with-devise 
+
+The following scenarios demonstrate some of the problems CanTango can help solve in an elegant way
 
 * "Simple scenario":https://github.com/kristianmandrup/cantango/wiki/Simple-scenario
 * "Complex scenario":https://github.com/kristianmandrup/cantango/wiki/Complex-scenario
