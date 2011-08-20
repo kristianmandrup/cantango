@@ -4,11 +4,12 @@ CanTango is an advanced Access Control (permissions) system for Rails 3.
 
 Cantango:
 
-* extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented permissions design
+* extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented design
 * integrates with _role_ and _authentication_ systems in a non-intrusive manner
 * can _cache_ rules between requests for increased performance
-* works well with multiple user accounts, sub applications 
-* supports having multiple "Devise":https://github.com/plataformatec/devise users
+* can _store_ rules in a permission store, including a YAML file, for easy administration
+* works well with multiple user accounts and sub applications
+* supports multiple "Devise":https://github.com/plataformatec/devise users
 
 h2. Supported ruby versions
 
@@ -100,18 +101,18 @@ If you encounter bugs, raise an issue or:
 
 h2. Contributors
 
-* Kristian Mandrup
-  * Main architect
-  * Designer of structure
-  * Feature ideas
-  * Initiator of project
-  * Devise app integration specs
+*Kristian Mandrup*
+- Main architect
+- Designer of structure
+- Feature ideas
+- Initiator of project
+- Devise app integration specs
 
-* "Stanislaw Pankevich":https://github.com/stanislaw
-  * Main contributor of permissions engine
-  * Caching of Procs
-  * Lots of bug fixes and many specs
-  * Tireless worker ;)
+"Stanislaw Pankevich":https://github.com/stanislaw
+- Main contributor of permissions engine
+- Caching of Procs for caching engine
+- Lots of bug fixes and specs
+- Tireless "worker" ;)
 
 h2. Copyright
 
