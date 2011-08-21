@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 group :default do
   gem 'rails',            '>= 3.0.1'
   gem 'cancan',           '>= 1.4'
-  gem 'sugar-high',       '~> 0.6.0'
+  gem 'sugar-high',       '>= 0.5.0'
   gem 'sweetloader',      '~> 0.1.0'
   gem 'sqlite3'
   gem 'hashie',           '>= 0.4'
