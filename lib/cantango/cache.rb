@@ -1,6 +1,6 @@
 module CanTango
   module Cache
-    autoload_modules :MonetaCache
+    autoload_modules :HashCache
   end
 end
 

@@ -30,7 +30,8 @@ module CanTango
         end
 
         def cache
-          CanTango::Cache::MonetaCache.instance
+          CanTango::Cache::HashCache.instance
+          # CanTango::Cache::MonetaCache.instance
         end
       end
     end
