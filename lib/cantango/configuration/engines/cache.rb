@@ -6,6 +6,16 @@ module CanTango
       class Cache < Engine
         include Singleton
 
+        def compile state
+          raise "Must be set to :on or :off" if ![:on, :off].include? state
+          @compile = state
+        end
+
+        def compile?
+          @compile ||= :on
+          @compile == :on
+        end
+
         def store &block
           @store ||= ns::Store.new
           # CanTango::Ability::Cache::MonetaCache

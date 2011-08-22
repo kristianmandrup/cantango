@@ -29,7 +29,7 @@ module CanTango
     end
 
     def adapters
-      [:moneta]
+      [:moneta, :compiler]
     end
   end
 end

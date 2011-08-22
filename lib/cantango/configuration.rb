@@ -35,6 +35,13 @@ module CanTango
       }
     end
 
+    # Turn on all engines and enable compile adapter 
+    # i.e compilation of rules via sourcify
+    def enable_defaults!
+      engines.all :on
+      CanTango.adapter :compile
+    end
+
     def clear!
       CanTango::Configuration.components.each do |c|
         comp = send(c)

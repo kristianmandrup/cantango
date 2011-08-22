@@ -2,7 +2,7 @@ require 'moneta'
 
 module CanTango
   module Cache
-      autoload_modules :MonetaCache
+    autoload_modules :MonetaCache
   end
 end
 

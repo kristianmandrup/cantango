@@ -1,4 +1,5 @@
 require 'sourcify'
+
 module CanTango
   class Ability
     module Cache

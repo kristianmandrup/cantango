@@ -21,12 +21,16 @@ module CanTango
 
       return if cached_rules?
 
+      permit_rules
       execute_engines!
 
       cache_rules!
     end
 
     include CanTango::PermitEngine::Util
+
+    def permit_rules
+    end
 
     def execute_engines!
       each_engine {|engine| engine.new(self).execute! if engine  }

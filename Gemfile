@@ -7,9 +7,9 @@ group :default do
   gem 'sweetloader',      '~> 0.1.0'
   gem 'sqlite3'
   gem 'hashie',           '>= 0.4'
-  gem 'sourcify'
 
   # adapters
+  # gem 'sourcify'
   # gem 'dkastner-moneta',  '>= 1.0'
   # gem 'meta_where'
   # gem 'mongoid'

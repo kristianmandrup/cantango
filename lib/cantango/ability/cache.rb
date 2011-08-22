@@ -1,9 +1,7 @@
 module CanTango
   class Ability
     module Cache
-      autoload_modules :BaseCache, :SessionCache, :Kompiler
-
-      include CanTango::Ability::Cache::Kompiler
+      autoload_modules :BaseCache, :SessionCache
 
       attr_reader :rules_cached
 
@@ -15,14 +13,9 @@ module CanTango
       def cache_rules!
         return if !caching_on?
         invalidate_cache!
-        rules_compiled = compile_rules! rules
-        rules_cache.save cache_key, rules_compiled
+        rules_cache.save cache_key, compiled_rules
         session_check!
         session[:cache_key] = cache_key
-      end
-
-      def caching_on?
-        CanTango.config.cache.on?
       end
 
       def cached_rules?
@@ -30,9 +23,7 @@ module CanTango
       end
 
       def cached_rules
-        rules_compiled = rules_cache.load(cache_key)
-        rules_raw = decompile_rules! rules_compiled
-        @rules ||= rules_raw
+        @rules ||= load_rules
       end
 
       def cache_key
@@ -59,6 +50,27 @@ module CanTango
       end
 
       protected
+
+      def compiled_rules
+        compile_on? ? compile_rules!(rules) : rules
+      end
+
+      def rules_loaded
+        rules_cache.load(cache_key)
+      end
+
+      def load_rules
+        compile_on? ? decompile_rules!(rules_loaded) : rules_loaded
+      end
+
+      def compile_on?
+        raise ":compile adapter must be used when compiler is on" if CompileCanTango.config.cache.compile? && !respond_to?(:compile_rules!)
+        CanTango.config.cache.compile?
+      end
+
+      def caching_on?
+        CanTango.config.cache.on?
+      end
 
       def cache_key_same?
         session_check!
