@@ -8,9 +8,9 @@ group :default do
   gem 'sqlite3'
   gem 'hashie',           '>= 0.4'
   gem 'sourcify'
-  gem 'dkastner-moneta',  '>= 1.0'
 
   # adapters
+  # gem 'dkastner-moneta',  '>= 1.0'
   # gem 'meta_where'
   # gem 'mongoid'
 end

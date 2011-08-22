@@ -1,7 +1,7 @@
 module CanTango
   class Ability
     module Cache
-      autoload_modules :BaseCache, :SessionCache, :MonetaCache, :Kompiler
+      autoload_modules :BaseCache, :SessionCache, :Kompiler
 
       include CanTango::Ability::Cache::Kompiler
 

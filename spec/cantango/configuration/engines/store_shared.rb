@@ -1,3 +1,5 @@
+CanTango.adapter :moneta
+
 class MoneyCache < CanTango::Ability::MonetaCache
   def initialize
   end

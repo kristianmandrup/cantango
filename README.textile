@@ -35,6 +35,14 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
+h3. Dependencies, Adapters and Loading
+
+CanTango had been designed to be minimally intrusive and not require too many external dependencies. 
+If you want to enable Moneta for caching or storage, you must execute an adapter macro: @CanTango.adapter :moneta@ 
+This will setup lazy-loading of Moneta cache and Moneta store respectively.
+
+Note that CanTango uses @autoload_modules@ from the "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' gem to ensure that all files are lazy-loaded. Thus if you configure CanTango to exclude an engine, the code for that engine will never be loaded.
+
 h2. Quickstart
 
 See the "Quickstart guide":https://github.com/kristianmandrup/cantango/wiki/Quickstart in the wiki.

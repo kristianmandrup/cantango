@@ -6,7 +6,6 @@ require 'sugar-high/class_ext'
 require 'sugar-high/array'
 require 'sugar-high/blank'
 require 'hashie'
-require 'moneta'
 
 AutoLoader.namespaces = {:CanTango => 'cantango'}
 
@@ -23,6 +22,15 @@ module CanTango
     end
 
     alias_method :config, :configure
+
+    def adapter name
+      return if !adapters.include? name.to_sym
+      require "cantango/adapter/#{name}"
+    end
+
+    def adapters
+      [:moneta]
+    end
   end
 end
 
