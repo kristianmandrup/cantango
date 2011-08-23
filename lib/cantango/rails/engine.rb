@@ -3,13 +3,11 @@ module CanTango
   # "Borrowed" from devise
   def self.include_helpers(scope)
     ActiveSupport.on_load(:action_controller) do
-
-      include scope::Rails::ControllerHelpers
+      include scope::Rails::Helpers::ControllerHelper
     end
 
     ActiveSupport.on_load(:action_view) do
-
-      include scope::Rails::ViewHelpers
+      include scope::Rails::Helpers::ViewHelper
     end
   end
 
