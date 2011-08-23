@@ -1,29 +1,27 @@
 module CanTango
   class Ability
     module Cache
-      autoload_modules :BaseCache, :SessionCache
+      autoload_modules :BaseCache, :SessionCache, :Reader, :Writer, :RulesCache
 
       attr_reader :rules_cached
+
+      include Reader
+      include Writer
 
       def rules
         return cached_rules if cached_rules?
         super
       end
 
-      def cache_rules!
-        return if !caching_on?
-        invalidate_cache!
-        rules_cache.save cache_key, compiled_rules
-        session_check!
-        session[:cache_key] = cache_key
+      protected
+
+      def compile_on?
+        raise ":compile adapter must be used when compiler is on" if CompileCanTango.config.cache.compile? && !respond_to?(:compile_rules!)
+        CanTango.config.cache.compile?
       end
 
-      def cached_rules?
-        caching_on? && cache_key_same?
-      end
-
-      def cached_rules
-        @rules ||= load_rules
+      def caching_on?
+        CanTango.config.cache.on?
       end
 
       def cache_key
@@ -40,57 +38,13 @@ module CanTango
         [subject.roles_list, subject.role_groups_list].hash
       end
 
-      def invalidate_cache!
-        session_check!
-        rules_cache.invalidate! session[:cache_key]
-      end
-
-      def rules_cache
-        @rules_cache ||= rules_cache_instance
-      end
-
-      protected
-
-      def compiled_rules
-        compile_on? ? compile_rules!(rules) : rules
-      end
-
-      def rules_loaded
-        rules_cache.load(cache_key)
-      end
-
-      def load_rules
-        compile_on? ? decompile_rules!(rules_loaded) : rules_loaded
-      end
-
-      def compile_on?
-        raise ":compile adapter must be used when compiler is on" if CompileCanTango.config.cache.compile? && !respond_to?(:compile_rules!)
-        CanTango.config.cache.compile?
-      end
-
-      def caching_on?
-        CanTango.config.cache.on?
-      end
-
       def cache_key_same?
         session_check!
         session[:cache_key] && (cache_key == session[:cache_key])
       end
 
-      def rules_cache_instance
-        @rules_cache_instance ||= begin
-          options = rules_cache_options
-          options.merge!(:session => session) if session?
-          rules_cache_class.new :rules_cache, options
-        end
-      end
-
-      def rules_cache_options
-       CanTango.config.cache.store.options || {}
-      end
-
-      def rules_cache_class
-        CanTango.config.cache.store.default_class
+      def rules_cache
+        @rules_cache ||= RulesCache.new(session).instance
       end
 
       def session?

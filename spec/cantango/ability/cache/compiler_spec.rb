@@ -2,6 +2,8 @@ require 'rspec'
 require 'cantango'
 require 'sourcify'
 
+CanTango.adapters :compiler, :moneta
+
 describe CanTango::Ability::Cache::Kompiler do
 
 module Cachestub
