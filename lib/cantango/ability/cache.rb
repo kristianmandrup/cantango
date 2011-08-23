@@ -1,58 +1,51 @@
 module CanTango
   class Ability
-    module Cache
+    class Cache
       autoload_modules :BaseCache, :SessionCache, :Reader, :Writer, :RulesCache
 
-      attr_reader :rules_cached
+      attr_reader :rules_cached, :session, :ability
 
-      include Reader
-      include Writer
-
-      def rules
-        return cached_rules if cached_rules?
-        super
+      def initialize ability, options = {}
+        @session = options[:session]
+        @ability = ability
       end
 
-      protected
-
-      def compile_on?
-        raise ":compile adapter must be used when compiler is on" if CompileCanTango.config.cache.compile? && !respond_to?(:compile_rules!)
-        CanTango.config.cache.compile?
+      def compiler
+        @compiler ||= Kompiler.new
       end
 
-      def caching_on?
-        CanTango.config.cache.on?
+      def reader
+        @reader ||= Reader.new(self)
       end
 
-      def cache_key
-        @cache_key ||= begin
-          user_key_field = CanTango.config.user.unique_key_field || :email
-          raise "#{user.class} must have a method ##{user_key_field}. You can configure this with CanTango.config#user.unique_key_field" if !user.respond_to?(user_key_field)
-
-          user_key = user.send(user_key_field)
-          [user_key, subject_roles_hash].hash
-        end
+      def writer
+        @writer ||= Writer.new(self)
       end
 
-      def subject_roles_hash
-        [subject.roles_list, subject.role_groups_list].hash
+      def cached_rules?
+        key.same? session
       end
 
-      def cache_key_same?
-        session_check!
-        session[:cache_key] && (cache_key == session[:cache_key])
+      def key
+        @key ||= Key.new ability.user, session
       end
 
       def rules_cache
         @rules_cache ||= RulesCache.new(session).instance
       end
 
-      def session?
-        session
+      def invalidate!
+        raise "no session" if !session
+        rules_cache.invalidate! session[:cache_key]
       end
 
-      def session_check!
-        raise "No session available" if !session?
+      def compile_on?
+        raise ":compile adapter must be used when compiler is on" if missing_compile_adapter?
+        CanTango.config.cache.compile?
+      end
+
+      def missing_compile_adapter?
+        CompileCanTango.config.cache.compile? && !respond_to?(:compile_rules!)
       end
     end
   end

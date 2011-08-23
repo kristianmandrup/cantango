@@ -5,10 +5,9 @@ module CanTango
   class Ability
     autoload_modules :Scope, :Cache
     autoload_modules :MasqueradeHelpers, :PermitHelpers, :PermissionHelpers
-    autoload_modules :UserHelpers, :RoleHelpers
+    autoload_modules :UserHelpers, :RoleHelpers, :CacheHelpers
 
     include CanCan::Ability
-    include Cache
 
     attr_reader :options, :subject, :session, :candidate
 
@@ -24,7 +23,7 @@ module CanTango
       permit_rules
       execute_engines!
 
-      cache_rules!
+      cache_rules! if caching_on?
     end
 
     include CanTango::PermitEngine::Util
