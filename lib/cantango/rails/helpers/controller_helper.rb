@@ -11,6 +11,7 @@ module CanTango
         def self.apis
           [] # [:Can, :Active, :Scope]
         end
+      end
     end
   end
 end

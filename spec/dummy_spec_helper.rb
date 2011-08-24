@@ -17,6 +17,8 @@ require 'capybara/rspec'
 #require 'controller_macros'
 #Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
+CanTango.adapters :compiler
+
 #ActiveRecord::Base.logger = Logger.new(STDERR)
 DatabaseCleaner.strategy = :truncation
 def migration_folder(name)

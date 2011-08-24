@@ -7,11 +7,15 @@ module CanTango
       end
 
       def cache_rules!
-        cache_writer.save cache.key, compiled_rules
+        cache.cache_rules!
       end
 
       def cached_rules
         cache.cached_rules
+      end
+
+      def cache
+        @cache ||= Cache.new self, options
       end
 
       protected

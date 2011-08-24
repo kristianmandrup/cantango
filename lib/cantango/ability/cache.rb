@@ -1,13 +1,17 @@
 module CanTango
   class Ability
     class Cache
-      autoload_modules :BaseCache, :SessionCache, :Reader, :Writer, :RulesCache
+      autoload_modules :BaseCache, :SessionCache, :Reader, :Writer, :RulesCache, :Key
 
       attr_reader :rules_cached, :session, :ability
 
       def initialize ability, options = {}
         @session = options[:session]
         @ability = ability
+      end
+
+      def cache_rules!
+        writer.save key, reader.prepared_rules
       end
 
       def cached_rules
@@ -27,7 +31,7 @@ module CanTango
       end
 
       def cached_rules?
-        key.same? session
+        key.same?
       end
 
       def key
@@ -49,7 +53,8 @@ module CanTango
       end
 
       def missing_compile_adapter?
-        CompileCanTango.config.cache.compile? && !respond_to?(:compile_rules!)
+        CanTango.config.cache.compile? && !defined?(CanTango::Ability::Cache::Kompiler)
+ 
       end
     end
   end

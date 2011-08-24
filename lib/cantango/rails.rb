@@ -1,5 +1,7 @@
 module CanTango
   module Rails
-    autoload_modules :ControllerHelpers, :ViewHelpers, :BaseHelpers
+    module Helpers
+      autoload_modules :ControllerHelper, :ViewHelper, :BaseHelper #, :RestHelper
+    end
   end
 end

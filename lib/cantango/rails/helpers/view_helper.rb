@@ -1,7 +1,7 @@
 module CanTango
   module Rails
     module Helpers
-      module ViewHelpers
+      module ViewHelper
         include CanTango::Rails::Helpers::BaseHelper
 
         def self.included(base)
