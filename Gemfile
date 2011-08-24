@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 group :default do
   gem 'rails',            '>= 3.0.1'
   gem 'cancan',           '>= 1.4'
-  gem 'sugar-high',       '>= 0.5.0'
+  gem 'sugar-high',       '>= 0.6.0'
   gem 'sweetloader',      '~> 0.1.0'
   gem 'sqlite3'
   gem 'hashie',           '>= 0.4'
@@ -27,7 +27,7 @@ group :test do
   gem 'spork'
   gem "rspec-rails",    '>= 2.4'
   gem 'capybara'
-  gem 'rails-app-spec', '>= 0.4.0'
+  # gem 'rails-app-spec', '>= 0.4.0'
   gem 'mocha'
   gem "launchy"
 
@@ -43,7 +43,7 @@ group :test do
   gem 'haml'
 
   # Generators
-  gem 'generator-spec', '>= 0.7.6'
+  gem 'generator-spec', '>= 0.7.8'
 end
 
 group :development, :test do
