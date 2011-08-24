@@ -37,11 +37,19 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 h3. Dependencies, Adapters and Loading
 
-CanTango had been designed to be minimally intrusive and not require too many external dependencies. 
-If you want to enable Moneta for caching or storage, you must execute an adapter macro: @CanTango.adapter :moneta@ 
-This will setup lazy-loading of Moneta cache and Moneta store respectively.
+CanTango had been designed to be minimally intrusive and not require too many external dependencies.
 
-Note that CanTango uses @autoload_modules@ from the "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' gem to ensure that all files are lazy-loaded. Thus if you configure CanTango to exclude an engine, the code for that engine will never be loaded.
+If you want to enable Moneta for caching or storage, you must execute an adapter macro: @CanTango.adapter :moneta@
+
+This will setup lazy-loading of Moneta cache and Moneta store respectively.
+If you want to enable compilation of dynamic rules (using blocks) you must use the @:compiler@ adapter
+
+If you use any of these adapters, you must manually include the following in your Rails app Gemfile.
+
+@gem 'dkastner-moneta'@ for moneta adapter and @gem 'sourcify'@ for the compiler adapter.
+
+CanTango uses @autoload_modules@ from the "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' gem.
+This ensures that all such modules are lazy-loaded. Thus if you configure CanTango to exclude an engine, the code for that engine will never be loaded, minimizing the load time and memory print.
 
 h2. Quickstart
 

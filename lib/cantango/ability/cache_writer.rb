@@ -20,12 +20,8 @@ module CanTango
       end
 
       def rules
-        return cached_rules if cache.cached_rules?
+        return cache.cached_rules if cache.cached_rules?
         super
-      end
-
-      def cached_rules
-        @rules ||= cache.reader.prepared_rules
       end
     end
   end

@@ -22,8 +22,10 @@ class CacheStub
   def dynamic_rules
     rules << :rule_d
   end
-  
-  include CanTango::Ability::Cache
+
+  def cache
+    @cache ||= CanTango::Ability::Cache.new
+  end
 end
 
 

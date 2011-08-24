@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    module Cache
+    class Cache
       class BaseCache
         attr_reader :name, :options
 

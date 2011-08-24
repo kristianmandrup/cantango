@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    module Cache
+    class Cache
       class SessionCache < BaseCache
         attr_accessor :session
 

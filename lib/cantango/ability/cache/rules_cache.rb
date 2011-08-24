@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    module Cache
+    class Cache
       class RulesCache
         def instance
           @instance ||= clazz.new :rules_cache, options

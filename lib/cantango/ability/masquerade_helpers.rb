@@ -1,6 +1,7 @@
 module CanTango
   class Ability
     module MasqueradeHelpers
+
       def masquerade_user?
         return false if masquerading_off?
         candidate.respond_to?(:active_user) && masquerading?

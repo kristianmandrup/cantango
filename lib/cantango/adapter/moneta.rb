@@ -8,7 +8,7 @@ end
 
 module CanTango
   class Ability
-    module Cache
+    class Cache
       autoload_modules :MonetaCache
     end
   end

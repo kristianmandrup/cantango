@@ -3,7 +3,7 @@ require 'active_support/inflector'
 
 module CanTango
   class Ability
-    module Cache
+    class Cache
       class MonetaCache
         # one cache store is shared for all store instances (w different names)
         attr_reader :store

@@ -7,26 +7,27 @@ CanTango.adapters :compiler, :moneta
 describe CanTango::Ability::Cache::Kompiler do
 
 module Cachestub
-  
   class << self
-  include CanTango::Ability::Cache::Kompiler
 
-  def compile_rules rules
-    compile_rules! rules
-  end
+    def compiler
+      @compiler ||= CanTango::Ability::Cache::Kompiler.new
+    end
 
-  def decompile_rules rules
-    decompile_rules! rules
-  end
+    def compile_rules rules
+      compiler.compile! rules
+    end
 
+    def decompile_rules rules
+      compiler.decompile! rules
+    end
   end
 end
-  
-  before(:each) { 
+
+  before(:each) do
     $b = [:a,:b,:c]
     @condition_block = Proc.new { |arg| $b = [1, 2, 3, arg] } 
     @rules = [CanCan::Rule.new(true, :read, :all, nil, @condition_block) ]
-  }
+  end
 
   it "should compile! rules" do
     Cachestub.compile_rules(@rules).first.block.should == "proc { |arg| $b = [1, 2, 3, arg] }"

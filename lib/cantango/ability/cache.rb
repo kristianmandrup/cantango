@@ -10,6 +10,10 @@ module CanTango
         @ability = ability
       end
 
+      def cached_rules
+        @rules ||= reader.prepared_rules
+      end
+
       def compiler
         @compiler ||= Kompiler.new
       end

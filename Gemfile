@@ -20,14 +20,21 @@ group :test do
 
   # Data
   gem 'database_cleaner', :git => "git://github.com/kristianmandrup/database_cleaner.git"
-
   gem 'factory_girl'
+
+  # Adapters
+  gem 'sourcify'
+  gem 'dkastner-moneta',  '>= 1.0'
+
+  # for later...
+  # gem 'meta_where'
+  # gem 'mongoid'
 
   # Specs
   gem 'spork'
   gem "rspec-rails",    '>= 2.4'
   gem 'capybara'
-  # gem 'rails-app-spec', '>= 0.4.0'
+  gem 'rails-app-spec', '>= 0.5.0'
   gem 'mocha'
   gem "launchy"
 
@@ -37,7 +44,7 @@ group :test do
   # Integration testing
   gem 'decent_exposure'
   gem "friendly_id"
-  gem "devise",         '>= 1.2'
+  gem "devise",         '>= 1.4'
 
   # Rails
   gem 'haml'

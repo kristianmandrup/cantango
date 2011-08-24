@@ -2,7 +2,7 @@ require 'sourcify'
 
 module CanTango
   class Ability
-    module Cache
+    class Cache
       class Kompiler
 
         def compile! rules_raw

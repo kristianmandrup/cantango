@@ -1,4 +1,3 @@
-# @stanislaw: needed?
 require 'cantango/permit_engine/util'
 
 module CanTango
@@ -53,6 +52,7 @@ module CanTango
       CanTango.config
     end
 
+    include CacheHelpers
     include MasqueradeHelpers
     include PermissionHelpers
     include PermitHelpers
