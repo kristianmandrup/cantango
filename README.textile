@@ -37,14 +37,15 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 h2. Update August 25, 2011
 
-Latest release: *0.8.5*
+Currently a few bugs in master.
+Next release will be: *0.8.5*
 
 CanTango now supports use of "sugar-high 0.6":https://github.com/kristianmandrup/sugar-high.git' where "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' has been extracted into its own gem.
 * The Cache has been refactored
 * Engines are now run in correct order and only if active
 * The Cache Kompiler (for dynamic rules caching) and Moneta cache are now optional (via adapters)
 
-For the next release, we plan to optimize permits loading (via pre-registration) and increase visibility of the Ability flow, to allow one to see which rules are triggered by which permits (special :debug config mode).
+For the first release in September, we plan to optimize permits loading (via pre-registration) and increase visibility of the Ability flow, to allow one to see which rules are triggered by which permits (special :debug config mode).
 
 h2. Quickstart
 
