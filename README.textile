@@ -35,27 +35,22 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h3. Dependencies, Adapters and Loading
+h2. Update August 25, 2011
 
-CanTango had been designed to be minimally intrusive and not require too many external dependencies.
+Latest release: *0.8.5*
 
-If you want to enable Moneta for caching or storage, you must execute an adapter macro: @CanTango.adapter :moneta@
+CanTango now supports use of "sugar-high 0.6":https://github.com/kristianmandrup/sugar-high.git' where "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' has been extracted into its own gem.
+* The Cache has been refactored
+* Engines are now run in correct order and only if active
+* The Cache Kompiler (for dynamic rules caching) and Moneta cache are now optional (via adapters)
 
-This will setup lazy-loading of Moneta cache and Moneta store respectively.
-If you want to enable compilation of dynamic rules (using blocks) you must use the @:compiler@ adapter
-
-If you use any of these adapters, you must manually include the following in your Rails app Gemfile.
-
-@gem 'dkastner-moneta'@ for moneta adapter and @gem 'sourcify'@ for the compiler adapter.
-
-CanTango uses @autoload_modules@ from the "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' gem.
-This ensures that all such modules are lazy-loaded. Thus if you configure CanTango to exclude an engine, the code for that engine will never be loaded, minimizing the load time and memory print.
+For the next release, we plan to optimize permits loading (via pre-registration) and increase visibility of the Ability flow, to allow one to see which rules are triggered by which permits (special :debug config mode).
 
 h2. Quickstart
 
 See the "Quickstart guide":https://github.com/kristianmandrup/cantango/wiki/Quickstart in the wiki.
 
-For devise integration, see "Quickstart with Devise":https://github.com/kristianmandrup/cantango/wiki/Quickstart-cantango-with-devise 
+For devise integration, see "Quickstart with Devise":https://github.com/kristianmandrup/cantango/wiki/Quickstart-cantango-with-devise
 
 The following scenarios demonstrate some of the problems CanTango can help solve in an elegant way
 
@@ -108,6 +103,22 @@ CanTango comes with the following engines:
 * "Permission engine":https://github.com/kristianmandrup/cantango/wiki/Permission-engine
 
 You can however freely plugin or unplug engines as you wish as described in "Pluggable engines":https://github.com/kristianmandrup/cantango/wiki/Pluggable-engines
+
+h3. Dependencies, Adapters and Loading
+
+CanTango had been designed to be minimally intrusive and not require too many external dependencies.
+
+If you want to enable Moneta for caching or storage, you must execute an adapter macro: @CanTango.adapter :moneta@
+
+This will setup lazy-loading of Moneta cache and Moneta store respectively.
+If you want to enable compilation of dynamic rules (using blocks) you must use the @:compiler@ adapter
+
+If you use any of these adapters, you must manually include the following in your Rails app Gemfile.
+
+@gem 'dkastner-moneta'@ for moneta adapter and @gem 'sourcify'@ for the compiler adapter.
+
+CanTango uses @autoload_modules@ from the "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' gem.
+This ensures that all such modules are lazy-loaded. Thus if you configure CanTango to exclude an engine, the code for that engine will never be loaded, minimizing the load time and memory print.
 
 h2. You need help?
 
