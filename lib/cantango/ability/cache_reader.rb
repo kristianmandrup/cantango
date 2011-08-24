@@ -8,10 +8,6 @@ module CanTango
         @cache = cache
       end
 
-      def cached_rules
-        @rules ||= prepared_rules
-      end
-
       protected
 
       def prepared_rules
