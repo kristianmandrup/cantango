@@ -89,6 +89,10 @@ module CanTango
         available.each {|engine| yield send(engine) if respond_to?(engine) }
       end
 
+      def active? name
+        active.include? name.to_sym
+      end
+
       def active
         available.select {|engine| send(engine).on? if respond_to?(engine) }
       end

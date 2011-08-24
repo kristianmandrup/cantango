@@ -8,7 +8,7 @@ module CanTango
     end
 
     def execute!
-      permits.each do |permit| 
+      permits.each do |permit|
         break if permit.execute == :break
       end
     end

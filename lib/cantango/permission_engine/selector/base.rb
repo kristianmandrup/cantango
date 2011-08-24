@@ -9,7 +9,7 @@ module CanTango
         end
 
         def select permissions
-          permissions.select{|permission| relevant? permission }
+          permissions.select { |permission| relevant? permission }
         end
       end
     end

@@ -35,7 +35,6 @@ class EditorsRoleGroupPermit < CanTango::RoleGroupPermit
 end
 
 
-
 class UserRolePermit < CanTango::RolePermit
   def initialize ability
     super
@@ -115,6 +114,8 @@ describe CanTango::Ability do
 
     subject { @ability }
       specify { @ability.should be_allowed_to(:read, Comment)}
+      specify { @ability.should be_allowed_to(:write, Article)}
+
       specify { @ability.should be_allowed_to(:publish, Post)}
 
       specify { @ability.should_not be_allowed_to(:publish, Article)}

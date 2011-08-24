@@ -19,6 +19,7 @@ module CanTango
 
       return if cached_rules?
 
+      clear_rules!
       permit_rules
       execute_engines!
 
@@ -30,12 +31,16 @@ module CanTango
     def permit_rules
     end
 
+    def clear_rules!
+      @rules = []
+    end
+
     def execute_engines!
       each_engine {|engine| engine.new(self).execute! if engine  }
     end
 
     def each_engine &block
-      engines.execution_order.each {|name| yield engines.registered[name] }
+      engines.execution_order.each {|name| yield engines.registered[name] if engines.active? name }
     end
 
     def engines
