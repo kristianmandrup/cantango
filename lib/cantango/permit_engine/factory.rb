@@ -1,10 +1,6 @@
-require 'sugar-high/class_ext'
-
 module CanTango
   class PermitEngine < Engine
     class Factory
-      include ClassExt
-
       attr_accessor :ability, :builders
 
       # creates the factory for the ability
