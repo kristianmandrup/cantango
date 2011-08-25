@@ -2,6 +2,8 @@ module CanTango
   class Ability
     class Cache
       class RulesCache
+        attr_reader :session
+
         def instance
           @instance ||= clazz.new :rules_cache, options
         end
@@ -11,7 +13,7 @@ module CanTango
         end
 
         def options
-          @options ||= session ? cache_options.merge!(:session => session) : cache_options
+          @options ||= session ? cache_options.merge(:session => session) : cache_options
         end
 
         def cache_options
