@@ -35,7 +35,7 @@ module CanTango
       end
 
       def key
-        @key ||= Key.new ability.user, session
+        @key ||= Key.new ability.user, ability.subject, session
       end
 
       def rules_cache

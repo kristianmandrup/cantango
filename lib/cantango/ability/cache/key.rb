@@ -2,10 +2,11 @@ module CanTango
   class Ability
     class Cache
       class Key
-        attr_reader :session
+        attr_reader :user, :session, :subject
 
-        def initialize user, session
+        def initialize user, subject, session
           @user = user
+          @subject = subject
           @session = session
         end
 

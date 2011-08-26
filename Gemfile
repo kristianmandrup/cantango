@@ -32,7 +32,6 @@ group :test do
 
   # Specs
   gem 'spork'
-  gem "rspec-rails",    '>= 2.4'
   gem 'capybara'
   gem 'rails-app-spec', '>= 0.5.0'
   gem 'mocha'
@@ -54,6 +53,9 @@ group :test do
 end
 
 group :development, :test do
+  gem 'rspec-rails', '2.6.1' # needed in development to expose the rails generators
+  gem 'forgery',    '0.3.10' # needed in development when using rake db:seed
+  gem 'factory_girl'
 end
 
 group :development do

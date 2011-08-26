@@ -3,9 +3,11 @@ require 'rspec'
 require 'cancan/matchers'
 require 'cantango'
 require 'cantango/rspec'
-require 'factory_girl'
 require 'mocha'
-require 'factories'
+require 'fixtures/models'
+
+require 'factory_girl'
+FactoryGirl.find_definitions
 
 require 'cutter'
 
