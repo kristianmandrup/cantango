@@ -7,8 +7,6 @@ module CanTango
       attr_writer   :default
       attr_accessor :registered
 
-      include Singleton
-
       def types= *types
         @types = types.select {|t| t.is_a? Class }
       end

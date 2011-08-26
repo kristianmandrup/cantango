@@ -21,7 +21,7 @@ module CanTango
     def self.components
       [
         :guest, :autoload, :user, :user_account, :models, :roles, :role_groups,
-        :engines, :users, :user_accounts, :categories, :adapters
+        :engines, :users, :user_accounts, :categories, :adapters, :permits
       ]
     end
 
@@ -52,11 +52,9 @@ module CanTango
 
     CanTango.config.engines.default_available.each do |engine|
       class_eval %{
-        def #{engine}
+        def #{engine}_engine
           engine(:#{engine})
         end
-
-        alias_method :#{engine.to_s.pluralize}, :#{engine}
       }
     end
 

@@ -39,4 +39,5 @@ module CanTango
 end
 
 require 'cantango/api/aliases'
+require 'cantango/permits/macros'
 require 'cantango/users/macros'

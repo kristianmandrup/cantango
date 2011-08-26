@@ -17,6 +17,11 @@ module CanTango
         @ability  = ability
       end
 
+      def self.first_name clazz
+        clazz.to_s.gsub(/^([A-Z][a-z]+).*/, '\1').downcase.to_sym # first part of class name
+      end
+
+
       def self.account_name clazz
         clazz.name.demodulize.gsub(/(.*)Permits::/, '\1').underscore.to_sym
       end

@@ -3,7 +3,7 @@ module CanTango
     class PermitRegistry
       attr_reader :accounts
 
-      [:user_type, :account_type, :role :role_group].each do |permit|
+      [:user_type, :account_type, :role, :role_group].each do |permit|
         class_eval %{
           def #{permit}
             @#{permit} ||= HashRegistry.new
