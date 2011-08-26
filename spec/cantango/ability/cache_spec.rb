@@ -2,6 +2,8 @@ require 'rspec'
 require 'cantango'
 require 'fixtures/models'
 
+puts "WARNING - TODO - Full caching spec !!!"
+
 class CacheStub
   attr_accessor :user
 

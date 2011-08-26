@@ -3,11 +3,14 @@ module CanTango
     class Cache
       autoload_modules :BaseCache, :SessionCache, :Reader, :Writer, :RulesCache, :Key
 
-      attr_reader :rules_cached, :session, :ability
+      attr_reader :rules_cached, :ability
 
-      def initialize ability, options = {}
-        @session = options[:session]
+      def initialize ability
         @ability = ability
+      end
+
+      def session
+        ability.session
       end
 
       def cache_rules!
