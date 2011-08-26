@@ -4,6 +4,7 @@ Bundler.require
 
 require 'rails/all'
 require "cantango"
+require "sourcify"
 require "haml"
 require "decent_exposure"
 require "friendly_id"

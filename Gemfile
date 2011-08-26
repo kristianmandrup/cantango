@@ -22,10 +22,6 @@ group :test do
   gem 'database_cleaner', :git => "git://github.com/kristianmandrup/database_cleaner.git"
   gem 'factory_girl'
 
-  # Adapters
-  gem 'sourcify'
-  gem 'dkastner-moneta',  '>= 1.0'
-
   # for later...
   # gem 'meta_where'
   # gem 'mongoid'
@@ -56,6 +52,10 @@ group :development, :test do
   gem 'rspec-rails', '2.6.1' # needed in development to expose the rails generators
   gem 'forgery',    '0.3.10' # needed in development when using rake db:seed
   gem 'factory_girl'
+
+  # Adapters
+  gem 'sourcify'
+  gem 'dkastner-moneta',  '>= 1.0'
 end
 
 group :development do
