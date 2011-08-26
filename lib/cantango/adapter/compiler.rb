@@ -6,3 +6,4 @@ module CanTango
   end
 end
 
+CanTango.config.adapters.register :compiler

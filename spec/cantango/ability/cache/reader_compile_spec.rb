@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+CanTango.adapters :compiler
+
 describe CanTango::Ability::Cache::Reader do
   let (:session) do
     {}
@@ -20,13 +22,20 @@ describe CanTango::Ability::Cache::Reader do
   describe 'prepared rules' do
     before do
       $b = [:a,:b,:c]
-      @rules = [ CanCan::Rule.new(true, :read, :all, nil, {}) ]
+      @condition_block = Proc.new { |arg| $b = [1, 2, 3, arg] } 
+      @rules = [CanCan::Rule.new(true, :read, :all, nil, @condition_block) ]
 
       subject.expects(:loaded_rules).returns(@rules)
     end
 
     specify do
       subject.prepared_rules.should == @rules
+    end
+
+    it 'should have proc condition block' do
+      $b = nil
+      @rules.first.block.call(4)
+      $b.should == [1,2,3,4]
     end
   end
 end

@@ -51,13 +51,12 @@ module CanTango
       end
 
       def compile_on?
-        raise ":compile adapter must be used when compiler is on" if missing_compile_adapter?
+        return false if !compile_adapter?
         CanTango.config.cache.compile?
       end
 
-      def missing_compile_adapter?
-        CanTango.config.cache.compile? && !defined?(CanTango::Ability::Cache::Kompiler)
- 
+      def compile_adapter?
+        CanTango.config.adapters.registered?(:compiler)
       end
     end
   end

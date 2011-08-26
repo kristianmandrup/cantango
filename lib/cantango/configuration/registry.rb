@@ -43,6 +43,10 @@ module CanTango
         @registered ||= default
       end
 
+      def registered? label
+        registered.map(&:to_s).include? label.to_s
+      end
+
       def default
         @default ||= []
       end

@@ -20,4 +20,4 @@ module CanTango
   end
 end
 
-
+CanTango.config.adapters.register :moneta

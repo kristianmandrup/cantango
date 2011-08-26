@@ -7,7 +7,7 @@ module CanTango
     autoload_modules :Models, :Engines, :Ability
     autoload_modules :User, :Guest, :UserAccount
     autoload_modules :Roles, :RoleGroups, :Registry, :RoleRegistry, :HashRegistry, :Factory
-    autoload_modules :SpecialPermits, :Autoload
+    autoload_modules :SpecialPermits, :Autoload, :Adapters
     autoload_modules :Users, :UserAccounts
 
     include Singleton
@@ -21,7 +21,7 @@ module CanTango
     def self.components
       [
         :guest, :autoload, :user, :user_account, :models, :roles, :role_groups,
-        :engines, :users, :user_accounts, :categories
+        :engines, :users, :user_accounts, :categories, :adapters
       ]
     end
 
