@@ -17,6 +17,10 @@ module CanTango
         @ability  = ability
       end
 
+      def self.account_name clazz
+        clazz.name.demodulize.gsub(/(.*)Permits::/, '\1').underscore.to_sym
+      end
+
       # executes the permit
       def execute
         executor.execute!
