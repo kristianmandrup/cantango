@@ -1,7 +1,6 @@
 module CanTango
   class PermitEngine < Engine
     class Finder
-      include ClassExt
 
       # This class is used to find the right permit, possible scoped for a specific user account
 
@@ -13,11 +12,34 @@ module CanTango
       end
 
       def get_permit
-        begin
-          find_first_class account_permit_class, permit_class
-        rescue
-          raise "Permit for #{type} #{name} could not be loaded. Define either class: #{account_permit_class} or #{permit_class}"
-        end
+        raise find_error if !retrieve_permit
+        retrieve_permit
+      end
+
+      protected
+
+      def find_error
+        "Permit for #{type} #{name} could not be loaded. Define either class: #{account_permit_class} or #{permit_class}"
+      end
+
+      def retrive_permit
+        @found_permit ||= [account_permit(name), permit(name)].compact.first
+      end
+
+      def account_permit name
+        account_permits.send(type).registered[name]
+      end
+
+      def permit name
+        permits.send(type).registered[name]
+      end
+
+      def permits
+        CanTango.config.permits
+      end
+
+      def account_permits
+        CanTango.config.permits.account(user_account)
       end
 
       # this is used to namespace role permits for a specific type of user account
