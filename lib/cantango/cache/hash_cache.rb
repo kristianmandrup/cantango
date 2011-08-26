@@ -18,7 +18,7 @@ module CanTango
       end
 
       def delete key
-        cache[key].delete
+        cache[key].delete if cache[key]
       end
 
       def cache

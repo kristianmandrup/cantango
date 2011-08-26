@@ -39,5 +39,23 @@ describe CanTango::Ability::Cache::Key do
     specify { lambda { subject.value }.should_not raise_error }
     specify { subject.value.should be_a Fixnum } # hash
   end
+
+  describe 'same' do
+    context 'set to same' do
+      before do
+        session[:cache_key] = subject.value
+      end
+
+      specify { subject.same?.should be_true }
+    end
+
+    context 'set to random' do
+      before do
+        session[:cache_key] = 25676923
+      end
+
+      specify { subject.same?.should be_false }
+    end
+  end
 end
 

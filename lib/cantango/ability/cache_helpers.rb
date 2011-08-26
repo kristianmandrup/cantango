@@ -15,7 +15,7 @@ module CanTango
       end
 
       def cache
-        @cache ||= Cache.new self, options
+        @cache ||= Cache.new self
       end
 
       protected

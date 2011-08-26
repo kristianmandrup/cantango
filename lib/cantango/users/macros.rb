@@ -9,7 +9,7 @@ class Module
     self.send :include, CanTango::Users::Masquerade if options[:masquerade]
   end
 
-  def maquerader
+  def masquerader
     self.send :include, CanTango::Users::Masquerade
   end
 end

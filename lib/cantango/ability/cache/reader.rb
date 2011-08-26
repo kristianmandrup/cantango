@@ -9,13 +9,21 @@ module CanTango
         end
 
         def prepared_rules
-          cache.compile_on? ? cache.compiler.decompile!(loaded_rules) : loaded_rules
+          cache.compile_on? ? compiler.decompile!(loaded_rules) : loaded_rules
         end
 
         protected
 
         def loaded_rules
-          cache.rules_cache.load(cache.key)
+          rules_cache.load(cache.key)
+        end
+
+        def compiler
+          cache.compiler
+        end
+
+        def rules_cache
+          cache.rules_cache
         end
       end
     end

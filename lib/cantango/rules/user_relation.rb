@@ -50,7 +50,7 @@ module CanTango
       end
 
       def rules
-        ability.rules
+        ability.send :rules # FIXME !?
       end
 
       def plural_attribute

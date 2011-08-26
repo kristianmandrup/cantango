@@ -4,11 +4,12 @@ require 'dummy_spec_helper'
 Cutter::Stamper.turn :off
 
 describe "Caching of the rules" do
-  
   before(:all) do
     @user = User.create! :name => 'stanislaw', :role => 'user', :email => 'stanislaw@mail.ru'
     Article.create!(:title => 'one')
   end
+
+=begin
 
   context 'CanTango::Ability::Cache::MonetaCache' do
     before do
@@ -43,4 +44,5 @@ describe "Caching of the rules" do
       end
     end
   end
+=end
 end

@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include_and_extend SimpleRoles
  
   tango_user # see macros
+  masquerader
 
   has_friendly_id :name
 
