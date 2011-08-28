@@ -10,8 +10,8 @@ end
 CanTango.configure do |config|
   config.users.register     :user, :admin
   config.user_accounts.register  :user, :admin
-  config.cache.set :off
-  config.permits.set :on
+  config.cache_engine.set :off
+  config.permit_engine.set :on
 end
 
 class UserRolePermit < CanTango::RolePermit

@@ -19,6 +19,4 @@ require 'simple_roles'
 
 CanTango.configure do |config|
   config.permission_engine.config_path File.dirname(__FILE__) + '/fixtures/config'
-  # config.cache.set :off
 end
-#require_all File.dirname(__FILE__) + '/fixtures'

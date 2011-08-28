@@ -4,6 +4,8 @@ require 'sugar-high/kind_of'
 module CanTango
   class Configuration
     class Registry
+      include Singleton
+      
       attr_writer   :default
       attr_accessor :registered
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-CanTango.adapters :compiler
+CanTango.config.adapters.bootstrap :compiler
 
 describe CanTango::Ability::Cache::Reader do
   let (:session) do

@@ -21,7 +21,7 @@ module CanTango
       protected
 
       def caching_on?
-        CanTango.config.cache.on?
+        CanTango.config.cache_engine.on?
       end
     end
   end

@@ -2,7 +2,7 @@ require 'rspec'
 require 'cantango'
 require 'sourcify'
 
-CanTango.adapters :compiler, :moneta
+CanTango.config.adapters.bootstrap :compiler, :moneta
 
 describe CanTango::Ability::Cache::Kompiler do
   subject do

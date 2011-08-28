@@ -30,7 +30,7 @@ module CanTango
         end
 
         def compiler_check! rule
-          if rule.block && !CanTango.adapters.registered?(:compiler)
+          if rule.block && !CanTango.config.adapters.registered?(:compiler)
             raise "You can NOT marshal dynamic rules (with Procs) unless you register the :compiler adapter"
           end
         end
