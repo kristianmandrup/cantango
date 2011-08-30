@@ -35,17 +35,17 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update August 25, 2011
+h2. Update August 30, 2011
 
-Currently a few bugs in master.
-Next release will be: *0.8.5*
+Currently a few bugs in master. Use the *0.8.4* gem which should use the *sugar-high 0.5* line and work just fine.
+Next release will be: *0.8.5* and will contain lots of updtes and improvements, please have patience.
 
-CanTango now supports use of "sugar-high 0.6":https://github.com/kristianmandrup/sugar-high.git' where "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' has been extracted into its own gem.
-* The Cache has been refactored
-* Engines are now run in correct order and only if active
+CanTango 0.8.5 will supports "sugar-high 0.6":https://github.com/kristianmandrup/sugar-high.git' where "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' has been extracted into its own gem.
+* The Cache is being refactored
+* Engines are now run in correct order (and only if active)
 * The Cache Kompiler (for dynamic rules caching) and Moneta cache are now optional (via adapters)
-
-For the first release in September, we plan to optimize permits loading (via pre-registration) and increase visibility of the Ability flow, to allow one to see which rules are triggered by which permits (special :debug config mode).
+* Permits will be found and loaded via pre-registration, fx via a new *tango_permit* macro, or by hooking into the @#inherited@ method for the base permits.
+* Better visibility of the @Ability@ flow, to allow one to see which rules are triggered by which permits (likely via a special :debug config mode, since it would affect performance).
 
 h2. Quickstart
 
