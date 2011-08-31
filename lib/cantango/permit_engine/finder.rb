@@ -25,7 +25,10 @@ module CanTango
       end
 
       def account_permit name
-        account_permits.send(type).registered[name]
+        
+        # TODO: User/Account cases should be handled somehow following is just interim measure
+        return nil if !user_account.class.name =~ /Account/
+        account_permits.send(account).send(type).registered[name]
       end
 
       def permit name
@@ -41,6 +44,9 @@ module CanTango
         CanTango.config.permits
       end
 
+      def account
+        user_account.class.name.underscore
+      end
       # this is used to namespace role permits for a specific type of user account
       # this allows role permits to be defined differently for each user account (and hence sub application) if need be
       # otherwise it will fall back to the generic role permit (the one which is not wrapped in a user account namespace)
