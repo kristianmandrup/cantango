@@ -3,8 +3,8 @@ require_all File.dirname(__FILE__) + "/../../shared/"
 
 def preconfigure
   CanTango.configure do |config|
-    config.permits.set :on
-    config.permissions.set :off
+    config.permit_engine.set :on
+    config.permission_engine.set :off
   end
 end
 
