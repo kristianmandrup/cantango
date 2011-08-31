@@ -28,7 +28,9 @@ module CanTango
         
         # TODO: User/Account cases should be handled somehow following is just interim measure
         return nil if !user_account.class.name =~ /Account/
-        account_permits.send(account).send(type).registered[name]
+        account_permits_for_account.send(type).registered[name]
+      rescue
+        nil
       end
 
       def permit name
@@ -40,6 +42,11 @@ module CanTango
       end
 
       # TODO: make proper account touching
+
+      def account_permits_for_account
+        account_permits.send(account)
+      end
+
       def account_permits
         CanTango.config.permits
       end
