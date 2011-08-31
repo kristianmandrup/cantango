@@ -16,9 +16,8 @@ module CanTango
         clazz.name.demodulize.gsub(/(.*)(AccountPermit)/, '\1').underscore.to_sym
       end
 
-      # fx for Admin account class, becomes simply AdminAccountPermit
       def account_type
-        self.class.role_group_name self.clazz
+        self.class.account_type_name self.class
       end
 
       # creates the permit

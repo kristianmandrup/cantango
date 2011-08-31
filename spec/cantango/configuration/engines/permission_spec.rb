@@ -6,14 +6,14 @@ require 'cantango/configuration/engines/store_engine_shared'
 require 'path_helper'
 
 describe CanTango::Configuration::Engines::Permission do
-  subject { CanTango.config.permissions }
+  subject { CanTango.config.permission_engine }
 
   it_should_behave_like 'Store Engine' do
-    subject { CanTango.config.permissions }
+    subject { CanTango.config.permission_engine }
   end
 
   it_should_behave_like 'Store' do
-    subject { CanTango.config.permissions.store }
+    subject { CanTango.config.permission_engine.store }
   end
 
   describe 'config_path' do

@@ -1,9 +1,7 @@
 module CanTango
   class PermitEngine < Engine
     class Finder
-
       # This class is used to find the right permit, possible scoped for a specific user account
-
       attr_reader :user_account, :name
 
       def initialize user_account, name
@@ -38,8 +36,9 @@ module CanTango
         CanTango.config.permits
       end
 
+      # TODO: make proper account touching
       def account_permits
-        CanTango.config.permit
+        CanTango.config.permits
       end
 
       # this is used to namespace role permits for a specific type of user account

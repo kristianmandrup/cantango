@@ -52,7 +52,7 @@ module CanTango
 
       def compile_on?
         return false if !compile_adapter?
-        CanTango.config.cache.compile?
+        CanTango.config.cache_engine.compile?
       end
 
       def compile_adapter?

@@ -20,7 +20,6 @@ module CanTango
 
       def register_permit_class(permit_name, permit_clazz, permit_type, account_name)
         registry = account_name ? self.send(account_name.to_sym) : self
-        inspect!{}
         registry.send(permit_type)[permit_name] = permit_clazz
       end
     end

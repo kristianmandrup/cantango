@@ -18,7 +18,7 @@ module CanTango
 
       # fx for User user class, becomes simply UserPermit
       def user_type
-        self.class.user_type_name self.clazz
+        self.class.user_type_name self.class
       end
 
       # creates the permit

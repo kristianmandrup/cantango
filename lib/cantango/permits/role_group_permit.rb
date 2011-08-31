@@ -17,7 +17,7 @@ module CanTango
       end
 
       def role_group
-        self.class.role_group_name self.clazz
+        self.class.role_group_name self.class
       end
 
       # creates the permit

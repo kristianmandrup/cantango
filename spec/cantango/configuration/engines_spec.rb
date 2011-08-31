@@ -31,8 +31,9 @@ describe CanTango::Configuration::Engines do
 
     specify { subject.registered.keys.should include(:permit, :permission) }
 
+    # TODO: should it be empty?
     describe 'active' do
-      its(:active) { should == [:permit] }
+      its(:active) { should == [] }
     end
 
     describe 'execution_order' do
@@ -66,8 +67,8 @@ describe CanTango::Configuration::Engines do
     end
 
     specify do
-      [:permits, :permissions, :cache].each do |engine|
-        CanTango.config.send(engine).on?.should be_true
+      [:permit, :permission, :cache].each do |engine|
+        CanTango.config.send("#{engine}_engine").on?.should be_true
       end
     end
 
