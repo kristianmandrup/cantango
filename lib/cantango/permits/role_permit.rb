@@ -5,7 +5,6 @@ module CanTango
       autoload_modules :Builder, :Finder
 
       def self.inherited(base_clazz)
-        inspect!{}
         CanTango.config.permits.register_permit_class role_name(base_clazz), base_clazz, type, account_name(base_clazz)
       end
 
