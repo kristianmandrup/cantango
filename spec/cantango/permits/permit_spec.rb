@@ -8,6 +8,7 @@ end
 class MusicianRolePermit < CanTango::RolePermit; end
 class EditorsRoleGroupPermit < CanTango::RoleGroupPermit; end
 class AdminAccountPermit < CanTango::AccountPermit; end
+class AdminPermit < CanTango::UserPermit; end
 
 describe CanTango::Permits::Permit do
 
@@ -16,6 +17,6 @@ describe CanTango::Permits::Permit do
     CanTango.config.permits.role[:musician].should == MusicianRolePermit
     CanTango.config.permits.role_group[:editors].should == EditorsRoleGroupPermit
     CanTango.config.permits.account[:admin].should == AdminAccountPermit
-
+    CanTango.config.permits.user[:admin].should == AdminPermit
   end
 end

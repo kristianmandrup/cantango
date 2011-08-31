@@ -8,7 +8,6 @@ module CanTango
         CanTango.config.permits.register_permit_class account_type_name(base_clazz), base_clazz, type, account_name(base_clazz)
       end
 
-      
       def self.type
         :account
       end
