@@ -3,11 +3,19 @@ module CanTango
   # "Borrowed" from devise
   def self.include_helpers(scope)
     ActiveSupport.on_load(:action_controller) do
-      include scope::Rails::Helpers::ControllerHelper
+
+      include scope::Rails::ControllerHelpers
+    end
+
+    ActiveSupport.on_load(:active_record) do
+      # load all models
+      # this is needed in order to register all users and accounts with CanTango using the user/account macros!
+      RailsAutoLoader.load_models! if CanTango.config.autoload.models?
     end
 
     ActiveSupport.on_load(:action_view) do
-      include scope::Rails::Helpers::ViewHelper
+
+      include scope::Rails::ViewHelpers
     end
   end
 
@@ -15,11 +23,7 @@ module CanTango
     initializer "cantango.helpers" do
       CanTango.include_helpers(CanTango)
 
-      # load all models
-      # this is needed in order to register all users and accounts with CanTango using the user/account macros!
-      RailsAutoLoader.load_models! if CanTango.config.autoload.models?
-
-      # load all permits
+     # load all permits
       RailsAutoLoader.load_permits! if CanTango.config.autoload.permits?
     end
   end
