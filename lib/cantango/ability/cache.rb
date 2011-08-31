@@ -34,11 +34,11 @@ module CanTango
       end
 
       def cached_rules?
-        key.same?
+        key.same? session
       end
 
       def key
-        @key ||= Key.new ability.user, ability.subject, session
+        @key ||= Key.new ability.user, ability.subject
       end
 
       def rules_cache

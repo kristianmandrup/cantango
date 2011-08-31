@@ -3,7 +3,7 @@ module CanTango
     module CacheHelpers
 
       def cached_rules?
-        caching_on? && cache.key.same?
+        caching_on? && cache.key.same?(session)
       end
 
       def cache_rules!

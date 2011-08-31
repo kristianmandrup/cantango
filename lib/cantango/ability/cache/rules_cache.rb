@@ -17,11 +17,11 @@ module CanTango
         end
 
         def cache_options
-          CanTango.config.cache.store.options || {}
+          CanTango.config.cache_engine.store.options || {}
         end
 
         def clazz
-          CanTango.config.cache.store.default_class
+          CanTango.config.cache_engine.store.default_class
         end
       end
     end

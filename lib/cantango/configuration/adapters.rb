@@ -9,7 +9,7 @@ module CanTango
         require "cantango/adapter/#{name}"
       end
 
-      def bootstrap *names
+      def use *names
         names.each {|name| adapter name }
       end
 
