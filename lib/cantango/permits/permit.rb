@@ -23,7 +23,8 @@ module CanTango
 
 
       def self.account_name clazz
-        clazz.name.demodulize.gsub(/(.*)Permits::/, '\1').underscore.to_sym
+        return nil if clazz.name == clazz.name.demodulize
+        clazz.name.gsub(/::.*/,'').gsub(/(.*)Permits/, '\1').underscore.to_sym
       end
 
       # executes the permit

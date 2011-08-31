@@ -1,8 +1,6 @@
 module CanTango
   class Configuration
     class PermitRegistry
-      attr_reader :accounts
-
       [:user, :account, :role, :role_group].each do |permit|
         class_eval %{
           def #{permit}
@@ -10,6 +8,7 @@ module CanTango
           end
         }
       end
+
     end
   end
 end
