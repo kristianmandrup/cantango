@@ -1,6 +1,8 @@
 module CanTango
   class Configuration
     class Roles < RoleRegistry
+      include Singleton
+
       def default_has_method
         :has_role?
       end

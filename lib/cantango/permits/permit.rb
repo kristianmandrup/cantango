@@ -18,7 +18,7 @@ module CanTango
       end
 
       def self.first_name clazz
-        clazz.to_s.gsub(/^([A-Z][a-z]+).*/, '\1').downcase.to_sym # first part of class name
+        clazz.to_s.gsub(/^([A-Za-z]+).*/, '\1').underscore.to_sym # first part of class name
       end
 
 

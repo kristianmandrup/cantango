@@ -22,7 +22,7 @@ module CanTango
         "Permit for #{type} #{name} could not be loaded. Define either class: #{account_permit_class} or #{permit_class}"
       end
 
-      def retrive_permit
+      def retrieve_permit
         @found_permit ||= [account_permit(name), permit(name)].compact.first
       end
 
@@ -39,7 +39,7 @@ module CanTango
       end
 
       def account_permits
-        CanTango.config.permits.account(user_account)
+        CanTango.config.permit
       end
 
       # this is used to namespace role permits for a specific type of user account

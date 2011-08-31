@@ -1,7 +1,2 @@
-The main things left I think.
+1) Sweetloader into Gemfile!
 
-To provide configuration options (global engines) and options on configuration macros tango_user and tango_user_account.
-
-Don't know for now what are the options should be except turning off permission and permit engines!
-
-Fx present CanTango.permission_engine = false -- it is only a stub - don't know if it is enough for real configuration needs.

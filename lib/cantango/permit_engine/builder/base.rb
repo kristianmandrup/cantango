@@ -8,6 +8,7 @@ module CanTango
         # note that the ability contains the roles and role groups of the user (or account)
         # @param [Permits::Ability] the ability
         def initialize ability
+          inspect!{}
           @ability = ability
         end
 

@@ -9,8 +9,7 @@ end
 
 class MyAdminyPermit < CanTango::UserPermit
 end
-
-
+=begin
 describe '#tango_permit macro' do
   specify do
     lambda { AdminPermit.tango_permit }.should raise_error
@@ -38,3 +37,5 @@ describe '#tango_permit macro' do
     specify { subject[:account].should == nil }
   end
 end
+
+=end
