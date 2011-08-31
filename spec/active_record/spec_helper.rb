@@ -1,8 +1,10 @@
-require 'spec_helper'
 require 'rails'
+require 'cantango'
+require 'cantango/rspec/matchers'
+
 require 'active_record'
-require 'arel'
-# require 'meta_where'
+
+require 'cutter'
 require 'yaml'
 require 'logger'
 require 'database_cleaner'
@@ -15,5 +17,5 @@ require 'active_record/helper/rails_config'
 Cutter::Inspection.loud!
 
 CanTango.configure do |config|
-  config.permits.set :on
+  config.permit_engine.set :on
 end
