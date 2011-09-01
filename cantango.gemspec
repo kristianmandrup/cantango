@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.8.4"
+  s.version = "0.8.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-08-20}
+  s.date = %q{2011-09-01}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -33,15 +33,22 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/ability.rb",
     "lib/cantango/ability/cache.rb",
     "lib/cantango/ability/cache/base_cache.rb",
+    "lib/cantango/ability/cache/key.rb",
     "lib/cantango/ability/cache/kompiler.rb",
     "lib/cantango/ability/cache/moneta_cache.rb",
+    "lib/cantango/ability/cache/reader.rb",
+    "lib/cantango/ability/cache/rules_cache.rb",
     "lib/cantango/ability/cache/session_cache.rb",
+    "lib/cantango/ability/cache/writer.rb",
+    "lib/cantango/ability/cache_helpers.rb",
     "lib/cantango/ability/masquerade_helpers.rb",
     "lib/cantango/ability/permission_helpers.rb",
     "lib/cantango/ability/permit_helpers.rb",
     "lib/cantango/ability/role_helpers.rb",
     "lib/cantango/ability/scope.rb",
     "lib/cantango/ability/user_helpers.rb",
+    "lib/cantango/adapter/compiler.rb",
+    "lib/cantango/adapter/moneta.rb",
     "lib/cantango/api.rb",
     "lib/cantango/api/aliases.rb",
     "lib/cantango/api/attributes.rb",
@@ -56,10 +63,12 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/api/user_account/can.rb",
     "lib/cantango/api/user_account/scope.rb",
     "lib/cantango/cache.rb",
+    "lib/cantango/cache/hash_cache.rb",
     "lib/cantango/cache/moneta_cache.rb",
     "lib/cantango/cancan/rule.rb",
     "lib/cantango/configuration.rb",
     "lib/cantango/configuration/ability.rb",
+    "lib/cantango/configuration/adapters.rb",
     "lib/cantango/configuration/autoload.rb",
     "lib/cantango/configuration/categories.rb",
     "lib/cantango/configuration/engines.rb",
@@ -72,6 +81,8 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/configuration/guest.rb",
     "lib/cantango/configuration/hash_registry.rb",
     "lib/cantango/configuration/models.rb",
+    "lib/cantango/configuration/permit_registry.rb",
+    "lib/cantango/configuration/permits.rb",
     "lib/cantango/configuration/registry.rb",
     "lib/cantango/configuration/role_groups.rb",
     "lib/cantango/configuration/role_registry.rb",
@@ -139,6 +150,7 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/permits/license.rb",
     "lib/cantango/permits/license/loader.rb",
     "lib/cantango/permits/license/rules.rb",
+    "lib/cantango/permits/macros.rb",
     "lib/cantango/permits/permit.rb",
     "lib/cantango/permits/role_group_permit.rb",
     "lib/cantango/permits/role_group_permit/builder.rb",
@@ -150,11 +162,12 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/permits/user_permit/builder.rb",
     "lib/cantango/permits/user_permit/finder.rb",
     "lib/cantango/rails.rb",
-    "lib/cantango/rails/base_helpers.rb",
-    "lib/cantango/rails/controller_helpers.rb",
     "lib/cantango/rails/engine.rb",
+    "lib/cantango/rails/helpers/base_helper.rb",
+    "lib/cantango/rails/helpers/controller_helper.rb",
+    "lib/cantango/rails/helpers/rest_helper.rb",
+    "lib/cantango/rails/helpers/view_helper.rb",
     "lib/cantango/rails/railtie.rb",
-    "lib/cantango/rails/view_helpers.rb",
     "lib/cantango/rspec.rb",
     "lib/cantango/rspec/config.rb",
     "lib/cantango/rspec/matchers.rb",
@@ -231,7 +244,7 @@ Store permissions in yaml file or key-value store}
     "spec/active_record/scenarios/masquerading/masquerading_for_admin_account_spec.rb",
     "spec/active_record/scenarios/masquerading/masquerading_for_admin_user_spec.rb",
     "spec/active_record/scenarios/shared/api.rb",
-    "spec/active_record/scenarios/shared/can_tango.rb",
+    "spec/active_record/scenarios/shared/cantango.rb",
     "spec/active_record/scenarios/shared/examples/user_accounts.rb",
     "spec/active_record/scenarios/shared/examples/users.rb",
     "spec/active_record/scenarios/shared/licenses/musicians_license.rb",
@@ -262,8 +275,13 @@ Store permissions in yaml file or key-value store}
     "spec/active_record/scenarios/user_accounts/user_account_spec.rb",
     "spec/active_record/spec_helper.rb",
     "spec/cantango/README.textile",
-    "spec/cantango/ability/cache/compiler_spec.rb",
+    "spec/cantango/ability/cache/key_spec.rb",
+    "spec/cantango/ability/cache/kompiler_spec.rb",
+    "spec/cantango/ability/cache/reader_compile_spec.rb",
+    "spec/cantango/ability/cache/reader_spec.rb",
+    "spec/cantango/ability/cache/rules_cache_spec.rb",
     "spec/cantango/ability/cache/session_cache_spec.rb",
+    "spec/cantango/ability/cache/writer_spec.rb",
     "spec/cantango/ability/cache_spec.rb",
     "spec/cantango/ability_filters_spec.rb",
     "spec/cantango/ability_spec.rb",
@@ -279,6 +297,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/api/user_account_api_spec.rb",
     "spec/cantango/api/user_api_spec.rb",
     "spec/cantango/configuration/ability_spec.rb",
+    "spec/cantango/configuration/adapter_spec.rb",
     "spec/cantango/configuration/autoload_spec.rb",
     "spec/cantango/configuration/categories_spec.rb",
     "spec/cantango/configuration/engines/cache_spec.rb",
@@ -292,6 +311,8 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/configuration/guest/find_guest_default_way_spec.rb",
     "spec/cantango/configuration/guest_spec.rb",
     "spec/cantango/configuration/hash_registry_spec.rb",
+    "spec/cantango/configuration/permit_registry_spec.rb",
+    "spec/cantango/configuration/permits_spec.rb",
     "spec/cantango/configuration/registry_spec.rb",
     "spec/cantango/configuration/role_groups_spec.rb",
     "spec/cantango/configuration/roles_spec.rb",
@@ -335,7 +356,10 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/permit_engine/role_permit_spec.rb",
     "spec/cantango/permit_engine/user_permit_spec.rb",
     "spec/cantango/permit_engine_spec.rb",
+    "spec/cantango/permits/macros_spec.rb",
+    "spec/cantango/permits/permit_spec.rb",
     "spec/cantango/rules_spec.rb",
+    "spec/cantango_spec.rb",
     "spec/devise-dummy/Rakefile",
     "spec/devise-dummy/app/controllers/accounts_controller.rb",
     "spec/devise-dummy/app/controllers/application_controller.rb",
@@ -536,7 +560,8 @@ Store permissions in yaml file or key-value store}
     "spec/dummy/tmp/pids/server.pid",
     "spec/dummy_spec_helper.rb",
     "spec/entire_suite_spec.rb",
-    "spec/factories.rb",
+    "spec/factories/user.rb",
+    "spec/factories/user_account.rb",
     "spec/fixtures/config/categories.yml",
     "spec/fixtures/config/evaluator_fixtures.yml",
     "spec/fixtures/config/licenses.yml",
@@ -546,6 +571,7 @@ Store permissions in yaml file or key-value store}
     "spec/fixtures/config/user_permissions.yml",
     "spec/fixtures/models.rb",
     "spec/fixtures/models/admin.rb",
+    "spec/fixtures/models/admin_account.rb",
     "spec/fixtures/models/items.rb",
     "spec/fixtures/models/simple_roles.rb",
     "spec/fixtures/models/user.rb",
@@ -620,11 +646,15 @@ Store permissions in yaml file or key-value store}
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rails>, [">= 3.0.1"])
       s.add_runtime_dependency(%q<cancan>, [">= 1.4"])
-      s.add_runtime_dependency(%q<sugar-high>, [">= 0.5"])
+      s.add_runtime_dependency(%q<sugar-high>, [">= 0.6.0"])
+      s.add_runtime_dependency(%q<sweetloader>, ["~> 0.1.0"])
       s.add_runtime_dependency(%q<sqlite3>, [">= 0"])
       s.add_runtime_dependency(%q<hashie>, [">= 0.4"])
-      s.add_runtime_dependency(%q<sourcify>, [">= 0"])
-      s.add_runtime_dependency(%q<dkastner-moneta>, [">= 1.0"])
+      s.add_development_dependency(%q<rspec-rails>, ["= 2.6.1"])
+      s.add_development_dependency(%q<forgery>, ["= 0.3.10"])
+      s.add_development_dependency(%q<factory_girl>, [">= 0"])
+      s.add_development_dependency(%q<sourcify>, [">= 0"])
+      s.add_development_dependency(%q<dkastner-moneta>, [">= 1.0"])
       s.add_development_dependency(%q<rspec>, [">= 2.4.0"])
       s.add_development_dependency(%q<jeweler>, [">= 1.6.4"])
       s.add_development_dependency(%q<bundler>, [">= 1.0.1"])
@@ -632,9 +662,13 @@ Store permissions in yaml file or key-value store}
     else
       s.add_dependency(%q<rails>, [">= 3.0.1"])
       s.add_dependency(%q<cancan>, [">= 1.4"])
-      s.add_dependency(%q<sugar-high>, [">= 0.5"])
+      s.add_dependency(%q<sugar-high>, [">= 0.6.0"])
+      s.add_dependency(%q<sweetloader>, ["~> 0.1.0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<hashie>, [">= 0.4"])
+      s.add_dependency(%q<rspec-rails>, ["= 2.6.1"])
+      s.add_dependency(%q<forgery>, ["= 0.3.10"])
+      s.add_dependency(%q<factory_girl>, [">= 0"])
       s.add_dependency(%q<sourcify>, [">= 0"])
       s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
       s.add_dependency(%q<rspec>, [">= 2.4.0"])
@@ -645,9 +679,13 @@ Store permissions in yaml file or key-value store}
   else
     s.add_dependency(%q<rails>, [">= 3.0.1"])
     s.add_dependency(%q<cancan>, [">= 1.4"])
-    s.add_dependency(%q<sugar-high>, [">= 0.5"])
+    s.add_dependency(%q<sugar-high>, [">= 0.6.0"])
+    s.add_dependency(%q<sweetloader>, ["~> 0.1.0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<hashie>, [">= 0.4"])
+    s.add_dependency(%q<rspec-rails>, ["= 2.6.1"])
+    s.add_dependency(%q<forgery>, ["= 0.3.10"])
+    s.add_dependency(%q<factory_girl>, [">= 0"])
     s.add_dependency(%q<sourcify>, [">= 0"])
     s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
     s.add_dependency(%q<rspec>, [">= 2.4.0"])
