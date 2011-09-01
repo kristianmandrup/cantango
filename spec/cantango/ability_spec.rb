@@ -12,7 +12,7 @@ CanTango.configure do |config|
   # config.permissions.set :on
   config.engines.all :on
 
-  config.permissions.config_path = config_folder
+  config.permission_engine.config_path = config_folder
   config.categories.register :blog_items => [Article, Post]
 end
 

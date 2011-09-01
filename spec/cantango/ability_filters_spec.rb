@@ -3,8 +3,8 @@ require 'fixtures/models'
 require 'cantango/rspec'
 
 CanTango.configure do |config|
-  config.permissions.set :off
-  config.permits.set :on
+  config.permission_engine.set :off
+  config.permit_engine.set :on
   config.categories.register :blog_items => [Article, Post]
 end
 
