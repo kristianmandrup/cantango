@@ -5,7 +5,7 @@ module CanTango
         attr_reader :account_type
 
         def initialize subject
-          @account_type = subject.account.to_s.underscore
+          @account_type = subject.account.class.to_s.underscore
         end
 
         protected
