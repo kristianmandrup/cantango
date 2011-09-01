@@ -34,11 +34,11 @@ module CanTango
       end
 
       def cached_rules?
-        key.same?
+        key.same? session
       end
 
       def key
-        @key ||= Key.new ability.user, ability.subject, session
+        @key ||= Key.new ability.user, ability.subject
       end
 
       def rules_cache
@@ -52,7 +52,7 @@ module CanTango
 
       def compile_on?
         return false if !compile_adapter?
-        CanTango.config.cache.compile?
+        CanTango.config.cache_engine.compile?
       end
 
       def compile_adapter?

@@ -7,7 +7,7 @@ class MyReg < CanTango::Configuration::HashRegistry
 end
 
 describe MyReg do
-  subject { MyReg.instance }
+  subject { MyReg.new }
 
   it_should_behave_like "Hash Registry" do
   end

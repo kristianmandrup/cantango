@@ -1,6 +1,11 @@
 require 'spec_helper'
 require 'fixtures/models'
 
+module AdminAccountPermits
+  class EditorRolePermit < CanTango::RolePermit
+  end
+end
+
 class AdminsRoleGroupPermit < CanTango::RoleGroupPermit
   def initialize ability
     super
@@ -45,9 +50,6 @@ class AdminAccountPermit < CanTango::AccountPermit
   end
 end
 
-
-
-
 def setup
   let (:user) do
     User.new 'kris'
@@ -63,28 +65,63 @@ def setup
   end
 
   let (:admin_account) do
-    ua = AdminAccount.new user, :role_groups => [:admins]
+    ua = AdminAccount.new user, :roles => [:editors], :role_groups => [:admins]
     admin.account = ua
   end
 end
 
 describe CanTango::Permits::RolePermit::Finder do
+    
   setup
 
-  let (:finder) do
-    CanTango::Permits::RolePermit::Finder.new user_account, :admin
+  context "Account" do
+    let (:finder) do
+      CanTango::Permits::RolePermit::Finder.new admin_account, :editor
+    end
+
+    describe 'attributes' do
+      it "should have an ability" do
+        finder.user_account.should be_a(AdminAccount)
+      end
+    end
+
+    describe '#permit_class' do
+      it 'should return the :admin permit class' do
+        finder.permit_class.should == "EditorRolePermit"
+      end
+    end
+    
+    describe '#get_permit' do
+      it 'should return the AdminAccount::EditorRolePermit' do
+        finder.get_permit.should == AdminAccountPermits::EditorRolePermit
+      end
+    end
+
   end
 
-  describe 'attributes' do
-    it "should have an ability" do
-      finder.user_account.should be_a(UserAccount)
+  context "User" do
+    let (:finder) do
+      CanTango::Permits::RolePermit::Finder.new user_account, :admin
     end
-  end
 
-  describe '#permit_class' do
-    it 'should return the :admin permit class' do
-      finder.permit_class.should == "AdminRolePermit"
+    describe 'attributes' do
+      it "should have an ability" do
+        finder.user_account.should be_a(UserAccount)
+      end
     end
+
+    describe '#permit_class' do
+      it 'should return the :admin permit class' do
+        finder.permit_class.should == "AdminRolePermit"
+      end
+    end
+    
+    describe '#get_permit' do
+      it 'should return the AdminRolePermit' do
+        finder.get_permit.should == AdminRolePermit
+      end
+    end
+
   end
 end
 
@@ -100,6 +137,13 @@ describe CanTango::Permits::RoleGroupPermit::Finder do
       finder.permit_class.should == "AdminsRoleGroupPermit"
     end
   end
+
+  describe '#get_permit' do
+    it 'should return the AdminsRoleGroupPermit class' do
+      finder.get_permit.should == AdminsRoleGroupPermit
+    end
+  end
+
 end
 
 describe CanTango::Permits::UserPermit::Finder do
@@ -114,6 +158,13 @@ describe CanTango::Permits::UserPermit::Finder do
       finder.permit_class.should == "AdminPermit"
     end
   end
+
+  describe '#get_permit' do
+    it 'should return AdminPermit class' do
+      finder.get_permit.should == AdminPermit
+    end
+  end
+
 end
 
 describe CanTango::Permits::AccountPermit::Finder do
@@ -123,9 +174,18 @@ describe CanTango::Permits::AccountPermit::Finder do
     CanTango::Permits::AccountPermit::Finder.new admin_account, :admin
   end
 
+  # We don't have AdminAccountPermits::AdminAccountPermit so it should fall back to single AdminAccountPermit
+
   describe '#permit_class' do
     it 'should return the :admin account permit class' do
       finder.permit_class.should == "AdminAccountPermit"
     end
   end
+  
+  describe '#get_permit' do
+    it 'should return AdminAccountPermit class' do
+      finder.get_permit.should == AdminAccountPermit
+    end
+  end
+
 end

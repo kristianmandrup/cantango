@@ -17,7 +17,7 @@ require 'capybara/rspec'
 #require 'controller_macros'
 #Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-CanTango.adapters :compiler
+CanTango.config.adapters.use :compiler
 
 #ActiveRecord::Base.logger = Logger.new(STDERR)
 DatabaseCleaner.strategy = :truncation

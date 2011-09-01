@@ -4,21 +4,20 @@ module CanTango
 
       autoload_modules :Builder, :Finder
 
-      def self.included(base_clazz)
+      def self.inherited(base_clazz)
         CanTango.config.permits.register_permit_class account_type_name(base_clazz), base_clazz, type, account_name(base_clazz)
       end
 
       def self.type
-        :account_type
+        :account
       end
 
       def self.account_type_name clazz
-        self.class.name.demodulize.gsub(/(.*)(AccountPermit)/, '\1').underscore.to_sym
+        clazz.name.demodulize.gsub(/(.*)(AccountPermit)/, '\1').underscore.to_sym
       end
 
-      # fx for Admin account class, becomes simply AdminAccountPermit
       def account_type
-        self.class.role_group_name self.clazz
+        self.class.account_type_name self.class
       end
 
       # creates the permit

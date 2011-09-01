@@ -1,9 +1,7 @@
 module CanTango
   class PermitEngine < Engine
     class Finder
-
       # This class is used to find the right permit, possible scoped for a specific user account
-
       attr_reader :user_account, :name
 
       def initialize user_account, name
@@ -22,12 +20,17 @@ module CanTango
         "Permit for #{type} #{name} could not be loaded. Define either class: #{account_permit_class} or #{permit_class}"
       end
 
-      def retrive_permit
+      def retrieve_permit
         @found_permit ||= [account_permit(name), permit(name)].compact.first
       end
 
       def account_permit name
-        account_permits.send(type).registered[name]
+        
+        # TODO: User/Account cases should be handled somehow following is just interim measure
+        return nil if !user_account.class.name =~ /Account/
+        account_permits_for_account.send(type).registered[name]
+      rescue
+        nil
       end
 
       def permit name
@@ -38,10 +41,19 @@ module CanTango
         CanTango.config.permits
       end
 
-      def account_permits
-        CanTango.config.permits.account(user_account)
+      # TODO: make proper account touching
+
+      def account_permits_for_account
+        account_permits.send(account)
       end
 
+      def account_permits
+        CanTango.config.permits
+      end
+
+      def account
+        user_account.class.name.underscore
+      end
       # this is used to namespace role permits for a specific type of user account
       # this allows role permits to be defined differently for each user account (and hence sub application) if need be
       # otherwise it will fall back to the generic role permit (the one which is not wrapped in a user account namespace)

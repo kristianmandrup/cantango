@@ -26,7 +26,7 @@ end
 
 describe CanTango::Permits::RoleGroupPermit::Builder do
   before do
-    CanTango.config.cache.set :off
+    CanTango.config.cache_engine.set :off
   end
 
   let (:user) do

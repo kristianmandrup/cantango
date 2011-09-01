@@ -23,4 +23,3 @@ end
 
 class Improvisation < ActiveRecord::Base
 end
-

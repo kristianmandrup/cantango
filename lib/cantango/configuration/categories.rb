@@ -1,7 +1,9 @@
 module CanTango
   class Configuration
     class Categories < HashRegistry
-      
+     
+      include Singleton
+
       def [] label
         models = super
         raise "Category '#{label}' either not exists or invalid!" if !models.kind_of?(Array)

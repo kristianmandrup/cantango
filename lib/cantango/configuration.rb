@@ -39,7 +39,7 @@ module CanTango
     # i.e compilation of rules via sourcify
     def enable_defaults!
       engines.all :on
-      CanTango.adapter :compiler
+      adapters.use :compiler
     end
 
     def clear!

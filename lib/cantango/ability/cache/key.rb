@@ -2,12 +2,11 @@ module CanTango
   class Ability
     class Cache
       class Key
-        attr_reader :user, :session, :subject
+        attr_reader :user, :subject
 
-        def initialize user, subject, session
+        def initialize user, subject
           @user = user
           @subject = subject
-          @session = session
         end
 
         def value
@@ -15,9 +14,9 @@ module CanTango
           @value ||= [user_key, subject_roles_hash].hash
         end
 
-        def same?
+        def same? session
           raise "No session available" if !session
-          session[:cache_key] && (value == session[:cache_key])
+          session[:cache_key] && (value == session[:cache_key].value)
         end
 
         protected

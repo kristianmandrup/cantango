@@ -7,7 +7,7 @@ class MyRegi < CanTango::Configuration::Registry
 end
 
 describe MyRegi do
-  subject { MyRegi.instance }
+  subject { MyRegi.new }
 
   it_should_behave_like "Registry" do
   end

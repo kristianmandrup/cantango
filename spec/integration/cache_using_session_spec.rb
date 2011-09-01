@@ -13,7 +13,7 @@ describe "Caching of the rules" do
   context 'CanTango::Ability::Cache::Session::Cache' do
     before do
       CanTango.configure do |config|
-        config.cache.store.default_class = CanTango::Ability::Cache::SessionCache
+        config.cache_engine.store.default_class = CanTango::Ability::Cache::SessionCache
       end
     end
 
