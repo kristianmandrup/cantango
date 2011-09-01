@@ -36,7 +36,14 @@ module CanTango
         statements(method)
       end
 
+      # TODO: make cleaner!
+      def check_actions method
+        permission_actions = permission.static_rules.send(method).keys.to_symbols
+        raise "valid actions are: #{valid_actions}" if (permission_actions - valid_actions).size > 0
+      end
+
       def statements method
+        check_actions method
         valid_actions.map do |action|
           statements_string(method, :action => action)
         end.compact.join("\n")
