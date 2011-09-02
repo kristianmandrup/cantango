@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.8.5"
+  s.version = "0.8.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-09-01}
+  s.date = %q{2011-09-02}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -650,8 +650,6 @@ Store permissions in yaml file or key-value store}
       s.add_runtime_dependency(%q<sweetloader>, ["~> 0.1.0"])
       s.add_runtime_dependency(%q<sqlite3>, [">= 0"])
       s.add_runtime_dependency(%q<hashie>, [">= 0.4"])
-      s.add_development_dependency(%q<rspec-rails>, ["= 2.6.1"])
-      s.add_development_dependency(%q<forgery>, ["= 0.3.10"])
       s.add_development_dependency(%q<factory_girl>, [">= 0"])
       s.add_development_dependency(%q<sourcify>, [">= 0"])
       s.add_development_dependency(%q<dkastner-moneta>, [">= 1.0"])
@@ -666,8 +664,6 @@ Store permissions in yaml file or key-value store}
       s.add_dependency(%q<sweetloader>, ["~> 0.1.0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<hashie>, [">= 0.4"])
-      s.add_dependency(%q<rspec-rails>, ["= 2.6.1"])
-      s.add_dependency(%q<forgery>, ["= 0.3.10"])
       s.add_dependency(%q<factory_girl>, [">= 0"])
       s.add_dependency(%q<sourcify>, [">= 0"])
       s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
@@ -683,8 +679,6 @@ Store permissions in yaml file or key-value store}
     s.add_dependency(%q<sweetloader>, ["~> 0.1.0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<hashie>, [">= 0.4"])
-    s.add_dependency(%q<rspec-rails>, ["= 2.6.1"])
-    s.add_dependency(%q<forgery>, ["= 0.3.10"])
     s.add_dependency(%q<factory_girl>, [">= 0"])
     s.add_dependency(%q<sourcify>, [">= 0"])
     s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
