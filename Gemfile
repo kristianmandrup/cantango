@@ -49,8 +49,8 @@ group :test do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '2.6.1' # needed in development to expose the rails generators
-  gem 'forgery',    '0.3.10' # needed in development when using rake db:seed
+  # gem 'rspec-rails', '2.6.1' # needed in development to expose the rails generators
+  # gem 'forgery',    '0.3.10' # needed in development when using rake db:seed
   gem 'factory_girl'
 
   # Adapters
