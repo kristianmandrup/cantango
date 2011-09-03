@@ -49,7 +49,7 @@ CanTango now:
 
 The wiki will soon be updated to reflect these improvements and changes.
 
-Improvements in the pipeline
+*Improvements in the pipeline:*
 
 * Better visibility of the @Ability@ flow, to allow one to see which rules are triggered by which permits (likely via a special :debug config mode, since it would affect performance).
 
@@ -77,14 +77,16 @@ h3. Rails 3 configuration
 
 The CanTango "Configuration":https://github.com/kristianmandrup/cantango/wiki/Configuration consists of a nice DSL that let's you configure most of the things we imagine you would want to customize. Feel free to suggest more configuration options!
 
-h3. Access Control via Permits and Permissions
+h3. Abilities via Permits and Permissions
 
-AC rules can be defined in both:
+Abilities are Access Control rules. With CanTango, these can be defined in both:
 
 * "Permissions":https://github.com/kristianmandrup/cantango/wiki/Permissions (fx a yaml file)
 * "Permits":https://github.com/kristianmandrup/cantango/wiki/Permits (special classes)
 
-AC rules can be defined for the following conceptual entities:
+Note: For the simplest cases, you can define a @#permit_rules@ instance method directly in _CanTango::Ability_
+
+Abilities can be defined for the following conceptual entities:
 
 * User models
 * User Account models
@@ -94,13 +96,13 @@ AC rules can be defined for the following conceptual entities:
 
 h3. Design overview
 
-The default CanTango ability pattern is simple.
+The default CanTango Ability pattern is simple.
 
-1. Return cached rules for ability candidate if available
+1. Return cached ability rules for candidate if available
 2. Generate rules for candidate
 3. Cache rules for candidate
 
-An ability candidate is typically either a user or an account instance.
+A candidate is typically either a user or an account instance.
 
 Caching can be enabled or disabled. To generate the rules, one or more engines are executed.
 
