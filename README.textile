@@ -2,10 +2,10 @@ h1. CanTango
 
 CanTango is an advanced Access Control (permissions) system for Rails 3. It:
 
-* extends "CanCan":http://github.com/ryanb/cancan and offers a role oriented design
+* extends "CanCan":http://github.com/ryanb/cancan and offers a more role oriented design
 * integrates with _role_ and _authentication_ systems in a non-intrusive manner
-* can _cache_ rules between requests for increased performance
-* can _store_ rules in a permission store, including a YAML file, for easy administration
+* can _cache_ ability rules between requests for increased performance
+* can _store_ abilites in a permission store, including a YAML file, for easy administration
 * works well with multiple user accounts and sub applications
 * supports multiple "Devise":https://github.com/plataformatec/devise users
 
@@ -37,17 +37,21 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 h2. Update Sept 1, 2011
 
-Version *0.8.5* has been released.
+Version *0.8.5.1* has been released.
 
-CanTango now supports "sugar-high 0.6":https://github.com/kristianmandrup/sugar-high.git' where "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' has been extracted into its own gem.
+CanTango now:
 
-* The Cache has been refactored
-* Engines are now run in correct order (and only if active)
-* The Cache Kompiler (for dynamic rules caching) and Moneta cache are now optional (via adapters)
-* Permits are found and loaded via pre-registratio via the @#inherited@ method for the base permits. You can also use the _tango_permit_ macro.
-* Better visibility of the @Ability@ flow, to allow one to see which rules are triggered by which permits (likely via a special :debug config mode, since it would affect performance).
+* supports "sugar-high 0.6":https://github.com/kristianmandrup/sugar-high.git.
+* The ability cache has been refactored
+* Activated engines are now run in specified order
+* The ability cache rules compiler (for dynamic rules caching) and Moneta cache/store are now optional (enabled via adapters)
+* Permits are found and loaded using pre-registration via inheritance. You can also use the _tango_permit_ macro for more control.
 
 The wiki will soon be updated to reflect these improvements and changes.
+
+Improvements in the pipeline
+
+* Better visibility of the @Ability@ flow, to allow one to see which rules are triggered by which permits (likely via a special :debug config mode, since it would affect performance).
 
 h2. Quickstart
 
@@ -141,18 +145,8 @@ If you encounter bugs, raise an issue or:
 
 h2. Contributors
 
-*Kristian Mandrup*
-- Main architect
-- Designer of structure
-- Feature ideas
-- Initiator of project
-- Devise app integration specs
-
-"Stanislaw Pankevich":https://github.com/stanislaw
-- Main contributor of permissions engine
-- Caching of Procs for caching engine
-- Lots of bug fixes and specs
-- Tireless "worker" ;)
+* Kristian Mandrup
+* "Stanislaw Pankevich":https://github.com/stanislaw
 
 h3. Copyright
 
