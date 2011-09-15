@@ -3,7 +3,7 @@ require 'spec_helper'
 class Menu
 end
 
-def WaiterRolePermit < CanTango::RolePermit
+class WaiterRolePermit < CanTango::RolePermit
   def initialize ability
     super
   end
@@ -16,7 +16,7 @@ def WaiterRolePermit < CanTango::RolePermit
   end
 end
 
-def ChefRolePermit < CanTango::RolePermit
+class ChefRolePermit < CanTango::RolePermit
   def initialize ability
     super
   end
@@ -29,8 +29,14 @@ def ChefRolePermit < CanTango::RolePermit
   end
 end
 
+class Context
+  include CanTango::Api::User::Ability
+end
+
+# Note: This config feature is currently not used, but could potentially be of use in the future
 describe CanTango::Configuration::Debug do
-  subject { CanTango.config.debug }
+  let(:context) { Context.new }
+  subject       { CanTango.config.debug }
 
   describe 'should set debug mode :on' do
     before do
@@ -46,18 +52,18 @@ describe CanTango::Configuration::Debug do
       subject.set :on
     end
 
-    its(:on?) { should be_true }
-    its(:off?) { should be_false }
+    its(:on?)   { should be_true  }
+    its(:off?)  { should be_false }
   end
 
   context 'debug :on' do
     let (:user) do
-      User.new 'kris', 'kris@gmail.com', :roles => [:waiter]
+      User.new 'kris', 'kris@gmail.com', :role => :waiter
     end
 
     before do
       subject.set :on
-      user_can? :read, Menu
+      context.user_ability(user).can? :read, Menu
     end
 
     describe 'should tell which permits allowe :read' do
@@ -73,6 +79,4 @@ describe CanTango::Configuration::Debug do
     end
   end
 end
-
-
 

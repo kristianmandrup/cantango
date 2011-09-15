@@ -4,7 +4,6 @@ module CanTango
       include Singleton
 
       attr_reader :accounts
-      # CanTango.config.permits.accounts[:admin].role => {}
 
       def accounts
         @accounts ||= Hash.new
@@ -23,15 +22,17 @@ module CanTango
         registry.send(permit_type)[permit_name] = permit_clazz
       end
 
-      def allowed? actions, subjects
-        executed.each do |permit|
-          permit.can? actions, subjects
+      def allowed actions, subjects, *extra_args
+        executed.inject([]) do |result, permit|
+          result << permit.class if permit.can? actions, subjects, *extra_args
+          result
         end
       end
 
-      def denied? actions, subjects
-        executed.each do |permit|
-          permit.cannot? actions, subjects
+      def denied actions, subjects, *extra_args
+        executed.inject([]) do |result, permit|
+          result << permit.class if permit.cannot? actions, subjects, *extra_args
+          result
         end
       end
 

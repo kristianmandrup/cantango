@@ -74,9 +74,13 @@ module CanTango
         ability.user_account
       end
 
+      def ability_rules
+        ability.send(:rules)
+      end
+
       def ability_sync!
-        ability.send(:rules) << rules
-        ability.send(:rules).flatten!
+        ability_rules << (rules - ability_rules)
+        ability_rules.flatten!
       end
 
       # In a specific Role based Permit you can use
