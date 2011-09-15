@@ -9,6 +9,7 @@ module CanTango
 
     def execute!
       permits.each do |permit|
+        CanTango.config.permits.executed << permit
         break if permit.execute == :break
       end
     end
@@ -17,7 +18,7 @@ module CanTango
     # has a role or a role group
     # also execute any permit marked as special
     def permits
-      permit_factory.build!
+      @permits ||= permit_factory.build!
     end
 
     def permit_class_names

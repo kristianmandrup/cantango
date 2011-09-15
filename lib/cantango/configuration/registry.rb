@@ -4,7 +4,7 @@ require 'sugar-high/kind_of'
 module CanTango
   class Configuration
     class Registry
-      
+
       attr_writer   :default
       attr_accessor :registered
 

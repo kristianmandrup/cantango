@@ -30,11 +30,13 @@ module CanTango
       # executes the permit
       def execute
         executor.execute!
+        ability_sync!
       end
 
       def category label
         config.models.by_category label
       end
+
 
       def any reg_exp
         config.models.by_reg_exp reg_exp
@@ -72,11 +74,12 @@ module CanTango
         ability.user_account
       end
 
-      def rules
-        ability.send :rules
+      def ability_sync!
+        ability.send(:rules) << rules
+        ability.send(:rules).flatten!
       end
 
-      # In a specific Role based Permit you can use 
+      # In a specific Role based Permit you can use
       #   def permit? user, options = {}
       #     return if !super(user, :in_role)
       #     ... permission logic follows
@@ -103,7 +106,7 @@ module CanTango
         end
       end
 
-      include CanTango::Rules
+      include CanTango::Rules # also makes a Permit a subclass of CanCan::Ability
 
       protected
 
@@ -117,7 +120,7 @@ module CanTango
         raise "License #{clazz} could not be enforced using #{self.inspect}"
       end
 
-      # This method will contain the actual rules 
+      # This method will contain the actual rules
       # can be implemented in the subclass
 
       def permit_rules

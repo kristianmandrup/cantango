@@ -21,7 +21,7 @@ module CanTango
     def self.components
       [
         :guest, :autoload, :user, :user_account, :models, :roles, :role_groups,
-        :engines, :users, :user_accounts, :categories, :adapters, :permits
+        :engines, :users, :user_accounts, :categories, :adapters, :permits, :debug
       ]
     end
 

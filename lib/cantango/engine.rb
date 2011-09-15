@@ -7,7 +7,7 @@ module CanTango
     end
 
     def execute!
-      # raise NotImplementedError      
+      # raise NotImplementedError
     end
   end
 end
