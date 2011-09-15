@@ -23,7 +23,7 @@ module CanTango
         registry.send(permit_type)[permit_name] = permit_clazz
       end
 
-      def permitted? actions, subjects
+      def allowed? actions, subjects
         executed.each do |permit|
           permit.can? actions, subjects
         end

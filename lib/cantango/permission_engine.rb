@@ -9,7 +9,6 @@ module CanTango
     end
 
     def execute!
-      puts "permissions"
       permissions.each do |permission|
         permission.evaluate! user
       end
