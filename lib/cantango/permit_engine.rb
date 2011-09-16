@@ -8,6 +8,7 @@ module CanTango
     end
 
     def execute!
+      # CanTango.config.permits.clear_executed! # should there be an option clear before each execution?
       permits.each do |permit|
         CanTango.config.permits.was_executed(permit, ability) if CanTango.config.debug.on?
         break if permit.execute == :break

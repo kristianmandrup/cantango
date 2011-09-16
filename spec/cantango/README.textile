@@ -1,3 +1,0 @@
-h1. README
-
-This folder is for creating specs to test the internals of CanTango.

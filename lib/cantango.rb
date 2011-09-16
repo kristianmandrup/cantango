@@ -22,6 +22,22 @@ module CanTango
     end
 
     alias_method :config, :configure
+
+    def permits_allowed candidate, actions, subjects, *extra_args
+      config.permits.allowed candidate, actions, subjects, *extra_args
+    end
+
+    def permits_denied candidate, actions, subjects, *extra_args
+      config.permits.denied candidate, actions, subjects, *extra_args
+    end
+
+    def clear_permits_executed!
+      config.permits.clear_executed!
+    end
+
+    def debug!
+      config.debug.set :on
+    end
   end
 end
 

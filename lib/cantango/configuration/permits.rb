@@ -48,6 +48,10 @@ module CanTango
         @executed ||= {}
       end
 
+      def clear_executed!
+        @executed = nil
+      end
+
       protected
 
       def hash_key_for subject

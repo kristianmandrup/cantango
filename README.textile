@@ -49,10 +49,6 @@ CanTango now:
 
 The wiki will soon be updated to reflect these improvements and changes.
 
-*Improvements in the pipeline:*
-
-* Better visibility of the @Ability@ flow, to allow one to see which rules are triggered by which permits (likely via a special :debug config mode, since it would affect performance).
-
 h2. Quickstart
 
 See the "Quickstart guide":https://github.com/kristianmandrup/cantango/wiki/Quickstart in the wiki.
@@ -93,6 +89,35 @@ Abilities can be defined for the following conceptual entities:
 * Roles
 * Role groups
 * Users
+
+h3. Debugging Abilities and Permits
+
+Each Permit is in effect an Ability on its own. This lets you easily investigate which Permits allowed or denied a certain action for a specific ability candidate (typically a user or user account). 
+
+Debugging Example:
+
+<pre>
+# First you must enable debug mode
+CanTango.debug!
+
+# And have the permit engine execute at least once
+user_can? :read, Article
+
+# Then you can debug the permits execution
+CanTango.permits_allowed current_user, :read, Article
+
+admin_can? :read, Article
+CanTango.permits_denied admin_user, :publish, [Article, Post]
+CanTango.permits_allowed admin_user, :write, Article
+
+CanTango.clear_executed_permits! # reset as if no permits have been executed
+
+user_can? :publish, Article
+CanTango.permits_denied current_user, [:write, publish], [Article, Post]
+
+guest_account_can? :publish, Article
+CanTango.permits_denied guest_account, :publish, [Article, Post], options
+</pre>
 
 h3. Design overview
 
