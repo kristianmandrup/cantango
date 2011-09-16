@@ -4,17 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{cantango}
-  s.version = "0.8.5.1"
+  s.name = "cantango"
+  s.version = "0.8.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-09-02}
-  s.description = %q{Define your permission rules as role- or role group specific permits.
-Integrates well with multiple Devise user acounts.
-Includes rules caching.
-Store permissions in yaml file or key-value store}
-  s.email = %q{kmandrup@gmail.com, s.pankevich@gmail.com}
+  s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
+  s.date = "2011-09-16"
+  s.description = "Define your permission rules as role- or role group specific permits.\nIntegrates well with multiple Devise user acounts.\nIncludes rules caching.\nStore permissions in yaml file or key-value store"
+  s.email = "kmandrup@gmail.com, s.pankevich@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.textile"
@@ -71,6 +68,7 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/configuration/adapters.rb",
     "lib/cantango/configuration/autoload.rb",
     "lib/cantango/configuration/categories.rb",
+    "lib/cantango/configuration/debug.rb",
     "lib/cantango/configuration/engines.rb",
     "lib/cantango/configuration/engines/cache.rb",
     "lib/cantango/configuration/engines/engine.rb",
@@ -274,7 +272,6 @@ Store permissions in yaml file or key-value store}
     "spec/active_record/scenarios/user_accounts/permits/user_account_permit.rb",
     "spec/active_record/scenarios/user_accounts/user_account_spec.rb",
     "spec/active_record/spec_helper.rb",
-    "spec/cantango/README.textile",
     "spec/cantango/ability/cache/key_spec.rb",
     "spec/cantango/ability/cache/kompiler_spec.rb",
     "spec/cantango/ability/cache/reader_compile_spec.rb",
@@ -300,6 +297,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/configuration/adapter_spec.rb",
     "spec/cantango/configuration/autoload_spec.rb",
     "spec/cantango/configuration/categories_spec.rb",
+    "spec/cantango/configuration/debug_spec.rb",
     "spec/cantango/configuration/engines/cache_spec.rb",
     "spec/cantango/configuration/engines/engine_shared.rb",
     "spec/cantango/configuration/engines/permission_spec.rb",
@@ -634,11 +632,11 @@ Store permissions in yaml file or key-value store}
     "wiki/when_to_use.markdown",
     "wiki/why_to_use.markdown"
   ]
-  s.homepage = %q{http://github.com/kristianmandrup/cantango}
-  s.licenses = [%q{MIT}]
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.8}
-  s.summary = %q{CanCan extension with role oriented permission management and more}
+  s.homepage = "http://github.com/kristianmandrup/cantango"
+  s.licenses = ["MIT"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = "1.8.10"
+  s.summary = "CanCan extension with role oriented permission management and more"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -650,6 +648,8 @@ Store permissions in yaml file or key-value store}
       s.add_runtime_dependency(%q<sweetloader>, ["~> 0.1.0"])
       s.add_runtime_dependency(%q<sqlite3>, [">= 0"])
       s.add_runtime_dependency(%q<hashie>, [">= 0.4"])
+      s.add_development_dependency(%q<rspec-rails>, [">= 2.6.1"])
+      s.add_development_dependency(%q<forgery>, [">= 0.3"])
       s.add_development_dependency(%q<factory_girl>, [">= 0"])
       s.add_development_dependency(%q<sourcify>, [">= 0"])
       s.add_development_dependency(%q<dkastner-moneta>, [">= 1.0"])
@@ -664,6 +664,8 @@ Store permissions in yaml file or key-value store}
       s.add_dependency(%q<sweetloader>, ["~> 0.1.0"])
       s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<hashie>, [">= 0.4"])
+      s.add_dependency(%q<rspec-rails>, [">= 2.6.1"])
+      s.add_dependency(%q<forgery>, [">= 0.3"])
       s.add_dependency(%q<factory_girl>, [">= 0"])
       s.add_dependency(%q<sourcify>, [">= 0"])
       s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
@@ -679,6 +681,8 @@ Store permissions in yaml file or key-value store}
     s.add_dependency(%q<sweetloader>, ["~> 0.1.0"])
     s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<hashie>, [">= 0.4"])
+    s.add_dependency(%q<rspec-rails>, [">= 2.6.1"])
+    s.add_dependency(%q<forgery>, [">= 0.3"])
     s.add_dependency(%q<factory_girl>, [">= 0"])
     s.add_dependency(%q<sourcify>, [">= 0"])
     s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
