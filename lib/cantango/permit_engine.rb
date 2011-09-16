@@ -9,7 +9,7 @@ module CanTango
 
     def execute!
       permits.each do |permit|
-        CanTango.config.permits.executed << permit
+        CanTango.config.permits.was_executed(permit, ability) if CanTango.config.debug.on?
         break if permit.execute == :break
       end
     end

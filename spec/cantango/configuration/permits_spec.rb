@@ -63,18 +63,19 @@ describe CanTango::Configuration::Permits do
     end
 
     before do
+      CanTango.config.debug.set :on
       context.user_ability(user).can? :read, Menu
     end
 
     describe 'should tell which permits allowe :read' do
       it 'should show WaiterRolePermit as the permit that allowed :read of Menu' do
-        CanTango.config.permits.allowed(:read, Menu).should include(WaiterRolePermit)
+        CanTango.config.permits.allowed(user, :read, Menu).should include(WaiterRolePermit)
       end
     end
 
     describe 'should tell which permits denied :write' do
       it 'should show WaiterRolePermit as the permit that denied :write of Menu' do
-        CanTango.config.permits.denied(:write, Menu).should include(WaiterRolePermit)
+        CanTango.config.permits.denied(user, :write, Menu).should include(WaiterRolePermit)
       end
     end
   end
