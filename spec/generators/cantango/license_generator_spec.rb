@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require 'spec_helper'
 require 'generator-spec'
 
 require_generator :cantango => :license
@@ -6,13 +6,13 @@ require_generator :cantango => :license
 RSpec::Generator.configure do |config|
   config.debug = true
   config.remove_temp_dir = true #false
-  config.default_rails_root(__FILE__) 
+  config.default_rails_root(__FILE__)
   config.lib = File.dirname(__FILE__) + '/../lib'
   config.logger = :stdout  # :file
 end
 
 
-describe CanTango::Generators::LicenseGenerator  do
+describe Cantango::Generators::LicenseGenerator  do
   use_helpers :special, :file
 
   setup_generator :license do

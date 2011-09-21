@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require 'spec_helper'
 require 'generator-spec'
 
 require_generator :cantango => :role_permit
@@ -6,17 +6,17 @@ require_generator :cantango => :role_permit
 RSpec::Generator.configure do |config|
   config.debug = true
   config.remove_temp_dir = true #false
-  config.default_rails_root(__FILE__) 
+  config.default_rails_root(__FILE__)
   config.lib = File.dirname(__FILE__) + '/../lib'
   config.logger = :stdout  # :file
 end
 
 
-describe CanTango::Generators::RolePermitGenerator do
+describe Cantango::Generators::RolePermitGenerator do
   use_helpers :special, :file
 
   setup_generator :permit do
-    tests CanTango::Generators::RolePermitGenerator
+    tests Cantango::Generators::RolePermitGenerator
   end
 
   describe 'Run Permit generator' do

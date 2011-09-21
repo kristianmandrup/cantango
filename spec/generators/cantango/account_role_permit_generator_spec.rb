@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require 'spec_helper'
 require 'generator-spec'
 
 require_generator :cantango => :role_permit
@@ -12,11 +12,11 @@ RSpec::Generator.configure do |config|
 end
 
 
-describe CanTango::Generators::RolePermitGenerator do
+describe Cantango::Generators::RolePermitGenerator do
   use_helpers :special, :file
 
   setup_generator :permit do
-    tests CanTango::Generators::RolePermitGenerator 
+    tests Cantango::Generators::RolePermitGenerator
   end
 
   describe 'Run Permit generator' do

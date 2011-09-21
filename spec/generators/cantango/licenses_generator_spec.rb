@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require 'spec_helper'
 require 'generator-spec'
 
 require_generator :cantango => :licenses
@@ -12,11 +12,11 @@ RSpec::Generator.configure do |config|
 end
 
 
-describe CanTango::Generators::LicensesGenerator do
+describe Cantango::Generators::LicensesGenerator do
   use_helpers :controller, :special, :file
 
   setup_generator :licenses do
-    tests CanTango::Generators::LicensesGenerator
+    tests Cantango::Generators::LicensesGenerator
   end
 
   describe "Licenses: Profile Administration and Article Editing" do
