@@ -1,9 +1,9 @@
 class Module
   def tango_permit options = {}
-    name_from_class_name = CanTango::Permits::Permit.first_name self.to_s.split("::").last
+    name_from_class_name = CanTango::Permit.first_name self.to_s.split("::").last
     name = options[:name] || name_from_class_name
 
-    account_from_class_name = CanTango::Permits::Permit.first_name self.to_s.split("::").first if (self.to_s.split("::").size > 1)
+    account_from_class_name = CanTango::Permit.first_name self.to_s.split("::").first if (self.to_s.split("::").size > 1)
     account = options[:account] || account_from_class_name
 
     type = options[:type] || self.superclass.type

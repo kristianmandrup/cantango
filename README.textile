@@ -35,19 +35,18 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Sept 1, 2011
+h2. Update Sept 20, 2011
 
-Version *0.8.5.1* has been released.
+Version *0.8.6* has been released.
 
 CanTango now:
 
 * supports "sugar-high 0.6":https://github.com/kristianmandrup/sugar-high.
 * The ability cache has been refactored
-* Activated engines are now run in specified order
+* Engines can now be mounted/unmounted, activated/deactivated and the execution order specified
 * The ability cache rules compiler (for dynamic rules caching) and Moneta cache/store are now optional (enabled via adapters)
-* Permits are found and loaded using pre-registration via inheritance. You can also use the _tango_permit_ macro for more control.
-
-The wiki will soon be updated to reflect these improvements and changes.
+* Permits are loaded using pre-registration of permit classes either via inheritance or use of the _tango_permit_ macro.
+* Enhanced Permits debugging. Easily track which permits granted or declined certain abilities
 
 h2. Quickstart
 
@@ -75,7 +74,7 @@ The CanTango "Configuration":https://github.com/kristianmandrup/cantango/wiki/Co
 
 h3. Abilities via Permits and Permissions
 
-Abilities are Access Control rules. With CanTango, these can be defined in both:
+Abilities are Access Control rules. With CanTango, the AC rules can be defined in both:
 
 * "Permissions":https://github.com/kristianmandrup/cantango/wiki/Permissions (fx a yaml file)
 * "Permits":https://github.com/kristianmandrup/cantango/wiki/Permits (special classes)
@@ -92,32 +91,7 @@ Abilities can be defined for the following conceptual entities:
 
 h3. Debugging Abilities and Permits
 
-Each Permit is in effect an Ability on its own. This lets you easily investigate which Permits allowed or denied a certain action for a specific ability candidate (typically a user or user account). 
-
-Debugging Example:
-
-<pre>
-# First you must enable debug mode
-CanTango.debug!
-
-# And have the permit engine execute at least once
-user_can? :read, Article
-
-# Then you can debug the permits execution
-CanTango.permits_allowed current_user, :read, Article
-
-admin_can? :read, Article
-CanTango.permits_denied admin_user, :publish, [Article, Post]
-CanTango.permits_allowed admin_user, :write, Article
-
-CanTango.clear_executed_permits! # reset as if no permits have been executed
-
-user_can? :publish, Article
-CanTango.permits_denied current_user, [:write, publish], [Article, Post]
-
-guest_account_can? :publish, Article
-CanTango.permits_denied guest_account, :publish, [Article, Post], options
-</pre>
+See [[Debugging permits]]
 
 h3. Design overview
 
