@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
-  s.date = "2011-09-16"
+  s.date = "2011-09-27"
   s.description = "Define your permission rules as role- or role group specific permits.\nIntegrates well with multiple Devise user acounts.\nIncludes rules caching.\nStore permissions in yaml file or key-value store"
   s.email = "kmandrup@gmail.com, s.pankevich@gmail.com"
   s.extra_rdoc_files = [
@@ -577,6 +577,7 @@ Gem::Specification.new do |s|
     "spec/fixtures/tango_fixtures.rb",
     "spec/generators/cantango/account_role_permit_generator_spec.rb",
     "spec/generators/cantango/account_role_permits_generator_spec.rb",
+    "spec/generators/cantango/install_generator_spec.rb",
     "spec/generators/cantango/license_generator_spec.rb",
     "spec/generators/cantango/licenses_generator_spec.rb",
     "spec/generators/cantango/role_permit_generator_spec.rb",
@@ -646,11 +647,11 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<cancan>, [">= 1.4"])
       s.add_runtime_dependency(%q<sugar-high>, [">= 0.6.0"])
       s.add_runtime_dependency(%q<sweetloader>, ["~> 0.1.0"])
-      s.add_runtime_dependency(%q<sqlite3>, [">= 0"])
       s.add_runtime_dependency(%q<hashie>, [">= 0.4"])
       s.add_development_dependency(%q<rspec-rails>, [">= 2.6.1"])
       s.add_development_dependency(%q<forgery>, [">= 0.3"])
       s.add_development_dependency(%q<factory_girl>, [">= 0"])
+      s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_development_dependency(%q<sourcify>, [">= 0"])
       s.add_development_dependency(%q<dkastner-moneta>, [">= 1.0"])
       s.add_development_dependency(%q<rspec>, [">= 2.4.0"])
@@ -662,11 +663,11 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<cancan>, [">= 1.4"])
       s.add_dependency(%q<sugar-high>, [">= 0.6.0"])
       s.add_dependency(%q<sweetloader>, ["~> 0.1.0"])
-      s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<hashie>, [">= 0.4"])
       s.add_dependency(%q<rspec-rails>, [">= 2.6.1"])
       s.add_dependency(%q<forgery>, [">= 0.3"])
       s.add_dependency(%q<factory_girl>, [">= 0"])
+      s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<sourcify>, [">= 0"])
       s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
       s.add_dependency(%q<rspec>, [">= 2.4.0"])
@@ -679,11 +680,11 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<cancan>, [">= 1.4"])
     s.add_dependency(%q<sugar-high>, [">= 0.6.0"])
     s.add_dependency(%q<sweetloader>, ["~> 0.1.0"])
-    s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<hashie>, [">= 0.4"])
     s.add_dependency(%q<rspec-rails>, [">= 2.6.1"])
     s.add_dependency(%q<forgery>, [">= 0.3"])
     s.add_dependency(%q<factory_girl>, [">= 0"])
+    s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<sourcify>, [">= 0"])
     s.add_dependency(%q<dkastner-moneta>, [">= 1.0"])
     s.add_dependency(%q<rspec>, [">= 2.4.0"])
