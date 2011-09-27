@@ -2,6 +2,7 @@ Gemfile.lock
 *.sqlite3
 *.swp
 *.log
+.rvmrc
 
 spec/fixtures/config/test_permissions.yml
 # rcov generated
