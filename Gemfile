@@ -5,7 +5,6 @@ group :default do
   gem 'cancan',           '>= 1.4'
   gem 'sugar-high',       '>= 0.6.0'
   gem 'sweetloader',      '~> 0.1.0'
-  gem 'sqlite3'
   gem 'hashie',           '>= 0.4'
 
   # adapters
@@ -52,6 +51,7 @@ group :development, :test do
   gem "rspec-rails",  '>= 2.6.1'  # needed in development to expose the rails generators
   gem 'forgery',      '>= 0.3' # needed in development when using rake db:seed
   gem 'factory_girl'
+  gem 'sqlite3'
 
   # Adapters
   gem 'sourcify'
