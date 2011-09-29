@@ -30,13 +30,13 @@ module CanTango
 
         def subject_in_role?
           return subject.send(has_role_meth, role) if subject.respond_to? has_role_meth
-          return subject.send(list_role_meth, role).include? role if subject.respond_to? has_role_meth
+          return subject.send(roles_list_meth).include? role if subject.respond_to? roles_list_meth
           false
         end
 
         def subject_in_role_group?
           return subject.send(has_role_group_meth, role) if subject.respond_to? has_role_group_meth
-          return subject.send(list_role_group_meth).include? role if subject.respond_to? list_role_group_meth
+          return subject.send(role_groups_list_meth).include? role if subject.respond_to? role_groups_list_meth
           false
         end
 
