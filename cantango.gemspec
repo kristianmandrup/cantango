@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "cantango"
-  s.version = "0.8.6.1"
+  s.version = "0.8.6.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
-  s.date = "2011-09-27"
+  s.date = "2011-10-04"
   s.description = "Define your permission rules as role- or role group specific permits.\nIntegrates well with multiple Devise user acounts.\nIncludes rules caching.\nStore permissions in yaml file or key-value store"
   s.email = "kmandrup@gmail.com, s.pankevich@gmail.com"
   s.extra_rdoc_files = [
@@ -346,6 +346,7 @@ Gem::Specification.new do |s|
     "spec/cantango/permit_engine/builder/role_group_permits_spec.rb",
     "spec/cantango/permit_engine/builder/role_permits_spec.rb",
     "spec/cantango/permit_engine/builder/special_permits_spec.rb",
+    "spec/cantango/permit_engine/executor/base_spec.rb",
     "spec/cantango/permit_engine/executor/system_spec.rb",
     "spec/cantango/permit_engine/factory_spec.rb",
     "spec/cantango/permit_engine/finder_spec.rb",
