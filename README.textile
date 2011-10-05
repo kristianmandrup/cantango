@@ -35,18 +35,13 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Sept 20, 2011
+h2. Update Oct 5, 2011
 
-Version *0.8.6* has been released.
+Version *0.8.7* has been released.
 
-CanTango now:
+* Enhanced Permits and Engines debugging. 
 
-* supports "sugar-high 0.6":https://github.com/kristianmandrup/sugar-high.
-* The ability cache has been refactored
-* Engines can now be mounted/unmounted, activated/deactivated and the execution order specified
-* The ability cache rules compiler (for dynamic rules caching) and Moneta cache/store are now optional (enabled via adapters)
-* Permits are loaded using pre-registration of permit classes either via inheritance or use of the _tango_permit_ macro.
-* Enhanced Permits debugging. Easily track which permits granted or declined certain abilities
+Now you can easily track which engines and permits are executed and which permits granted or declined certain abilities
 
 h2. Quickstart
 
