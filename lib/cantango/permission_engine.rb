@@ -9,6 +9,7 @@ module CanTango
     end
 
     def execute!
+      puts "Permission Engine executing..." if CanTango.config.debug.on?
       permissions.each do |permission|
         permission.evaluate! user
       end

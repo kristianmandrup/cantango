@@ -29,6 +29,7 @@ module CanTango
 
       # executes the permit
       def execute
+        puts "Execute Permit: #{self}" if CanTango.config.debug.on?        
         executor.execute!
         ability_sync!
       end

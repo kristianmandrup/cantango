@@ -40,7 +40,10 @@ module CanTango
     end
 
     def each_engine &block
-      engines.execution_order.each {|name| yield engines.registered[name] if engines.active? name }
+      engines.execution_order.each do |name| 
+        
+        yield engines.registered[name] if engines.active? name
+      end
     end
 
     def engines

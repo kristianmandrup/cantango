@@ -24,10 +24,12 @@ module CanTango
     alias_method :config, :configure
 
     def permits_allowed candidate, actions, subjects, *extra_args
+      raise "Debugging has not been turned on. Turn it on using: CanTango.debug!" if CanTango.config.debug.off?
       config.permits.allowed candidate, actions, subjects, *extra_args
     end
 
     def permits_denied candidate, actions, subjects, *extra_args
+      raise "Debugging has not been turned on. Turn it on using: CanTango.debug!" if CanTango.config.debug.off?
       config.permits.denied candidate, actions, subjects, *extra_args
     end
 
