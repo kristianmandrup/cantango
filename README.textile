@@ -37,10 +37,14 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 h2. Update Oct 6, 2011
 
-Version *0.8.8* has been released.
+Version *0.8.8.1* has been released.
 
 * Fixed some bugs when using :user and :account permits
 * Enhanced Permits debugging so you can now track the execution flow of the Permits engine. 
+* You can now disable specific types of Permits to be used for the Permits engine
+  * CanTango.config.permits.disable :role_groups, :special
+  * CanTango.config.permits.enabled
+  * CanTango.config.permits.available 
 
 h2. Quickstart
 
