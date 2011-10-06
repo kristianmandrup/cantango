@@ -5,6 +5,18 @@ module CanTango
 
       attr_reader :accounts
 
+      def enabled
+        @enabled || available
+      end
+
+      def available
+        [:user, :account, :role, :role_group, :special]
+      end
+
+      def disable *types
+        @enabled = available - types.flatten
+      end
+
       def accounts
         @accounts ||= Hash.new
       end

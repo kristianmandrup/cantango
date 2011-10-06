@@ -39,7 +39,7 @@ module CanTango
       end
 
       def builders
-        [:role_group, :role, :user, :account, :special]
+        CanTango.config.permits.enabled
       end
 
       def options
