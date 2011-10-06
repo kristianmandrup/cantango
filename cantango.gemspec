@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "cantango"
-  s.version = "0.8.7"
+  s.version = "0.8.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
-  s.date = "2011-10-05"
+  s.date = "2011-10-06"
   s.description = "Define your permission rules as role- or role group specific permits.\nIntegrates well with multiple Devise user acounts.\nIncludes rules caching.\nStore permissions in yaml file or key-value store"
   s.email = "kmandrup@gmail.com, s.pankevich@gmail.com"
   s.extra_rdoc_files = [
