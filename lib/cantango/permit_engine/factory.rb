@@ -1,7 +1,7 @@
 module CanTango
   class PermitEngine < Engine
     class Factory
-      attr_accessor :ability, :builders
+      attr_accessor :ability
 
       # creates the factory for the ability
       # note that the ability contains the roles and role groups of the user (or account)
@@ -11,10 +11,21 @@ module CanTango
       end
 
       def build!
-        @builders ||= builders.inject([]) do |res, builder|
-          res << create_builder(builder).build
-          res
-        end.flatten.compact
+        puts "PermitEngine Factory: No permits could be built" if permits.empty? && CanTango.debug?
+        permits
+      end
+
+      def permits
+        @permits ||= builders.inject([]) do |permits, builder|
+          puts "++ Permit Builder: #{builder_class builder}"
+          built_permits = permits_built_with(builder)
+          puts "== Permits built: #{built_permits.size}"
+          permits = permits + built_permits if built_permits
+        end.flatten
+      end
+
+      def permits_built_with builder
+        create_builder(builder).build
       end
 
       def create_builder builder

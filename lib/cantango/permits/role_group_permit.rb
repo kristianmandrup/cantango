@@ -44,6 +44,19 @@ module CanTango
         super
       end
  
+      def valid_for? subject
+        in_role_group? subject
+      end
+      
+      protected
+
+      include CanTango::Helpers::RoleMethods
+
+      def in_role_group? subject
+        return subject.send(has_role_group_meth, role) if subject.respond_to? has_role_group_meth
+        return subject.send(role_groups_list_meth).include? role if subject.respond_to? role_groups_list_meth
+        false
+      end 
     end
   end
 end

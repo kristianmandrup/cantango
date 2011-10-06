@@ -21,7 +21,6 @@ module CanTango
         clazz.to_s.gsub(/^([A-Za-z]+).*/, '\1').underscore.to_sym # first part of class name
       end
 
-
       def self.account_name clazz
         return nil if clazz.name == clazz.name.demodulize
         clazz.name.gsub(/::.*/,'').gsub(/(.*)Permits/, '\1').underscore.to_sym
@@ -34,10 +33,13 @@ module CanTango
         ability_sync!
       end
 
+      def valid_for? subject
+        raise NotImplementedError
+      end
+
       def category label
         config.models.by_category label
       end
-
 
       def any reg_exp
         config.models.by_reg_exp reg_exp

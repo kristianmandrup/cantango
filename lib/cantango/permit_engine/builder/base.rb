@@ -1,6 +1,8 @@
 module CanTango
   class PermitEngine < Engine
     module Builder
+      class CreatePermitError < StandardError; end;
+
       class Base
         attr_accessor :ability
 
@@ -21,7 +23,7 @@ module CanTango
           self.class.to_s.gsub(/::Builder/, '').constantize
         end
 
-        # Tries to create a new permit for the given role
+        # Tries to create a new permit for the given name
         # If no permit Class can be found, it should return nil
         # @param [Symbol] the name
         # @return the permit Class or nil if not found
@@ -29,12 +31,13 @@ module CanTango
           begin
             permit_clazz(name).new ability
           rescue RuntimeError => e
-            #raise "Error instantiating Permit instance for role #{role}, cause #{e}"
+            # puts "Error instantiating Permit instance for #{name}, cause: #{e}" if CanTango.debug?
             nil
           end
         end
 
         def permit_clazz name
+          puts "Permit Finder: #{finder}" if CanTango.debug?
           finder.new(subject, name).get_permit
         end
 

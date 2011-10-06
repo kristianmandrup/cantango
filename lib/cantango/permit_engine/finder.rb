@@ -6,7 +6,7 @@ module CanTango
 
       def initialize user_account, name
         @user_account = user_account
-        @name = name
+        @name = name.to_s.underscore.to_sym
       end
 
       def get_permit
@@ -17,37 +17,62 @@ module CanTango
       protected
 
       def find_error
-        "Permit for #{type} #{name} could not be loaded. Define either class: #{account_permit_class} or #{permit_class}"
+        "Permit for #{type} #{name} could not be loaded. Define class: #{permit_class} (or wrapped in account scope)"
       end
 
       def retrieve_permit
-        @found_permit ||= [account_permit(name), permit(name)].compact.first
+        @found_permit ||= permits_to_try.first
       end
 
-      def account_permit name
-        
+      def permits_to_try
+        [account_permit, permit].compact
+      end
+
         # TODO: User/Account cases should be handled somehow following is just interim measure
+      def account_permit
         return nil if !user_account.class.name =~ /Account/
-        account_permits_for_account.send(type).registered[name]
+        found = account_permits_by(type)[name]
+        debug_msg account_permit_msg(found)
+        found
       rescue
         nil
       end
 
-      def permit name
-        permits.send(type).registered[name]
+      def account_permit_msg found
+        found.nil? ? "no account permits found for #{name}" : "account permits registered for name: #{name} -> #{found}"
       end
 
-      def permits
+      def permit
+        found = registered_permits.registered_for type, name
+        debug_msg permit_msg(found)
+        found        
+      end
+
+      def debug_msg msg
+        puts msg if CanTango.debug?
+      end
+
+      def permit_msg found
+        found.nil? ? "no permits found for #{name}" : "permits registered for name: #{name} -> #{found}"
+      end
+
+      def account_permits_by type
+        account_permits_for_account.registered_for(type)
+      end
+
+      def permits_by type
+        registered_permits.registered_for(type)
+      end
+
+      def registered_permits
         CanTango.config.permits
       end
 
-      # TODO: make proper account touching
-
       def account_permits_for_account
-        account_permits.send(account)
+        registered_account_permits.send(account)
       end
 
-      def account_permits
+      def registered_account_permits
         CanTango.config.permits
       end
 

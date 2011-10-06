@@ -8,7 +8,10 @@ module CanTango
     end
 
     def execute!
-      puts "Permit Engine executing..." if CanTango.config.debug.on?
+      if CanTango.config.debug.on?
+        puts "Permit Engine executing..." 
+        puts "No permits found!" if permits.empty?
+      end
       # CanTango.config.permits.clear_executed! # should there be an option clear before each execution?
       permits.each do |permit|
         CanTango.config.permits.was_executed(permit, ability) if CanTango.config.debug.on?

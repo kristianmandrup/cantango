@@ -8,8 +8,18 @@ module CanTango
         # @return [Array<RoleGroupPermit::Base>] the role permits built for this ability
         def build
           return [] if !user_account
-          # raise NoAvailableRoles, "no available roles are defined" if available_roles.empty?
-          [] << create_permit(user_account.class.to_s)
+          puts debug_msg if CanTango.debug?          
+          [permit].compact
+        end
+
+        protected
+
+        def debug_msg
+          permit ? "Building AccountPermit for #{user_account}, permit: #{permit}" : "Not building any AccountPermit"
+        end 
+
+        def permit
+          create_permit(user_account.class.to_s)
         end
       end
     end

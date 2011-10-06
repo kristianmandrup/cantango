@@ -44,8 +44,27 @@ module CanTango
       def permit?
         super
       end
-    end
 
+      def valid_for? subject
+        debug_invalid if CanTango.debug? && !(subject_name == account_name)
+        subject_name == account_name
+      end
+
+      protected
+
+      def debug_invalid
+        puts "Not a valid permit for subject: (account class) #{subject_account} != #{permit_account} (permit account)"
+      end
+
+      def subject_name
+        nm = subject.class.name.sub(/.*(Account)$/, '')
+        nm.underscore.to_sym
+      end
+
+      def account_name
+        self.class.account_type_name(self.class)
+      end
+    end
   end
 end
 

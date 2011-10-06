@@ -40,6 +40,10 @@ module CanTango
     def debug!
       config.debug.set :on
     end
+
+    def debug?
+      config.debug.on?
+    end
   end
 end
 

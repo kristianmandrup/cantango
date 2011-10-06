@@ -18,6 +18,10 @@ module CanTango
 
         protected
 
+        def valid_for? subject
+          permit.valid_for?(subject) if permit
+        end
+
         def options
           permit.options
         end

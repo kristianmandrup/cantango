@@ -13,12 +13,14 @@ module CanTango
         end
 
         def file_name= file
-          raise "Couldn't find permissions file: #{file}" if file.nil? || !File.file?(file)
+          raise "Couldn't find permissions file: #{file}. Either disable Permission engine or add this file." if file.nil? || !File.file?(file)
           @file_name = file
         end
 
         def yml_content
           YAML.load_file(file_name)
+        rescue
+          raise "Couldn't load permissions file: #{file_name}. Either disable Permission engine or add this file."
         end
 
         module ClassMethods

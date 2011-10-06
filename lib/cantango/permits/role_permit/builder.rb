@@ -5,7 +5,12 @@ module CanTango
         # builds a list of Permits for each role of the current ability user (or account)
         # @return [Array<RoleGroupPermit::Base>] the role permits built for this ability
         def build
+          if roles.empty?
+            puts "Not building any RolePermit" if CanTango.debug?
+            return [] if roles.empty?
+          end
           roles.inject([]) do |permits, role|
+            puts "Building RolePermit for #{role}" if CanTango.debug?
             (permits << create_permit(role)) if valid?(role.to_sym)
             permits
           end.compact

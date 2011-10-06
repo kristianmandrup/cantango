@@ -32,12 +32,12 @@ module CanTango
 
       def [] label
         raise "Must be a label" if !label.kind_of_label?
-        registered[label]
+        registered[label.to_s]
       end
 
       def []= label, value
         raise "Must be a label" if !label.kind_of_label?
-        registered[label] = value
+        registered[label.to_s] = value
       end
 
       def register hash
@@ -56,7 +56,6 @@ module CanTango
       def default= hash
         @default = Hashie::Mash.new hash
       end
-
     end
   end
 end

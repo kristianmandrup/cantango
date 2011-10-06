@@ -3,6 +3,7 @@ module CanTango
     module Builder
       class SpecialPermits < Base
         def build
+          puts "Building special permits"
           special_permits.map{|role| create_permit(role)}.compact
         end
 

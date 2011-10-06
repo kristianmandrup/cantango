@@ -35,13 +35,12 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Oct 5, 2011
+h2. Update Oct 6, 2011
 
-Version *0.8.7* has been released.
+Version *0.8.8* has been released.
 
-* Enhanced Permits and Engines debugging. 
-
-Now you can easily track which engines and permits are executed and which permits granted or declined certain abilities
+* Fixed some bugs when using :user and :account permits
+* Enhanced Permits debugging so you can now track the execution flow of the Permits engine. 
 
 h2. Quickstart
 

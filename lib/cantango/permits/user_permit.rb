@@ -45,8 +45,26 @@ module CanTango
       def permit?
         super
       end
-    end
 
+      def valid_for? subject
+        debug_invalid if CanTango.debug? && !(subject_user == permit_user)
+        subject_user == permit_user
+      end
+
+      protected
+
+      def debug_invalid
+        puts "Not a valid permit for subject: (user class) #{subject_user} != #{permit_user} (permit user)"
+      end
+
+      def subject_user
+        subject.class.name.underscore.to_sym
+      end
+
+      def permit_user
+        self.class.user_type_name(self.class)
+      end
+    end
   end
 end
 

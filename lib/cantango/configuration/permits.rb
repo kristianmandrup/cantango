@@ -19,7 +19,9 @@ module CanTango
 
       def register_permit_class(permit_name, permit_clazz, permit_type, account_name)
         registry = account_name ? self.send(account_name.to_sym) : self
+        puts "Registering #{permit_type} permit: #{permit_name} of class #{permit_clazz}" if CanTango.debug?
         registry.send(permit_type)[permit_name] = permit_clazz
+        puts registry.send(permit_type).inspect if CanTango.debug?
       end
 
       def allowed candidate, actions, subjects, *extra_args
