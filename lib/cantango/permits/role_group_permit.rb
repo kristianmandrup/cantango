@@ -53,10 +53,16 @@ module CanTango
       include CanTango::Helpers::RoleMethods
 
       def in_role_group? subject
-        return subject.send(has_role_group_meth, role) if subject.respond_to? has_role_group_meth
-        return subject.send(role_groups_list_meth).include? role if subject.respond_to? role_groups_list_meth
-        false
-      end 
+        has_role_group?(subject) || role_groups_of(subject).include?(role) 
+      end
+
+      def has_role_group? subject
+        subject.send(has_role_group_meth, role) if subject.respond_to?(has_role_group_meth) 
+      end
+
+      def role_groups_of subject
+        subject.respond_to?(role_groups_list_meth) ? subject.send(role_groups_list_meth) : []
+      end
     end
   end
 end

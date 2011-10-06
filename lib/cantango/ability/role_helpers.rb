@@ -6,18 +6,24 @@ module CanTango
 
       # return list roles the user has
       def roles
-        raise "#{subject.inspect} should have a #{roles_list_meth} method" if !subject.respond_to?(roles_list_meth)
-        subj_roles = subject.send(roles_list_meth)
-        return [] if subj_roles.blank?
-        subj_roles.flatten
+        return [] if !subject.respond_to?(roles_list_meth) || roles_of(subject).blank?
+        roles_of(subject).flatten
       end
 
       # return list of symbols for role groups the user belongs to
       def role_groups
-        raise "#{subject.inspect} should have a #{role_groups_list_meth} method" if !subject.respond_to?(role_groups_list_meth)
-        subj_role_groups = subject.send(role_groups_list_meth)
-       return [] if subj_role_groups.blank?
-        subj_role_groups.flatten
+        return [] if !subject.respond_to?(role_groups_list_meth) || role_groups_of(subject).blank?
+        role_groups_of(subject).flatten
+      end
+
+      protected
+
+      def role_groups_of subject
+        @subj_role_groups ||= subject.send(role_groups_list_meth)
+      end
+
+      def roles_of subject
+        @subj_roles ||= subject.send(roles_list_meth)
       end
     end
   end
