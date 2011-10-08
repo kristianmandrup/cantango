@@ -21,9 +21,17 @@ module CanTango
         clazz.to_s.gsub(/^([A-Za-z]+).*/, '\1').underscore.to_sym # first part of class name
       end
 
+      def self.type
+        :abstract
+      end
+
       def self.account_name clazz
         return nil if clazz.name == clazz.name.demodulize
         clazz.name.gsub(/::.*/,'').gsub(/(.*)Permits/, '\1').underscore.to_sym
+      end
+
+      def permit_type
+        self.class.type
       end
 
       def disable!
@@ -31,13 +39,13 @@ module CanTango
       end
 
       def disabled?
-        @disabled
+        @disabled || config_disabled?
       end
 
       # executes the permit
       def execute
         return if disabled?
-        puts "Execute Permit: #{self}" if CanTango.config.debug.on?        
+        puts "Execute Permit: #{self}" if CanTango.debug?
         executor.execute!
         ability_sync!
       end
@@ -125,6 +133,10 @@ module CanTango
       include CanTango::Rules # also makes a Permit a subclass of CanCan::Ability
 
       protected
+
+      def config_disabled?
+        (CanTango.config.permits.disabled[permit_type] || []).include?(permit_name.to_s)
+      end
 
       def try_license name
         module_name = "#{name.camelize}License"

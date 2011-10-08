@@ -16,9 +16,10 @@ module CanTango
         clazz.name.demodulize.gsub(/(.*)(RoleGroupPermit)/, '\1').underscore.to_sym
       end
 
-      def role_group
+      def permit_name
         self.class.role_group_name self.class
       end
+      alias_method :role_group, :permit_name
 
       # creates the permit
       def initialize ability

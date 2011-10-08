@@ -16,9 +16,10 @@ module CanTango
         clazz.name.demodulize.gsub(/(.*)(AccountPermit)/, '\1').underscore.to_sym
       end
 
-      def account_type
+      def permit_name
         self.class.account_type_name self.class
       end
+      alias_method :account_type, :permit_name
 
       # creates the permit
       # @param [Permits::Ability] the ability
@@ -26,7 +27,6 @@ module CanTango
       def initialize ability
         super
       end
-
 
       # In a specific Role based Permit you can use 
       #   def permit? user, options = {}
@@ -46,14 +46,14 @@ module CanTango
       end
 
       def valid_for? subject
-        debug_invalid if CanTango.debug? && !(subject_name == account_name)
+        debug_invalid if !(subject_name == account_name)
         subject_name == account_name
       end
 
       protected
 
       def debug_invalid
-        puts "Not a valid permit for subject: (account class) #{subject_account} != #{permit_account} (permit account)"
+        puts "Not a valid permit for subject: (account class) #{subject_account} != #{permit_account} (permit account)" if CanTango.debug?
       end
 
       def subject_name
@@ -62,7 +62,7 @@ module CanTango
       end
 
       def account_name
-        self.class.account_type_name(self.class)
+        account_type(self.class)
       end
     end
   end

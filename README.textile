@@ -35,16 +35,25 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Oct 6, 2011
+h2. Update Oct 8, 2011
 
-Version *0.8.8.1* has been released.
+Version *0.8.9* has been released.
 
-* Fixed some bugs when using :user and :account permits
-* Enhanced Permits debugging so you can now track the execution flow of the Permits engine. 
-* You can now disable specific types of Permits to be used for the Permits engine
-  * CanTango.config.permits.disable :role_groups, :special
-  * CanTango.config.permits.enabled
-  * CanTango.config.permits.available 
+* You can now disable specific Permits to not be executed by the Permits engine
+
+This is especially useful when you are conerting permits into permissions
+
+<pre>
+CanTango.config.permits.disable_for :user, [:admin, :editor]  # AdminPermit, EditorPermit
+CanTango.config.permits.disable_for :role, :guest # GuestRolePermit
+CanTango.config.permits.disable_for :account, :admin # AdminAccountPermit
+puts CanTango.config.permits.disabled # => {:role => ['guest'], :user ...}
+puts CanTango.config.permits.disabled_for :role # => :guest
+CanTango.config.permits.enable_all_types! # reset types only
+CanTango.config.permits.enable_all! # reset types and specific
+</pre>
+
+Note: You can also disable a permit directly from within the Permit class, using the new @disable!@ method. This can fx be done in a permit initializer.
 
 h2. Quickstart
 

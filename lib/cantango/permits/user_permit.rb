@@ -16,10 +16,11 @@ module CanTango
         clazz.name.demodulize.gsub(/(.*)(Permit)/, '\1').underscore.to_sym
       end
 
-      # fx for User user class, becomes simply UserPermit
-      def user_type
+      # UserPermit becomes :user
+      def permit_name
         self.class.user_type_name self.class
       end
+      alias_method :user_type, :permit_name
 
       # creates the permit
       # @param [Permits::Ability] the ability
@@ -27,7 +28,6 @@ module CanTango
       def initialize ability
         super
       end
-
 
       # In a specific Role based Permit you can use 
       #   def permit? user, options = {}
@@ -47,14 +47,14 @@ module CanTango
       end
 
       def valid_for? subject
-        debug_invalid if CanTango.debug? && !(subject_user == permit_user)
+        debug_invalid if !(subject_user == permit_user)
         subject_user == permit_user
       end
 
       protected
 
       def debug_invalid
-        puts "Not a valid permit for subject: (user class) #{subject_user} != #{permit_user} (permit user)"
+        puts "Not a valid permit for subject: (user class) #{subject_user} != #{permit_user} (permit user)" if CanTango.debug?
       end
 
       def subject_user
@@ -62,7 +62,7 @@ module CanTango
       end
 
       def permit_user
-        self.class.user_type_name(self.class)
+        permit_name(self.class)
       end
     end
   end

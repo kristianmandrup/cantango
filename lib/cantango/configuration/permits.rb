@@ -5,16 +5,45 @@ module CanTango
 
       attr_reader :accounts
 
-      def enabled
-        @enabled || available
+      def enabled_types
+        @enabled_types || available_types
       end
+      alias_method :enabled, :enabled_types
 
-      def available
+      def available_types
         [:user, :account, :role, :role_group, :special]
       end
 
-      def disable *types
-        @enabled = available - types.flatten
+      def disable_types *types
+        @enabled_types = available_types - types.flatten
+      end
+      alias_method :disable, :disable_types      
+
+      def enable_all_types!
+        @enabled_types = available_types
+      end
+
+      def disable_for type, *names
+        @disabled ||= {}
+        @disabled[type.to_sym] = names.flatten.select_labels.map{|n| n.to_s.underscore}
+      end
+
+      def enable_all_for type
+        @disabled ||= {}
+        @disabled[type.to_sym] = nil
+      end
+
+      def disabled
+        @disabled ||= {}
+      end
+
+      def disabled_for type
+        disabled[type]
+      end
+
+      def enable_all!
+        @disabled = {}
+        enable_all_types!
       end
 
       def accounts
