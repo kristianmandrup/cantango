@@ -8,7 +8,7 @@ module CanTango
       attr_reader :ability
 
       # strategy is used to control the owns strategy (see rules.rb)
-      attr_reader :strategy
+      attr_reader :strategy, :disabled
 
       include CanTango::Api::Attributes
 
@@ -26,8 +26,17 @@ module CanTango
         clazz.name.gsub(/::.*/,'').gsub(/(.*)Permits/, '\1').underscore.to_sym
       end
 
+      def disable!
+        @disabled = true
+      end
+
+      def disabled?
+        @disabled
+      end
+
       # executes the permit
       def execute
+        return if disabled?
         puts "Execute Permit: #{self}" if CanTango.config.debug.on?        
         executor.execute!
         ability_sync!
