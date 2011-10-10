@@ -11,6 +11,7 @@ module Cantango
       CAN_ACTIONS.each do |action|
         class_eval %{
           class_option :#{action},      :type => :array,     :default => [],  :desc => "Models allowed to #{action}"
+          class_option :not_#{action},  :type => :array,     :default => [],  :desc => "Models not allowed to #{action}"
         }
       end
 
@@ -30,7 +31,28 @@ module Cantango
         }
       end
 
+      CAN_ACTIONS.each do |action|
+        class_eval %{
+          def not_#{action}
+            options[:not_#{action}]
+          end
+        }
+      end
+
       def rules_logic
+        can_logic
+        cannot_logic
+      end
+
+      def can_logic
+        CAN_ACTIONS.map do |action|
+          send(action).map do |c|
+            "can(:#{action}, #{act_model(c)})"
+          end.join("\n    ")
+        end.join("\n")
+      end
+
+      def cannot_logic
         CAN_ACTIONS.map do |action|
           send(action).map do |c|
             "can(:#{action}, #{act_model(c)})"
