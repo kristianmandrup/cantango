@@ -33,6 +33,15 @@ module CanTango
       config.permits.denied candidate, actions, subjects, *extra_args
     end
 
+    def debug_permits_registry
+      puts "permits registry:" << CanTango.config.permits.show_all.inspect
+    end
+
+    def debug_ability candidate, actions, subjects, *extra_args
+      puts "permits allowed:" << permits_allowed(candidate, actions, subjects, *extra_args).inspect
+      puts "permits denied:"  << permits_denied(candidate, actions, subjects, *extra_args).inspect
+    end
+
     def clear_permits_executed!
       config.permits.clear_executed!
     end
