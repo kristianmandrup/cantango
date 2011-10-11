@@ -8,36 +8,40 @@ module CanTango::Rails::Helpers::RestHelper
   end
 
   def link_to_new obj, user_type, options = {}
-    return unless send(:"#{user_type}_can?", :create, obj)
+    return unless can_perform_action?(user_type, :create, obj)
     # use i18n translation on label
-    link_to t(".create"), action_method(obj, :new)
+    link_to t(".create"), send(action_method obj, :new, options)
   end
 
   def link_to_delete obj, user_type, options = {}
-    return unless send(:"#{user_type}_can?", :delete, obj)
+    return unless can_perform_action?(user_type, :delete, obj)
     # use i18n translation on label
-    link_to t(".delete"), rest_action(obj, :delete, options)
+    link_to t(".delete"), rest_obj_action(obj, :delete, options)
   end
 
   def link_to_edit obj, user_type, options = {}
-    return unless send(:"#{user_type}_can?", :edit, obj)
+    return unless can_perform_action?(user_type, :edit, obj)
     # use i18n translation on label
-    link_to t(".edit"), rest_action(obj, :edit, options)
+    link_to t(".edit"), rest_obj_action(obj, :edit, options)
   end
 
   def link_to_view obj, user_type, options = {}
-    return unless send(:"#{user_type}_can?", :edit, obj)
+    return unless can_perform_action?(user_type, :view, obj)
     # use i18n translation on label
     link_to t(".view"), send(view_method(obj), obj, options)
   end
 
   protected
 
+  def can_perform_action? user_type, action, obj
+    send(:"#{user_type}_can?", action, obj)
+  end
+
   def view_method obj
     "#{obj.class.to_s.underscore}_path"
   end
 
-  def rest_action obj, action, options
+  def rest_obj_action obj, action, options
     send action_method(obj, :edit), obj, options
   end
 
