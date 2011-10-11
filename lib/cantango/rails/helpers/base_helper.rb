@@ -4,7 +4,7 @@ module CanTango
       module BaseHelper
         def self.included(base)
           include_apis(base)
-          # base.send :include, CanTango::Rails::Helpers::RestHelper
+          base.send :include, CanTango::Rails::Helpers::RestHelper
           base.extend ClassMethods
         end
 

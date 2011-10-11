@@ -18,6 +18,10 @@ module CanTango
         end
       end
 
+      def available_models
+        ar_models.map(&:name)
+      end
+
       private
 
       def try_model model_string
@@ -30,10 +34,6 @@ module CanTango
         available_models.grep reg_exp
       end
  
-      def available_models
-        ar_models.map(&:name)
-      end
-
       def ar_models
         # Sugar-high #to_strings didn't work here!
         ActiveRecord::Base.descendants
