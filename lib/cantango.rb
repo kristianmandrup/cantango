@@ -38,6 +38,7 @@ module CanTango
     end
 
     def debug_ability candidate, actions, subjects, *extra_args
+      puts "Ability: #{actions} on #{subjects}"
       puts "permits allowed:" << permits_allowed(candidate, actions, subjects, *extra_args).inspect
       puts "permits denied:"  << permits_denied(candidate, actions, subjects, *extra_args).inspect
     end
