@@ -13,7 +13,7 @@ module CanTango
       private
 
       def options_list
-        [:session, :request, :params, :controller, :domain]
+        [:session, :request, :params, :controller, :domain, :cookies]
       end
     end
   end
