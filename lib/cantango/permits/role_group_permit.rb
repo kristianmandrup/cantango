@@ -19,6 +19,7 @@ module CanTango
       def permit_name
         self.class.role_group_name self.class
       end
+      
       alias_method :role_group, :permit_name
 
       # creates the permit

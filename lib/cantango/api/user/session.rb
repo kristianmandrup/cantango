@@ -6,6 +6,7 @@ module CanTango
         # def admin_can?(*args)
         #   current_ability(:admin).can?(*args)
         # end
+        
         def self.included(base)      	
           ::CanTango.config.users.registered.each do |user|
             base.class_eval %{
@@ -14,9 +15,10 @@ module CanTango
                 guest_user
               end
           	}
+          end
       	end
-
-      	# give me any logged in user or the guest user
+      	
+        # give me any logged in user or the guest user
       	def any_user *types
       		types = types.flatten.select_labels.map(&:to_sym)
           c_user = ::CanTango.config.users.registered.each do |user|

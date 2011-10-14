@@ -6,9 +6,10 @@ module CanTango
       def permit_name clazz
         @name ||= clazz.to_s.demodulize.gsub(/Role/,'').gsub(/Permit$/, '').gsub(/Group/,'').underscore.to_sym
       end
-
+      
+      # TODO:
       def role
-        @role ||= permit_name(self.class)
+        @role ||= permit_name
       end
 
       def localhost_manager?
