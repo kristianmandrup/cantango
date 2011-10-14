@@ -66,7 +66,8 @@ module CanTango
         ability.options
       end
 
-      [:session, :controller, :request, :params].each do |obj|
+      # [:session, :controller, :request, :params, :domain, :cookies].each do |obj|
+      CanTango::Api::Options.options_list.each do |obj|
         class_eval %{
           def #{obj}
             options[:#{obj}]

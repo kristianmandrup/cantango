@@ -10,10 +10,15 @@ module CanTango
         opts
       end
 
+      def self.options_list
+        [:session, :request, :params, :controller, :domain, :cookies]
+      end
+
       private
 
+      # [:session, :request, :params, :controller, :domain, :cookies]
       def options_list
-        [:session, :request, :params, :controller, :domain, :cookies]
+        self.class.options_list
       end
     end
   end
