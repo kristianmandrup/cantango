@@ -5,7 +5,7 @@ module CanTango
       def ability_options
         opts = {}
         options_list.each do |option|
-          opts.merge!(option => send(option)) if respond_to? option
+          opts.merge!(option => send(option)) if respond_to? option, true
         end
         opts
       end
