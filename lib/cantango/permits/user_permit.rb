@@ -61,8 +61,9 @@ module CanTango
         subject.class.name.underscore.to_sym
       end
 
+      # TODO
       def permit_user
-        permit_name(self.class)
+        permit_name 
       end
     end
   end
