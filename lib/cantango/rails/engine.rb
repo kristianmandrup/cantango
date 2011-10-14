@@ -44,7 +44,7 @@ module CanTango
 
     def self.load_files! path
       Dir[::Rails.root + "app/#{path}/**/*.rb"].each do |path|
-        require path
+        require_dependency path
       end
     end
   end
