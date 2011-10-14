@@ -25,8 +25,10 @@ module CanTango
 
       # load all models
       # this is needed in order to register all users and accounts with CanTango using the user/account macros!
+    end
 
-      # load all permits
+    config.to_prepare do
+      # load all permits (development mode: EVERY request!)
       RailsAutoLoader.load_permits! if CanTango.config.autoload.permits?
     end
   end
