@@ -35,9 +35,9 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Oct 8, 2011
+h2. Update Oct 13, 2011
 
-Version *0.8.9* has been released.
+Version *0.8.9.4* has been released. Contains a few fixes submitted by @stanislaw :) Thanks!
 
 * You can now disable specific Permits to not be executed by the Permits engine
 
