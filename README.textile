@@ -98,7 +98,7 @@ Abilities can be defined for the following conceptual entities:
 
 h3. Debugging Abilities and Permits
 
-See [[Debugging permits]]
+See "Debugging permits"::https://github.com/kristianmandrup/cantango/wiki/Debugging-permits
 
 h3. Design overview
 
