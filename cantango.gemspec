@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "cantango"
-  s.version = "0.8.9.5"
+  s.version = "0.9.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
@@ -91,6 +91,7 @@ Gem::Specification.new do |s|
     "lib/cantango/configuration/user_accounts.rb",
     "lib/cantango/configuration/users.rb",
     "lib/cantango/engine.rb",
+    "lib/cantango/filter.rb",
     "lib/cantango/filters.rb",
     "lib/cantango/filters/filter.rb",
     "lib/cantango/filters/role_filter.rb",
@@ -322,6 +323,7 @@ Gem::Specification.new do |s|
     "spec/cantango/configuration/user_account_spec.rb",
     "spec/cantango/configuration/user_spec.rb",
     "spec/cantango/configuration_spec.rb",
+    "spec/cantango/filter_spec.rb",
     "spec/cantango/license/save_license_spec.rb",
     "spec/cantango/models/items.rb",
     "spec/cantango/models/users.rb",
