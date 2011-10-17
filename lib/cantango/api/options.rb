@@ -14,10 +14,8 @@ module CanTango
         [:session, :request, :params, :controller, :domain, :cookies]
       end
 
-      private
-
       def options_list
-        self.class.options_list
+        CanTango::Api::Options.options_list
       end
     end
   end

@@ -19,10 +19,24 @@ module CanTango
           return AbilityUser.guest if !respond_to?(user_meth)
 
           user = send user_meth
+          # test if current_xxx actually returns an account and not a user instance!
+          # if so call the #user method on the account
+          user = AbilityUser.resolve_user(user)
+          # return guest user if user is nil
           user ? user : AbilityUser.guest
         end
 
         module AbilityUser
+          def self.resolve_user obj
+            return obj if AbilityUser.is_a_user?(obj)
+            return obj.send(:user) if obj.respond_to? :user
+            raise "no user object could be resolved via #{obj}. Please define a #user method for #{obj.class}"
+          end
+
+          def self.is_a_user? user
+            ::CanTango.config.users.registered.include?(user.class.to_s.underscore.to_sym)
+          end
+
           def self.guest
             user = CanTango.config.guest.user
 
