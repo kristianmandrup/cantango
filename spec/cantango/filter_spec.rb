@@ -56,7 +56,7 @@ class Project
   include CanTango::Filter
 
   tango_filter :publish, :edit
-  tango_filter :assign_to => [:user], :create => [:OPTS], :show => [:ARGS]
+  tango_filter :assign_to => [:user], :create => :OPTS, :show => [:ARGS]
 
   def create options = {}
     options

@@ -55,9 +55,10 @@ class Project
   include CanTango::Filter
 
   tango_filter :publish, :edit
-  tango_filter :assign_to => [:user], :create => [:OPTS], :show => [:ARGS]
+  tango_filter :assign_to => :assignee, :create => [version, :OPTS], :show => :ARGS
 
-  def create options = {}
+  def create version, options = {}
+    self.version = version
     options
   end
 
@@ -85,7 +86,7 @@ From your controller, you would then use these wrappers like this:
 class ProjectsController < ApplicationController
 
   def new
-    project.create_by current_user, params[:project]
+    project.create_by current_user, params[:version], params[:project]
   end
 
   def show

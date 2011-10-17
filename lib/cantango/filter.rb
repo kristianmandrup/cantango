@@ -16,6 +16,7 @@ module CanTango
           when Hash
             base = self
             name.each_pair do |meth_name, argies|
+              argies = argies.kind_of?(Symbol) ? [argies] : argies
               argies = argies.map(&:to_s).map{|a| a == 'ARGS' ? '*args' : a}
               args = argies.map{|a| a == 'OPTS' ? 'options = {}' : a}.join(',')
               args_call = argies.map{|a| a == 'OPTS' ? 'options' : a}.join(',')
