@@ -4,7 +4,7 @@ module CanTango
       class Base
         attr_accessor :file_name
 
-        def self.inherited(subclass)
+        def self.inherited subclass
           subclass.extend ClassMethods
         end
 

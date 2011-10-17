@@ -1,0 +1,49 @@
+--- 
+roles: 
+  admin: 
+    can: 
+      manage: 
+      - all
+  user: 
+    can: 
+      read: 
+      - ^articles
+      - Post
+      write: 
+      - Comment
+    cannot: 
+      write: 
+      - Article
+role_groups: 
+  bloggers: 
+    can: 
+      read: 
+      - Article
+      - Comment
+    cannot: 
+      write: 
+      - Article
+      - Post
+  editors: 
+    can: 
+      read: 
+      - Article
+      - Comment
+    cannot: 
+      write: 
+      - Article
+      - Post
+licenses: 
+  editors: 
+    can: 
+      manage: 
+      - all
+users: 
+  kris@gmail.com: 
+    can: 
+      read: 
+      - Article
+user_types: {}
+
+account_types: {}
+

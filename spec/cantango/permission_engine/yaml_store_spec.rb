@@ -28,7 +28,6 @@ describe CanTango::PermissionEngine::YamlStore do
 
   context 'Caching permissions by types' do
     let (:store) do
-      # filename: 'cantango_permissions.yml',
       @store ||= CanTango::PermissionEngine::YamlStore.new 'permissions', :path => config_folder 
     end
 

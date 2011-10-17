@@ -12,10 +12,6 @@ module CanTango
         super
       end
 
-      def self.create name, options = {}
-        super
-      end
-
       def load!
         loader.load!
       end
@@ -32,7 +28,7 @@ module CanTango
 
       CanTango.config.permission_engine.types.each do |type|
         define_method(:"#{type}_permissions") do
-          loader.send(:"#{type}_permissions")
+          loader.send(:"#{type}_permissions") || {}
         end
 
         define_method(:"#{type}_permissions_rules") do
@@ -51,10 +47,7 @@ module CanTango
 
         # @stanislaw: this needs revision!
 
-        define_method(:"#{type}_rules") do
-          #cache(":#{type}") || 
-          send(:"#{type}_compiled_permissions")
-        end
+        alias_method :"#{type}_rules", :"#{type}_compiled_permissions"
       end
 
       def save! perms = nil
@@ -65,7 +58,7 @@ module CanTango
         end
       end
 
-      def save_permissions(perms)
+      def save_permissions perms
         load_from_hash perms
       end
 

@@ -14,18 +14,12 @@ module CanTango
         end
       end
 
-      def self.create name, options = {}
-        self.new name, options
-      end
-
       def load!
         raise NotImplementedError
       end
 
       def save! permissions
-        permissions.each do |permission|
-          store permission
-        end
+        raise NotImplementedError
       end
 
     end
