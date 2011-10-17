@@ -11,7 +11,7 @@ module CanTango
           case name
           when String, Symbol
             case name.to_sym
-            when :REST
+            when :REST, :MANAGE
               tango_filter :create => :OPTS, :create! => :OPTS, :update_attributes => :OPTS, :update_attributes! => :OPTS
               tango_filter :destroy, :destroy!
             when :CREATE, :NEW
