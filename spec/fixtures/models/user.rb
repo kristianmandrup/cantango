@@ -23,4 +23,8 @@ class User
   def email
     @email ||= 'default@gmail.com'
   end
+
+  def role
+    @role || ''
+  end
 end

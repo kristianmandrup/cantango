@@ -4,7 +4,8 @@ require 'fixtures/models'
 require 'cantango/api/current_users'
 require 'cantango/configuration/engines/store_engine_shared'
 
-CanTango.config.users.register :user, :admin
+CanTango.config.users.register :user, User
+CanTango.config.users.register :admin, Admin
 
 class Context
   include CanTango::Api::User::Ability
