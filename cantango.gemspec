@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "cantango"
-  s.version = "0.9.0"
+  s.version = "0.9.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
@@ -68,6 +68,7 @@ Gem::Specification.new do |s|
     "lib/cantango/configuration/ability.rb",
     "lib/cantango/configuration/adapters.rb",
     "lib/cantango/configuration/autoload.rb",
+    "lib/cantango/configuration/candidate_registry.rb",
     "lib/cantango/configuration/categories.rb",
     "lib/cantango/configuration/debug.rb",
     "lib/cantango/configuration/engines.rb",
