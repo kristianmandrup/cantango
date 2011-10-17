@@ -1,16 +1,29 @@
 require 'rspec'
 require 'cantango'
+require 'simple_roles'
 require 'fixtures/models'
 require 'cantango/api/current_users'
-require 'cantango/configuration/engines/store_engine_shared'
+# require 'cantango/configuration/engines/store_engine_shared'
 
-CanTango.config.users.register :user, :admin
+class User
+  include_and_extend SimpleRoles
+end
+
+class Admin < User
+end
+
+CanTango.configure do |config|
+  config.users.register :user, User
+  config.users.register :admin, Admin
+
+  config.cache_engine.set :off
+  config.permit_engine.set :on
+end
 
 class Context
   include CanTango::Api::User::Ability
 
-  include CurrentUsers
-  extend ::CurrentUsers
+  include_and_extend ::CurrentUsers
 end
 
 describe CanTango::Api::User::Ability do

@@ -44,6 +44,8 @@ In this case CanTango will attempt to call the #user method on the account to ge
 In many cases for more advanced scenarios, it makes more sense to treat the devise models as accounts and have the user models defined separately and linked to one or more accounts. 
 The accounts would then have the credentials for the user in that partiular context and the user only the user specific details.
 
+Now the _#current_[type]_account_ methods are generated for each registered account and by default aliases the current_[type] methods (fx as exposed by devise). You can override this if you need to, but in most instances CanTango will now sort it all out depending on what kind of instance these methods return!
+
 CanTango now also supports Access Control method wrappers directly on the models. Here an example:
 
 <pre>

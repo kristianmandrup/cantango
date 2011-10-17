@@ -23,7 +23,7 @@ module CanTango
       end
 
       def self.included(base)
-        CanTango.config.users.register base.name.underscore
+        CanTango.config.users.register base.name.underscore, base
       end
     end
   end

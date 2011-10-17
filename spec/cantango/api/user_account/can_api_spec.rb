@@ -7,9 +7,14 @@ require 'cantango/api/current_user_accounts'
 class User
   include_and_extend SimpleRoles
 end
+
 CanTango.configure do |config|
-  config.users.register     :user, :admin
-  config.user_accounts.register  :user, :admin
+  config.users.register     :user, User
+  config.users.register     :admin, Admin
+
+  config.user_accounts.register  :user, UserAccount
+  config.user_accounts.register  :admin, AdminAccount
+
   config.cache_engine.set :off
   config.permit_engine.set :on
 end
@@ -35,8 +40,7 @@ end
 class Context
   include CanTango::Api::UserAccount::Can
 
-  include ::CurrentUserAccounts
-  extend ::CurrentUserAccounts
+  include_and_extend ::CurrentUserAccounts
 end
 
 describe CanTango::Api::UserAccount::Can do

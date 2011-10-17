@@ -1,7 +1,11 @@
 require 'cantango/api/current_users'
 
 module CurrentUserAccounts
-  include CurrentUsers 
+  include ::CurrentUsers
+
+  def self.included(base)
+    base.extend ::CurrentUsers
+  end
 
   def current_user_account
     ::UserAccount.new(current_user, :roles => [:user])

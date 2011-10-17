@@ -6,7 +6,7 @@ module CanTango
     autoload_modules :Categories
     autoload_modules :Models, :Engines, :Ability
     autoload_modules :User, :Guest, :UserAccount
-    autoload_modules :Roles, :RoleGroups, :Registry, :RoleRegistry, :HashRegistry, :PermitRegistry, :Factory
+    autoload_modules :Roles, :RoleGroups, :Registry, :RoleRegistry, :HashRegistry, :PermitRegistry, :CandidateRegistry, :Factory
     autoload_modules :SpecialPermits, :Autoload, :Adapters, :Permits, :Debug
     autoload_modules :Users, :UserAccounts
 

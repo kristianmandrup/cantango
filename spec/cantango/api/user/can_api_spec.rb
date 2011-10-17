@@ -7,16 +7,21 @@ require 'cantango/api/current_users'
 
 class User
   include CanTango::Users::Masquerade
-
   include_and_extend SimpleRoles
 end
 
+class Admin < User
+end
+
 CanTango.configure do |config|
-  config.users.register :user, :admin
+  config.users.register :user, User
+  config.users.register :admin, Admin
+
   config.cache_engine.set :off
   config.permit_engine.set :on
 end
 
+# puts "#{CanTango.config.users.registered_classes} : #{CanTango.config.users.registered}"
 
 class UserRolePermit < CanTango::RolePermit
   def initialize ability
@@ -43,8 +48,7 @@ end
 class Context
   include CanTango::Api::User::Can
 
-  include ::CurrentUsers
-  extend ::CurrentUsers
+  include_and_extend ::CurrentUsers
 end
 
 describe CanTango::Api::User::Can do
@@ -94,7 +98,7 @@ describe CanTango::Api::User::Can do
 
   describe 'admin masquerades as user' do
     before do
-      Context.current_admin.masquerade_as Context.current_user
+      Context.new.current_admin.masquerade_as Context.new.current_user
     end
 
     # admin masquerading as user can do same as user

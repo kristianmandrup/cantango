@@ -1,22 +1,30 @@
 require 'rspec'
 require 'cantango'
+require 'simple_roles'
 require 'fixtures/models'
 require 'cantango/api/current_users'
+# require 'cantango/configuration/engines/store_engine_shared'
 
-require 'cantango/configuration/engines/store_engine_shared'
+CanTango.configure do |config|
+  config.users.register :user, User
+  config.users.register :admin, Admin
 
-CanTango.config.users.register :user, :admin
+  config.cache_engine.set :off
+  config.permit_engine.set :on
+end
+
+# puts "#{CanTango.config.users.registered_classes} : #{CanTango.config.users.registered}"
 
 class User
   include CanTango::Users::Masquerade
+  include_and_extend ::SimpleRoles
 end
 
 class Context
   include CanTango::Api::User::Ability
   include CanTango::Api::User::Scope
 
-  include ::CurrentUsers
-  extend ::CurrentUsers
+  include_and_extend ::CurrentUsers
 end
 
 describe CanTango::Api::User::Scope do
@@ -24,7 +32,7 @@ describe CanTango::Api::User::Scope do
 
   describe 'scope_user' do
     before do
-      Context.current_admin.masquerade_as Context.current_user
+      subject.current_admin.masquerade_as subject.current_user
     end
 
     specify do
@@ -43,8 +51,8 @@ describe CanTango::Api::User::Scope do
 
   describe 'real_user' do
     before do
-      Context.current_user.masquerade_as Context.current_admin
-    end
+      subject.current_user.masquerade_as subject.current_admin
+   end
 
     specify do
       subject.real_user(:user) do |user|

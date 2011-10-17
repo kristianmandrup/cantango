@@ -1,7 +1,7 @@
 module CanTango
   class Configuration
     class Categories < HashRegistry
-     
+
       include Singleton
 
       def [] label
@@ -9,7 +9,7 @@ module CanTango
         raise "Category '#{label}' either not exists or invalid!" if !models.kind_of?(Array)
         models
       end
-      
+
       def category label, &block
         cat = Category.new self[label]
         yield cat if block
