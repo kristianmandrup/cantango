@@ -5,7 +5,7 @@ module CanTango
         attr_accessor :permissions
 
         def initialize file_name
-          self.file_name = file_name
+          @file_name = file_name
           
           load!
         end
@@ -13,8 +13,11 @@ module CanTango
         def load_from_hash hash
           return if hash.empty?
           hash.each do |type, groups|
+            permissions[type] ||= {}                   
+            
+            next if groups.nil?           
+            
             groups.each do |group, rules|
-              permissions[type] ||= {}
               parser.parse(group, rules) do |permission|
                 permissions[type][permission.name] = permission
               end
@@ -23,17 +26,7 @@ module CanTango
         end
 
         def load!
-          return if yml_content.empty?
-          yml_content.each do |type, groups|
-            (permissions[type] = {} # This is for having fx empty users: section 
-             next) if groups.nil?   #
-            groups.each do |group, rules|
-              permissions[type] ||= {}
-              parser.parse(group, rules) do |permission|
-                permissions[type][permission.name] = permission
-              end
-            end
-          end
+          load_from_hash yml_content
         rescue => e
           raise "PermissionsLoader Error: The permissions for the file #{file_name} could not be loaded - cause was #{e}"
         end
