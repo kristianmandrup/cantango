@@ -14,14 +14,17 @@ module CanTango
               send(name) if user_ability(user).can? name.to_sym, self
             end
           when Hash
-            meth_name = name.keys.first
-            argies = name.values.first
-            args = argies.map(&:to_s).join(',')
-            class_eval %{
-              def #{meth_name}_by the_user, #{args}
-                send(:#{meth_name}, #{args}) if user_ability(the_user).can? :#{meth_name}, self
-              end
-            }
+            base = self
+            name.each_pair do |meth_name, argies|
+              argies = argies.map(&:to_s).map{|a| a == 'ARGS' ? '*args' : a}
+              args = argies.map{|a| a == 'OPTS' ? 'options = {}' : a}.join(',')
+              args_call = argies.map{|a| a == 'OPTS' ? 'options' : a}.join(',')
+              base.class_eval %{
+                def #{meth_name}_by the_user, #{args}
+                  send(:#{meth_name}, #{args_call}) if user_ability(the_user).can? :#{meth_name}, self
+                end
+              }
+            end
           end
         end
       end

@@ -46,13 +46,24 @@ The accounts would then have the credentials for the user in that partiular cont
 
 Now the _#current_[type]_account_ methods are generated for each registered account and by default aliases the current_[type] methods (fx as exposed by devise). You can override this if you need to, but in most instances CanTango will now sort it all out depending on what kind of instance these methods return!
 
-CanTango now also supports Access Control method wrappers directly on the models. Here an example:
+CanTango now also supports Access Control method wrappers directly on the models. 
+The symbols :ARGS and :OPTS each have a special significance as shown below
+Here an example:
 
 <pre>
 class Project
   include CanTango::Filter
 
-  tango_filter :publish, :edit, :assign_to => [:assignee]
+  tango_filter :publish, :edit
+  tango_filter :assign_to => [:user], :create => [:OPTS], :show => [:ARGS]
+
+  def create options = {}
+    options
+  end
+
+  def show *args
+    args.flatten.compact
+  end
 
   def publish
     self.publish = true
@@ -72,6 +83,14 @@ From your controller, you would then use these wrappers like this:
 
 <pre>
 class ProjectsController < ApplicationController
+
+  def new
+    project.create_by current_user, params[:project]
+  end
+
+  def show
+    project.show_by current_user, domain, detail_level
+  end
 
   def edit
     project.edit_by current_user
