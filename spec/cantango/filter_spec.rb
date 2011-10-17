@@ -45,7 +45,12 @@ class AdminRolePermit < CanTango::RolePermit
   def permit_rules
     can :create, Project
     can :show, Project
- 
+
+    can :has_role?, Project
+    can :is_done?, Project
+    can :destroy!, Project
+
+    can :done!, Project
     can :edit, Project
     can :publish, Project
     can :assign_to, Project
@@ -55,8 +60,8 @@ end
 class Project
   include CanTango::Filter
 
-  tango_filter :publish, :edit
-  tango_filter :assign_to => [:user], :create => :OPTS, :show => [:ARGS]
+  tango_filter :publish, :edit, :DELETE, :is_done?, :done!
+  tango_filter :assign_to => [:user], :create => :OPTS, :show => [:ARGS], :has_role? => :role
 
   def create options = {}
     options
@@ -66,8 +71,24 @@ class Project
     args.flatten.compact
   end
 
+  def is_done?
+    false
+  end
+
+  def has_role? role
+    true
+  end
+
+  def done!
+    "done"
+  end
+
   def publish
     "publish"
+  end
+
+  def destroy!
+    "destroy!"
   end
 
   def edit
@@ -103,6 +124,19 @@ describe CanTango::Filter do
 
   describe 'handle method with options' do
     specify { subject.create_by(context.current_admin, :love => 5, :hate => 2).should == {:love => 5, :hate => 2} }
+  end
+
+  describe 'handle method with ? postfix' do
+    specify { subject.has_role_by?(context.current_admin, 'editor').should be_true }
+    specify { subject.is_done_by?(context.current_admin).should be_false }
+  end
+
+  describe 'handle method with ! postfix' do
+    specify { subject.done_by!(context.current_admin).should == 'done' }
+  end
+
+  describe 'handle special REST method - DELETE' do
+    specify { subject.destroy_by!(context.current_admin).should == 'destroy!' }
   end
 end
 
