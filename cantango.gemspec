@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "cantango"
-  s.version = "0.9.1"
+  s.version = "0.9.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
-  s.date = "2011-10-17"
+  s.date = "2011-10-18"
   s.description = "Define your permission rules as role- or role group specific permits.\nIntegrates well with multiple Devise user acounts.\nIncludes rules caching.\nStore permissions in yaml file or key-value store"
   s.email = "kmandrup@gmail.com, s.pankevich@gmail.com"
   s.extra_rdoc_files = [
@@ -335,7 +335,7 @@ Gem::Specification.new do |s|
     "spec/cantango/permission_engine/categories_store_spec.rb",
     "spec/cantango/permission_engine/compiler_spec.rb",
     "spec/cantango/permission_engine/loader/categories_spec.rb",
-    "spec/cantango/permission_engine/loader/permissions/cantango_permissions_loader.rb",
+    "spec/cantango/permission_engine/loader/permissions/cantango_permissions_loader_spec.rb",
     "spec/cantango/permission_engine/loader/permissions/shared.rb",
     "spec/cantango/permission_engine/moneta_store_spec.rb",
     "spec/cantango/permission_engine/parser_spec.rb",
@@ -565,6 +565,7 @@ Gem::Specification.new do |s|
     "spec/entire_suite_spec.rb",
     "spec/factories/user.rb",
     "spec/factories/user_account.rb",
+    "spec/fixtures/config/cantango_permissions.yml",
     "spec/fixtures/config/categories.yml",
     "spec/fixtures/config/evaluator_fixtures.yml",
     "spec/fixtures/config/licenses.yml",
