@@ -123,7 +123,7 @@ If you use any of these adapters, you must manually include the following in you
 
 @gem 'dkastner-moneta'@ for moneta adapter and @gem 'sourcify'@ for the compiler adapter.
 
-CanTango uses @autoload_modules@ from the "sweetloader":https://github.com/kristianmandrup/sweet_loader.git' gem.
+CanTango uses @autoload_modules@ from the "sweetloader":https://github.com/kristianmandrup/sweet_loader.git gem.
 This ensures that all such modules are lazy-loaded. Thus if you configure CanTango to exclude an engine, the code for that engine will never be loaded, minimizing the load time and memory print.
 
 h2. You need help?
