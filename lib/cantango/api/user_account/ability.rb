@@ -7,14 +7,14 @@ module CanTango
         end
 
         def current_account_ability user_type = :user
-         user_account_ability get_ability_user_acount
+         user_account_ability get_ability_user_account
         end
 
         protected
 
         include CanTango::Api::Common
 
-        def get_ability_user_acount user_type = :user
+        def get_ability_user_account user_type = :user
           account_meth = :"current_#{user_type}_account"
           return AbilityAccount.guest if !respond_to?(account_meth)
           AbilityAccount.resolve_account(send account_meth)
