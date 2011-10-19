@@ -7,7 +7,7 @@ module CanTango::Rails::Helpers::RestHelper
     }
   end
 
-  def link_to_new obj user_type, options = {}
+  def link_to_new obj, user_type, options = {}
     clazz = obj.kind_of?(Class) ? obj : obj.class
     return unless can_perform_action?(user_type, :create, clazz)
     # use i18n translation on label
