@@ -3,12 +3,24 @@ require 'cantango'
 require 'simple_roles'
 require 'fixtures/models'
 require 'cantango/api/current_users'
+require 'cantango/api/current_user_accounts'
 
 class User
   include_and_extend SimpleRoles
 end
 
 class Admin < User
+end
+
+class UserAccount
+  tango_account # register
+  include_and_extend SimpleRoles
+end
+
+
+class AdminAccount
+  tango_account
+  include_and_extend SimpleRoles
 end
 
 
@@ -24,6 +36,7 @@ class Context
   include CanTango::Api::User::Ability
 
   include_and_extend ::CurrentUsers
+  include_and_extend ::CurrentUserAccounts
 end
 
 class UserRolePermit < CanTango::RolePermit
@@ -105,38 +118,51 @@ describe CanTango::Filter do
 
   subject { Project.new }
 
-  describe 'block access to model method due to permission rule' do
-    specify { subject.publish_by(context.current_user).should be_nil }
+  describe '#tango_filter' do
+
+    describe 'block access to model method due to permission rule' do
+      specify { subject.publish_by(context.current_user).should be_nil }
+    end
+
+    describe 'allow access to model method due to permission rule' do
+      specify { subject.publish_by(context.current_admin).should == "publish" }
+    end
+
+    describe 'handle method with args' do
+      specify { subject.assign_to_by(context.current_admin, context.current_user).should == context.current_user }
+      specify { subject.assign_to_by(context.current_user, context.current_admin).should be_nil }
+    end
+
+    describe 'handle method with *args' do
+      specify { subject.show_by(context.current_admin, 'love', nil, 'hate').should == ['love', 'hate'] }
+    end
+
+    describe 'handle method with options' do
+      specify { subject.create_by(context.current_admin, :love => 5, :hate => 2).should == {:love => 5, :hate => 2} }
+    end
+
+    describe 'handle method with ? postfix' do
+      specify { subject.has_role_by?(context.current_admin, 'editor').should be_true }
+      specify { subject.is_done_by?(context.current_admin).should be_false }
+    end
+
+    describe 'handle method with ! postfix' do
+      specify { subject.done_by!(context.current_admin).should == 'done' }
+    end
+
+    describe 'handle special REST method - DELETE' do
+      specify { subject.destroy_by!(context.current_admin).should == 'destroy!' }
+    end
   end
 
-  describe 'allow access to model method due to permission rule' do
-    specify { subject.publish_by(context.current_admin).should == "publish" }
-  end
+  describe '#tango_account_filter' do
+    describe 'block access to model method due to permission rule' do
+      specify { subject.publish_by(context.current_user_account).should be_nil }
+    end
 
-  describe 'handle method with args' do
-    specify { subject.assign_to_by(context.current_admin, context.current_user).should == context.current_user }
-    specify { subject.assign_to_by(context.current_user, context.current_admin).should be_nil }
-  end
-
-  describe 'handle method with *args' do
-    specify { subject.show_by(context.current_admin, 'love', nil, 'hate').should == ['love', 'hate'] }
-  end
-
-  describe 'handle method with options' do
-    specify { subject.create_by(context.current_admin, :love => 5, :hate => 2).should == {:love => 5, :hate => 2} }
-  end
-
-  describe 'handle method with ? postfix' do
-    specify { subject.has_role_by?(context.current_admin, 'editor').should be_true }
-    specify { subject.is_done_by?(context.current_admin).should be_false }
-  end
-
-  describe 'handle method with ! postfix' do
-    specify { subject.done_by!(context.current_admin).should == 'done' }
-  end
-
-  describe 'handle special REST method - DELETE' do
-    specify { subject.destroy_by!(context.current_admin).should == 'destroy!' }
+    describe 'allow access to model method due to permission rule' do
+      specify { subject.publish_by(context.current_admin_account).should == "publish" }
+    end
   end
 end
 

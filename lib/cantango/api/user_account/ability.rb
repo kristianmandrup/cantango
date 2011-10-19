@@ -5,6 +5,7 @@ module CanTango
         def user_account_ability user_account, options = {}
           @current_ability ||= create_ability(user_account, ability_options.merge(options))
         end
+        alias_method :account_ability, :user_account_ability
 
         def current_account_ability user_type = :user
          user_account_ability get_ability_user_account

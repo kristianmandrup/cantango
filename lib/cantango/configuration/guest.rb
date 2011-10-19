@@ -19,7 +19,7 @@ module CanTango
         return (@account || guest_account) if !account && !block
         @account = account || yield
       end
-
+      alias_method :user_account, :account
       alias_method :account=, :account
 
       def default_user?
