@@ -1,11 +1,11 @@
 module CanTango
   module Api
     module UserAccount
-      autoload_modules :Ability, :Can, :Scope
+      autoload_modules :Ability, :Can, :Scope, :Session
 
       module All
         def self.included base
-          [:Ability, :Can, :Scope].each do |api|
+          [:Ability, :Can, :Scope, :Session].each do |api|
             base.send :include, clazz(api)
           end
         end

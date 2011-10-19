@@ -8,6 +8,7 @@ class Module
     self.send :include, CanTango::Users::UserAccount
     self.send :include, CanTango::Users::Masquerade if options[:masquerade]
   end
+  alias_method :tango_account, :tango_user_account 
 
   def masquerader
     self.send :include, CanTango::Users::Masquerade
