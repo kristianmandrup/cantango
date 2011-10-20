@@ -30,6 +30,10 @@ module CanTango
         clazz.name.gsub(/::.*/,'').gsub(/(.*)Permits/, '\1').underscore.to_sym
       end
 
+      def cached?
+        ability.mode? :cached
+      end
+
       def permit_type
         self.class.type
       end
@@ -119,9 +123,16 @@ module CanTango
       # or if subclassing another Permit than Permit::Base
       #
       def permit?
+        cached? ? cached_rules : non_cached_rules
+      end
+
+      def cached_rules
         static_rules
         permit_rules
         dynamic_rules
+      end
+
+      def non_cached_rules
       end
 
       def licenses *names

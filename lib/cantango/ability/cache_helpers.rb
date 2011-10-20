@@ -20,8 +20,12 @@ module CanTango
 
       protected
 
+      def any_caching_on?
+        CanTango.config.cache_engine.on? || caching_on?
+      end
+
       def caching_on?
-        CanTango.config.cache_engine.on?
+        caching_on
       end
     end
   end

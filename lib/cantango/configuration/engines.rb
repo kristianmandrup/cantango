@@ -79,6 +79,10 @@ module CanTango
         available.each {|engine| send(engine).set state }
       end
 
+      def any? state
+        available.any? {|engine| send(engine).send(:"#{state}?") if respond_to?(engine) }
+      end
+
       def clear!
         each {|engine| engine.reset! }
         @registered = nil

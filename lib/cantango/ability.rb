@@ -4,11 +4,11 @@ module CanTango
   class Ability
     autoload_modules :Scope, :Cache
     autoload_modules :MasqueradeHelpers, :PermitHelpers, :PermissionHelpers
-    autoload_modules :UserHelpers, :RoleHelpers, :CacheHelpers
+    autoload_modules :UserHelpers, :RoleHelpers, :CacheHelpers, :EngineHelpers
 
     include CanCan::Ability
 
-    attr_reader :options, :subject, :session, :candidate
+    attr_reader :options, :subject, :session, :candidate, :caching_on, :engines_on, :mode
 
     # Equivalent to a CanCan Ability#initialize call
     # which executes all the permission logic
@@ -17,38 +17,35 @@ module CanTango
       @candidate, @options = candidate, options
       @session = options[:session] || {} # seperate session cache for each type of user?
 
+      @caching_on = options[:caching] != :off
+      @engines_on = options[:engines] != :off
+
       return if cached_rules?
 
       clear_rules!
       permit_rules
-      execute_engines!
 
-      cache_rules! if caching_on?
+      execute_engines! if engines_on?
+      cache_rules! if any_caching_on?
     end
 
     include CanTango::PermitEngine::Util
+
+    def mode
+      :cached
+    end
+
+    def mode? mode
+      self.mode == mode
+    end
 
     def permit_rules
     end
 
     def clear_rules!
-      @rules = []
+      @rules ||= default_rules
     end
 
-    def execute_engines!
-      each_engine {|engine| engine.new(self).execute! if engine  }
-    end
-
-    def each_engine &block
-      engines.execution_order.each do |name| 
-        
-        yield engines.registered[name] if engines.active? name
-      end
-    end
-
-    def engines
-      CanTango.config.engines
-    end
 
     def subject
       return candidate.active_user if masquerade_user?
@@ -60,11 +57,18 @@ module CanTango
       CanTango.config
     end
 
+    include EngineHelpers
     include CacheHelpers
     include MasqueradeHelpers
     include PermissionHelpers
     include PermitHelpers
     include UserHelpers
     include RoleHelpers
+
+    protected
+
+    def default_rules
+      []
+    end
   end
 end

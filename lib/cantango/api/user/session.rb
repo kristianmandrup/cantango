@@ -22,7 +22,8 @@ module CanTango
         def any_user *types
           types = types.flatten.select_labels.map(&:to_sym)
           c_user = ::CanTango.config.users.registered.each do |user|
-          send(:"current_#{user}") if respond_to?(:"current_#{user}") && (types.empty? || types.include?(user))
+            meth = :"current_#{user}"
+            send(meth) if respond_to?(meth) && (types.empty? || types.include?(user))
           end.compact.first
           c_user || guest_user
         end
