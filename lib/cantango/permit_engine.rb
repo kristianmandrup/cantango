@@ -9,7 +9,7 @@ module CanTango
 
     def execute!
       if CanTango.config.debug.on?
-        puts "Permit Engine executing..." 
+        puts "Permit Engine executing..."
         puts "No permits found!" if permits.empty?
       end
       # CanTango.config.permits.clear_executed! # should there be an option clear before each execution?
