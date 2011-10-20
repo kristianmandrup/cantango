@@ -11,12 +11,12 @@ module CanTango
         end
       end
 
-      def engines_on?
-        engines_on
+      def opts_engines_off?
+        options[:engines] == :off
       end
 
-      def any_engines_on?
-        CanTango.config.engines.any?(:on) || engines_on?
+       def engines_on?
+        CanTango.config.engines.any?(:on) && !opts_engines_off?
       end
 
       def engines

@@ -20,12 +20,12 @@ module CanTango
 
       protected
 
-      def any_caching_on?
-        CanTango.config.cache_engine.on? || caching_on?
+      def caching_on?
+        CanTango.config.cache_engine.on? && !opts_caching_off?
       end
 
-      def caching_on?
-        caching_on
+      def opts_caching_off?
+        options[:caching] == :off
       end
     end
   end

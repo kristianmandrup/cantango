@@ -8,7 +8,7 @@ module CanTango
     module Cache
       def cache_rules!
         stamper(:cache_rules) {
-        return if !any_caching_on?
+        return if !caching_on?
         invalidate_cache!
         rules_compiled = compile_rules! rules
         rules_cache.save cache_key, rules_compiled

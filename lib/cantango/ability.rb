@@ -8,17 +8,13 @@ module CanTango
 
     include CanCan::Ability
 
-    attr_reader :options, :subject, :session, :candidate, :caching_on, :engines_on, :mode
+    attr_reader :options, :candidate
 
     # Equivalent to a CanCan Ability#initialize call
     # which executes all the permission logic
     def initialize candidate, options = {}
       raise "Candidate must be something!" if !candidate
       @candidate, @options = candidate, options
-      @session = options[:session] || {} # seperate session cache for each type of user?
-
-      @caching_on = options[:caching] != :off
-      @engines_on = options[:engines] != :off
 
       return if cached_rules?
 
@@ -26,7 +22,7 @@ module CanTango
       permit_rules
 
       execute_engines! if engines_on?
-      cache_rules! if any_caching_on?
+      cache_rules! if caching_on?
     end
 
     include CanTango::PermitEngine::Util
@@ -46,6 +42,9 @@ module CanTango
       @rules ||= default_rules
     end
 
+    def session
+      @session = options[:session] || {} # seperate session cache for each type of user?
+    end
 
     def subject
       return candidate.active_user if masquerade_user?
