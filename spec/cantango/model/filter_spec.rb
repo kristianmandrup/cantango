@@ -71,7 +71,7 @@ class AdminRolePermit < CanTango::RolePermit
 end
 
 class Project
-  include CanTango::Filter
+  include CanTango::Model::Filter
 
   tango_filter :publish, :edit, :DELETE, :is_done?, :done!
   tango_filter :assign_to => [:user], :create => :OPTS, :show => [:ARGS], :has_role? => :role
@@ -113,7 +113,7 @@ class Project
   end
 end
 
-describe CanTango::Filter do
+describe CanTango::Model::Filter do
   let(:context) { Context.new }
 
   subject { Project.new }
