@@ -5,6 +5,10 @@ module CanTango::Model
       base.extend ClassMethods
     end
 
+    def self.rest_actions
+      [:read, :access, :write, :manage, :edit, :create, :delete]
+    end
+
     class AllowedActions
       attr_reader :actions, :clazz
 
@@ -14,12 +18,12 @@ module CanTango::Model
       end
 
       def by_user user
-        clazz.all.select {|obj| user_ability(user).can? actions, clazz }
+        clazz.all.select {|obj| obj.user_ability(user).can? actions, obj }
       end
       alias_method :by, :by_user
 
       def by_account account
-        clazz.all.select {|obj| account_ability(account).can? actions, obj}
+        clazz.all.select {|obj| obj.account_ability(account).can? actions, obj}
       end
     end
 
@@ -28,10 +32,10 @@ module CanTango::Model
         CanTango::Scope::AllowActions.new self, *actions
       end
 
-      [:read, :access, :write, :manage, :edit, :create, :delete].each do |meth_name|
-        action = meth_name.to_s.sub(/e$/, '') << "able"
+      CanTango::Model::Scope.rest_actions.each do |action|
+        meth_name = action.to_s.sub(/e$/, '') << "able"
         define_method :"#{meth_name}_by" do |user|
-          all.select {|obj| user_ability(user).can? action.to_sym, obj }
+          all.select {|obj| obj.user_ability(user).can? action.to_sym, obj }
         end
       end
     end
