@@ -92,11 +92,14 @@ describe CanTango::Model::Scope do
       specify { subject.send(:"#{meth_name}_by", context.current_user).should_not be_empty }
     end
 
-    # TODO: doesn't work when specifying multiple actions
     describe '#allowed_to' do
       specify { subject.allowed_to(:create).by_user(context.current_user).should_not be_empty }
 
+      specify { subject.allowed_to(:create, :edit).by_user(context.current_user).should_not be_empty }
+
       specify { subject.allowed_to(:delete).by_user(context.current_user).should be_empty }
+
+      specify { subject.allowed_to(:delete, :manage).by_user(context.current_user).should be_empty }
     end
   end
 end

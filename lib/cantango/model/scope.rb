@@ -22,14 +22,22 @@ module CanTango::Model
       end
 
       def by_user user
-        ability = user_ability(user)
-        clazz.all.select {|obj| ability.can? actions.first, obj}
+        check user_ability(user)
       end
       alias_method :by, :by_user
 
       def by_account account
-        ability = account_ability(account)
-        clazz.all.select {|obj| ability.can? actions.first, obj}
+        check account_ability(account)
+      end
+
+      protected
+
+      def check ability
+        clazz.all.select do |obj|
+          actions.all? do |action|
+            ability.can? action.to_sym, obj
+          end
+        end
       end
     end
 

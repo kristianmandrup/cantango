@@ -6,7 +6,7 @@ module CanTango
       def permit_name clazz
         @name ||= clazz.to_s.demodulize.gsub(/Role/,'').gsub(/Permit$/, '').gsub(/Group/,'').underscore.to_sym
       end
-      
+
       # TODO:
       def role
         @role ||= permit_name
