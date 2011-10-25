@@ -2,6 +2,7 @@ module CanTango::Model
   module Scope
     def self.included(base)
       base.send :include, CanTango::Api::User::Ability
+      base.extend CanTango::Api::User::Ability
       base.extend ClassMethods
     end
 
@@ -10,26 +11,31 @@ module CanTango::Model
     end
 
     class AllowedActions
+      include CanTango::Api::User::Ability
+
+
       attr_reader :actions, :clazz
 
       def initialize clazz, *actions
         @clazz = clazz
-        @actions = actions
+        @actions = actions.flatten
       end
 
       def by_user user
-        clazz.all.select {|obj| obj.user_ability(user).can? actions, obj }
+        ability = user_ability(user)
+        clazz.all.select {|obj| ability.can? actions.first, obj}
       end
       alias_method :by, :by_user
 
       def by_account account
-        clazz.all.select {|obj| obj.account_ability(account).can? actions, obj}
+        ability = account_ability(account)
+        clazz.all.select {|obj| ability.can? actions.first, obj}
       end
     end
 
     module ClassMethods
       def allowed_to *actions
-        CanTango::Scope::AllowActions.new self, *actions
+        CanTango::Model::Scope::AllowedActions.new self, *actions
       end
 
       CanTango::Model::Scope.rest_actions.each do |action|
