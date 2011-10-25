@@ -11,15 +11,15 @@ module CanTango
     end
 
     def non_cached_rules
-       non_cached_ability.send(:rules)
+      non_cached_ability.send(:rules)
     end
 
     def cached_ability
-       CanTango::Ability.new(candidate, options.merge(:mode => :cache)
+      CanTango::CachedAbility.new(candidate, options
     end
 
     def non_cached_ability
-       CanTango::Ability.new(candidate, options.merge(:mode => :no_cache)
+      CanTango::Ability.new(candidate, options
     end
   end
 end

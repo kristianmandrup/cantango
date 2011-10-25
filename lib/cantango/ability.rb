@@ -16,24 +16,13 @@ module CanTango
       raise "Candidate must be something!" if !candidate
       @candidate, @options = candidate, options
 
-      return if cached_rules?
-
       clear_rules!
       permit_rules
 
       execute_engines! if engines_on?
-      cache_rules! if caching_on?
     end
 
     include CanTango::PermitEngine::Util
-
-    def mode
-      :cached
-    end
-
-    def mode? mode
-      self.mode == mode
-    end
 
     def permit_rules
     end
