@@ -3,7 +3,7 @@ require 'singleton'
 module CanTango
   class Configuration
     class Engines
-      autoload_modules :Permission, :Permit, :Cache, :Store, :Engine
+      autoload_modules :Permission, :Permit, :UserAc, :Cache, :Store, :Engine
 
       include Singleton
       include Enumerable
@@ -29,7 +29,7 @@ module CanTango
       end
 
       def default_register
-        {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine }
+        {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine, :user_ac => CanTango::UserAcEngine }
       end
 
       # defines the order of execution of engine in ability
@@ -60,7 +60,7 @@ module CanTango
       end
 
       def self.default_available
-        [:cache, :permission , :permit]
+        [:cache, :permission , :permit, :user_ac]
       end
 
       def default_available

@@ -9,5 +9,19 @@ module CanTango
     def execute!
       # raise NotImplementedError
     end
+
+    protected
+
+    def user
+      ability.user
+    end
+
+    def subject
+      ability.subject
+    end
+
+    def candidate
+      ability.candidate
+    end
   end
 end

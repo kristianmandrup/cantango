@@ -29,9 +29,9 @@ def setup
 
   let (:permit) do
     SystemRolePermit.new ability
-  end  
-  
-  let (:executor) do    
+  end
+
+  let (:executor) do
     CanTango::PermitEngine::Executor::System.new permit, user_account
   end
 end
@@ -44,12 +44,12 @@ describe CanTango::Rules do
     it "should not have any rules" do
       permit.rules.should be_empty
     end
-    
+
     it "should have rules after can" do
       permit.can :read, Comment
       permit.rules.should_not be_empty
-    end    
-  end  
+    end
+  end
 end
 
 

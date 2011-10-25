@@ -27,4 +27,8 @@ class User
   def role
     @role || ''
   end
+
+  def permissions
+    @permissions ||= []
+  end
 end
