@@ -19,12 +19,6 @@ module CanTango
       permission_factory.build!
     end
 
-    protected
-
-    def user
-      ability.user
-    end
-
     def permission_factory
       @permission_factory ||= CanTango::PermissionEngine::Factory.new ability
     end
