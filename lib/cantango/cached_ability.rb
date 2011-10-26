@@ -14,6 +14,13 @@ module CanTango
       execute_engines! if engines_on?
       cache_rules!
     end
+
+    def cached?
+      true
+    end
+
+    def permit_rules
+    end
   end
 end
 

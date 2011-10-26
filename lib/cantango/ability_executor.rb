@@ -9,11 +9,11 @@ module CanTango
     end
 
     def cached_rules
-      cached_ability.send(:rules)
+      cache_mode? ? cached_ability.send(:rules) : []
     end
 
     def non_cached_rules
-      non_cached_ability.send(:rules)
+      no_cache_mode? ? non_cached_ability.send(:rules) : []
     end
 
     def cached_ability
@@ -22,6 +22,20 @@ module CanTango
 
     def non_cached_ability
       CanTango::Ability.new candidate, options
+    end
+
+    protected
+
+    def no_cache_mode?
+      modes.include?(:no_cache)
+    end
+
+    def cache_mode?
+      modes.include?(:cache)
+    end
+
+    def modes
+      CanTango.config.ability.modes
     end
   end
 end

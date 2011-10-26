@@ -24,6 +24,10 @@ module CanTango
 
     include CanTango::PermitEngine::Util
 
+    def cached?
+      false
+    end
+
     def permit_rules
     end
 

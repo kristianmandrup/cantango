@@ -31,7 +31,7 @@ module CanTango
       end
 
       def cached?
-        ability.mode? :cached
+        ability.cached?
       end
 
       def permit_type
@@ -124,15 +124,29 @@ module CanTango
       #
       def permit?
         cached? ? cached_rules : non_cached_rules
+        run_rule_methods
       end
 
-      def cached_rules
+      def run_rule_methods
         static_rules
         permit_rules
         dynamic_rules
       end
 
       def non_cached_rules
+        include_non_cached if defined?(self.class::NonCached)
+     end
+
+      def cached_rules
+        include_cached if defined?(self.class::Cached)
+      end
+
+      def include_non_cached
+        self.class.send :include, self.class::NonCached
+      end
+
+      def include_cached
+        self.class.send :include, self.class::Cached
       end
 
       def licenses *names

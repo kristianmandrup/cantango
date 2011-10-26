@@ -16,11 +16,11 @@ describe CanTango::Permits::Permit do
     CanTango.config.permits.admin_account.role[:admin].should == AdminAccountPermits::AdminRolePermit
     CanTango.config.permits.role[:musician].should == MusicianRolePermit
   end
-  
+
   it "should register RoleGroupPermit-based permits" do
     CanTango.config.permits.role_group[:editors].should == EditorsRoleGroupPermit
   end
- 
+
   it "should register UserPermit-based permits" do
     CanTango.config.permits.user[:admin].should == AdminPermit
   end

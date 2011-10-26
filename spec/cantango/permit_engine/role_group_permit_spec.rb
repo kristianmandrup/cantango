@@ -26,8 +26,8 @@ describe CanTango::Permits::RoleGroupPermit do
   let (:ability) do
     CanTango::Ability.new user_account
   end
-  
-  let (:permit) do    
+
+  let (:permit) do
     AdminsRoleGroupPermit.new ability
   end
 
