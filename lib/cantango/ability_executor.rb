@@ -1,5 +1,7 @@
 module CanTango
   class AbilityExecutor < CanTango::Ability
+    attr_reader :rules
+
     def initialize candidate, options = {}
       raise "Candidate must be something!" if !candidate
       @candidate, @options = [candidate, options]
@@ -15,11 +17,11 @@ module CanTango
     end
 
     def cached_ability
-      CanTango::CachedAbility.new(candidate, options
+      CanTango::CachedAbility.new candidate, options
     end
 
     def non_cached_ability
-      CanTango::Ability.new(candidate, options
+      CanTango::Ability.new candidate, options
     end
   end
 end

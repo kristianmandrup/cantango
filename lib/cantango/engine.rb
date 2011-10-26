@@ -1,5 +1,7 @@
 module CanTango
   class Engine
+    include CanTango::Helpers::Debug
+
     attr_reader :ability
 
     def initialize ability

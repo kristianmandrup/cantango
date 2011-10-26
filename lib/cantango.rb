@@ -10,8 +10,9 @@ require 'sweetloader'
 AutoLoader.namespaces = {:CanTango => 'cantango'}
 
 module CanTango
-  autoload_modules :Ability, :Api, :Configuration, :Cache, :Permits
-  autoload_modules :PermitEngine, :PermissionEngine, :UserAcEngine, :AbilityExecutor
+  autoload_modules :Ability, :CachedAbility, :AbilityExecutor
+  autoload_modules :Api, :Configuration, :Cache, :Permits
+  autoload_modules :PermitEngine, :PermissionEngine, :UserAcEngine
   autoload_modules :Rails, :Users, :Rules, :Api, :Helpers, :Filters, :Model, :Engine
 
   class << self

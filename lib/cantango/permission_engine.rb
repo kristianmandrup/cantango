@@ -9,14 +9,26 @@ module CanTango
     end
 
     def execute!
-      puts "Permission Engine executing..." if CanTango.config.debug.on?
+      return if !valid?
+      debug "Permission Engine executing..."
       permissions.each do |permission|
         permission.evaluate! user
       end
     end
 
+    def valid?
+      permissions.empty? ? invalid : true
+    end
+
     def permissions
       permission_factory.build!
+    end
+
+    protected
+
+    def invalid
+      debug "No permissions found!"
+      false
     end
 
     def permission_factory

@@ -1,5 +1,5 @@
 module CanTango
   module Helpers
-    autoload_modules :RoleMethods
+    autoload_modules :RoleMethods, :Debug
   end
 end
