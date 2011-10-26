@@ -18,7 +18,12 @@ module CanTango
       end
     end
 
+    def engine_name
+      :permit
+    end
+
     def valid?
+      return false if !valid_mode?
       permits.empty? ? invalid : true
     end
 

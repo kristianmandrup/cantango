@@ -49,11 +49,9 @@ describe CanTango::AbilityExecutor do
   context 'cached only' do
     before do
       CanTango.configure.ability.mode = :cache
-      puts "modes:" << CanTango.configure.ability.modes.inspect
 
       @user = User.new 'admin', 'admin@mail.ru', :role => 'admin'
       @abil = CanTango::AbilityExecutor.new @user
-      puts @abil.cached_rules.inspect
     end
 
     subject { CanTango::AbilityExecutor.new @user }

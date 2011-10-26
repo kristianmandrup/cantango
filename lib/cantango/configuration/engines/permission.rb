@@ -5,6 +5,11 @@ module CanTango
     class Engines
       class Permission < Engine
         include Singleton
+        include CanTango::Configuration::Modes
+
+        def modes
+          @modes ||= [:cache]
+        end
 
         def store &block
           @store ||= ns::Store.new
