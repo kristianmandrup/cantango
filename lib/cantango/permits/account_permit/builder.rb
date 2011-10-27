@@ -8,15 +8,19 @@ module CanTango
         # @return [Array<RoleGroupPermit::Base>] the role permits built for this ability
         def build
           return [] if !user_account
-          puts debug_msg if CanTango.debug?          
+          puts debug_msg if CanTango.debug?
           [permit].compact
+        end
+
+        def name
+          :account
         end
 
         protected
 
         def debug_msg
           permit ? "Building AccountPermit for #{user_account}, permit: #{permit}" : "Not building any AccountPermit"
-        end 
+        end
 
         def permit
           create_permit(user_account.class.to_s)

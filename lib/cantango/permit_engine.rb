@@ -12,9 +12,12 @@ module CanTango
       debug "Permit Engine executing..."
 
       # CanTango.config.permits.clear_executed! # should there be an option clear before each execution?
-      permits.each do |permit|
-        CanTango.config.permits.was_executed(permit, ability) if CanTango.config.debug.on?
-        break if permit.execute == :break
+      permits.each_pair do |type, permits|
+        # TODO: somehow type specific caching of result of permits!
+        permits.each do |permit|
+          CanTango.config.permits.was_executed(permit, ability) if CanTango.config.debug.on?
+          break if permit.execute == :break
+        end
       end
     end
 

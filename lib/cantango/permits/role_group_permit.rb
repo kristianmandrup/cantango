@@ -19,7 +19,7 @@ module CanTango
       def permit_name
         self.class.role_group_name self.class
       end
-      
+
       alias_method :role_group, :permit_name
 
       # creates the permit
@@ -45,11 +45,11 @@ module CanTango
       def permit?
         super
       end
- 
+
       def valid_for? subject
         in_role_group? subject
       end
-      
+
       protected
 
       include CanTango::Helpers::RoleMethods

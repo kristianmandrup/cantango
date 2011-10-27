@@ -18,7 +18,11 @@ module CanTango
             puts "Not building any RoleGroupPermits since no role groups are roles that are members of a role group could be found for the permission candidate" if CanTango.debug?
             return []
           end
-       end
+        end
+
+        def name
+          :role_group
+        end
 
         def valid? role_group
           return true if !role_groups_filter?

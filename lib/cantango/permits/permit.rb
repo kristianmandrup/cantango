@@ -5,33 +5,23 @@ require 'sugar-high/array'
 module CanTango
   module Permits
     class Permit
-      attr_reader :ability
+      autoload_modules :Delegate, :Execute, :License, :ClassMethods
+
+      include CanTango::Helpers::Debug
+      include CanTango::Rules # also makes a Permit a subclass of CanCan::Ability
+      include CanTango::Api::Attributes
+
+      include Delegate
+      include Execute
+      include License
+      extend ClassMethods
 
       # strategy is used to control the owns strategy (see rules.rb)
-      attr_reader :strategy, :disabled
-
-      include CanTango::Api::Attributes
+      attr_reader :ability, :strategy, :disabled
 
       # creates the permit
       def initialize ability
         @ability  = ability
-      end
-
-      def self.first_name clazz
-        clazz.to_s.gsub(/^([A-Za-z]+).*/, '\1').underscore.to_sym # first part of class name
-      end
-
-      def self.type
-        :abstract
-      end
-
-      def self.account_name clazz
-        return nil if clazz.name == clazz.name.demodulize
-        clazz.name.gsub(/::.*/,'').gsub(/(.*)Permits/, '\1').underscore.to_sym
-      end
-
-      def cached?
-        ability.cached?
       end
 
       def permit_type
@@ -46,14 +36,6 @@ module CanTango
         @disabled || config_disabled?
       end
 
-      # executes the permit
-      def execute
-        return if disabled?
-        puts "Execute Permit: #{self}" if CanTango.debug?
-        executor.execute!
-        ability_sync!
-      end
-
       def valid_for? subject
         raise NotImplementedError
       end
@@ -64,10 +46,6 @@ module CanTango
 
       def any reg_exp
         config.models.by_reg_exp reg_exp
-      end
-
-      def options
-        ability.options
       end
 
      CanTango::Api::Options.options_list.each do |obj|
@@ -86,127 +64,27 @@ module CanTango
         !localhost?
       end
 
-      def subject
-        ability.subject
-      end
-
-      def user
-        ability.user
-      end
-
-      def user_account
-        ability.user_account
-      end
-
-      def ability_rules
-        ability.send(:rules)
-      end
-
       def ability_sync!
         ability_rules << (rules - ability_rules)
         ability_rules.flatten!
       end
 
-      # In a specific Role based Permit you can use
-      #   def permit? user, options = {}
-      #     return if !super(user, :in_role)
-      #     ... permission logic follows
-      #
-      # This will call the Permit::Base#permit? instance method (the method below)
-      # It will only return true if the user matches the role of the Permit class and the
-      # options passed in is set to :in_role
-      #
-      # If these confitions are not met, it will return false and thus the outer permit 
-      # will not run the permission logic to follow
-      #
-      # Normally super for #permit? should not be called except for this case, 
-      # or if subclassing another Permit than Permit::Base
-      #
-      def permit?
-        cached? ? cached_rules : non_cached_rules
-        run_rule_methods
-      end
-
-      def run_rule_methods
-        static_rules
-        permit_rules
-        dynamic_rules
-      end
-
-      def non_cached_rules
-        include_non_cached if defined?(self.class::NonCached)
-     end
-
-      def cached_rules
-        include_cached if defined?(self.class::Cached)
-      end
-
-      def include_non_cached
-        self.class.send :include, self.class::NonCached
-      end
-
-      def include_cached
-        self.class.send :include, self.class::Cached
-      end
-
-      def licenses *names
-        names.to_strings.each do |name|
-          try_license name
-        end
-      end
-
-      include CanTango::Rules # also makes a Permit a subclass of CanCan::Ability
-
       protected
+
+      include CanTango::PermitEngine::Util
+      include CanTango::PermitEngine::Compatibility
+      include CanTango::PermitEngine::RoleMatcher
 
       def config_disabled?
         (CanTango.config.permits.disabled[permit_type] || []).include?(permit_name.to_s)
       end
 
-      def try_license name
-        module_name = "#{name.camelize}License"
-        clazz = module_name.constantize
-        clazz.new(self).license_rules
-      rescue NameError
-        raise "License #{module_name} is not defined"
-      rescue
-        raise "License #{clazz} could not be enforced using #{self.inspect}"
-      end
-
-      # This method will contain the actual rules
-      # can be implemented in the subclass
-
-      def permit_rules
-      end
-
-      def static_rules
-      end
-
-      def dynamic_rules
-      end
-
-      #include CanTango::PermitEngine::Cache
-      include CanTango::PermitEngine::Util
-      include CanTango::PermitEngine::Compatibility
-
       def strategy
         @strategy ||= options[:strategy] || CanTango::Ability.strategy || :default
       end
 
-      include CanTango::PermitEngine::RoleMatcher
-
       def any_role_match?
         role_match?(subject) || role_group_match?(subject)
-      end
-
-      # return the executor used to execute the permit
-      def executor
-        @executor ||= case self.class.name
-        when /System/
-          then CanTango::PermitEngine::Executor::System.new self
-        else
-          CanTango::PermitEngine::Executor::Base.new self
-        end
       end
 
       def config

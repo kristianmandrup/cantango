@@ -11,11 +11,15 @@ module CanTango
           [permit].compact
         end
 
+        def name
+          :user
+        end
+
         protected
 
         def debug_msg
           permit ? "Building UserPermit for #{user}, permit: #{permit}" : "Not building any UserPermit"
-        end 
+        end
 
         def permit
           @permit ||= create_permit(user.class.to_s)

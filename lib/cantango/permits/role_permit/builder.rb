@@ -16,6 +16,10 @@ module CanTango
           end.compact
         end
 
+        def name
+          :role
+        end
+
         protected
 
         def valid? role
