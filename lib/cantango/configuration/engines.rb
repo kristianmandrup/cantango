@@ -60,7 +60,7 @@ module CanTango
       end
 
       def self.default_available
-        [:permission , :permit, :user_ac]
+        [:cache, :permission , :permit, :user_ac]
       end
 
       def default_available

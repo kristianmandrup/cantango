@@ -31,7 +31,15 @@ module CanTango
         protected
 
         def hash_values
-          @hash_values ||= [user_key, subject_roles_hash].compact
+          @hash_values ||= [user_key, subject_roles_hash, permissions_key].compact
+        end
+
+        def permissions_key
+          subject.send(:permissions) if permissions_key?
+        end
+
+        def permissions_key?
+          subject.respond_to?(:permissions) && permission_engine.modes.include?(:cache) && permission_engine.on?
         end
 
         def user_key
@@ -56,8 +64,12 @@ module CanTango
 
         private
 
+        def permission_engine
+          CanTango.config.engine(:user_ac)
+        end
+
         def use_in_hash? meth_name
-          subject.respond_to?(meth_name) && CanTango.config.permits.enabled_types.include? meth_map(meth_name)
+          subject.respond_to?(meth_name) && CanTango.config.permits.enabled_types.include?(meth_map[meth_name])
         end
 
         def meth_map

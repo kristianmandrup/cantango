@@ -17,11 +17,18 @@ module CanTango
         end
 
         def cache_options
-          CanTango.config.cache_engine.store.options || {}
+          cache_engine.store.options || {}
         end
 
         def clazz
-          CanTango.config.cache_engine.store.default_class
+          cache_engine.store.default_class
+        end
+
+        protected
+
+        def cache_engine
+          raise "Cache engine not registered!" if !CanTango.config.engine(:cache)
+          CanTango.config.engine(:cache)
         end
       end
     end
