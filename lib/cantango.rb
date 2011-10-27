@@ -62,6 +62,7 @@ module CanTango
   end
 end
 
+require 'cantango/adapter/init'
 require 'cantango/api/aliases'
 require 'cantango/permits/macros'
 require 'cantango/users/macros'

@@ -50,7 +50,7 @@ module CanTango
       end
 
       def rules
-        ability.send :rules # FIXME !?
+        ability.send :rules
       end
 
       def plural_attribute
@@ -62,7 +62,6 @@ module CanTango
           raise "#{model} has no :#{attribute} or :#{plural_attribute} defined" if !model.new.respond_to?(attribute) && !model.new.respond_to?(plural_attribute)
         end
       end
-
     end
   end
 end

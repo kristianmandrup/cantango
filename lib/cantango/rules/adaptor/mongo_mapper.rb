@@ -1,9 +1,10 @@
 module CanTango
   module Rules
     module Adaptor
-      module Mongoid
+      module MongoMapper
         include module CanTango::Rules::Adaptor::Mongo
       end
     end
   end
 end
+

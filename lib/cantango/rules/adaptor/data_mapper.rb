@@ -1,10 +1,11 @@
 module CanTango
   module Rules
     module Adaptor
-      module ActiveRecord
+      module DataMapper
         include CanTango::Rules::Adaptor::Relational
       end
     end
   end
 end
+
 

@@ -1,6 +1,8 @@
 module CanTango
   class Configuration
     class Models
+      autoload_modules :Generic, :ActiveRecord, :DataMapper, :MongoMapper, :Mongoid
+
       include Singleton
       include ClassExt
 
@@ -19,10 +21,17 @@ module CanTango
       end
 
       def available_models
-        ar_models.map(&:name)
+        CanTango.config.orms.inject([]) do |result, orm|
+          result << adapter_for(orm).models.map(&:name)
+          result
+        end.flatten.compact
       end
 
       private
+
+      def adapter_for orm
+        "CanTango::Configuration::Models::#{orm.to_s.camlize}".constantize.new
+      end
 
       def try_model model_string
         model = try_class(model_string.singularize) || try_class(model_string) 
@@ -33,7 +42,7 @@ module CanTango
       def grep reg_exp
         available_models.grep reg_exp
       end
- 
+
       def ar_models
         # Sugar-high #to_strings didn't work here!
         ActiveRecord::Base.descendants

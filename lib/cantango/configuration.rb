@@ -67,6 +67,7 @@ module CanTango
       engine
     end
 
+    attr_accessor :orms
     attr_writer :localhost_list
 
     def localhost_list
