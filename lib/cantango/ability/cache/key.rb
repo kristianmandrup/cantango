@@ -4,9 +4,14 @@ module CanTango
       class Key
         attr_reader :user, :subject
 
-        def initialize user, subject = nil
+        def initialize user, subject = nil, method_names = nil
           @user = user
           @subject = subject || user
+          @method_names = method_names
+        end
+
+        def method_names
+          @method_names ||= [:roles_list, :role_groups_list]
         end
 
         def self.create_for ability
@@ -43,10 +48,20 @@ module CanTango
         end
 
         def role_hash_values
-          @role_hash_values ||= [:roles_list, :role_groups_list].inject([]) do |result, meth|
-            result << subject.send(meth) if subject.respond_to? meth
+          @role_hash_values ||= method_names.inject([]) do |result, meth|
+            result << subject.send(meth) if use_in_hash? meth_name
             result
           end
+        end
+
+        private
+
+        def use_in_hash? meth_name
+          subject.respond_to?(meth_name) && CanTango.config.permits.enabled_types.include? meth_map(meth_name)
+        end
+
+        def meth_map
+          {:roles_list => :role, :role_groups_list => :role_group }
         end
       end
     end

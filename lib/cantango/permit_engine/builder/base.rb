@@ -4,6 +4,8 @@ module CanTango
       class CreatePermitError < StandardError; end;
 
       class Base
+        include CanTango::Helpers::Debug
+
         attr_accessor :ability
 
         # creates the factory for the ability
@@ -37,7 +39,7 @@ module CanTango
         end
 
         def permit_clazz name
-          puts "Permit Finder: #{finder}" if CanTango.debug?
+          debug "Permit Finder: #{finder}"
           finder.new(subject, name).get_permit
         end
 

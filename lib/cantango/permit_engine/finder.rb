@@ -1,6 +1,8 @@
 module CanTango
   class PermitEngine < Engine
     class Finder
+      include CanTango::Helpers::Debug
+
       # This class is used to find the right permit, possible scoped for a specific user account
       attr_reader :user_account, :name
 
@@ -44,12 +46,8 @@ module CanTango
 
       def permit
         found = registered_permits.registered_for type, name
-        debug_msg permit_msg(found)
-        found        
-      end
-
-      def debug_msg msg
-        puts msg if CanTango.debug?
+        debug permit_msg(found)
+        found
       end
 
       def permit_msg found

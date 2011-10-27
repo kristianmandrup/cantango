@@ -2,6 +2,8 @@ module CanTango
   class PermitEngine < Engine
     module Executor
       class Abstract
+        include CanTango::Helpers::Debug
+
         attr_accessor :permit
 
         def initialize permit

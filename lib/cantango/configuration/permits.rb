@@ -17,7 +17,7 @@ module CanTango
       def disable_types *types
         @enabled_types = available_types - types.flatten
       end
-      alias_method :disable, :disable_types      
+      alias_method :disable, :disable_types
 
       def enable_all_types!
         @enabled_types = available_types

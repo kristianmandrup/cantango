@@ -10,7 +10,7 @@ module CanTango
         protected
 
         def not_candidate_permit
-          puts "Permit #{permit} is not valid for #{subject}" if CanTango.debug?
+          debug "Permit #{permit} is not valid for #{subject}"
         end
       end
     end

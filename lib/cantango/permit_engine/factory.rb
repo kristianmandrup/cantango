@@ -1,6 +1,8 @@
 module CanTango
   class PermitEngine < Engine
     class Factory
+      include CanTango::Helpers::Debug
+
       attr_accessor :ability
 
       # creates the factory for the ability
@@ -11,15 +13,15 @@ module CanTango
       end
 
       def build!
-        puts "PermitEngine Factory: No permits could be built" if permits.empty? && CanTango.debug?
+        debug "PermitEngine Factory: No permits could be built" if permits.empty?
         permits
       end
 
       def permits
         @permits ||= builders.inject([]) do |permits, builder|
-          puts "++ Permit Builder: #{builder_class builder}" if CanTango.debug?
+          debug "++ Permit Builder: #{builder_class builder}"
           built_permits = permits_built_with(builder)
-          puts "== Permits built: #{built_permits.size}" if CanTango.debug?
+          debug "== Permits built: #{built_permits.size}"
           permits = permits + built_permits if built_permits
         end.flatten
       end

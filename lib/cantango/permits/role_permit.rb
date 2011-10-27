@@ -28,7 +28,6 @@ module CanTango
         super
       end
 
-
       # In a specific Role based Permit you can use 
       #   def permit? user, options = {}
       #     ... permission logic follows
@@ -49,7 +48,7 @@ module CanTango
       def valid_for? subject
         in_role? subject
       end
-      
+
       protected
 
       include CanTango::Helpers::RoleMethods
