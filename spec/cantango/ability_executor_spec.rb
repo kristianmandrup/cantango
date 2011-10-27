@@ -26,7 +26,6 @@ class AdminRolePermit < CanTango::RolePermit
   protected
 
   def static_rules
-    puts "AdminRole permit - read Article"
     can :read, Article
   end
 
@@ -50,11 +49,9 @@ describe CanTango::AbilityExecutor do
   context 'non-cached only' do
     before do
       CanTango.configure.ability.mode = :no_cache
-      puts "modes:" << CanTango.configure.ability.modes.inspect
 
       @user = User.new 'admin', 'admin@mail.ru', :role => 'admin'
       @abil = CanTango::AbilityExecutor.new @user
-      puts @abil.non_cached_rules.inspect
     end
 
     subject { CanTango::AbilityExecutor.new @user }
