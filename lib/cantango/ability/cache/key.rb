@@ -35,6 +35,7 @@ module CanTango
         end
 
         def permissions_key
+          return subject.send(:permissions_hash) if permissions_key? && subject.respond_to?(:permissions_hash)
           subject.send(:permissions) if permissions_key?
         end
 
