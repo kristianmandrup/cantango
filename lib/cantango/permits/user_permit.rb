@@ -63,7 +63,7 @@ module CanTango
 
       # TODO
       def permit_user
-        permit_name 
+        permit_name
       end
     end
   end

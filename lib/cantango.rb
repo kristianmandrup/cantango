@@ -2,6 +2,7 @@ require 'cantango/rails/railtie' if defined?(Rails)
 require 'cantango/rails/engine' if defined?(Rails)
 require 'cancan'
 require 'active_support' # for Delegate module
+require 'active_support/core_ext/module/delegation'
 require 'cantango/cancan/rule'
 require 'sugar-high/array'
 require 'sugar-high/blank'

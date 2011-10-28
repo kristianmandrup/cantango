@@ -19,11 +19,13 @@ module CanTango
 
       # return hash of permits built, keyed by name of builder
       def permits
+        puts "building..."
         @permits ||= builders.inject({}) do |permits, builder|
           debug "++ Permit Builder: #{builder_class builder}"
           built_permits = permits_built_with(builder)
           debug "== Permits built: #{built_permits.size}"
-          permits[builder.name] = built_permits if built_permits
+          permits[builder] = built_permits if built_permits
+          permits
         end
       end
 

@@ -27,6 +27,10 @@ module CanTango
         self.class.type
       end
 
+      def ability_rules
+        ability.send :rules
+      end
+
       def disable!
         @disabled = true
       end

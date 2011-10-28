@@ -4,6 +4,7 @@ module CanTango
       include Singleton
 
       attr_reader :accounts
+      attr_writer :enabled_types
 
       def enabled_types
         @enabled_types || available_types
