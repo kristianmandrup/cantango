@@ -7,8 +7,8 @@ module CanTango
         cache.key.same?(session)
       end
 
-      def cache cache_key = :cache
-        @cache ||= CanTango::Ability::Cache.new self, cache_key
+      def cache options = {}
+        @cache ||= CanTango::Ability::Cache.new self, options
       end
     end
   end

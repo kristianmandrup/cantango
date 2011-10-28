@@ -3,11 +3,21 @@ module CanTango
     class Cache
       autoload_modules :BaseCache, :SessionCache, :Reader, :Writer, :RulesCache, :Key
 
-      attr_reader :rules_cached, :ability, :cache_key
+      attr_reader :rules_cached, :ability
+      attr_writer :key_method_names, :cache_key
 
-      def initialize ability, cache_key = :cache
+      def initialize ability, options = {}
         @ability = ability
-        @cache_key = cache_key
+        @cache_key = options[:cache_key]
+        @key_method_names = options[:key_method_names]
+      end
+
+      def key_method_names
+        @key_method_names ||= [:roles_list, :role_groups_list]
+      end
+
+      def cache_key
+        @cache_key ||= :cache
       end
 
       def session
@@ -39,7 +49,7 @@ module CanTango
       end
 
       def key
-        @key ||= Key.new ability.user, ability.subject
+        @key ||= Key.new ability.user, ability.subject, key_method_names
       end
 
       def rules_cache
@@ -48,7 +58,7 @@ module CanTango
 
       def invalidate!
         raise "no session" if !session
-        rules_cache.invalidate! session[:cache_key]
+        rules_cache.invalidate! session[cache_key]
       end
 
       def compile_on?

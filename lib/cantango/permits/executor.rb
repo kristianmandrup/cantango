@@ -27,7 +27,7 @@ module CanTango
       end
 
       def cache
-        @cache ||= CanTango::Ability::Cache.new self, cache_key
+        @cache ||= CanTango::Ability::Cache.new self, :cache_key => cache_key, :key_method_names => key_method_names
       end
 
       def execute!
@@ -44,6 +44,19 @@ module CanTango
         permits.each do |permit|
           CanTango.config.permits.was_executed(permit, ability) if CanTango.debug?
           break if permit.execute == :break
+        end
+      end
+
+      protected
+
+      def key_method_names
+        case permit_type
+        when :role
+          [:roles_list]
+        when :role_group
+          [:role_groups_list]
+        else
+          []
         end
       end
     end

@@ -7,7 +7,7 @@ module CanTango
         def initialize user, subject = nil, method_names = nil
           @user = user
           @subject = subject || user
-          @method_names = method_names
+          @method_names = method_names if method_names
         end
 
         def method_names
