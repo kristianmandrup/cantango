@@ -2,7 +2,9 @@ module CanTango
   class Ability
     class Cache
       class Writer
-        attr_reader :cache
+        attr_reader :cache, :cache_key
+
+        delegate :cache_key, :to => :cache
 
         def initialize cache
           @cache = cache
@@ -11,7 +13,7 @@ module CanTango
         def save key, rules
           cache.invalidate!
           cache.rules_cache.save cache.key, prepared_rules
-          session[:cache_key] = cache.key if session
+          session[cache_key] = cache.key if session
         end
 
         protected

@@ -3,6 +3,8 @@ module CanTango
     autoload_modules :Builder, :Compatibility, :Executor
     autoload_modules :Factory, :Finder, :Loaders, :Util, :RoleMatcher
 
+    delegate :rules, :to => :ability
+
     def initialize ability
       super
     end
@@ -11,14 +13,11 @@ module CanTango
       return if !valid?
       debug "Permit Engine executing..."
 
-      # CanTango.config.permits.clear_executed! # should there be an option clear before each execution?
+      # push result of each permit type execution into main ability rules array
       permits.each_pair do |type, permits|
-        # TODO: somehow type specific caching of result of permits!
-        permits.each do |permit|
-          CanTango.config.permits.was_executed(permit, ability) if CanTango.config.debug.on?
-          break if permit.execute == :break
-        end
+        rules << executor.execute! ability, type, permits
       end
+      rules.flatten
     end
 
     def engine_name

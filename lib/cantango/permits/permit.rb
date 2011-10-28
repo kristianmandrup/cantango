@@ -1,23 +1,22 @@
-require 'sugar-high/array'
-
 # The permit base class for both Role Permits and Role Group Permits
 # Should contain all common logic
 module CanTango
   module Permits
     class Permit
-      autoload_modules :Delegate, :Execute, :License, :ClassMethods
+      autoload_modules :Execute, :License, :ClassMethods
 
       include CanTango::Helpers::Debug
       include CanTango::Rules # also makes a Permit a subclass of CanCan::Ability
       include CanTango::Api::Attributes
 
-      include Delegate
       include Execute
       include License
       extend ClassMethods
 
       # strategy is used to control the owns strategy (see rules.rb)
       attr_reader :ability, :strategy, :disabled
+
+      delegate :cached?, :options, :subject, :user, :user_account, :to => :ability
 
       # creates the permit
       def initialize ability

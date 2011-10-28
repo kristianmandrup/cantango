@@ -3,6 +3,7 @@ module CanTango
     class Cache
       class SessionCache < BaseCache
         attr_accessor :session
+        attr_reader   :key
 
         # will be called with :session => session (pointing to user session)
         def initialize name, options = {}
@@ -10,11 +11,15 @@ module CanTango
           @cache = cache
           @cache.configure_with :type => :memory
           raise "SessionCache must be initialized with a :session option" if !session
-          session[:rules_cache] = @cache
+          session[cache_key] = @cache
+        end
+
+        def cache_key
+          @cache_key ||= :rules_cache
         end
 
         def store
-          session[:rules_cache]
+          session[cache_key]
         end
 
         def load key
@@ -31,7 +36,6 @@ module CanTango
 
         def cache
           CanTango::Cache::HashCache.instance
-          # CanTango::Cache::MonetaCache.instance
         end
       end
     end

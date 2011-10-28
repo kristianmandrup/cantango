@@ -1,17 +1,10 @@
 module CanTango
   class Ability
     module CacheHelpers
+      delegate :cache_rules!, :cached_rules, :to => :cache
 
       def cached_rules?
         cache.key.same?(session)
-      end
-
-      def cache_rules!
-        cache.cache_rules!
-      end
-
-      def cached_rules
-        cache.cached_rules
       end
 
       def cache
