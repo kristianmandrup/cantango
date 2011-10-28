@@ -6,6 +6,8 @@ module CanTango
       attr_reader :rules_cached, :ability
       attr_writer :key_method_names, :cache_key
 
+      delegate :session, :cached?, :to => :ability
+
       def initialize ability, options = {}
         @ability = ability
         @cache_key = options[:cache_key]
@@ -20,16 +22,12 @@ module CanTango
         @cache_key ||= :cache
       end
 
-      def session
-        ability.session
-      end
-
       def cache_rules!
-        writer.save key, reader.prepared_rules
+        writer.save(key, reader.prepared_rules) if cached?
       end
 
       def cached_rules
-        @rules ||= reader.prepared_rules
+        @rules ||= reader.prepared_rules if cached?
       end
 
       def compiler
@@ -45,7 +43,7 @@ module CanTango
       end
 
       def cached_rules?
-        key.same? session
+        key.same?(session) && cached?
       end
 
       def key

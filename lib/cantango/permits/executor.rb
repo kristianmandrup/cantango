@@ -8,7 +8,7 @@ module CanTango
 
       attr_reader :ability, :permit_type, :permits
 
-      delegate :session, :user, :subject, :to => :ability
+      delegate :session, :user, :subject, :cached?, :to => :ability
 
       def initialize ability, permit_type, permits
         @ability      = ability
