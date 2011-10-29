@@ -18,8 +18,16 @@ module CanTango
         end
       end
 
+      def exclude *names
+        @excluded = names.flatten.select_labels
+      end
+
+      def excluded
+        @excluded ||= []
+      end
+
       def available_models
-        ar_models.map(&:name)
+        ar_models.map(&:name) - excluded.map {|m| m.to_s.camelize}
       end
 
       private
@@ -33,7 +41,7 @@ module CanTango
       def grep reg_exp
         available_models.grep reg_exp
       end
- 
+
       def ar_models
         # Sugar-high #to_strings didn't work here!
         ActiveRecord::Base.descendants
