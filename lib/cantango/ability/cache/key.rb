@@ -57,8 +57,8 @@ module CanTango
         end
 
         def role_hash_values
-          @role_hash_values ||= method_names.inject([]) do |result, meth|
-            result << subject.send(meth) if use_in_hash? meth_name
+          @role_hash_values ||= method_names.inject([]) do |result, meth_name|
+            result << subject.send(meth_name) if use_in_hash? meth_name
             result
           end
         end
