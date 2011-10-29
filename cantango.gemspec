@@ -4,14 +4,17 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "cantango"
-  s.version = "0.9.3.1"
+  s.name = %q{cantango}
+  s.version = "0.9.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Kristian Mandrup", "Stanislaw Pankevich"]
-  s.date = "2011-10-27"
-  s.description = "Define your permission rules as role- or role group specific permits.\nIntegrates well with multiple Devise user acounts.\nIncludes rules caching.\nStore permissions in yaml file or key-value store"
-  s.email = "kmandrup@gmail.com, s.pankevich@gmail.com"
+  s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
+  s.date = %q{2011-10-29}
+  s.description = %q{Define your permission rules as role- or role group specific permits.
+Integrates well with multiple Devise user acounts.
+Includes rules caching.
+Store permissions in yaml file or key-value store}
+  s.email = %q{kmandrup@gmail.com, s.pankevich@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.textile"
@@ -195,6 +198,7 @@ Gem::Specification.new do |s|
     "lib/cantango/rules/scope.rb",
     "lib/cantango/rules/user_relation.rb",
     "lib/cantango/user_ac_engine.rb",
+    "lib/cantango/user_ac_engine/executor.rb",
     "lib/cantango/users.rb",
     "lib/cantango/users/macros.rb",
     "lib/cantango/users/masquerade.rb",
@@ -658,11 +662,11 @@ Gem::Specification.new do |s|
     "wiki/when_to_use.markdown",
     "wiki/why_to_use.markdown"
   ]
-  s.homepage = "http://github.com/kristianmandrup/cantango"
-  s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
-  s.summary = "CanCan extension with role oriented permission management and more"
+  s.homepage = %q{http://github.com/kristianmandrup/cantango}
+  s.licenses = [%q{MIT}]
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.6}
+  s.summary = %q{CanCan extension with role oriented permission management and more}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
