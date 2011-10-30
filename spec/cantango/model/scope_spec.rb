@@ -2,6 +2,7 @@ require 'rspec'
 require 'cantango'
 # require 'active_record/spec_helper'
 
+require 'cutter'
 require 'simple_roles'
 require 'fixtures/models'
 require 'cantango/api/current_users'
@@ -31,6 +32,7 @@ end
 CanTango.configure do |config|
   config.cache_engine.set :off
   config.permit_engine.set :on
+  config.ability.mode = :no_cache
 end
 
 class Context

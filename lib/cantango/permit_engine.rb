@@ -15,10 +15,10 @@ module CanTango
 
       # push result of each permit type execution into main ability rules array
       permits.each_pair do |type, permits|
-        rules << executor(type, permits).execute!
+        permit_rules = executor(type, permits).execute!
+        rules << permit_rules if permit_rules
       end
-      rules.flatten
-    end
+   end
 
     def executor type, permits
       CanTango::Permits::Executor.new ability, type, permits

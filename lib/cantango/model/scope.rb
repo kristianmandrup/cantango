@@ -34,8 +34,9 @@ module CanTango::Model
       protected
 
       def check ability
+        puts ability.rules.inspect
         clazz.all.select do |obj|
-          actions.all? do |action|
+         actions.all? do |action|
             ability.send mode_action, action.to_sym, obj
           end
         end
