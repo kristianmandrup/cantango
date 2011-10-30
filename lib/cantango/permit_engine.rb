@@ -16,7 +16,7 @@ module CanTango
       # push result of each permit type execution into main ability rules array
       permits.each_pair do |type, permits|
         permit_rules = executor(type, permits).execute!
-        rules << permit_rules if permit_rules
+        rules << permit_rules if !permit_rules.blank?
       end
    end
 

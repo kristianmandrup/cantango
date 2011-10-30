@@ -10,6 +10,7 @@ end
 
 CanTango.configure do |config|
   config.clear!
+  config.ability.mode = :cache
 end
 # CanTango.debug!
 

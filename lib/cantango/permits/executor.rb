@@ -32,12 +32,13 @@ module CanTango
       end
 
       def execute!
-        return if cached_rules?
+        return cached_rules if cached_rules?
 
         clear_rules!
         permit_rules
 
         cache_rules!
+        rules
       end
 
       def permit_rules
