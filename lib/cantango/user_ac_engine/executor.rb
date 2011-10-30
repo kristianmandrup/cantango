@@ -2,22 +2,22 @@
 # which can be cached under some key and later reused
 #
 module CanTango
-  module Permits
+  class UserAcEngine < Engine
     class Executor
       include CanTango::Ability::CacheHelpers
-      include CanTango::Helpers::RoleMethods
 
-      attr_reader :ability, :permit_type, :permits
+      attr_reader :ability, :permits
 
       delegate :session, :user, :subject, :cached?, :to => :ability
 
-      def initialize ability, permit_type, permits
-        @ability      = ability
-        @permit_type  = permit_type
-        @permits      = permits
+      def initialize ability, permit_type, permissions
+        @ability        = ability
+        @permissions    = permissions
       end
 
-      alias_method :cache_key, :permit_type
+      def cache_key
+        :user_ac
+      end
 
       def rules
         @rules ||= []
@@ -51,15 +51,9 @@ module CanTango
       protected
 
       def key_method_names
-        case permit_type
-        when :role
-          [roles_list_meth]
-        when :role_group
-          [role_groups_list_meth]
-        else
-          []
-        end
+        [:permissions_hash]
       end
     end
   end
 end
+

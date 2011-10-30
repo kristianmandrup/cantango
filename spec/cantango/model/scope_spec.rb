@@ -87,6 +87,11 @@ describe CanTango::Model::Scope do
       specify { subject.send(:"#{meth_name}_by", context.current_user).should be_empty }
     end
 
+    (CanTango::Model::Scope.rest_actions - [:edit, :create]).each do |action|
+      meth_name = action.to_s.sub(/e$/, '') << "able"
+      specify { subject.send(:"not_#{meth_name}_by", context.current_user).should_not be_empty }
+    end
+
     [:edit, :create].each do |action|
       meth_name = action.to_s.sub(/e$/, '') << "able"
       specify { subject.send(:"#{meth_name}_by", context.current_user).should_not be_empty }
@@ -100,6 +105,10 @@ describe CanTango::Model::Scope do
       specify { subject.allowed_to(:delete).by_user(context.current_user).should be_empty }
 
       specify { subject.allowed_to(:delete, :manage).by_user(context.current_user).should be_empty }
+    end
+
+    describe '#not_allowed_to' do
+      specify { subject.not_allowed_to(:create).by_user(context.current_user).should be_empty }
     end
   end
 end

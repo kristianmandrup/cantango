@@ -20,7 +20,21 @@ module CanTango
         end
       end
 
+      def exclude *names
+        @excluded = names.flatten.select_labels
+      end
+
+      def excluded
+        @excluded ||= []
+      end
+
       def available_models
+       all_models - excluded.map {|m| m.to_s.camelize}
+      end
+
+      protected
+
+      def all_models
         CanTango.config.orms.inject([]) do |result, orm|
           result << adapter_for(orm).models.map(&:name)
           result
@@ -28,6 +42,8 @@ module CanTango
       end
 
       private
+
+
 
       def adapter_for orm
         "CanTango::Configuration::Models::#{orm.to_s.camlize}".constantize.new

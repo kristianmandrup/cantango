@@ -3,6 +3,8 @@ module CanTango
     class Cache
       autoload_modules :BaseCache, :SessionCache, :Reader, :Writer, :RulesCache, :Key
 
+      include CanTango::Helpers::RoleMethods
+
       attr_reader :rules_cached, :ability
       attr_writer :key_method_names, :cache_key
 
@@ -15,7 +17,7 @@ module CanTango
       end
 
       def key_method_names
-        @key_method_names ||= [:roles_list, :role_groups_list]
+        @key_method_names ||= [roles_list_meth, role_groups_list_meth]
       end
 
       def cache_key

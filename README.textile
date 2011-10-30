@@ -35,9 +35,10 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Oct 27, 2011
+h2. Update Oct 29, 2011
 
-Version *0.9.3* has been released.
+Please use version 0.8.9.5 of the gem for now. 
+Version 0.9.3.2 should also work and contains some of the latests feature additions:
 
 New features:
 

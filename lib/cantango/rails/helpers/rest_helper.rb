@@ -1,7 +1,7 @@
 module CanTango::Rails::Helpers::RestHelper
   CanTango.config.models.available_models.each do |model|
     class_eval %{
-      def delete_#{model}_path obj, options = {}
+      def delete_#{model.to_s.underscore}_path obj, options = {}
         #{model}_path obj, {:method => 'delete'}.merge(options)
       end
     }

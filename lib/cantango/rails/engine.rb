@@ -2,7 +2,6 @@ module CanTango
   # Include helpers in the given scope to AC and AV.
   # "Borrowed" from devise
   def self.include_helpers(scope)
-    
     # Seems like the order of initializers is important! ActiveRecord should go first!
     ActiveSupport.on_load(:active_record) do
       RailsAutoLoader.load_models! if CanTango.config.autoload.models?
@@ -15,11 +14,9 @@ module CanTango
     ActiveSupport.on_load(:action_view) do
       include scope::Rails::Helpers::ViewHelper
     end
-
   end
 
   class RailsEngine < ::Rails::Engine
- 
     initializer "cantango.helpers" do
       CanTango.include_helpers(CanTango)
 
