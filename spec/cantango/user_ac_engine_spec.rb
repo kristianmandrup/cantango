@@ -20,7 +20,6 @@ class Thingy
   end
 end
 
-
 describe CanTango::UserAcEngine do
   context 'User model has_many Permissions' do
     before do

@@ -10,11 +10,13 @@ module CanTango
       return if !valid?
       debug "User AC Engine executing..."
 
-      permissions.each do |permission|
-        ability.can permission.action.to_sym, permission.thing_type.constantize do |thing|
-          thing.nil? || permission.thing_id.nil? || permission.thing_id == thing.id
-        end
-      end
+      user_ac_rules = executor.execute!
+
+      rules << user_ac_rules if !user_ac_rules.blank?
+    end
+
+    def executor
+      CanTango::UserAcEngine::Executor.new ability, permissions
     end
 
     def valid?
@@ -29,11 +31,11 @@ module CanTango
     protected
 
     def permissions
-      candidate.respond_to?(:permissions) ? candidate.permissions : []
+      candidate.respond_to?(:all_permissions) ? candidate.all_permissions : []
     end
 
     def invalid
-      debug "No permissions for #{candidate} found!"
+      debug "No permissions for #{candidate} found for #all_permissions call"
       false
     end
   end

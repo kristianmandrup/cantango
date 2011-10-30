@@ -6,11 +6,11 @@ module CanTango
     class Executor
       include CanTango::Ability::CacheHelpers
 
-      attr_reader :ability, :permits
+      attr_reader :ability, :permissions
 
       delegate :session, :user, :subject, :cached?, :to => :ability
 
-      def initialize ability, permit_type, permissions
+      def initialize ability, permissions
         @ability        = ability
         @permissions    = permissions
       end
@@ -32,19 +32,20 @@ module CanTango
       end
 
       def execute!
-        return if cached_rules?
+        return cached_rules if cached_rules?
 
         clear_rules!
         permit_rules
 
         cache_rules!
+        rules
       end
 
       def permit_rules
-        # TODO: somehow type specific caching of result of permits!
-        permits.each do |permit|
-          CanTango.config.permits.was_executed(permit, ability) if CanTango.debug?
-          break if permit.execute == :break
+        permissions.each do |permission|
+          ability.can permission.action.to_sym, permission.thing_type.constantize do |thing|
+            thing.nil? || permission.thing_id.nil? || permission.thing_id == thing.id
+          end
         end
       end
 

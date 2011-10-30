@@ -28,7 +28,26 @@ class User
     @role || ''
   end
 
+  # This hash should be recalculated anytime the permissions collection changes
+  #
+
+  # after_update :recalculate_permissions_hash
+
+  def permissions_hash
+    @permissions_hash = permissions.hash
+  end
+
   def permissions
     @permissions ||= []
   end
+
+  # allows implementation specific to ORM, fx using #all on some datastores such as Mongoid etc.
+  alias_method :all_permissions, :permissions
+
+  protected
+
+  def recalculate_permissions_hash
+    @permissions_hash = nil if self.permissions_changed?
+  end
+
 end

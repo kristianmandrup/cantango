@@ -3,7 +3,7 @@ require 'yaml'
 module CanTango
   class PermissionEngine < Engine
     class YamlStore < Store
-      attr_reader :path
+      attr_reader :path, :last_load_time
 
       # for a YamlStore, the name is the name of the yml file
       # options: extension, path
@@ -14,16 +14,22 @@ module CanTango
 
       def load!
         loader.load!
+        @last_load_time = Time.now
       end
 
       def load_from_hash hash
         loader.load_from_hash hash
       end
 
-      # @stanislaw: don't like this, because what if loader#load! will be called
-      # twice during object's (YamlStore.new) life time!
+      # return cached permissions if file has not changed since last load
+      # otherwise load permissions again to reflect changes!
       def permissions
-        @permissions ||= loader.permissions
+        return @permissions if last_modify_time <= last_load_time
+        @permissions = loader.permissions
+      end
+
+      def last_modify_time
+        File.mtime(file_path)
       end
 
       CanTango.config.permission_engine.types.each do |type|
