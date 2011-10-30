@@ -42,6 +42,15 @@ module CanTango
       adapters.use :compiler
     end
 
+    def enable_helpers *names
+      names = names.to_symbols
+      enable_rest_helper if names.include? :rest
+    end
+
+    def enable_rest_helper
+      ApplicationController.send :include, CanTango::Rails::Helpers::RestHelper
+    end
+
     def clear!
       CanTango::Configuration.components.each do |c|
         comp = send(c)
