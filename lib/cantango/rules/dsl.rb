@@ -16,7 +16,7 @@ module CanTango
       end
 
       # creates a scope that enforces either using the user or user_account for determining relationship matches on the models
-      def scope name, &block
+      def tango_scope name, &block
         yield CanTango::Rules::Scope.new name, self, &block
       end
     end
