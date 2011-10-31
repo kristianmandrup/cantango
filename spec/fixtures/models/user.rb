@@ -49,5 +49,4 @@ class User
   def recalculate_permissions_hash
     @permissions_hash = nil if self.permissions_changed?
   end
-
 end

@@ -1,10 +1,7 @@
-require 'singleton'
-
 module CanTango
   class Configuration
     class Engines
       class Cache < Engine
-        include Singleton
 
         def compile state
           raise "Must be set to :on or :off" if ![:on, :off].include? state

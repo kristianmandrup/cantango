@@ -4,9 +4,6 @@ module CanTango
   class Configuration
     class Engines
       class Permission < Engine
-        include Singleton
-        include CanTango::Configuration::Modes
-
         def modes
           @modes ||= [:cache]
         end

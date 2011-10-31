@@ -1,12 +1,7 @@
-require 'singleton'
-
 module CanTango
   class Configuration
     class Engines
       class Permit < Engine
-        include Singleton
-        include CanTango::Configuration::Modes
-
         def on?
           @state ||= :on
           @state == :on
