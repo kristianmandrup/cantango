@@ -21,7 +21,6 @@ module CanTango
       def save! permissions
         raise NotImplementedError
       end
-
     end
   end
 end

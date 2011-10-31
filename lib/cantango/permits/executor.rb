@@ -5,7 +5,6 @@ module CanTango
   module Permits
     class Executor
       include CanTango::Ability::CacheHelpers
-      include CanTango::Helpers::RoleMethods
 
       attr_reader :ability, :permit_type, :permits
 

@@ -4,17 +4,6 @@ module CanTango
     autoload_modules :Factory, :Finder, :Loaders, :Util, :RoleMatcher
 
     include CanTango::Ability::CacheHelpers
-    include CanTango::Helpers::RoleMethods
-
-    # delegate :rules, :to => :ability
-
-    def rules
-      @rules ||= []
-    end
-
-    def clear_rules!
-      @rules ||= []
-    end
 
     def initialize ability
       super
@@ -30,6 +19,14 @@ module CanTango
 
       cache_rules!
       rules
+    end
+
+    def rules
+      @rules ||= []
+    end
+
+    def clear_rules!
+      @rules ||= []
     end
 
     def permit_rules

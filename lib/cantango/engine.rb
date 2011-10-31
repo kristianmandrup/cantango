@@ -4,12 +4,14 @@ module CanTango
 
     attr_reader :ability
 
+    delegate :session, :user, :subject, :candidate, :cached?, :to => :ability
+
     def initialize ability
       @ability = ability
     end
 
     def execute!
-      # raise NotImplementedError
+      raise NotImplementedError
     end
 
     def engine_name
@@ -23,31 +25,15 @@ module CanTango
     end
 
     def valid_cache_mode?
-      modes.include?(:cache) && cache_mode?
+      modes.include?(:cache) && cached?
     end
 
     def valid_no_cache_mode?
-      modes.include?(:no_cache) && !cache_mode?
+      modes.include?(:no_cache) && !cached?
     end
 
     def modes
       CanTango.config.engine(engine_name.to_sym).modes
-    end
-
-    def cache_mode?
-      ability.cached?
-    end
-
-    def user
-      ability.user
-    end
-
-    def subject
-      ability.subject
-    end
-
-    def candidate
-      ability.candidate
     end
   end
 end

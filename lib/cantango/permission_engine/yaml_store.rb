@@ -24,8 +24,12 @@ module CanTango
       # return cached permissions if file has not changed since last load
       # otherwise load permissions again to reflect changes!
       def permissions
-        return @permissions if last_modify_time <= last_load_time
+        return @permissions if changed?
         @permissions = loader.permissions
+      end
+
+      def changed?
+        last_modify_time <= last_load_time
       end
 
       def last_modify_time

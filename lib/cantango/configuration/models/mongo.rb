@@ -1,13 +1,12 @@
 module CanTango
   class Configuration
     class Models
-      class Mongoid < Mongo
-        def models
-          ::Mongoid.database.collections
+      class Mongo
+        def available_models
+          models.map {|m| m.to_s.camelize }
         end
       end
     end
   end
 end
-
 
