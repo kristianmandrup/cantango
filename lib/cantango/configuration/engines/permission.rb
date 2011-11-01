@@ -31,6 +31,10 @@ module CanTango
 
         private
 
+        def valid_mode_names
+          [:cache, :no_cache]
+        end
+ 
         def current_config_path
           @config_path ||= File.join(::Rails.root.to_s, 'config') if rails?
           @config_path or raise "Define path to config files dir!\nCanTango.config.engine(:permission).config_path(dir_path)"
