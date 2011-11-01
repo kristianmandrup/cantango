@@ -9,11 +9,11 @@ end
 
 CanTango.configure do |config|
   config.clear!
-  config.ability.mode = :no_cache
+  config.ability.mode = :cache
 end
 
 describe CanTango::PermissionEngine do
-  context 'no-cache' do
+  context 'cache' do
     let (:ability) do
       CanTango::Ability.new @user
     end
@@ -33,5 +33,6 @@ describe CanTango::PermissionEngine do
     end
   end
 end
+
 
 

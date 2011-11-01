@@ -9,32 +9,37 @@ end
 
 CanTango.configure do |config|
   config.clear!
-  config.ability.mode = :no_cache
+  config.ability.mode :cache
 end
 
-class UserPermit < CanTango::UserPermit
-  def initialize ability
-    super
-  end
+class Thingy
+  attr_reader :name, :id
 
-  protected
-
-  def static_rules
-    can :read, Article
+  def initialize name
+    @name = name
+    @id = rand(1000)
   end
 end
 
-describe CanTango::PermitEngine do
-  context 'no-cache' do
+describe CanTango::UserAcEngine do
+  context 'mode :cache' do
     before do
+      @thingy = Thingy.new 'a'
       @user = User.new 'kris'
+      @permission = Permission.new @user, :edit, @thingy
+      @user.permissions << @permission
+    end
+
+    describe 'Permission' do
+      subject { @permission }
+        its(:thing_id) { should be_a(Integer) }
     end
 
     describe 'UserAc engine' do
       let (:ability) do
         CanTango::Ability.new @user
       end
-      subject { CanTango::PermitEngine.new ability }
+      subject { CanTango::UserAcEngine.new ability }
 
       describe '#execute!' do
         before do

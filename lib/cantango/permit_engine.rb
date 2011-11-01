@@ -3,30 +3,10 @@ module CanTango
     autoload_modules :Builder, :Compatibility, :Executor
     autoload_modules :Factory, :Finder, :Loaders, :Util, :RoleMatcher
 
-    include CanTango::Ability::CacheHelpers
+    include CanTango::Ability::Executor
 
     def initialize ability
       super
-    end
-
-    def execute!
-      return if !valid?
-      debug "Permit Engine executing..."
-      return cached_rules if cached_rules?
-
-      clear_rules!
-      permit_rules
-
-      cache_rules!
-      rules
-    end
-
-    def rules
-      @rules ||= []
-    end
-
-    def clear_rules!
-      @rules ||= []
     end
 
     def permit_rules
@@ -39,10 +19,6 @@ module CanTango
 
     def executor type, permits
       CanTango::Permits::Executor.new ability, type, permits
-    end
-
-    def cache
-      @cache ||= CanTango::Ability::Cache.new self, :cache_key => cache_key, :key_method_names => key_method_names
     end
 
     def engine_name
@@ -66,6 +42,10 @@ module CanTango
     end
 
     protected
+
+    def start_execute
+      debug "Permit Engine executing..."
+    end
 
     def invalid
       debug "No permits found!"

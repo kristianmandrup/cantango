@@ -12,7 +12,37 @@ CanTango.configure do |config|
   config.ability.mode = :no_cache
 end
 
-describe CanTango::PermissionEngine do
+class MyExecutor
+  include CanTango::Ability::Executor
+
+  attr_reader :ability
+
+  def initialize ability
+    @ability = ability
+  end
+
+  def valid?
+    true
+  end
+
+  def cache_key
+    :my_exec
+  end
+
+  def permit_rules
+    ability.permit_rules
+  end
+end
+
+module CanTango
+  class Ability
+    def permit_rules
+      can :edit, Project
+    end
+  end
+end
+
+describe CanTango::Ability::Executor do
   context 'no-cache' do
     let (:ability) do
       CanTango::Ability.new @user
@@ -22,7 +52,7 @@ describe CanTango::PermissionEngine do
       @user = User.new 'kris'
     end
 
-    subject { CanTango::PermissionEngine.new ability }
+    subject { MyExecutor.new ability }
 
     describe '#execute!' do
       before do

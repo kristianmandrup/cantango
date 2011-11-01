@@ -2,7 +2,7 @@ require 'cantango/permit_engine/util'
 
 module CanTango
   class Ability
-    autoload_modules :Scope, :Cache
+    autoload_modules :Scope, :Cache, :Executor
     autoload_modules :MasqueradeHelpers, :PermitHelpers, :PermissionHelpers
     autoload_modules :UserHelpers, :RoleHelpers, :CacheHelpers, :EngineHelpers
 
