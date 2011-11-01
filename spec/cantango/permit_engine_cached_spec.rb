@@ -10,6 +10,21 @@ end
 CanTango.configure do |config|
   config.clear!
   config.ability.mode = :cache
+  config.engine(:permit) do |engine|
+    engine.mode = :cache
+  end
+end
+
+class UserPermit < CanTango::UserPermit
+  def initialize ability
+    super
+  end
+
+  protected
+
+  def static_rules
+    can :read, Article
+  end
 end
 
 describe CanTango::PermitEngine do
@@ -28,8 +43,13 @@ describe CanTango::PermitEngine do
         subject.execute!
       end
 
-      specify { subject.ability.send(:rules).should_not be_empty }
+      it 'engine should have rules' do
+        subject.send(:rules).should_not be_empty
+      end
+
+      it 'engine cache should have rules' do
+        subject.cache.empty?.should be_false
+      end
     end
   end
 end
-

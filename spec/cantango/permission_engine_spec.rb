@@ -9,7 +9,16 @@ end
 
 CanTango.configure do |config|
   config.clear!
+
+  config.engines.all :off
+  config.engine(:permission).set :on
+
   config.ability.mode = :no_cache
+  config.engine(:permission) do |engine|
+    engine.mode = :no_cache
+    engine.config_path(config_folder)
+  end
+  config.debug!
 end
 
 describe CanTango::PermissionEngine do
@@ -24,12 +33,21 @@ describe CanTango::PermissionEngine do
 
     subject { CanTango::PermissionEngine.new ability }
 
+    specify { CanTango.config.ability.modes.should include(:no_cache) }
+    specify { subject.cached?.should be_false }
+
     describe '#execute!' do
       before do
         subject.execute!
       end
 
-      specify { subject.ability.send(:rules).should_not be_empty }
+      it 'ability should have rules' do
+        subject.send(:rules).should_not be_empty
+      end
+
+      it 'cache should be empty' do
+          subject.cache.empty?.should be_true
+      end
     end
   end
 end

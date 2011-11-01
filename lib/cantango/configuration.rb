@@ -35,6 +35,10 @@ module CanTango
       }
     end
 
+    def debug!
+      debug.set :on
+    end
+
     # Turn on all engines and enable compile adapter 
     # i.e compilation of rules via sourcify
     def enable_defaults!

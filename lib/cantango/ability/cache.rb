@@ -16,6 +16,10 @@ module CanTango
         @key_method_names = options[:key_method_names]
       end
 
+      def empty?
+        cached_rules.blank?
+      end
+
       def key_method_names
         @key_method_names ||= [roles_list_meth, role_groups_list_meth]
       end

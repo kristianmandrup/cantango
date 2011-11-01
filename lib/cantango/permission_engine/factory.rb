@@ -1,6 +1,8 @@
 module CanTango
   class PermissionEngine < Engine
     class Factory
+      include CanTango::Helpers::Debug
+
       attr_accessor :ability
 
       # creates the factory for the ability
@@ -11,6 +13,7 @@ module CanTango
       end
 
       def build!
+        debug "building permissions"
         @evaluators ||= permission_types.inject([]) do |res, type|
           res << collector(type).build
           res

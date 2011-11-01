@@ -1,9 +1,12 @@
 module CanTango
   class PermissionEngine < Engine
     class Collector
+      include CanTango::Helpers::Debug
+
       attr_reader :ability, :permissions, :type
 
       def initialize ability, permissions, type
+        debug "Collecting #{type} permissions"
         @ability = ability
         @permissions = permissions
         @type = type

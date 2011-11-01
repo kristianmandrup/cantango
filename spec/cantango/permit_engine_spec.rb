@@ -10,6 +10,9 @@ end
 CanTango.configure do |config|
   config.clear!
   config.ability.mode = :no_cache
+  config.engine(:permit) do |engine|
+    engine.mode = :no_cache
+  end
 end
 
 class UserPermit < CanTango::UserPermit
@@ -30,7 +33,7 @@ describe CanTango::PermitEngine do
       @user = User.new 'kris'
     end
 
-    describe 'UserAc engine' do
+    describe 'Permit engine' do
       let (:ability) do
         CanTango::Ability.new @user
       end
@@ -41,9 +44,14 @@ describe CanTango::PermitEngine do
           subject.execute!
         end
 
-        specify { subject.ability.send(:rules).should_not be_empty }
+        it 'engine should have rules' do
+          subject.send(:rules).should_not be_empty
+        end
+
+        it 'engine cache should be empty' do
+          subject.cache.empty?.should be_true
+        end
       end
     end
   end
 end
-

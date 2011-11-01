@@ -29,6 +29,7 @@ module CanTango
       end
 
       def changed?
+        return true if !last_load_time
         last_modify_time <= last_load_time
       end
 

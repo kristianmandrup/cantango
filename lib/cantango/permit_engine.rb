@@ -4,6 +4,8 @@ module CanTango
     autoload_modules :Factory, :Finder, :Loaders, :Util, :RoleMatcher
 
     include CanTango::Ability::Executor
+    include CanTango::Ability::RoleHelpers
+    include CanTango::Ability::UserHelpers
 
     def initialize ability
       super
@@ -12,13 +14,13 @@ module CanTango
     def permit_rules
       # push result of each permit type execution into main ability rules array
       permits.each_pair do |type, permits|
-        permit_rules = executor(type, permits).execute!
-        rules << permit_rules if !permit_rules.blank?
+        perm_rules = executor(type, permits).execute!
+        rules << perm_rules if !perm_rules.blank?
       end
     end
 
     def executor type, permits
-      CanTango::Permits::Executor.new ability, type, permits
+      CanTango::Permits::Executor.new self, type, permits
     end
 
     def engine_name
@@ -53,7 +55,7 @@ module CanTango
     end
 
     def permit_factory
-      @permit_factory ||= CanTango::PermitEngine::Factory.new ability
+      @permit_factory ||= CanTango::PermitEngine::Factory.new self
     end
 
     def cache_key

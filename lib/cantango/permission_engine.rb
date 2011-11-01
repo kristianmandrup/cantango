@@ -4,39 +4,15 @@ module CanTango
     autoload_modules :Factory, :Loader, :Parser, :Permission
     autoload_modules :RulesParser, :Store, :YamlStore, :Statements, :Statement
 
-    include CanTango::Ability::CacheHelpers
-
-    delegate :session, :user, :subject, :cached?, :to => :ability
+    include CanTango::Ability::Executor
+    include CanTango::Ability::RoleHelpers
+    include CanTango::Ability::UserHelpers
 
     def initialize ability
       super
     end
 
-    def rules
-      @rules ||= []
-    end
-
-    def clear_rules!
-      @rules ||= []
-    end
-
-    def cache
-      @cache ||= CanTango::Ability::Cache.new self, :cache_key => cache_key, :key_method_names => []
-    end
-
-    def execute!
-      return cached_rules if !changed?
-
-      clear_rules!
-      permit_rules
-
-      cache_rules!
-      rules
-    end
-
     def permit_rules
-      return if !valid?
-      debug "Permission Engine executing..."
       permissions.each do |permission|
         permission.evaluate! user
       end
@@ -57,6 +33,10 @@ module CanTango
 
     protected
 
+    def start_execute
+      debug "Permission Engine executing..."
+    end
+
     def cache_key
       :permissions
     end
@@ -67,7 +47,7 @@ module CanTango
     end
 
     def permission_factory
-      @permission_factory ||= CanTango::PermissionEngine::Factory.new ability
+      @permission_factory ||= CanTango::PermissionEngine::Factory.new self
     end
 
     def changed?
