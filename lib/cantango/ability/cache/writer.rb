@@ -2,6 +2,8 @@ module CanTango
   class Ability
     class Cache
       class Writer
+        include CanTango::Helpers::Debug
+
         attr_reader :cache, :cache_key
 
         delegate :cache_key, :to => :cache
@@ -11,7 +13,7 @@ module CanTango
         end
 
         def save key, rules
-          puts "save: #{key}"
+          debug "writing #{rules.size} rules to cache: #{key}"
           cache.invalidate!
           cache.rules_cache.save cache.key, prepared_rules
           session[cache_key] = cache.key if session

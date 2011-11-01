@@ -3,6 +3,7 @@ module CanTango
     class Cache
       autoload_modules :BaseCache, :SessionCache, :Reader, :Writer, :RulesCache, :Key
 
+      include CanTango::Helpers::Debug
       include CanTango::Helpers::RoleMethods
 
       attr_reader :rules_cached, :ability
@@ -14,6 +15,7 @@ module CanTango
         @ability = ability
         @cache_key = options[:cache_key]
         @key_method_names = options[:key_method_names]
+        debug "Creating cache with key: #{cache_key.inspect} on #{key_method_names.inspect}"
       end
 
       def empty?

@@ -2,6 +2,8 @@ module CanTango
   class Ability
     class Cache
       class Reader
+        include CanTango::Helpers::Debug
+
         attr_reader :cache
 
         def initialize cache
@@ -9,6 +11,7 @@ module CanTango
         end
 
         def prepared_rules
+          debug "reading rules from cache: #{cache.key}"
           cache.compile_on? ? compiler.decompile!(loaded_rules) : loaded_rules
         end
 
