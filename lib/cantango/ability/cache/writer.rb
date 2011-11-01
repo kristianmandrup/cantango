@@ -13,8 +13,9 @@ module CanTango
         end
 
         def save key, rules
-          debug "writing #{rules.size} rules to cache: #{key}"
           cache.invalidate!
+          return if prepared_rules.blank?
+          debug "writing #{prepared_rules.size} rules to cache: #{key}"
           cache.rules_cache.save cache.key, prepared_rules
           session[cache_key] = cache.key if session
         end

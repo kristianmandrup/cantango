@@ -22,7 +22,7 @@ end
 describe CanTango::PermissionEngine do
   context 'cache' do
     let (:ability) do
-      CanTango::Ability.new @user
+      CanTango::CachedAbility.new @user
     end
 
     before do
@@ -34,7 +34,6 @@ describe CanTango::PermissionEngine do
     describe '#execute!' do
       before do
         subject.execute!
-        puts subject.inspect
       end
 
       it 'engine should have rules' do

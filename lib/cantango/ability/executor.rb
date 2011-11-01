@@ -9,12 +9,12 @@ module CanTango
       def execute!
         return if !valid?
         start_execute
-        return cached_rules if cached_rules?
+        return cached_rules if cached? && cached_rules?
 
         clear_rules!
         permit_rules
 
-        cache_rules!
+        cache_rules! if cached?
         end_execute
         rules
       end
@@ -50,6 +50,7 @@ module CanTango
       end
 
       def end_execute
+        debug "DONE"
       end
 
       def cache_key

@@ -23,6 +23,7 @@ module CanTango
     end
 
     def valid?
+      puts "valid_mode? #{valid_mode?} #{modes} #{cached?}"
       return false if !valid_mode?
       permissions.empty? ? invalid : true
     end
@@ -33,12 +34,14 @@ module CanTango
 
     protected
 
+    alias_method :cache_key, :engine_name
+
     def start_execute
       debug "Permission Engine executing..."
     end
 
-    def cache_key
-      :permissions
+    def end_execute
+      debug "Done Permission Engine"
     end
 
     def invalid

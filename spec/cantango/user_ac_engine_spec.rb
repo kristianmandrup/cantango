@@ -9,6 +9,13 @@ end
 
 CanTango.configure do |config|
   config.clear!
+  config.engines.all :off
+  config.engine(:user_ac).set :on
+  config.ability.mode = :no_cache
+  config.engine(:user_ac) do |engine|
+    engine.mode = :no_cache
+  end
+  config.debug!
 end
 
 class Thingy
@@ -45,7 +52,13 @@ describe CanTango::UserAcEngine do
           subject.execute!
         end
 
-        specify { subject.ability.send(:rules).should_not be_empty }
+        it 'engine should have rules' do
+          subject.send(:rules).should_not be_empty
+        end
+
+        it 'engine cache should be empty' do
+          subject.cache.empty?.should be_true
+        end
       end
     end
   end

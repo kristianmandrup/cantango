@@ -13,6 +13,7 @@ CanTango.configure do |config|
   config.engine(:permit) do |engine|
     engine.mode = :cache
   end
+  config.debug!
 end
 
 class UserPermit < CanTango::UserPermit
@@ -34,7 +35,7 @@ describe CanTango::PermitEngine do
     end
 
     let (:ability) do
-      CanTango::Ability.new @user
+      CanTango::CachedAbility.new @user
     end
     subject { CanTango::PermitEngine.new ability }
 

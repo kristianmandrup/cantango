@@ -13,6 +13,7 @@ CanTango.configure do |config|
   config.engine(:permit) do |engine|
     engine.mode = :no_cache
   end
+  config.debug!
 end
 
 class UserPermit < CanTango::UserPermit

@@ -1,22 +1,20 @@
 module CanTango
   class UserAcEngine < Engine
-    autoload_modules :Executor
+    include CanTango::Ability::Executor
+    include CanTango::Ability::RoleHelpers
+    include CanTango::Ability::UserHelpers
 
     def initialize ability
       super
     end
 
-    def execute!
-      return if !valid?
-      debug "User AC Engine executing..."
-
-      user_ac_rules = executor.execute!
-
-      rules << user_ac_rules if !user_ac_rules.blank?
-    end
-
-    def executor
-      CanTango::UserAcEngine::Executor.new ability, permissions
+    def permit_rules
+      permissions.each do |permission|
+        ability.can permission.action.to_sym, permission.thing_type.constantize do |thing|
+          thing.nil? || permission.thing_id.nil? || permission.thing_id == thing.id
+        end
+      end
+      rules << ability_rules if !ability_rules.blank?
     end
 
     def valid?
@@ -29,6 +27,24 @@ module CanTango
     end
 
     protected
+
+    def ability_rules
+      ability.send(:rules)
+    end
+
+    alias_method :cache_key, :engine_name
+
+    def key_method_names
+      [:permissions_hash]
+    end
+
+    def start_execute
+      debug "User AC Engine executing..."
+    end
+
+    def end_execute
+      debug "Done User AC Engine"
+    end
 
     def permissions
       candidate.respond_to?(:all_permissions) ? candidate.all_permissions : []

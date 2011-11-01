@@ -19,13 +19,17 @@ module CanTango
         end
 
         def value
-          raise "No key could be generated for #{user} and #{subject}" if hash_values.empty?
+          raise "No key could be generated for User:#{user.inspect} and Subject:#{subject} - key field: #{user_key_field}" if hash_values.empty?
           @value ||= hash_values.hash
         end
 
         def same? session
           raise "No session available" if !session
           session[:cache_key] && (value == session[:cache_key].value)
+        end
+
+        def to_s
+          "key hash: #{value}"
         end
 
         protected

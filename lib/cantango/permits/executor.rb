@@ -4,11 +4,9 @@
 module CanTango
   module Permits
     class Executor
-      include CanTango::Ability::CacheHelpers
+      include CanTango::Ability::Executor
 
       attr_reader :ability, :permit_type, :permits
-
-      delegate :session, :user, :subject, :cached?, :to => :ability
 
       def initialize ability, permit_type, permits
         @ability      = ability
@@ -18,26 +16,8 @@ module CanTango
 
       alias_method :cache_key, :permit_type
 
-      def rules
-        @rules ||= []
-      end
-
-      def clear_rules!
-        @rules ||= []
-      end
-
       def cache
         @cache ||= CanTango::Ability::Cache.new self, :cache_key => cache_key, :key_method_names => key_method_names
-      end
-
-      def execute!
-        return cached_rules if cached_rules?
-
-        clear_rules!
-        permit_rules
-
-        cache_rules!
-        rules
       end
 
       def permit_rules
@@ -49,6 +29,18 @@ module CanTango
       end
 
       protected
+
+      def valid?
+        true
+      end
+
+      def start_execute
+        debug "Execute #{permit_type} permits"
+      end
+
+      def end_execute
+        debug "Done #{permit_type} permits"
+      end
 
       def key_method_names
         case permit_type

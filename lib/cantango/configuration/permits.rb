@@ -103,7 +103,7 @@ module CanTango
       end
 
       def key_for subject
-        subject.kind_of?(CanTango::Ability) ? key_maker.create_for(subject) : key_maker.new(subject)
+        subject.respond_to?(:subject) ? key_maker.create_for(subject) : key_maker.new(subject)
       end
 
       def key_maker

@@ -45,8 +45,14 @@ module CanTango
 
     protected
 
+    alias_method :cache_key, :engine_name
+
     def start_execute
       debug "Permit Engine executing..."
+    end
+
+    def end_execute
+      debug "Done Permit Engine"
     end
 
     def invalid
@@ -56,10 +62,6 @@ module CanTango
 
     def permit_factory
       @permit_factory ||= CanTango::PermitEngine::Factory.new self
-    end
-
-    def cache_key
-      :permits
     end
 
     def key_method_names
