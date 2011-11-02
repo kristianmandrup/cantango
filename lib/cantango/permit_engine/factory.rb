@@ -22,8 +22,12 @@ module CanTango
         @permits ||= builders.inject({}) do |permits, builder|
           debug "++ Permit Builder: #{builder_class builder}"
           built_permits = permits_built_with(builder)
-          debug "== Permits built: #{built_permits.size}"
-          permits[builder] = built_permits if built_permits
+
+          if built_permits
+            debug "== Permits built: #{built_permits.size}"
+            permits[builder] = built_permits
+          end
+
           permits
         end
       end
