@@ -1,12 +1,11 @@
 module CanTango
   class Configuration
     class PermitRegistry
-      [:user, :account, :role, :role_group].each do |permit|
-        class_eval %{
-          def #{permit}
-            @#{permit} ||= HashRegistry.new
-          end
-        }
+      def get permit
+        raise ArgumentError, "Not an available permit" if !CanTango.config.permits.available_types.include? permit
+        inst_var_name = "@#{permit}"
+        instance_variable_set(inst_var_name, HashRegistry.new) if !instance_variable_get(inst_var_name)
+        instance_variable_get(inst_var_name)
       end
 
       def registered_for type, name = nil
@@ -18,7 +17,7 @@ module CanTango
       end
 
       def all
-        [user, account, role, role_group]
+        (CanTango.config.permits.available_types - [:special]).map{|p| send(p) if respond_to?(p)}
       end
 
       def show_all

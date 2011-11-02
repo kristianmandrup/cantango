@@ -12,6 +12,10 @@ module CanTango
       alias_method :enabled, :enabled_types
 
       def available_types
+        @available_types ||= default_types
+      end
+
+      def default_types
         [:user, :account, :role, :role_group, :special]
       end
 
