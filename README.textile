@@ -35,18 +35,17 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Oct 29, 2011
+h2. Update Nov 2, 2011
 
-Please use version 0.8.9.5 of the gem for now. 
-Version 0.9.3.2 should also work and contains some of the latests feature additions:
+Version 0.9.4 has been released with the following featuring and improvements:
 
-New features:
+* Redesign of Cache and Ability execution
+  * Caching at the individual engine level that can be switched (configured) on/off
+  * Individual caching for each type of Permit in the Permit engine
+  * Each engine return a set of rules which are merged into one rule set for that particular execution mode
+* Caching for the new User AC engine
 
-* Model AC filters and scopes
-* Engine _:user_ac_ (User Access Control)
-* Cache and No-Cache modes for Ability, run in succession and rule results merged
-
-The :user_ac engine is a port of the Permission system from the _Rails in Action_ book. 
+The :user_ac engine is a port of the Permission system from the _Rails in Action_ book.
 With this engine a user can have many permissions defined, where each such permission is a persisted Permission model instance that describes a 'can' action on a specific type of object.
 
 The new modal Ability model allows you to define rules that are run in Cache mode and others that can be run in no-cache mode. This enables you to circumvent the previos restriction that didn't allow you to use normal conditional ruby logic outside blocks if you enabled caching.
@@ -54,16 +53,18 @@ The new modal Ability model allows you to define rules that are run in Cache mod
 <pre>
 class UserPermit < CanTango::UserPermit
   def static_rules
-    ...
+    can :access, Article
   end
 
   module Cached
     def permit_rules
+      can :read, Project
     end
   end
 
   module NonCached
     def permit_rules
+      can :edit, Article
     end
   end
 end
