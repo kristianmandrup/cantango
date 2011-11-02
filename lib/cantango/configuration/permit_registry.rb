@@ -9,7 +9,7 @@ module CanTango
         }
       end
 
-      def registered_for type, name = nil        
+      def registered_for type, name = nil
         name ? registered_by(type)[name.to_s] : registered_by(type)
       end
 

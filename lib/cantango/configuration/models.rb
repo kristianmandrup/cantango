@@ -2,9 +2,14 @@ module CanTango
   class Configuration
     class Models
       autoload_modules :Generic, :ActiveRecord, :DataMapper, :MongoMapper, :Mongoid
+      autoload_modules :Actions
 
       include Singleton
       include ClassExt
+
+      def actions
+        @actions ||= HashRegistry.new
+      end
 
       def by_reg_exp reg_exp
         raise "Must be a Regular Expression like: /xyz/ was #{reg_exp.inspect}" if !reg_exp.kind_of? Regexp
@@ -42,8 +47,6 @@ module CanTango
       end
 
       private
-
-
 
       def adapter_for orm
         "CanTango::Configuration::Models::#{orm.to_s.camlize}".constantize.new
