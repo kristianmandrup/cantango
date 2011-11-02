@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.9.3.2"
+  s.version = "0.9.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-10-29}
+  s.date = %q{2011-11-02}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -41,7 +41,9 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/ability/cache/session_cache.rb",
     "lib/cantango/ability/cache/writer.rb",
     "lib/cantango/ability/cache_helpers.rb",
+    "lib/cantango/ability/cached_executor.rb",
     "lib/cantango/ability/engine_helpers.rb",
+    "lib/cantango/ability/executor.rb",
     "lib/cantango/ability/masquerade_helpers.rb",
     "lib/cantango/ability/permission_helpers.rb",
     "lib/cantango/ability/permit_helpers.rb",
@@ -89,6 +91,12 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/configuration/guest.rb",
     "lib/cantango/configuration/hash_registry.rb",
     "lib/cantango/configuration/models.rb",
+    "lib/cantango/configuration/models/active_record.rb",
+    "lib/cantango/configuration/models/data_mapper.rb",
+    "lib/cantango/configuration/models/generic.rb",
+    "lib/cantango/configuration/models/mongo.rb",
+    "lib/cantango/configuration/models/mongo_mapper.rb",
+    "lib/cantango/configuration/models/mongoid.rb",
     "lib/cantango/configuration/modes.rb",
     "lib/cantango/configuration/permit_registry.rb",
     "lib/cantango/configuration/permits.rb",
@@ -160,11 +168,15 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/permits/account_permit.rb",
     "lib/cantango/permits/account_permit/builder.rb",
     "lib/cantango/permits/account_permit/finder.rb",
+    "lib/cantango/permits/executor.rb",
     "lib/cantango/permits/license.rb",
     "lib/cantango/permits/license/loader.rb",
     "lib/cantango/permits/license/rules.rb",
     "lib/cantango/permits/macros.rb",
     "lib/cantango/permits/permit.rb",
+    "lib/cantango/permits/permit/class_methods.rb",
+    "lib/cantango/permits/permit/execute.rb",
+    "lib/cantango/permits/permit/license.rb",
     "lib/cantango/permits/role_group_permit.rb",
     "lib/cantango/permits/role_group_permit/builder.rb",
     "lib/cantango/permits/role_group_permit/finder.rb",
@@ -191,14 +203,17 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/rules.rb",
     "lib/cantango/rules/adaptor.rb",
     "lib/cantango/rules/adaptor/active_record.rb",
+    "lib/cantango/rules/adaptor/data_mapper.rb",
     "lib/cantango/rules/adaptor/generic.rb",
+    "lib/cantango/rules/adaptor/mongo.rb",
+    "lib/cantango/rules/adaptor/mongo_mapper.rb",
     "lib/cantango/rules/adaptor/mongoid.rb",
+    "lib/cantango/rules/adaptor/relational.rb",
     "lib/cantango/rules/dsl.rb",
     "lib/cantango/rules/rule_class.rb",
     "lib/cantango/rules/scope.rb",
     "lib/cantango/rules/user_relation.rb",
     "lib/cantango/user_ac_engine.rb",
-    "lib/cantango/user_ac_engine/executor.rb",
     "lib/cantango/users.rb",
     "lib/cantango/users/macros.rb",
     "lib/cantango/users/masquerade.rb",
@@ -299,6 +314,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/ability/cache/session_cache_spec.rb",
     "spec/cantango/ability/cache/writer_spec.rb",
     "spec/cantango/ability/cache_spec.rb",
+    "spec/cantango/ability/executor_spec.rb",
     "spec/cantango/ability_executor/cached_only_spec.rb",
     "spec/cantango/ability_executor_spec.rb",
     "spec/cantango/ability_filters_spec.rb",
@@ -365,6 +381,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/permission_engine/store_spec.rb",
     "spec/cantango/permission_engine/user_permission_store_spec.rb",
     "spec/cantango/permission_engine/yaml_store_spec.rb",
+    "spec/cantango/permission_engine_cached_spec.rb",
     "spec/cantango/permission_engine_spec.rb",
     "spec/cantango/permit_engine/account_permit_spec.rb",
     "spec/cantango/permit_engine/builder/role_group_permits_spec.rb",
@@ -378,10 +395,14 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/permit_engine/role_group_permit_spec.rb",
     "spec/cantango/permit_engine/role_permit_spec.rb",
     "spec/cantango/permit_engine/user_permit_spec.rb",
+    "spec/cantango/permit_engine_cached_spec.rb",
     "spec/cantango/permit_engine_spec.rb",
+    "spec/cantango/permits/executor_cached_spec.rb",
+    "spec/cantango/permits/executor_spec.rb",
     "spec/cantango/permits/macros_spec.rb",
     "spec/cantango/permits/permit_spec.rb",
     "spec/cantango/rules_spec.rb",
+    "spec/cantango/user_ac_engine_cached_spec.rb",
     "spec/cantango/user_ac_engine_spec.rb",
     "spec/cantango_spec.rb",
     "spec/devise-dummy/Rakefile",
