@@ -1,4 +1,27 @@
 module CanTango::Rails::Helpers::RestHelper
+  CanTango.config.models.actions.each_pair do |model, actions|
+    actions.actions_for :member do |member_action|
+      class_eval %{
+        def #{member_action}_#{model.to_s.underscore}_path obj, options = {}
+          return unless can_perform_action?(user_type, :#{member_action}, obj)
+          # use i18n translation on label
+          link_to t(".#{member_action}"), rest_obj_action(obj, :#{member_action}, options)
+        end
+      }
+    end
+
+    actions.actions_for :collection do |collection_action|
+      class_eval %{
+        def #{collection_action}_#{model.to_s.underscore}_path obj, options = {}
+          clazz = obj.kind_of?(Class) ? obj : obj.class
+          return unless can_perform_action?(user_type, :#{collection_action}, clazz)
+          # use i18n translation on label
+          link_to t(".#{collection_action}"), send(action_method clazz, :#{collection_action}, options)
+        end
+      }
+    end
+  end
+
   CanTango.config.models.available_models.each do |model|
     class_eval %{
       def delete_#{model.to_s.underscore}_path obj, options = {}
