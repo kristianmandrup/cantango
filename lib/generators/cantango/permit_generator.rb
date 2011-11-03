@@ -42,6 +42,7 @@ module Cantango
       end
 
       def permit_target name
+        name = name.to_s.underscore
         return "#{name}_permit.rb" if is_user?
         return "#{name}_account_permit.rb" if is_account?
 
