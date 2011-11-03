@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cantango}
-  s.version = "0.9.4"
+  s.version = "0.9.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Kristian Mandrup}, %q{Stanislaw Pankevich}]
-  s.date = %q{2011-11-02}
+  s.date = %q{2011-11-03}
   s.description = %q{Define your permission rules as role- or role group specific permits.
 Integrates well with multiple Devise user acounts.
 Includes rules caching.
@@ -91,6 +91,7 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/configuration/guest.rb",
     "lib/cantango/configuration/hash_registry.rb",
     "lib/cantango/configuration/models.rb",
+    "lib/cantango/configuration/models/actions.rb",
     "lib/cantango/configuration/models/active_record.rb",
     "lib/cantango/configuration/models/data_mapper.rb",
     "lib/cantango/configuration/models/generic.rb",
@@ -117,6 +118,7 @@ Store permissions in yaml file or key-value store}
     "lib/cantango/helpers/debug.rb",
     "lib/cantango/helpers/role_methods.rb",
     "lib/cantango/model.rb",
+    "lib/cantango/model/actions.rb",
     "lib/cantango/model/filter.rb",
     "lib/cantango/model/scope.rb",
     "lib/cantango/permission_engine.rb",
@@ -360,6 +362,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/configuration/user_spec.rb",
     "spec/cantango/configuration_spec.rb",
     "spec/cantango/license/save_license_spec.rb",
+    "spec/cantango/model/actions_spec.rb",
     "spec/cantango/model/filter_spec.rb",
     "spec/cantango/model/scope_spec.rb",
     "spec/cantango/models/items.rb",
@@ -397,6 +400,7 @@ Store permissions in yaml file or key-value store}
     "spec/cantango/permit_engine/user_permit_spec.rb",
     "spec/cantango/permit_engine_cached_spec.rb",
     "spec/cantango/permit_engine_spec.rb",
+    "spec/cantango/permits/custom_permit_spec.rb",
     "spec/cantango/permits/executor_cached_spec.rb",
     "spec/cantango/permits/executor_spec.rb",
     "spec/cantango/permits/macros_spec.rb",
