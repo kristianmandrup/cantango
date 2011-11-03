@@ -10,5 +10,15 @@ class <%= permit_name.to_s.camelize %>RoleGroupPermit < CanTango::RoleGroupPermi
     <%= rules_logic.strip %>
     <%= license_logic %>
   end
+
+  module Cached
+    def permit_rules
+    end
+  end
+
+  module NonCached
+    def permit_rules
+    end
+  end
 end
 
