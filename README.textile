@@ -35,15 +35,18 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Nov 2, 2011
+h2. Update Nov 3, 2011
 
-Version 0.9.4 has been released with the following featuring and improvements:
+Version 0.9.4.1 has been released with the following featuring and improvements:
 
 * Redesign of Cache and Ability execution
   * Caching at the individual engine level that can be switched (configured) on/off
   * Individual caching for each type of Permit in the Permit engine
   * Each engine return a set of rules which are merged into one rule set for that particular execution mode
 * Caching for the new User AC engine
+* Ability to register your own Permit base classes simply by subclassing CanTango::Permit!
+  * This is useful if you want to go beyond the built in types, see the @custom_permit_spec.rb@ for an example
+* Some bug fixes
 
 The :user_ac engine is a port of the Permission system from the _Rails in Action_ book.
 With this engine a user can have many permissions defined, where each such permission is a persisted Permission model instance that describes a 'can' action on a specific type of object.
