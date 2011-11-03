@@ -37,7 +37,7 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 h2. Update Nov 3, 2011
 
-Version 0.9.4.1 has been released with the following featuring and improvements:
+Version 0.9.4.1 has been released with the following features and improvements:
 
 * Redesign of Cache and Ability execution
   * Caching at the individual engine level that can be switched (configured) on/off
