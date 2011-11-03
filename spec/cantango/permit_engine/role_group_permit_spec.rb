@@ -34,10 +34,10 @@ describe CanTango::Permits::RoleGroupPermit do
   describe 'attributes' do
     it "should be the permit for the :admins group" do
       permit.role_group.should == :admins
-    end     
+    end
 
     it "should have an ability" do
       permit.ability.should be_a(CanTango::Ability)
-    end     
+    end
   end
 end

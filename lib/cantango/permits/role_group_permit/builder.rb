@@ -1,23 +1,22 @@
 module CanTango
   module Permits
     class RoleGroupPermit < CanTango::Permit
-
       class Builder < CanTango::PermitEngine::Builder::Base
-        #class NoAvailableRoleGroups < StandardError; end
-
+        include CanTango::Helpers::Debug
         # builds a list of Permits for each role group of the current ability user (or account)
         # @return [Array<RoleGroupPermit::Base>] the role group permits built for this ability
         def build
           matching_permits = matching_role_groups(roles).inject([]) do |permits, role_group|
-            puts "Building RoleGroupPermit for #{role_group}" if CanTango.debug?
+            debug "Building RoleGroupPermit for #{role_group}"
             (permits << create_permit(role_group)) if valid?(role_group)
             permits
           end.compact
 
           if matching_permits.empty?
-            puts "Not building any RoleGroupPermits since no role groups are roles that are members of a role group could be found for the permission candidate" if CanTango.debug?
+            debug "Not building any RoleGroupPermits since no role groups could be found that are relevant for the permission candidate"
             return []
           end
+          matching_permits
         end
 
         def name

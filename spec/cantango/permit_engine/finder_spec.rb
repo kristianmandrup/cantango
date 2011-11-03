@@ -1,6 +1,14 @@
 require 'spec_helper'
 require 'fixtures/models'
 
+class UserAccount
+  tango_account
+end
+
+class AdminAccount
+  tango_account
+end
+
 module AdminAccountPermits
   class EditorRolePermit < CanTango::RolePermit
   end
@@ -71,7 +79,6 @@ def setup
 end
 
 describe CanTango::Permits::RolePermit::Finder do
-    
   setup
 
   context "Account" do
@@ -90,7 +97,7 @@ describe CanTango::Permits::RolePermit::Finder do
         finder.permit_class.should == "EditorRolePermit"
       end
     end
-    
+
     describe '#get_permit' do
       it 'should return the AdminAccount::EditorRolePermit' do
         finder.get_permit.should == AdminAccountPermits::EditorRolePermit

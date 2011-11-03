@@ -32,12 +32,16 @@ module CanTango
 
         # TODO: User/Account cases should be handled somehow following is just interim measure
       def account_permit
-        return nil if !user_account.class.name =~ /Account/
+        return nil if !registered_account? user_account.class
         found = account_permits_by(type)[name]
-        debug_msg account_permit_msg(found)
+        debug account_permit_msg(found)
         found
       rescue
         nil
+      end
+
+      def registered_account? account
+        CanTango.config.user_accounts.registered_class? account
       end
 
       def account_permit_msg found
