@@ -13,7 +13,7 @@ module CanTango
       end
 
       def registered_by type
-        send(type).registered
+        get(type).registered
       end
 
       def all

@@ -65,18 +65,10 @@ module CanTango
     end
 
     def key_method_names
-      permits.keys.map {|type| key type }.compact
-    end
-
-    def key type
-      case type
-      when :role
-        roles_list_meth
-      when :role_group
-        role_groups_list_meth
-      else
-        nil
-      end
+      permits.keys.map do |permit|
+        permit_class = CanTango.config.permits.available_permits[permit]
+        permit_class.hash_key
+      end.compact
     end
   end
 end

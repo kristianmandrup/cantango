@@ -19,21 +19,24 @@ module CanTango
       delegate :cached?, :options, :subject, :user, :user_account, :to => :ability
 
       def self.inherited(subclass)
-        register subclass.name.split('::').last.sub(/Permit$/, '').underscore.to_sym
+        register subclass.name.split('::').last.sub(/Permit$/, '').underscore.to_sym, subclass
       end
 
-      def self.register permit
-        available_types << permit
-        available_types.uniq!
+      def self.register permit, subclass
+        available_permits[permit] = subclass
       end
 
-      def self.available_types
-        CanTango.config.permits.available_types
+      def self.available_permits
+        CanTango.config.permits.available_permits
       end
 
       # creates the permit
       def initialize ability
         @ability  = ability
+      end
+
+      def hash_key
+        nil
       end
 
       def permit_type

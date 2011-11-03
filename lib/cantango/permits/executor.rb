@@ -43,14 +43,8 @@ module CanTango
       end
 
       def key_method_names
-        case permit_type
-        when :role
-          [roles_list_meth]
-        when :role_group
-          [role_groups_list_meth]
-        else
-          []
-        end
+        permit_class = CanTango.config.permits.available_permits[permit_type]
+        permit_class.hash_key ? [permit_class.hash_key] : []
       end
     end
   end

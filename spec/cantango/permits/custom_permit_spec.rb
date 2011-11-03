@@ -63,8 +63,16 @@ class MembershipPermit < CanTango::Permit
 end
 
 describe 'Custom Permit registration - Membership' do
+  it 'should register :membership as available permit' do
+    CanTango.config.permits.available_permits[:membership].should == MembershipPermit
+  end
+
   it 'should register :membership as available permit type' do
     CanTango.config.permits.available_types.should include(:membership)
+  end
+
+  it 'should register MmembershipPermit as available permit class' do
+    CanTango.config.permits.available_classes.should include(MembershipPermit)
   end
 end
 

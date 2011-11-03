@@ -2,6 +2,7 @@ module CanTango
   class Configuration
     class Permits < PermitRegistry
       include Singleton
+      include CanTango::Helpers::Debug
 
       attr_reader :accounts
       attr_writer :enabled_types
@@ -11,12 +12,25 @@ module CanTango
       end
       alias_method :enabled, :enabled_types
 
-      def available_types
-        @available_types ||= default_types
+      def available_permits
+        @available_permits ||= default_permits
       end
 
-      def default_types
-        [:user, :account, :role, :role_group, :special]
+      def available_types
+        available_permits.keys
+      end
+
+      def available_classes
+        available_permits.values.compact
+      end
+
+      def default_permits
+        { :user       => CanTango::Permits::UserPermit,
+          :account    => CanTango::Permits::AccountPermit,
+          :role       => CanTango::Permits::RolePermit,
+          :role_group => CanTango::Permits::RoleGroupPermit,
+          :special    => nil
+        }
       end
 
       def disable_types *types
@@ -65,9 +79,10 @@ module CanTango
 
       def register_permit_class(permit_name, permit_clazz, permit_type, account_name)
         registry = account_name ? self.send(account_name.to_sym) : self
-        puts "Registering #{permit_type} permit: #{permit_name} of class #{permit_clazz}" if CanTango.debug?
-        registry.send(permit_type)[permit_name] = permit_clazz
-        puts registry.send(permit_type).inspect if CanTango.debug?
+        debug "Registering #{permit_type} permit: #{permit_name} of class #{permit_clazz}"
+
+        registry.get(permit_type)[permit_name] = permit_clazz
+        debug registry.get(permit_type).inspect
       end
 
       def allowed candidate, actions, subjects, *extra_args
