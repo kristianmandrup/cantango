@@ -67,7 +67,7 @@ module CanTango
     def key_method_names
       permits.keys.map do |permit|
         permit_class = CanTango.config.permits.available_permits[permit]
-        permit_class.hash_key
+        permit_class.hash_key if permit_class && permit_class.respond_to?(:hash_key)
       end.compact
     end
   end

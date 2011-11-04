@@ -44,7 +44,8 @@ module CanTango
 
       def key_method_names
         permit_class = CanTango.config.permits.available_permits[permit_type]
-        permit_class.hash_key ? [permit_class.hash_key] : []
+        key = permit_class.hash_key if permit_class && permit_class.respond_to?(:hash_key)
+        key ? [key] : []
       end
     end
   end

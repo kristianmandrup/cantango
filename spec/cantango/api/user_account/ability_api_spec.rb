@@ -29,7 +29,7 @@ describe CanTango::Api::UserAccount::Ability do
     specify { subject.user_account_ability(subject.current_admin_account).should be_a CanTango::Ability }
   end
 
-  describe 'current_ability' do
+  describe 'current_account_ability' do
     specify { subject.current_account_ability(:user).should be_a CanTango::Ability }
     specify { subject.current_account_ability(:admin).should be_a CanTango::Ability }
   end

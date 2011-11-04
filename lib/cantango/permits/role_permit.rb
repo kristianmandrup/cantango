@@ -49,13 +49,14 @@ module CanTango
         in_role? subject
       end
 
-      def hash_key
-        send roles_list_meth
+      def self.hash_key
+        roles_list_meth
       end
 
       protected
 
       include CanTango::Helpers::RoleMethods
+      extend CanTango::Helpers::RoleMethods
 
       def in_role? subject
         return subject.send(has_role_meth, role) if subject.respond_to? has_role_meth

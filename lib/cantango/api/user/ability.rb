@@ -3,10 +3,10 @@ module CanTango
     module User
       module Ability
         def user_ability user, options = {}
-          @current_ability ||= create_ability(user, ability_options.merge(options))
+          create_ability(user, ability_options.merge(options))
         end
 
-        def current_ability user_type = :user
+        def current_user_ability user_type = :user
           user_ability get_ability_user(user_type)
         end
 

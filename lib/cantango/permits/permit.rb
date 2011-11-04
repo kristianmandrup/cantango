@@ -35,7 +35,7 @@ module CanTango
         @ability  = ability
       end
 
-      def hash_key
+      def self.hash_key
         nil
       end
 

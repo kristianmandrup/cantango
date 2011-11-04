@@ -10,7 +10,7 @@ describe 'Scenario: users - :guest, :user, :admin' do
 
     it_should_behave_like "Guest role" do
       let(:current_guest ) { @guest }
-      let(:user) { current_ability(:guest) }
+      let(:user) { current_user_ability(:guest) }
     end
   end
 end

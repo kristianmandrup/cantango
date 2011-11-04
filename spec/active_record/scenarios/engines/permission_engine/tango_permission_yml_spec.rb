@@ -23,7 +23,7 @@ describe 'Cantango config: permissions.yml' do
   }
 
   let(:current_user) { @user }
-  let(:ability) { current_ability(:user) }
+  let(:ability) { current_user_ability(:user) }
   let(:own_comment) { Comment.create(:user_id => @user.id) }
   let(:specific_post) { Post.create(:body => "Nice!") }
 

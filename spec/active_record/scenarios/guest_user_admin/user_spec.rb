@@ -14,7 +14,7 @@ describe 'Scenario: users - :guest, :user, :admin' do
   
     it_should_behave_like "User role" do
       let(:current_user) { @user }
-      let(:user) { current_ability(:user) }
+      let(:user) { current_user_ability(:user) }
       let(:own_article) { Article.create!(:user_id => @user.id) }
       let(:own_post)    { Post.create(:user_id => @user.id) }
       let(:own_comment) { Comment.create(:user_id => @user.id) }

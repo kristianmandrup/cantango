@@ -2,11 +2,6 @@ module CanTango
   module Api
     module User
       module Session
-        # Example: generated from types of accounts! (see below)
-        # def admin_can?(*args)
-        #   current_ability(:admin).can?(*args)
-        # end
-
         def self.included(base)
           ::CanTango.config.users.registered.each do |user|
             base.class_eval %{

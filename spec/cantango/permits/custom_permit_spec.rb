@@ -27,6 +27,10 @@ class MembershipPermit < CanTango::Permit
     clazz.name.demodulize.gsub(/(.*)(MembershipPermit)/, '\1').underscore.to_sym
   end
 
+  def self.hash_key
+    :memberships
+  end
+
   def permit_name
     self.class.membership_name self.class
   end

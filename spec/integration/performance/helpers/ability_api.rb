@@ -8,14 +8,13 @@ module CanTango
       module Ability
         def user_ability user, options = {}
           stamper(:call_on_ability) { 
-            @current_ability ||= ::CanTango::Ability.new(user, ability_options.merge(options)) 
+            @user_ability ||= ::CanTango::Ability.new(user, ability_options.merge(options)) 
           }
-          @current_ability
+          @user_ability
         end
 
-        def current_ability user_type = :user
+        def current_user_ability user_type = :user
           user_ability get_ability_user(user_type)
-
         end
 
         protected

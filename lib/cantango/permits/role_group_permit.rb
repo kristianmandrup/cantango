@@ -50,13 +50,14 @@ module CanTango
         in_role_group? subject
       end
 
-      def hash_key
-        send role_groups_list_meth
+      def self.hash_key
+        role_groups_list_meth
       end
 
       protected
 
       include CanTango::Helpers::RoleMethods
+      extend CanTango::Helpers::RoleMethods
 
       def in_role_group? subject
         has_role_group?(subject) || role_groups_of(subject).include?(role) 
