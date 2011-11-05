@@ -51,6 +51,10 @@ module CanTango
         subject_user == permit_user
       end
 
+      def self.hash_key
+        user_type_name(self)
+      end
+
       protected
 
       def debug_invalid

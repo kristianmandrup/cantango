@@ -23,15 +23,18 @@ module CanTango
         end
 
         def load key
+          raise "no key" if key.nil?
           store.load! key
         end
 
         def save key, rules
-          store.save! key, rules
+          raise "no key" if key.nil?
+          store.save!(key, rules)
         end
 
         def invalidate! key
-          store.delete key
+          raise "no key" if key.nil?
+          store.delete(key)
         end
 
         def cache

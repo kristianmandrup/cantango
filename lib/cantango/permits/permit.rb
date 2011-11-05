@@ -35,10 +35,6 @@ module CanTango
         @ability  = ability
       end
 
-      def self.hash_key
-        nil
-      end
-
       def permit_type
         self.class.type
       end

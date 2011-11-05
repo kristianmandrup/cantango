@@ -50,6 +50,10 @@ module CanTango
         subject_name == account_name
       end
 
+      def self.hash_key
+        account_type_name(self)
+      end
+
       protected
 
       def debug_invalid

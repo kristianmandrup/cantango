@@ -14,6 +14,10 @@ module CanTango
           return nil if clazz.name == clazz.name.demodulize
           clazz.name.gsub(/::.*/,'').gsub(/(.*)Permits/, '\1').underscore.to_sym
         end
+
+        def hash_key
+          nil
+        end
       end
     end
   end
