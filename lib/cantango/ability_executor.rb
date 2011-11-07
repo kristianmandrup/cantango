@@ -5,7 +5,8 @@ module CanTango
       raise "Candidate must be something!" if !candidate
       @candidate, @options = [candidate, options]
       @rules = cached_rules + non_cached_rules
-      rules.flatten!.compact!
+      rules.flatten!
+      rules.compact!
     end
 
     def rules
