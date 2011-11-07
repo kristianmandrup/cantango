@@ -1,12 +1,15 @@
 module CanTango
   class AbilityExecutor < CanTango::Ability
-    attr_reader :rules
 
     def initialize candidate, options = {}
       raise "Candidate must be something!" if !candidate
       @candidate, @options = [candidate, options]
       @rules = cached_rules + non_cached_rules
-      @rules.flatten!.compact!
+      rules.flatten!.compact!
+    end
+
+    def rules
+      @rules ||= []
     end
 
     def cached_rules
