@@ -4,17 +4,21 @@ module CanTango
 
       autoload_modules :Builder, :Finder
 
-      def self.inherited(base_clazz)
-        CanTango.config.permits.register_permit_class account_type_name(base_clazz), base_clazz, type, account_name(base_clazz)
-      end
+      module ClassMethods
+        def inherited(base_clazz)
+          CanTango.config.permits.register_permit_class base_clazz
+        end
 
-      def self.type
-        :account
-      end
+        def type
+          :account
+        end
 
-      def self.account_type_name clazz
-        clazz.name.demodulize.gsub(/(.*)(AccountPermit)/, '\1').underscore.to_sym
+        def account_type_name clazz
+          clazz.name.demodulize.gsub(/(.*)(AccountPermit)/, '\1').underscore.to_sym
+        end
+        alias_method :account_type_name, :permit_name
       end
+      extend ClassMethods
 
       def permit_name
         self.class.account_type_name self.class

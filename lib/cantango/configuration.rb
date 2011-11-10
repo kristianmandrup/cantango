@@ -18,6 +18,18 @@ module CanTango
       @ability
     end
 
+    def hooks
+      @hooks ||= {}
+    end
+
+    def hook name
+      hooks[name.to_sym]
+    end
+
+    def register_hook name, procedure
+      hook(name) = procedure
+    end
+
     def self.components
       [
         :guest, :autoload, :user, :user_account, :models, :roles, :role_groups,
@@ -71,6 +83,13 @@ module CanTango
       }
     end
 
+    def include_models *names
+      names = names.select_symbols
+      if names.include? :use_default_guest_user
+        require 'cantango/users/guest'
+      end
+    end
+
     # allow either block or direct access
     # engine(:permission) do |permission|
     # engine(:permission).config_path
@@ -85,6 +104,11 @@ module CanTango
 
     def localhost_list
       @localhost_list ||= ['localhost', '0.0.0.0', '127.0.0.1']
+    end
+
+    def add_local_hosts *hosts
+      @localhost_list << hosts.flatten
+      @localhost_list.flatten!
     end
 
     protected

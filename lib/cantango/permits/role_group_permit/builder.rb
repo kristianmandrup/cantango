@@ -34,6 +34,10 @@ module CanTango
 
         private
 
+        def role_groups
+          ability.respond_to?(:role_groups) ? ability.role_groups : []
+        end
+
         def matching_role_groups roles
           role_groups | matching_role_groups_for(roles)
         end

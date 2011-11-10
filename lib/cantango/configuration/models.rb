@@ -34,7 +34,7 @@ module CanTango
       end
 
       def available_models
-       all_models - excluded.map {|m| m.to_s.camelize}
+        all_models - excluded.map {|m| m.to_s.camelize}
       end
 
       protected

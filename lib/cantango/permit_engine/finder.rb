@@ -6,7 +6,7 @@ module CanTango
       # This class is used to find the right permit, possible scoped for a specific user account
       attr_reader :user_account, :name
 
-      def initialize user_account, name
+      def initialize name, user_account = nil
         @user_account = user_account
         @name = name.to_s.underscore.to_sym
       end
@@ -81,6 +81,7 @@ module CanTango
       def account
         user_account.class.name.underscore
       end
+
       # this is used to namespace role permits for a specific type of user account
       # this allows role permits to be defined differently for each user account (and hence sub application) if need be
       # otherwise it will fall back to the generic role permit (the one which is not wrapped in a user account namespace)

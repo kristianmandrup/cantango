@@ -17,7 +17,7 @@ describe CanTango::Configuration::Categories do
   describe 'API' do
     before(:each) do
       categories = {:a => ['B', 'C'], 'x' => ['Y', 'Z'], 'v' => ['B', 'Z']}
-      
+
       subject.clean!
       subject.register categories
     end

@@ -16,6 +16,12 @@ module CanTango
     end
   end
 
+  # http://edgeguides.rubyonrails.org/configuring.html
+  # - before_configuration: This is run as soon as the application constant inherits from Rails::Application. The config calls are evaluated before this happens.
+  # - before_initialize: This is run directly before the initialization process of the application occurs with the :bootstrap_hook initializer near the beginning of the Rails initialization process.
+  # - to_prepare: Run after the initializers are ran for all Railties (including the application itself), but before eager loading and the middleware stack is built. More importantly, will run upon every request in development, but only once (during boot-up) in production and test.
+  # - before_eager_load: This is run directly before eager loading occurs, which is the default behaviour for the production environment and not for the development environment.
+  # - after_initialize: Run directly after the initialization of the application, but before the application initializers are run.
   class RailsEngine < ::Rails::Engine
     initializer "cantango.helpers" do
       CanTango.include_helpers(CanTango)
@@ -25,8 +31,14 @@ module CanTango
     end
 
     config.to_prepare do
+      CanTango.to_prepare
+
       # load all permits (development mode: EVERY request!)
       RailsAutoLoader.load_permits! if CanTango.config.autoload.permits?
+    end
+
+    config.after_initialize do
+      CanTango.after_initialize
     end
   end
 

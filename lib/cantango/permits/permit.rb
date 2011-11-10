@@ -22,12 +22,8 @@ module CanTango
         register subclass.name.split('::').last.sub(/Permit$/, '').underscore.to_sym, subclass
       end
 
-      def self.register permit, subclass
-        available_permits[permit] = subclass
-      end
-
-      def self.available_permits
-        CanTango.config.permits.available_permits
+      def permit_name
+        self.class.permit_name self.class
       end
 
       # creates the permit

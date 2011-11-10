@@ -8,6 +8,11 @@ module CanTango
           end
         end
 
+        def license name
+          raise ArgumentError, "Argument must be a single label" if !name.kind_of_label?
+          licenses name
+        end
+
         protected
 
         def try_license name

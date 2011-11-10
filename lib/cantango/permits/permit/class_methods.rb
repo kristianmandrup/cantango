@@ -16,7 +16,31 @@ module CanTango
         end
 
         def hash_key
-          nil
+          raise NotImplementedError
+        end
+
+        def find_permit
+          finder.get_permit
+        end
+
+        def finder
+          @finder ||= CanTango::PermitEngine::Finder.new permit_name(self), account_name(self)
+        end
+
+        def build_permit ability, name
+          builder(ability, finder).create_permit name
+        end
+
+        def builder ability, finder
+          @builder ||= CanTango::PermitEngine::Builder.new ability, finder
+        end
+
+        def register permit, subclass
+          available_permits[permit] = subclass
+        end
+
+        def available_permits
+          CanTango.config.permits.available_permits
         end
       end
     end

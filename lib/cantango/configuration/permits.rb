@@ -77,7 +77,11 @@ module CanTango
         accounts[method_name] ||= PermitRegistry.new
       end
 
-      def register_permit_class(permit_name, permit_clazz, permit_type, account_name)
+      def register permit_clazz, base_clazz, options = {}
+        permit_name = options[:permit_name] || base_clazz.permit_name(permit_clazz)
+        permit_type = options[:permit_type] || base_clazz.type
+        account_name = options[:account_name] || base_clazz.account_name(permit_clazz)
+
         registry = account_name ? self.send(account_name.to_sym) : self
         debug "Registering #{permit_type} permit: #{permit_name} of class #{permit_clazz}"
 

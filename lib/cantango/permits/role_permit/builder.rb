@@ -9,7 +9,7 @@ module CanTango
         def build
           if roles.empty?
             debug "Not building any RolePermit"
-            return [] if roles.empty?
+            return []
           end
           roles.inject([]) do |permits, role|
             debug "Building RolePermit for #{role}"
@@ -23,6 +23,10 @@ module CanTango
         end
 
         protected
+
+        def roles
+          ability.respond_to?(:roles) ? ability.roles : []
+        end
 
         def valid? role
           filter(role).valid?
