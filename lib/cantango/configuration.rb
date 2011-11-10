@@ -27,7 +27,7 @@ module CanTango
     end
 
     def register_hook name, procedure
-      hook(name) = procedure
+      hooks[name.to_sym] = procedure
     end
 
     def self.components

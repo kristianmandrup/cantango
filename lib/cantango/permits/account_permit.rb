@@ -13,7 +13,7 @@ module CanTango
           :account
         end
 
-        def account_type_name clazz
+        def permit_name clazz
           clazz.name.demodulize.gsub(/(.*)(AccountPermit)/, '\1').underscore.to_sym
         end
         alias_method :account_type_name, :permit_name
@@ -21,7 +21,7 @@ module CanTango
       extend ClassMethods
 
       def permit_name
-        self.class.account_type_name self.class
+        self.class.permit_name self.class
       end
       alias_method :account_type, :permit_name
 

@@ -54,7 +54,7 @@ describe CanTango::Permits::UserPermit do
 
   describe 'enable all Permits' do
     before do
-      CanTango.config.permits.enable_all!      
+      CanTango.config.permits.enable_all!
     end
 
     it "should be disabled" do

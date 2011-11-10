@@ -1,7 +1,8 @@
 module CanTango
   class PermitEngine < Engine
-    autoload_modules :Builder, :Compatibility, :Executor
-    autoload_modules :Factory, :Finder, :Loaders, :Util, :RoleMatcher
+    autoload_modules :PermitFactory,  :PermitFinder, :PermitBuilder
+    autoload_modules :PermitExecutor, :AbstractPermitExecutor, :SystemPermitExecutor
+    autoload_modules :Loaders, :Util, :RoleMatcher, :Compatibility
 
     include CanTango::Ability::Executor
     include CanTango::Ability::RoleHelpers
@@ -52,7 +53,7 @@ module CanTango
     end
 
     def end_execute
-      debug "Done Permit Engine"
+      debug "Done executing Permit Engine"
     end
 
     def invalid
@@ -61,7 +62,7 @@ module CanTango
     end
 
     def permit_factory
-      @permit_factory ||= CanTango::PermitEngine::Factory.new self
+      @permit_factory ||= CanTango::PermitEngine::PermitFactory.new self
     end
 
     def key_method_names
