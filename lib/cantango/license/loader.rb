@@ -1,4 +1,4 @@
-module CanTango::Permits
+module CanTango
   class License
     module Loader
       def load_rules name = nil

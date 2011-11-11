@@ -2,8 +2,8 @@
 # which can be cached under some key and later reused
 #
 module CanTango
-  module Permits
-    class Executor
+  class Ability
+    class PermitTypeExecutor
       include CanTango::Ability::Executor
 
       attr_reader :ability, :permit_type, :permits

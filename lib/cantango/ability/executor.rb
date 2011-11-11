@@ -2,19 +2,17 @@ module CanTango
   class Ability
     module Executor
       include CanTango::Helpers::Debug
-      include CanTango::Ability::CacheHelpers
 
       delegate :session, :user, :subject, :candidate, :cached?, :to => :ability
 
       def execute!
         return if !valid?
         start_execute
-        return cached_rules if cached? && cached_rules?
+        return if cached?
 
         clear_rules!
         permit_rules
 
-        cache_rules! if cached?
         end_execute
         rules
       end
@@ -31,16 +29,8 @@ module CanTango
         raise NotImplementedError
       end
 
-      def cache
-        @cache ||= CanTango::Ability::Cache.new self, :cache_key => cache_key, :key_method_names => key_method_names
-      end
-
-      def engine_name
-        :permit
-      end
-
-      def valid?
-        raise NotImplementedError
+      def cached?
+        false
       end
 
       protected
@@ -53,15 +43,9 @@ module CanTango
         debug "DONE"
       end
 
-      def cache_key
-        raise NotImplementedError
-      end
-
       def key_method_names
         []
       end
     end
   end
 end
-
-

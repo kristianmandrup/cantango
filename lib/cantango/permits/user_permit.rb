@@ -26,23 +26,6 @@ module CanTango
 
       attr_accessor :key, :match_value
 
-      # In a specific Role based Permit you can use 
-      #   def permit? user, options = {}
-      #     ... permission logic follows
-      #
-      # This will call the Permit::Base#permit? instance method (the method below)
-      # It will only return true if the user matches the role of the Permit class and the
-      #
-      # If these confitions are not met, it will return false and thus the outer permit 
-      # will not run the permission logic to follow
-      #
-      # Normally super for #permit? should not be called except for this case, 
-      # or if subclassing another Permit than Permit::Base
-      #
-      def execute!
-        super
-      end
-
       def valid_for? subject
         debug_invalid if !match?
         true

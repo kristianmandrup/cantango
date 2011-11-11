@@ -1,4 +1,4 @@
-module CanTango::Permits
+module CanTango
   class License
     module Rules
       def can(action, subject, conditions = nil, &block)

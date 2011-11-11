@@ -9,8 +9,8 @@ module CanTango
         @permit = permit
       end
 
-      def permit?
-        permit.permit? if permit
+      def execute!
+        permit.execute! if permit
       end
 
       def execute!
