@@ -22,7 +22,7 @@ module CanTango
         register subclass.name.split('::').last.sub(/Permit$/, '').underscore.to_sym, subclass
       end
 
-      def permit_name
+      def name
         self.class.permit_name self.class
       end
 

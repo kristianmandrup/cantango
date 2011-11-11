@@ -2,28 +2,22 @@ module CanTango
   module Permits
     class RoleGroupPermit < CanTango::Permit
 
-      autoload_modules :Builder, :Finder
+      autoload_modules :Builder
 
       module ClassMethods
         def inherited(base_clazz)
           CanTango.config.permits.register_permit_class base_clazz
         end
 
-        def type
-          :role_group
-        end
-
         def permit_name clazz
           clazz.name.demodulize.gsub(/(.*)(RoleGroupPermit)/, '\1').underscore.to_sym
         end
-        alias_method :role_group_name, :permit_name
       end
       extend ClassMethods
 
-      def permit_name
-        self.class.role_group_name self.class
+      def name
+        self.class.permit_name self.class
       end
-      alias_method :role_group, :permit_name
 
       # creates the permit
       def initialize ability

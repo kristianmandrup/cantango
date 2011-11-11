@@ -1,16 +1,12 @@
 module CanTango
   module Permits
-    class RolePermit < CanTango::Permit
+    class SpecialPermit < CanTango::Permit
 
       autoload_modules :Builder
 
       module ClassMethods
         def inherited(base_clazz)
           CanTango.config.permits.register_permit_class base_clazz
-        end
-
-        def type
-          :role
         end
 
         def permit_name clazz
@@ -20,10 +16,9 @@ module CanTango
       end
       extend ClassMethods
 
-      def permit_name
+      def name
         self.class.role_name self.class
       end
-      alias_method :role, :permit_name
 
       # creates the permit
       # @param [Permits::Ability] the ability
@@ -50,22 +45,11 @@ module CanTango
       end
 
       def valid_for? subject
-        in_role? subject
+        true
       end
 
       def self.hash_key
-        roles_list_meth
-      end
-
-      protected
-
-      include CanTango::Helpers::RoleMethods
-      extend CanTango::Helpers::RoleMethods
-
-      def in_role? subject
-        return subject.send(has_role_meth, role) if subject.respond_to? has_role_meth
-        return subject.send(roles_list_meth).include? role if subject.respond_to? roles_list_meth
-        false
+        nil
       end
     end
   end

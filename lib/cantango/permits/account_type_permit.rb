@@ -1,6 +1,6 @@
 module CanTango
   module Permits
-    class AccountPermit < CanTango::Permit
+    class AccountTypePermit < CanTango::Permit
 
       autoload_modules :Builder, :Finder
 
