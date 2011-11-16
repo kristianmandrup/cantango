@@ -2,12 +2,13 @@ h1. CanTango
 
 CanTango is an advanced Access Control (permissions) system for Rails 3. It:
 
-* extends "CanCan":http://github.com/ryanb/cancan and offers a more role oriented design
+* extends "CanCan":http://github.com/ryanb/cancan and offers a more granular Object Oriented design
 * integrates with _role_ and _authentication_ systems in a non-intrusive manner
 * can _cache_ ability rules between requests for increased performance
-* can _store_ abilites in a permission store, including a YAML file, for easy administration
-* works well with multiple user accounts and sub applications
-* supports multiple "Devise":https://github.com/plataformatec/devise users
+* allows for context specific "Permits":https://github.com/kristianmandrup/cantango/wiki/Permits with rules
+* supports multiple "Devise":https://github.com/plataformatec/devise users/accounts
+* can _store_ static ability rules in a permission store for easy administration
+* manage the permission store from a web UI using the "cantango_editor":https://github.com/stanislaw/cantango_editor, a mountable Rails engine
 
 h3. Will CanTango meet my Access Control (permission) requirements?
 
@@ -35,47 +36,11 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Nov 4, 2011
+h2. Update Nov 15, 2011
 
-Version 0.9.4.2 has been released with the following features and improvements:
+Version 0.9.4.4 has been released with a few bug fixes.
 
-* Redesign of Cache and Ability execution
-  * Caching at the individual engine level that can be switched (configured) on/off
-  * Individual caching for each type of Permit in the Permit engine
-  * Each engine return a set of rules which are merged into one rule set for that particular execution mode
-* Caching for the new User AC engine
-* Ability to register your own Permit base classes simply by subclassing CanTango::Permit!
-  * This is useful if you want to go beyond the built in types, see the @custom_permit_spec.rb@ for an example
-* Some bug fixes!
-
-The :user_ac engine is a port of the Permission system from the _Rails in Action_ book.
-With this engine a user can have many permissions defined, where each such permission is a persisted Permission model instance that describes a 'can' action on a specific type of object.
-
-The new modal Ability model allows you to define rules that are run in Cache mode and others that can be run in no-cache mode. This enables you to circumvent the previos restriction that didn't allow you to use normal conditional ruby logic outside blocks if you enabled caching.
-
-<pre>
-class UserPermit < CanTango::UserPermit
-  def static_rules
-    can :access, Article
-  end
-
-  module Cached
-    def permit_rules
-      can :read, Project
-    end
-  end
-
-  module NonCached
-    def permit_rules
-      can :edit, Article
-    end
-  end
-end
-</pre>
-
-Any rule method defined directly for the permit is run for any (or both) modes. To define rules specifically for cache or no-cache modes, you should place them in a nested module to signify this as shown in this example.
-
-You can configure modes with the new config object @CanTango.config.ability.modes@ and set it via @CanTango.config.ability.mode = :no_cache@ . The valid modes are: :cache, :no_cache, and :both. You can similarly configure which modes each engine should participate in, fx via @CanTango.config.permit_engine.mode = :cache@
+The "wiki":https://github.com/kristianmandrup/cantango/wiki has been rewritten and updated to reflect all latest design changes and feature additions.
 
 h2. Quickstart
 
@@ -95,7 +60,7 @@ Simply start with:
 
 * cantango:install
 
-To use the Permit generators please see the Generators wiki page ;)
+To use the Permit generators please see the "Generators":https://github.com/kristianmandrup/cantango/wiki/Generators page ;)
 
 h3. Rails 3 configuration
 
@@ -118,19 +83,17 @@ Abilities can be defined for the following conceptual entities:
 * Role groups
 * Users
 
-h3. Debugging Abilities and Permits
-
-See "Debugging permits"::https://github.com/kristianmandrup/cantango/wiki/Debugging-permits
+You can even create your own Permit types to suit your own needs! This feature will be further improved in the upcoming 1.0 release.
 
 h3. Design overview
 
 The default CanTango Ability pattern is simple.
 
-1. Return cached ability rules for candidate if available
+1. Return cached ability rules for candidate if available (and cache is on)
 2. Generate rules for candidate
-3. Cache rules for candidate
+3. Cache rules for candidate (if cache is on)
 
-A candidate is typically either a user or an account instance.
+An ability candidate is typically either a user or an account instance.
 
 Caching can be enabled or disabled. To generate the rules, one or more engines are executed.
 
@@ -139,7 +102,7 @@ CanTango comes with the following engines:
 * "Permit engine"::https://github.com/kristianmandrup/cantango/wiki/Permit-engine
 * "Permission engine":https://github.com/kristianmandrup/cantango/wiki/Permission-engine
 
-You can however freely plugin or unplug engines as you wish as described in "Pluggable engines":https://github.com/kristianmandrup/cantango/wiki/Pluggable-engines
+You can however freely plugin or unplug engines as you wish as described in "Engines":https://github.com/kristianmandrup/cantango/wiki/Engines
 
 h3. Dependencies, Adapters and Loading
 
