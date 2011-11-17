@@ -2,7 +2,7 @@
 # Should contain all common logic
 module CanTango
   class Permit
-    autoload_modules :Execute, :License, :ClassMethods
+    autoload_modules :Execute, :License, :ClassMethods, :Naming, :Macros
 
     include CanTango::Helpers::Debug
     include CanTango::Rules # also makes a Permit a subclass of CanCan::Ability

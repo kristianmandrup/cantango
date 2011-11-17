@@ -49,6 +49,14 @@ module CanTango
         @registered ||= default
       end
 
+      def registered? label
+        registered.keys.map(&:to_s).include? label.to_s
+      end
+
+      def registered_value? value
+        registered.values.include? value
+      end
+
       def default
         @default ||= Hashie::Mash.new
       end

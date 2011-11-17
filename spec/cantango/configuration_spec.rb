@@ -25,7 +25,22 @@ describe CanTango::Configuration do
     specify { subject.role_groups.excluded.should be_empty }
   end
 
-  describe "configure DSL" do
+  describe 'hooks' do
+    specify { subject.hooks.should be_empty }
+  end
+
+  describe 'hook' do
+    specify { subject.hook[:name].should be_nil }
+  end
+
+  describe 'register_hook' do
+    before do
+      subject.register_hook :name, Proc.new { 2 }
+    end
+    specify { subject.hook[:name].should == 2 }
+  end  
+
+  describe "engines DSL" do
     before(:all) {
       CanTango.configure do |config|
         CanTango.config.engines.each do |engine|
