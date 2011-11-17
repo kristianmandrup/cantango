@@ -29,7 +29,7 @@ module CanTango
 
       def register *list
         registered << list.select_kinds_of(*types)
-        registered.flat_uniq!
+        @registered.flat_uniq!
       end
 
       alias_method :<<, :register

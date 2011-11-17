@@ -7,7 +7,7 @@ module CanTango
     autoload_modules :Models, :Engines, :Ability
     autoload_modules :User, :Guest, :UserAccount
     autoload_modules :Roles, :RoleGroups, :Registry, :RoleRegistry, :HashRegistry, :PermitRegistry, :CandidateRegistry, :Factory
-    autoload_modules :SpecialPermits, :Autoload, :Adapters, :Permits, :Debug, :Modes
+    autoload_modules :SpecialPermits, :Autoload, :Adapters, :Permits, :Debug, :Modes, :Orms, :Localhosts, :Hooks
     autoload_modules :Users, :UserAccounts
 
     include Singleton
@@ -18,22 +18,11 @@ module CanTango
       @ability
     end
 
-    def hooks
-      @hooks ||= {}
-    end
-
-    def hook name
-      hooks[name.to_sym]
-    end
-
-    def register_hook name, procedure
-      hooks[name.to_sym] = procedure
-    end
-
     def self.components
       [
         :guest, :autoload, :user, :user_account, :models, :roles, :role_groups,
-        :engines, :users, :user_accounts, :categories, :adapters, :permits, :debug
+        :engines, :users, :user_accounts, :categories, :adapters, :permits, :debug,
+        :localhosts, :orms, :hooks
       ]
     end
 
@@ -99,26 +88,6 @@ module CanTango
       engine = find_engine(name)
       yield engine if block
       engine
-    end
-
-    attr_writer :localhost_list, :orms
-
-    def orms
-      @orms ||= []
-    end
-
-    def add_orms *orms
-      @orms << orms
-      @orms.flatten!
-    end
-
-    def localhost_list
-      @localhost_list ||= ['localhost', '0.0.0.0', '127.0.0.1']
-    end
-
-    def add_local_hosts *hosts
-      @localhost_list << hosts
-      @localhost_list.flatten!
     end
 
     protected

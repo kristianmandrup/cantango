@@ -40,8 +40,7 @@ module CanTango
       protected
 
       def all_models
-        return [] if CanTango.config.orms.blank?
-        CanTango.config.orms.inject([]) do |result, orm|
+        CanTango.config.orms.registered.inject([]) do |result, orm|
           result << adapter_for(orm).models.map(&:name)
           result
         end.flatten.compact

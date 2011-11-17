@@ -13,6 +13,14 @@ module CanTango
         [Hash]
       end
 
+      def value_methods
+        []
+      end
+
+      def value_types
+        []
+      end
+
       def clean!
         registered = Hashie::Mash.new
       end
@@ -27,7 +35,10 @@ module CanTango
 
       def << hash
         raise "Must be a hash" if !hash.is_a? Hash
-        registered.merge! hash
+        registered.merge!(hash) and return if value_methods.empty? && value_types.empty?
+        hash.each_pair do |key, value|
+          registered[key] = value if value_api.all?{|m| value.respond_to(m)} && value.any_kind_of?(value_types)
+        end
       end
 
       def [] label

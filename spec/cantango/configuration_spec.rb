@@ -16,36 +16,21 @@ end
 describe CanTango::Configuration do
   subject { CanTango.config }
 
-  describe 'clear!' do
-    before do
-      subject.roles.exclude :user
-      subject.role_groups.exclude :admins
-
-      subject.clear!
-    end
-
-    specify { subject.roles.excluded.should be_empty }
-    specify { subject.role_groups.excluded.should be_empty }
-  end
-
   describe 'ability' do
     specify { subject.ability.should be_a CanTango::Configuration::Ability }
   end
 
   describe 'hooks' do
-    specify { subject.hooks.should be_empty }
-  end
+    specify { subject.hooks.registered.should be_empty }
 
-  describe 'hook' do
-    specify { subject.hook(:name).should be_nil }
-  end
-
-  describe 'register_hook' do
-    before do
-      subject.register_hook :name, Proc.new { 2 }
+    describe 'register hooks' do
+      before do
+        subject.hooks.register :nime => Proc.new { 2 }
+      end
+      specify { subject.hooks.registered.should_not be_empty }
+      specify { subject.hooks[:nime].should be_a Proc }
     end
-    specify { subject.hook(:name).should be_a Proc }
-  end  
+  end
 
   describe 'include_models :default_guest_user' do
     before do
@@ -69,25 +54,25 @@ describe CanTango::Configuration do
     specify { ::ApplicationController.instance_methods.should include(:link_to_new) }
   end
 
-  describe 'localhost_list' do
-    specify { subject.localhost_list.should include('localhost') }
+  describe 'localhosts' do
+    specify { subject.localhosts.registered.should include('localhost') }
   end
 
   describe 'orms' do
-    specify { subject.orms.should be_empty }
+    specify { subject.orms.registered.should be_empty }
 
-    describe 'set orms' do    
+    describe 'register' do    
       before do
-        subject.orms = [:mongoid]
+        subject.orms.register :mongoid
       end
-      specify { subject.orms.should include(:mongoid) }
+      specify { subject.orms.registered.should include(:mongoid) }
     end
 
-    describe 'add orms' do    
+    describe '<<' do    
       before do
-        subject.add_orms :mongoid, :mongo_mapper
+        subject.orms << :mongo_mapper
       end
-      specify { subject.orms.should include(:mongo_mapper) }
+      specify { subject.orms.registered.should include(:mongo_mapper) }
     end
   end
   
@@ -112,5 +97,17 @@ describe CanTango::Configuration do
         specify { engine.off?.should be_true}
       end
     end
+  end
+  
+  describe 'clear!' do
+    before do
+      subject.roles.exclude :user
+      subject.role_groups.exclude :admins
+
+      subject.clear!
+    end
+
+    specify { subject.roles.excluded.should be_empty }
+    specify { subject.role_groups.excluded.should be_empty }
   end
 end
