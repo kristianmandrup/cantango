@@ -2,8 +2,8 @@ require 'singleton'
 
 module CanTango
   class Configuration
-    class Engines
-      autoload_modules :Permission, :Permit, :UserAc, :Cache, :Store, :Engine
+    class Engines < HashRegistry
+      autoload_modules :Permission, :Permit, :PermitStore, :Cache, :Store, :Engine
 
       include Singleton
       include Enumerable
@@ -17,18 +17,7 @@ module CanTango
         end
       end
 
-      # engine factories ?
-      # :cache => Cantango::Ability::Cache
-      def registered
-        @registered ||= default_register
-      end
-
-      def unregister name
-        @registered = {} if name == :all
-        @registered.delete(name)
-      end
-
-      def default_register
+      def default
         {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine, :permit_store => CanTango::PermitStoreEngine }
       end
 
@@ -60,7 +49,7 @@ module CanTango
       end
 
       def self.default_available
-        [:cache, :permission , :permit, :user_ac]
+        [:cache, :permission , :permit, :permit_store]
       end
 
       def default_available
@@ -68,7 +57,7 @@ module CanTango
       end
 
       def available
-        (registered.keys + default_available).uniq
+        (registered_names + default_available).uniq
       end
 
       def available? name

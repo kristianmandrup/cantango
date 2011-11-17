@@ -25,6 +25,10 @@ describe CanTango::Configuration do
     specify { subject.role_groups.excluded.should be_empty }
   end
 
+  describe 'ability' do
+    specify { subject.ability.should be_a CanTango::Configuration::Ability }
+  end
+
   describe 'hooks' do
     specify { subject.hooks.should be_empty }
   end
@@ -40,6 +44,13 @@ describe CanTango::Configuration do
     specify { subject.hook(:name).should be_a Proc }
   end  
 
+  describe 'include_models :default_guest_user' do
+    before do
+      subject.include_models :default_guest_user
+    end
+    specify { defined?(::Guest).should be_true }
+  end
+
   describe "engines DSL" do
     before(:all) {
       CanTango.configure do |config|
@@ -49,9 +60,17 @@ describe CanTango::Configuration do
      end
     }
 
-    CanTango.config.engines.each do |engine|
-      specify { engine.on?.should be_false}
-      specify { engine.off?.should be_true}
+    describe 'engine(name)' do
+      CanTango.config.engines.registered_names.each do |name|
+        specify { subject.engine(name).off?.should be_true}
+      end
+    end
+
+    describe 'each' do
+      CanTango.config.engines.each do |engine|
+        specify { engine.on?.should be_false}
+        specify { engine.off?.should be_true}
+      end
     end
   end
 end

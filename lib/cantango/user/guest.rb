@@ -1,7 +1,9 @@
+require 'active_model'
+
 class Guest
-  extend  ActiveModel::Naming
-  include ActiveModel::Conversion
-  include ActiveModel::Validations
+  extend  ::ActiveModel::Naming
+  include ::ActiveModel::Conversion
+  include ::ActiveModel::Validations
 
   def initialize
     # basic config of guest user!

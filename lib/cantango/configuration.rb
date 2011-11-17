@@ -85,8 +85,8 @@ module CanTango
 
     def include_models *names
       names = names.select_symbols
-      if names.include? :use_default_guest_user
-        require 'cantango/users/guest'
+      if names.include? :default_guest_user
+        require 'cantango/user/guest'
       end
     end
 

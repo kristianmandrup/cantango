@@ -45,16 +45,30 @@ module CanTango
         registered.merge! hash
       end
 
+      def unregister name
+        @registered = {} if name == :all
+        @registered.delete(name)
+      end
+
       def registered
         @registered ||= default
       end
 
-      def registered? label
-        registered.keys.map(&:to_s).include? label.to_s
+      def registered_names
+        registered.keys
       end
 
+      def registered_values
+        registered.values
+      end
+
+      def registered? label
+        registered_names.map(&:to_s).include? label.to_s
+      end
+      alias_method :registered_name, :registered?
+
       def registered_value? value
-        registered.values.include? value
+        registered_values.include? value
       end
 
       def default
