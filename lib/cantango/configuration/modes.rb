@@ -2,7 +2,7 @@ module CanTango
   class Configuration
     module Modes
       def modes
-        @modes ||= [:cache, :no_cache]
+        @modes ||= [:no_cache]
       end
 
       def mode= mode_name
@@ -14,7 +14,7 @@ module CanTango
       private
 
       def valid_mode_names
-        [:cache, :no_cache, :both]
+        [:cache, :no_cache]
       end
     end
   end

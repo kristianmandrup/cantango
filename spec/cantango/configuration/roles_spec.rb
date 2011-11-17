@@ -1,6 +1,5 @@
 require 'rspec'
 require 'cantango'
-
 require 'cantango/configuration/shared/role_registry_ex'
 
 describe CanTango::Configuration::Roles do
