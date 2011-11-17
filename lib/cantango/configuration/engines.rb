@@ -29,7 +29,7 @@ module CanTango
       end
 
       def default_register
-        {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine, :user_ac => CanTango::UserAcEngine }
+        {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine, :permit_store => CanTango::PermitStoreEngine }
       end
 
       # defines the order of execution of engine in ability

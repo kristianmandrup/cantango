@@ -11,9 +11,9 @@ class CanTango::CustomAbility < CanTango::Ability
 end
 
 describe CanTango::Configuration do
-  describe 'clear!' do
-    subject { CanTango.config }
+  subject { CanTango.config }
 
+  describe 'clear!' do
     before do
       subject.roles.exclude :user
       subject.role_groups.exclude :admins
@@ -30,14 +30,14 @@ describe CanTango::Configuration do
   end
 
   describe 'hook' do
-    specify { subject.hook[:name].should be_nil }
+    specify { subject.hook(:name).should be_nil }
   end
 
   describe 'register_hook' do
     before do
       subject.register_hook :name, Proc.new { 2 }
     end
-    specify { subject.hook[:name].should == 2 }
+    specify { subject.hook(:name).should be_a Proc }
   end  
 
   describe "engines DSL" do

@@ -1,5 +1,5 @@
 module CanTango
-  class UserAcEngine < Engine
+  class PermissionEngine < Engine
     include CanTango::Ability::Executor
     include CanTango::Ability::RoleHelpers
     include CanTango::Ability::UserHelpers
