@@ -10,6 +10,9 @@ class CanTango::CustomAbility < CanTango::Ability
   end
 end
 
+class ApplicationController
+end
+
 describe CanTango::Configuration do
   subject { CanTango.config }
 
@@ -51,6 +54,43 @@ describe CanTango::Configuration do
     specify { defined?(::Guest).should be_true }
   end
 
+  describe 'enable defaults' do
+    before do
+      subject.enable_defaults!
+    end
+    specify { subject.engine(:permit).on?.should be_true }
+    specify { subject.engine(:permission).on?.should be_false }
+  end
+
+  describe 'enable_helpers' do
+    before do
+      subject.enable_helpers :rest
+    end
+    specify { ::ApplicationController.instance_methods.should include(:link_to_new) }
+  end
+
+  describe 'localhost_list' do
+    specify { subject.localhost_list.should include('localhost') }
+  end
+
+  describe 'orms' do
+    specify { subject.orms.should be_empty }
+
+    describe 'set orms' do    
+      before do
+        subject.orms = [:mongoid]
+      end
+      specify { subject.orms.should include(:mongoid) }
+    end
+
+    describe 'add orms' do    
+      before do
+        subject.add_orms :mongoid, :mongo_mapper
+      end
+      specify { subject.orms.should include(:mongo_mapper) }
+    end
+  end
+  
   describe "engines DSL" do
     before(:all) {
       CanTango.configure do |config|

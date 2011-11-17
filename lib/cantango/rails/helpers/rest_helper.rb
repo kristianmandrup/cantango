@@ -1,5 +1,5 @@
 module CanTango::Rails::Helpers::RestHelper
-  CanTango.config.models.actions.each_pair do |model, actions|
+  CanTango.config.models.actions.registered.each_pair do |model, actions|
     actions.actions_for :member do |member_action|
       class_eval %{
         def #{member_action}_#{model.to_s.underscore}_path obj, options = {}

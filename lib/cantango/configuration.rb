@@ -51,10 +51,11 @@ module CanTango
       debug.set :on
     end
 
-    # Turn on all engines and enable compile adapter 
+    # Turn on default engines and enable compile adapter 
     # i.e compilation of rules via sourcify
     def enable_defaults!
-      engines.all :on
+      engines.all :off
+      engine(:permit).set :on
       adapters.use :compiler
     end
 
@@ -64,7 +65,8 @@ module CanTango
     end
 
     def enable_rest_helper
-      ApplicationController.send :include, CanTango::Rails::Helpers::RestHelper
+      raise 'ApplicationController not defined' if !defined?(::ApplicationController)
+      ::ApplicationController.send :include, CanTango::Rails::Helpers::RestHelper
     end
 
     def clear!
@@ -99,15 +101,23 @@ module CanTango
       engine
     end
 
-    attr_accessor :orms
-    attr_writer :localhost_list
+    attr_writer :localhost_list, :orms
+
+    def orms
+      @orms ||= []
+    end
+
+    def add_orms *orms
+      @orms << orms
+      @orms.flatten!
+    end
 
     def localhost_list
       @localhost_list ||= ['localhost', '0.0.0.0', '127.0.0.1']
     end
 
     def add_local_hosts *hosts
-      @localhost_list << hosts.flatten
+      @localhost_list << hosts
       @localhost_list.flatten!
     end
 
