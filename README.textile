@@ -35,47 +35,13 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Nov 4, 2011
+h2. Update Nov 19, 2011
 
-Version 0.9.4.2 has been released with the following features and improvements:
+CanTango has now been split up into these logical components:
 
-* Redesign of Cache and Ability execution
-  * Caching at the individual engine level that can be switched (configured) on/off
-  * Individual caching for each type of Permit in the Permit engine
-  * Each engine return a set of rules which are merged into one rule set for that particular execution mode
-* Caching for the new User AC engine
-* Ability to register your own Permit base classes simply by subclassing CanTango::Permit!
-  * This is useful if you want to go beyond the built in types, see the @custom_permit_spec.rb@ for an example
-* Some bug fixes!
-
-The :user_ac engine is a port of the Permission system from the _Rails in Action_ book.
-With this engine a user can have many permissions defined, where each such permission is a persisted Permission model instance that describes a 'can' action on a specific type of object.
-
-The new modal Ability model allows you to define rules that are run in Cache mode and others that can be run in no-cache mode. This enables you to circumvent the previos restriction that didn't allow you to use normal conditional ruby logic outside blocks if you enabled caching.
-
-<pre>
-class UserPermit < CanTango::UserPermit
-  def static_rules
-    can :access, Article
-  end
-
-  module Cached
-    def permit_rules
-      can :read, Project
-    end
-  end
-
-  module NonCached
-    def permit_rules
-      can :edit, Article
-    end
-  end
-end
-</pre>
-
-Any rule method defined directly for the permit is run for any (or both) modes. To define rules specifically for cache or no-cache modes, you should place them in a nested module to signify this as shown in this example.
-
-You can configure modes with the new config object @CanTango.config.ability.modes@ and set it via @CanTango.config.ability.mode = :no_cache@ . The valid modes are: :cache, :no_cache, and :both. You can similarly configure which modes each engine should participate in, fx via @CanTango.config.permit_engine.mode = :cache@
+* "Cantango cache":https://github.com/kristianmandrup/cantango-cache
+* "Permits":https://github.com/kristianmandrup/permits
+* "Permit store":https://github.com/kristianmandrup/permit_store
 
 h2. Quickstart
 
