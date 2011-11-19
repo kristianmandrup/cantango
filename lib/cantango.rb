@@ -20,7 +20,7 @@ module CanTango
   autoload_modules :Engine, :PermissionEngine
   autoload_modules :Permit
 
-  autoload_modules :User, :UserAccount, 
+  autoload_modules :User, :UserAccount
   autoload_modules :Rules, :Api, :Helpers, :Filters, :Filter, :Model
   autoload_modules :Rails
 

@@ -1,6 +1,6 @@
 module CanTango
   class Permit
-    module Execute
+    module Execution
       # executes the permit
       def execute
         return if disabled?

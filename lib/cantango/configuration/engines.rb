@@ -1,9 +1,7 @@
-require 'singleton'
-
 module CanTango
   class Configuration
     class Engines < HashRegistry
-      autoload_modules :Permission, :Permit, :PermitStore, :Cache, :Store, :Engine
+      autoload_modules :Permission, :Engine
 
       include Singleton
       include Enumerable
@@ -15,10 +13,6 @@ module CanTango
           raise "Name of engine must be a String or Symbol" if !name.kind_of_label?
           registered[name.to_sym] = engine_class
         end
-      end
-
-      def default
-        {:permit => CanTango::PermitEngine, :permission => CanTango::PermissionEngine, :permit_store => CanTango::PermitStoreEngine }
       end
 
       # defines the order of execution of engine in ability
@@ -45,19 +39,11 @@ module CanTango
       end
 
       def execution_order
-        @execution_order ||= (self.class.default_available - [:cache])
-      end
-
-      def self.default_available
-        [:cache, :permission , :permit, :permit_store]
-      end
-
-      def default_available
-        self.class.default_available
+        @execution_order ||= (available - [:cache])
       end
 
       def available
-        (registered_names + default_available).uniq
+        registered_names
       end
 
       def available? name
@@ -90,17 +76,6 @@ module CanTango
         available.select {|engine| send(engine).on? if respond_to?(engine) }
       end
 
-      default_available.each do |engine|
-        # def permission
-        #   return Permission.instance
-        # end
-        class_eval %{
-          def #{engine}
-            CanTango::Configuration::Engines::#{engine.to_s.camelize}.instance
-          end
-        }
-      end
-
       protected
 
       # does it implement the basic Engine API?
@@ -110,5 +85,3 @@ module CanTango
     end
   end
 end
-
-

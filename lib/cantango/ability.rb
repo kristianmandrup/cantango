@@ -1,8 +1,6 @@
-require 'cantango/permit_engine/util'
-
 module CanTango
   class Ability
-    autoload_modules :Scope, :Cache, :Executor
+    autoload_modules :Scope, :Cache, :Executor, :Helper
 
     include CanCan::Ability
 
@@ -19,8 +17,6 @@ module CanTango
 
       execute_engines! if engines_on?
     end
-
-    include CanTango::PermitEngine::Util
 
     def cached?
       false
@@ -47,14 +43,10 @@ module CanTango
       CanTango.config
     end
 
-    include EngineHelpers
-    include CacheHelpers
-    include MasqueradeHelpers
-    include PermissionHelpers
-    include PermitHelpers
-    include UserHelpers
-    include RoleHelpers
-
+    Helper.modules.each do |name|
+      include "CanTango::Ability::Helper::#{name.to_s.camelize}".constantize
+    end
+    
     protected
 
     def default_rules

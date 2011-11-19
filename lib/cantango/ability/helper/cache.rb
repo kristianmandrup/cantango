@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    module Helpers
+    module Helper
       module Cache
         include CanTango::Helpers::RoleMethods
 

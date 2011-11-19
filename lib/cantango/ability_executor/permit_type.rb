@@ -3,7 +3,7 @@
 #
 module CanTango
   module AbilityExecutor
-    class PermitTypeExecutor < Base
+    class PermitType < Base
       include CanTango::Ability::Executor
 
       attr_reader :ability, :permit_type, :permits

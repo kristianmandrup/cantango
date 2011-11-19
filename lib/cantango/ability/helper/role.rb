@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    module Helpers
+    module Helper
       module Role
         include CanTango::Helpers::RoleMethods
 

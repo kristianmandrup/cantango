@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    module Helpers
+    module Helper
       module Account
         def user_account
           return subject.active_account if subject.respond_to? :active_account

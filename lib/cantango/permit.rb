@@ -2,13 +2,13 @@
 # Should contain all common logic
 module CanTango
   class Permit
-    autoload_modules :Execute, :License, :ClassMethods, :Naming, :Macros
+    autoload_modules :Execution, :License, :ClassMethods, :Naming, :Macros
 
     include CanTango::Helpers::Debug
     include CanTango::Rules # also makes a Permit a subclass of CanCan::Ability
     include CanTango::Api::Attributes
 
-    include Execute
+    include Execution
     include License
     extend ClassMethods
 
@@ -78,8 +78,6 @@ module CanTango
 
     protected
 
-    include CanTango::PermitEngine::Util
-    include CanTango::PermitEngine::Compatibility
     include CanTango::PermitEngine::RoleMatcher
 
     def config_disabled?

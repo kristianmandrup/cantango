@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    module Helpers
+    module Helper
       module User
         def user
           return subject.user if subject.respond_to? :user

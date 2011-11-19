@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    module Helpers
+    module Helper
       module Engine
         def execute_engines!
           each_engine do |engine|
