@@ -1,12 +1,9 @@
 module CanTango
   module Permits
-    autoload_modules :Executor
-    autoload_modules :License, :Permit
-
-    autoload_modules :RoleGroupPermit,  :RoleGroupPermitBuilder
-    autoload_modules :RolePermit,       :RolePermitBuilder
-    autoload_modules :UserPermit,       :UserPermitBuilder
-    autoload_modules :AccountPermit,    :AccountPermitBuilder
+    autoload_modules :RoleGroupPermit,      :RoleGroupPermitBuilder
+    autoload_modules :RolePermit,           :RolePermitBuilder
+    autoload_modules :UserTypePermit,       :UserTypePermitBuilder
+    autoload_modules :AccountTypePermit,    :AccountTypePermitBuilder
   end
 end
 

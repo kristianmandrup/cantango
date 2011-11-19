@@ -2,11 +2,11 @@ module CanTango
   class Permit
     module ClassMethods
       def inherited(subclass)
-        register permit_type_name(subclass), subclass
+        register permit_name(subclass), subclass
       end
 
-      def permit_name
-        self.name.demodulize.gsub(/(.*)(#{permit_type_name.to_s.camelize}Permit)/, '\1').underscore.to_sym
+      def permit_name clazz
+        self.name.demodulize.gsub(/(.*)(#{clazz.to_s.camelize}Permit)/, '\1').underscore.to_sym
       end
 
       def type

@@ -4,7 +4,7 @@ require 'cantango'
 describe CanTango::Configuration::Modes do
   subject { CanTango.config.modes }
 
-  specify { subject.should include(:cache, :no_cache)
+  specify { subject.should include(:cache, :no_cache) }
 
   describe 'valid mode=' do
     before do
