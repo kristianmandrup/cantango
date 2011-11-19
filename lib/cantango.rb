@@ -12,11 +12,16 @@ require 'sweetloader'
 AutoLoader.namespaces = {:CanTango => 'cantango'}
 
 module CanTango
-  autoload_modules :Ability, :CachedAbility, :AbilityExecutor
-  autoload_modules :Api, :Configuration, :Cache, :Permits
-  autoload_modules :PermitEngine, :PermitStoreEngine, :PermissionEngine
-  autoload_modules :User, :UserAccount, :Permit
-  autoload_modules :Rules, :Api, :Helpers, :Filters, :Model, :Engine
+  autoload_modules :Ability, :CachedAbility
+  autoload_modules :AbilityExecutor, :AbilityCache
+  autoload_modules :Api, :Configuration
+  autoload_modules :HashCache, :MonetaCache
+
+  autoload_modules :Engine, :PermissionEngine
+  autoload_modules :Permit
+
+  autoload_modules :User, :UserAccount, 
+  autoload_modules :Rules, :Api, :Helpers, :Filters, :Filter, :Model
   autoload_modules :Rails
 
   class << self
@@ -79,4 +84,3 @@ module CanTango
 end
 
 require 'cantango/macros'
-require 'cantango/permits/aliases'

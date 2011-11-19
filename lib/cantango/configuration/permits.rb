@@ -25,12 +25,13 @@ module CanTango
       end
 
       def default_permits
-        { :user       => CanTango::Permits::UserTypePermit,
-          :account    => CanTango::Permits::AccountTypePermit,
-          :role       => CanTango::Permits::RolePermit,
-          :role_group => CanTango::Permits::RoleGroupPermit,
-          :special    => nil
-        }
+        {}
+      #   { :user       => CanTango::Permits::UserTypePermit,
+      #     :account    => CanTango::Permits::AccountTypePermit,
+      #     :role       => CanTango::Permits::RolePermit,
+      #     :role_group => CanTango::Permits::RoleGroupPermit,
+      #     :special    => nil
+      #   }
       end
 
       def disable_types *types

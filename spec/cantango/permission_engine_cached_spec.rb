@@ -10,26 +10,41 @@ end
 CanTango.configure do |config|
   config.clear!
   config.engines.all :off
-  config.engine(:permission).set :on
+  config.engine(:user_ac).set :on
   config.ability.mode = :cache
-  config.engine(:permission) do |engine|
+  config.engine(:user_ac) do |engine|
     engine.mode = :cache
-    engine.config_path(config_folder)
   end
   config.debug!
 end
 
-describe CanTango::PermissionEngine do
-  context 'cache' do
+class Thingy
+  attr_reader :name, :id
+
+  def initialize name
+    @name = name
+    @id = rand(1000)
+  end
+end
+
+describe CanTango::UserAcEngine do
+  context 'mode :cache' do
+    before do
+      @thingy = Thingy.new 'a'
+      @user = User.new 'kris'
+      @permission = Permission.new @user, :edit, @thingy
+      @user.permissions << @permission
+    end
+
+    describe 'Permission' do
+      subject { @permission }
+        its(:thing_id) { should be_a(Integer) }
+    end
+
     let (:ability) do
       CanTango::CachedAbility.new @user
     end
-
-    before do
-      @user = User.new 'kris'
-    end
-
-    subject { CanTango::PermissionEngine.new ability }
+    subject { CanTango::UserAcEngine.new ability }
 
     describe '#execute!' do
       before do
@@ -37,15 +52,13 @@ describe CanTango::PermissionEngine do
       end
 
       it 'engine should have rules' do
-        subject.rules.should_not be_empty
+        subject.send(:rules).should_not be_empty
       end
 
-      it 'engine cache should be empty' do
-          subject.cache.empty?.should_not be_true
+      it 'engine cache should have rules' do
+        subject.cache.empty?.should be_false
       end
     end
   end
 end
-
-
 

@@ -8,9 +8,9 @@ describe CanTango::Configuration::Autoload do
       subject.adapter :moneta
     end
 
-    specify { lambda { CanTango::Cache::MonetaCache }.should_not raise_error }
-    specify { lambda { CanTango::Ability::Cache::MonetaCache }.should_not raise_error }
-    specify { lambda { CanTango::PermissionEngine::MonetaStore }.should_not raise_error }
+    specify { lambda { CanTango::MonetaCache }.should_not raise_error }
+    specify { lambda { CanTango::MonetaAbilityCache }.should_not raise_error }
+    specify { lambda { CanTango::MonetaPermitStore }.should_not raise_error }
   end
 
   specify { lambda { CanTango::Ability::Cache::Kompiler }.should raise_error }
