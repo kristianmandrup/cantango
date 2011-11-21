@@ -5,9 +5,9 @@ describe CanTango::Configuration::PermitRegistry do
     @permit_registry = CanTango::Configuration::PermitRegistry.new
   end
 
-  it "should respond to permits groups methods" do
-    [:user, :account, :role, :role_group].each do |permit_group|
-      @permit_registry.should respond_to(permit_group)
+  it '#get_permit should respond to default permit types' do
+    [:user, :account, :role, :role_group].each do |type|
+      @permit_registry.get_permit(type).should_not be_nil
     end
   end
 
