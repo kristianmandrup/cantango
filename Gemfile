@@ -59,10 +59,11 @@ group :development, :test do
 end
 
 group :development do
-  gem "rspec",    ">= 2.4.0"
+  gem "rspec",    ">= 2.6.0"
   gem "jeweler",  ">= 1.6.4"
-  gem "bundler",  ">= 1.0.1"
+  gem "bundler",  ">= 1.1.rc"
   gem "rdoc"
+  gem 'rake',     '>= 0.9.2.2'
 
   # gem 'logging_assist'
   # gem 'meta_where'
