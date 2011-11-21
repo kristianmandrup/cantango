@@ -1,6 +1,6 @@
 module CanTango
   class Ability
-    autoload_modules :Scope, :Cache, :Executor, :Helper
+    autoload_modules :Scope, :CacheKey, :Helper
 
     include CanCan::Ability
 

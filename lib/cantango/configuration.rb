@@ -66,14 +66,6 @@ module CanTango
       engines.clear!
     end
 
-    CanTango.config.engines.default_available.each do |engine|
-      class_eval %{
-        def #{engine}_engine
-          engine(:#{engine})
-        end
-      }
-    end
-
     def include_models *names
       names = names.select_symbols
       if names.include? :default_guest_user
