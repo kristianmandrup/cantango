@@ -36,11 +36,20 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Nov 15, 2011
+h2. Update Nov 21, 2011
 
-Version 0.9.4.4 has been released with a few bug fixes.
+Version 0.9.4.6 has been released. Fixes bug in configuration/permit_registry.
 
 The "wiki":https://github.com/kristianmandrup/cantango/wiki has been rewritten and updated to reflect all latest design changes and feature additions.
+
+I am now in the process of a major refactoring effort in the *major-refactor* branch. 
+I've split up cantango into separate gems which will be developed independently in the future (towards a 1.0 release), notably one gem for each engine. I might rename the "engine" concept into "component" so that developers don't confuse it with Rails engines ;)
+
+* "cantango-cache":https://github.com/kristianmandrup/cantango-cache
+* "permits":https://github.com/kristianmandrup/permits
+* "permit_store":https://github.com/kristianmandrup/permit_store
+
+I might also extract the _permission_ engine (currently known as _user_ac_). Lot's of changes coming doewn the pipeline. Please help make CanTango much better and more stable! Thanks! 
 
 h2. Quickstart
 
