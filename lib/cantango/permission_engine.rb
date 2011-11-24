@@ -23,7 +23,6 @@ module CanTango
     end
 
     def valid?
-      puts "valid_mode? #{valid_mode?} #{modes} #{cached?}"
       return false if !valid_mode?
       permissions.empty? ? invalid : true
     end

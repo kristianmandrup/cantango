@@ -81,7 +81,7 @@ module CanTango
         registry = account_name ? self.send(account_name.to_sym) : self
         debug "Registering #{permit_type} permit: #{permit_name} of class #{permit_clazz}"
 
-        registry.get(permit_type)[permit_name] = permit_clazz
+        registry.for(permit_type)[permit_name] = permit_clazz
         debug registry.get(permit_type).inspect
       end
 
