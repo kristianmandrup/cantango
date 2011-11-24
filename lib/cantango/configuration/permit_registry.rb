@@ -1,8 +1,8 @@
 module CanTango
   class Configuration
     class PermitRegistry
-      def for type
-        raise ArgumentError, "Not an available permit" if !CanTango.config.permits.available_types.include? type
+      def permits_for type        
+        raise ArgumentError, "Not an available permit type: #{type}, available are: #{available_types}" if !available_types.include? type
         inst_var_name = "@#{type}"
         instance_variable_set(inst_var_name, HashRegistry.new) if !instance_variable_get(inst_var_name)
         instance_variable_get(inst_var_name)
@@ -13,15 +13,19 @@ module CanTango
       end
 
       def registered_by type
-        for(type).registered
+        permits_for(type).registered
       end
 
       def all
-        (CanTango.config.permits.available_types - [:special]).map{|type| for(type)}
+        (available_types - [:special]).map{|type| permits_for(type)}
       end
 
       def show_all
         all.map(&:registered)
+      end
+      
+      def available_types
+        CanTango.config.permits.available_types
       end
     end
   end

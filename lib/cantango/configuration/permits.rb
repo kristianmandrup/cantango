@@ -80,8 +80,8 @@ module CanTango
       def register_permit_class(permit_name, permit_clazz, permit_type, account_name)
         registry = account_name ? get_permit(account_name.to_sym) : self
         debug "Registering #{permit_type} permit: #{permit_name} of class #{permit_clazz}"
-        registry.for(permit_type)[permit_name] = permit_clazz
-        debug registry.get(permit_type).inspect
+        registry.permits_for(permit_type)[permit_name] = permit_clazz
+        debug registry.permits_for(permit_type).inspect
       end
 
       def allowed candidate, actions, subjects, *extra_args
