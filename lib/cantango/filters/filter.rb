@@ -15,7 +15,7 @@ module CanTango
       end
 
       def in_include_list?
-        return true if include_list.empty?
+        return false if include_list.blank?
         include_list.include? item
       end
 
