@@ -23,16 +23,20 @@ module CanTango
       end
 
       def default_has_method
-        :in_role_group?
+        role_group_methods[:has] || :in_role_group?
       end
 
       def default_list_method
-        role_groups_list_map[role_group_system] || :role_groups_list
+         role_group_methods[:list] || :role_groups_list
+      end
+      
+      def role_group_methods
+        role_groups_list_map[role_group_system] || {}
       end
       
       def role_groups_list_map
         @role_groups_list_map ||= {
-          :troles => :role_group_list
+          :troles => {:list => :role_group_list}
         }
       end
     end

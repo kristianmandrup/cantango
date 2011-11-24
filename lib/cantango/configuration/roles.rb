@@ -14,7 +14,7 @@ module CanTango
       end
 
       def role_system
-        @role_system ||= :troles
+        @role_system ||= :simple_roles
       end
 
       def add_role_system role_system_hash
@@ -23,16 +23,21 @@ module CanTango
       end
 
       def default_has_method
-        :has_role?
+        role_system_methods[:list] || :has_role?
       end
 
       def default_list_method
-        roles_list_map[role_system] || :roles_list
+        role_system_methods[:list] || :roles_list
+      end
+      
+      def role_system_methods
+        roles_list_map[role_system] || {}
       end
       
       def roles_list_map
         @roles_list_map ||= {
-          :troles => :role_list
+          :troles       => {:list => :role_list},
+          :simple_roles => {:list => :roles_list}
         }
       end
     end

@@ -36,9 +36,32 @@ Run bundler in a terminal/console from the folder of your Gemfile (root folder o
 
 @$ bundle@
 
-h2. Update Nov 21, 2011
+h2. Update Nov 24, 2011
 
-Version 0.9.4.6 has been released. Fixes bug in configuration/permit_registry.
+Version 0.9.4.7 has been released. 
+
+* Now enables configuration of role and role group systems directly:
+
+Defaults:
+
+* Role system - "simple_roles":https://github.com/stanislaw/simple_roles
+* Role group system - "troles":https://github.com/kristianmandrup/troles
+
+You can override the defaults like this:
+
+<pre>
+CanTango.config do |c|
+  c.roles.role_system = :troles
+end
+</pre>
+
+Then CanTango should auto-configure to use the correct list methods of that system. You can even add your own role system with custom mappings. Here I tell CanTango that I'm using a system I call _MyRoles_ and that the method added to role candidates (fx User) to return the list of roles, will be @#list_of_roles@ and the method to check if he is in (or has) a specific role will be @is_in_role?@. Same goes for role groups, using @role_groups.add_role_group_system@.
+
+<pre>
+CanTango.config do |c|
+  c.roles.add_role_system :my_roles => {:list => :list_of_roles, :has => :is_in_role?}
+end
+</pre>
 
 The "wiki":https://github.com/kristianmandrup/cantango/wiki has been rewritten and updated to reflect all latest design changes and feature additions.
 
