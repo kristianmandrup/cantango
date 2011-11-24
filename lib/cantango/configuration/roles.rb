@@ -3,10 +3,23 @@ module CanTango
     class Roles < RoleRegistry
       include Singleton
 
-      attr_writer :roles_system
+      def role_system= name
+        raise ArgumentError, "Must be a label" if !name.kind_of_label?
+        @role_system = name.to_sym
+      end
 
-      def roles_system
-        @roles_system ||= :troles
+      def roles_list_map= role_systems_hash
+        raise ArgumentError, "Must be a hash fx :troles => :role_list, was: #{role_systems_hash}" if !role_systems_hash.kind_of?(Hash)
+        @roles_list_map = role_systems_hash
+      end
+
+      def role_system
+        @role_system ||= :troles
+      end
+
+      def add_role_system role_system_hash
+        raise ArgumentError, "Must be a hash fx :troles => :role_list, was: #{role_system_hash}" if !role_system_hash.kind_of?(Hash)
+        roles_list_map.merge! role_system
       end
 
       def default_has_method
@@ -14,17 +27,14 @@ module CanTango
       end
 
       def default_list_method
-        role_list_map[roles_system] || :roles_list
+        roles_list_map[role_system] || :roles_list
       end
       
-      def role_list_map
-        @role_list_map ||= {
+      def roles_list_map
+        @roles_list_map ||= {
           :troles => :role_list
         }
       end
     end
   end
 end
-
-
-
