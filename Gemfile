@@ -1,4 +1,4 @@
-source :rubygems.org
+source :rubygems
 
 group :default do
   gem 'rails',          '>= 3.0.1'
