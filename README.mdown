@@ -1,0 +1,69 @@
+# CanTango
+
+CanTango is an advanced Access Control (permissions) system for Rails 3. It:
+
+* extends [CanCan]:(http://github.com/ryanb/cancan) and offers a more granular Object Oriented design
+* integrates with _role_ and _authentication_ systems in a non-intrusive manner
+
+## Installation
+
+CanTango has been tested to work with _Ruby 1.9+_.
+If you require ruby 1.8.7 support, please patch it and make a pull request ;)
+
+### Install in current environment (or gemset)
+
+`gem install cantango`
+
+### Install in application
+
+Insert into Gemfile
+
+`gem 'cantango'`
+
+Run bundler in a terminal/console from the folder of your Gemfile (root folder of app)
+
+`$ bundle`
+
+## Gem design
+
+Version 1.0.0.beta1 branch - the new cantango meta gem.
+
+* [cantango-config]:(https://github.com/kristianmandrup/cantango-config)
+* [cantango-api]:(https://github.com/kristianmandrup/cantango-api)
+
+Optional extensions:
+
+* [cantango-cache]:(https://github.com/kristianmandrup/cantango-cache)
+* [cantango-roles]:(https://github.com/kristianmandrup/cantango-roles)
+* more ...
+
+Ability executors (formerly known as engines):
+
+* [cantango-permits]:(https://github.com/kristianmandrup/cantango-permits)
+* [cantango-permit_store]:(https://github.com/kristianmandrup/cantango-permit_store)
+* [cantango-permissions]:(https://github.com/kristianmandrup/cantango-permissions)
+
+## You need help?
+
+Please post ideas, questions etc. in the [cantango group]:(http://groups.google.com/group/cantango) on Google.
+
+### Bugs, issues or feature request/ideas?
+
+If you encounter bugs, raise an issue or:
+
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+## Contributors
+
+* [Kristian Mandrup]:(https://github.com/kristianmandrup)
+* [Stanislaw Pankevich]:(https://github.com/stanislaw)
+
+## Copyright
+
+Copyright (c) 2010 Kristian Mandrup. See LICENSE for details.
