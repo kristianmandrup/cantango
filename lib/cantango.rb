@@ -1,7 +1,8 @@
 require 'cantango/rails' if defined?(Rails)
 require 'sweetloader'
 
-AutoLoader.namespaces = {:CanTango => 'cantango'}
+SweetLoader.namespaces = {:CanTango => 'cantango'}
+SweetLoader.mode = :require
 
 module CanTango
 end

@@ -4,8 +4,8 @@ group :default do
   gem 'rails',          '>= 3.0.1'
   gem 'cancan',         '>= 1.4'
   gem 'sugar-high',     '>= 0.6.0'
-  gem 'sweetloader',    '~> 0.1.0'
-  gem 'hashie',         '>= 0.4'
+  gem 'sweetloader',    '~> 0.1.5'
+  gem 'hashie',         '~> 0.4.0'
 
   # IMPORTANT: Each of the cantango extension gems should depend on cantango-core
   # cantango-core MUST have NO cantango related dependencies
