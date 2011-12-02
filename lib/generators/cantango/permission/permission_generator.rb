@@ -15,7 +15,7 @@ module Cantango
       end
 
       def relational
-        Rails::Generators.invoke "model", ['Permission', "#{name}_id:integer", "thing_id:integer", "thing_type:string", "action:string"
+        Rails::Generators.invoke "model", ['Permission', "#{name}_id:integer", "thing_id:integer", "thing_type:string", "action:string"]
 
         puts "Manual Modifications to Permission model:"
         puts "-----------------------------------------"
