@@ -5,7 +5,7 @@ module CanTango
 
       def initialize item, list = nil
         @item         = item.to_sym
-        @include_list = list || []
+        @include_list = list
       end
 
       def valid?
