@@ -23,7 +23,7 @@ module CanTango
       end
 
       def default_has_method
-        role_system_methods[:list] || :has_role?
+        role_system_methods[:has_role] || :has_role?
       end
 
       def default_list_method

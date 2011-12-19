@@ -5,7 +5,7 @@ module CanTango
 
       def initialize item, list = nil
         @item         = item.to_sym
-        @include_list = list || []
+        @include_list = list
       end
 
       def valid?
@@ -15,7 +15,7 @@ module CanTango
       end
 
       def in_include_list?
-        return false if include_list.blank?
+        return true if include_list.nil?
         include_list.include? item
       end
 
