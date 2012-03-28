@@ -37,7 +37,7 @@ group :test do
 
   # Integration testing
   gem 'decent_exposure'
-  gem "friendly_id"
+  gem "friendly_id",    "~> 4.0.1"
   gem "devise",         '>= 1.4'
 
   # Rails

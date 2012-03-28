@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -13,7 +15,7 @@ class User < ActiveRecord::Base
 
   tango_user # see macros
 
-  has_friendly_id :name
+  friendly_id :name
 
   has_many :articles
   has_many :comments

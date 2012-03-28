@@ -1,10 +1,12 @@
 class User < ActiveRecord::Base  
+	extend FriendlyId
+	
   include_and_extend SimpleRoles
  
   tango_user # see macros
   masquerader
 
-  has_friendly_id :name
+  friendly_id :name
 
   has_many :articles
   has_many :comments
