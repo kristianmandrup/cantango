@@ -19,7 +19,7 @@ module CanTango
 
       def add_role_system role_system_hash
         raise ArgumentError, "Must be a hash fx :troles => :role_list, was: #{role_system_hash}" if !role_system_hash.kind_of?(Hash)
-        roles_list_map.merge! role_system
+        roles_list_map.merge! role_system_hash
       end
 
       def default_has_method
