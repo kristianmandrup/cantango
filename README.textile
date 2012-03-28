@@ -10,7 +10,15 @@ CanTango is an advanced Access Control (permissions) system for Rails 3. It:
 * can _store_ static ability rules in a permission store for easy administration
 * manage the permission store from a web UI using the "cantango_editor":https://github.com/stanislaw/cantango_editor, a mountable Rails engine
 
-h3. Will CanTango meet my Access Control (permission) requirements?
+A rewrite of Cantango can be found at "CanTango permits":https://github.com/kristianmandrup/cantango-permits
+
+The Cantango rewrite currently lacks _caching_ functionality and the "permit_store":https://github.com/kristianmandrup/cantango-permit_store is also incomplete. 
+
+The Cantango rewrite consists of a _cantango-core_ and a set of individual gems with minimal inter-dependencies. Each of these gems have been designed in a test driven fashion with almost complete spec coverage so they should be much easier to develop in the future. The old Cantango got too bloated and big and became too hard to maintain in the end.
+
+If you like this project, please give a hand or encouragement for me to finalize the new Cantango.
+
+h3. Will CanTango meet my Access Control requirements?
 
 * "CanCan vs CanTango":https://github.com/kristianmandrup/cantango/wiki/CanCan-vs-CanTango
 * "CanTango overview":https://github.com/kristianmandrup/cantango/wiki
