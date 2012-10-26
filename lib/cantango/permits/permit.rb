@@ -80,8 +80,7 @@ module CanTango
       end
 
       def ability_sync!
-        ability_rules << (rules - ability_rules)
-        ability_rules.flatten!
+        ability_rules += (rules - ability_rules)
       end
 
       protected

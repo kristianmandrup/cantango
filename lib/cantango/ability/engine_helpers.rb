@@ -4,7 +4,7 @@ module CanTango
       def execute_engines!
         each_engine do |engine|
           engine_rules = engine.new(self).execute! if engine
-          @rules << engine_rules if !engine_rules.blank?
+          @rules += engine_rules if !engine_rules.blank?
         end
       end
 
