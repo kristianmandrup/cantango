@@ -14,7 +14,7 @@ module CanTango
           thing.nil? || permission.thing_id.nil? || permission.thing_id == thing.id
         end
       end
-      rules << ability_rules if !ability_rules.blank?
+      rules += ability_rules if !ability_rules.blank?
     end
 
     def valid?
