@@ -45,9 +45,9 @@ module CanTango
         # for that role group will be run
         def matching_role_groups_for roles
           roles.inject([]) do |groups, role|
-            groups << subject.role_groups_for(role) if subject.respond_to?(:role_groups_for)
+            groups += subject.role_groups_for(role) if subject.respond_to?(:role_groups_for)
             groups
-          end.flatten.compact.uniq
+          end.compact.uniq
         end
 
         def role_groups_filter?
