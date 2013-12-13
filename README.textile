@@ -1,5 +1,24 @@
 h1. CanTango
 
+h1. IMPORTANT
+
+CanTango in its current form is no longer being maintained. 
+The current version is somewhat *unstable* and NOT production ready.
+
+If you are interested in the general ideas and concepts behind this project and would like to use it or see the ideas
+live on, you are encouraged to look at the attempt of divinding this project into smaller maintainable gems:
+
+These gems all follow the *cantango-xxxx* convention.
+
+Alternatively, you can look at the following Node.js project and perhaps port it to Ruby and whatever prog. environment
+you are using. It sports a much better/simpler design (learning from the faults in the cantango design).
+
+https://github.com/kristianmandrup/authorize-mw/
+
+Good luck!
+
+h1. Intro
+
 CanTango is an advanced Access Control (permissions) system for Rails 3. It:
 
 * extends "CanCan":http://github.com/ryanb/cancan and offers a more granular Object Oriented design
